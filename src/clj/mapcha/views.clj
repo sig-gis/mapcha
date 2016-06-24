@@ -27,10 +27,11 @@
 
 (defn wrap-header-footer
   [request & content]
-  (let [description (str "Multi-criteria wildfire risk assessment "
+  (let [description (str "Mapcha is an Image Analysis Crowdsourcing Platform "
                          "by Spatial Informatics Group")
-        keywords    (str "wildfire wild fire risk assessment United States "
-                         "US USA SIG spatial informatics group")
+        keywords    (str "mapcha image analysis crowdsourcing platform asia "
+                         "mekong cambodia thailand laos vietnam myanmar SIG "
+                         "spatial informatics group")
         html5shiv   (str "<!--[if lt IE 9]><script type=\"text/javascript\" "
                          "src=\"/js/html5shiv.js\"></script><![endif]-->")
         link-active (fn [url label]
@@ -80,7 +81,7 @@
               [:p {:class "alert"} sub-message])))
         content]
        [:footer
-        [:p (link-to "http://www.sig-gis.com" "&copy; SIG-GIS 2011-2016")]]]))))
+        [:p (link-to "http://www.sig-gis.com" "&copy; SIG-GIS 2016")]]]))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
