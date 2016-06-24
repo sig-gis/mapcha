@@ -95,8 +95,8 @@
    request
    [:section#home-top
     [:div#left-block
-     [:h1 "Integrated Wildfire Assessment Portal"]
-     [:h2 "Map the exposure, quantify the risk"]
+     [:h1 "Mapcha: The Image Analysis Game"]
+     [:h2 "Collaborate. Play. Map the world."]
      [:input.button {:type "button" :value "Learn more »"
                      :onclick "window.location='/learn'"}]]
     [:div#right-block
@@ -118,52 +118,7 @@
                 :placeholder "Password confirmation" :autocomplete "off"}]
        [:input.button {:type "submit" :name "register" :value "Register"}]]]]]
    [:section#home-content
-    [:p "Major advances in fire science have resulted in the
-        development of the " [:span.trademark "Integrated Wildfire
-        Assessment Portal (Mapcha)"] ", which incorporates the three
-        dominant components of fire-related threats to the built
-        environment. In contrast, most available approaches for
-        spatially assessing wildfire threat are based on relatively
-        simple and outdated models. For example, many products
-        emphasize the distance to brush fields as being central to
-        mapping fire hazard, while it has been shown repeatedly that
-        fire weather exposure - especially hot and dry wind patterns -
-        is often the cause of the greatest losses. Expected fire
-        frequencies, if they are included at all, are typically not
-        modeled well. Instead, probabilities of occurrence should be
-        based on climatic factors controlling both fuel productivity
-        rates and the length of the fire season, as well as the
-        potential ignition load from human and natural sources."]
-    [:p [:span.trademark "Mapcha"] " employs a new and scientifically
-        current methodology for mapping your exposure, using three new
-        modeling frameworks:"]
-    [:dl
-     [:dt "Ground-based variables influencing fire behavior"]
-     [:dd "We incorporate fine-scale factors such as fuel amount and
-          type, in addition to steepness of slope, which are
-          well-accepted in fire behavior modeling. Extreme outcome
-          percentiles are then used to predict the most dangerous
-          flame lengths and fire intensities possible for a given
-          location."]
-     [:dt "Severe fire weather patterns"]
-     [:dd "The fastest fire spread rates, ember generation, and the
-          greatest losses are associated with widely known but
-          difficult to map fire weather corridors. The latest
-          fine-scale wind models reveal which locations are most
-          threatened versus those that are relatively sheltered."]
-     [:dt "Long-term environmental drivers of fire frequency"]
-     [:dd "Expected fire return intervals are quantified through
-          landscape-scale historical rates of observed burning and the
-          environmental factors causing this fire activity. These
-          components can be projected into the future, if climate
-          change scenarios are desired."]]
-    [:p "Depending on end-user criteria, each of the three threat
-        components can be analyzed and visualized separately.
-        Alternatively, they can be weighted and combined through our
-        own integrated assessment, for comprehensive metrics of a
-        location's exposure. It is also possible to develop new and
-        proprietary algorithms for specific clientele, to take
-        advantage of their own experience and knowledge base."]]))
+    [:p "Enter a description of Mapcha here..."]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
