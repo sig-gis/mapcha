@@ -1,0 +1,44 @@
+* Mapcha Website
+
+This is the web interface for Spatial Informatics Group's Image
+Analysis Crowdsourcing Platform (Mapcha).
+
+** Usage
+
+To run this web application, you will need:
+
+1) Sun's JDK 1.8+
+2) Boot 2.5.5+
+
+Then simply instruct Boot to run the application as follows:
+
+  In development mode:
+  $ boot dev
+
+  In production mode:
+  $ boot site
+
+Both commands will start a web server running the Mapcha website.
+Connect to it by pointing your web browser at http://localhost:8080.
+
+In development mode, connect to the local nrepl server with your IDE
+or using boot from the command-line:
+
+  $ boot repl --client
+
+Then run (start-repl) from the Clojure prompt and refresh your browser
+to activate a browser-backed ClojureScript repl.
+
+** Contact
+
+Authors: Gary W. Johnson, David S. Saah, and Peter Cutter
+
+Emails: gjohnson@sig-gis.com, dsaah@sig-gis.com, pcutter@sig-gis.com
+
+** License
+
+Copyright © 2016 Spatial Informatics Group, LLC.
+
+Mapcha is distributed by Spatial Informatics Group, LLC. under a
+restricted use license. Please contact the authors at the above-listed
+emails for a copy of this license.
