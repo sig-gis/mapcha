@@ -95,7 +95,7 @@
    request
    [:section#home-top
     [:div#left-block
-     [:h1 "Mapcha: The Image Analysis Game"]
+     [:h1 "Mapcha: " [:em "Earth Image Identification"]]
      [:h2 "Collaborate. Play. Map the world."]
      [:input.button {:type "button" :value "Learn more »"
                      :onclick "window.location='/learn'"}]]
