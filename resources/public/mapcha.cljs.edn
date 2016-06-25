@@ -1,1 +1,1 @@
-{:require [mapcha.new-report mapcha.new-report-reagent]}
+{:require [mapcha.new-report mapcha.new-report-reagent mapcha.overview-plot]}
