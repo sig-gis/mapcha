@@ -118,7 +118,7 @@
                 :placeholder "Password confirmation" :autocomplete "off"}]
        [:input.button {:type "submit" :name "register" :value "Register"}]]]]]
    [:section#home-content
-    [:p "Enter a description of Mapcha here..."]]))
+    [:p "Enter a description of " [:span.trademark "Mapcha"] " here..."]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
