@@ -461,7 +461,35 @@
   [request]
   (wrap-header-footer
    request
-   [:h3 "Admin page...in progress"]))
+   [:div#admin
+    [:h1 "Create New Project"]
+    [:form {:method "post" :action "/admin"}
+     [:h2 "Name"]
+     [:input {:type "text" :name "project-name" :autocomplete "off"}]
+     [:h2 "Description"]
+     [:input {:type "text" :name "project-description" :autocomplete "off"}]
+     [:h2 "Define bounding box"]
+     [:input {:type "text" :name "boundary-lon-min"
+              :placeholder "Longitude Min" :autocomplete "off"}]
+     [:input {:type "text" :name "boundary-lon-max"
+              :placeholder "Longitude Max" :autocomplete "off"}]
+     [:input {:type "text" :name "boundary-lat-min"
+              :placeholder "Latitude Min" :autocomplete "off"}]
+     [:input {:type "text" :name "boundary-lat-max"
+              :placeholder "Latitude Max" :autocomplete "off"}]
+     [:h2 "Number of plots"]
+     [:input {:type "text" :name "plots" :autocomplete "off"}]
+     [:h2 "Plot radius in meters"]
+     [:input {:type "text" :name "buffer-radius" :autocomplete "off"}]
+     [:h2 "Number of samples per plot"]
+     [:input {:type "text" :name "samples-per-plot" :autocomplete "off"}]
+     [:h2 "Categories per sample"]
+     [:input {:type "text" :name "sample-values"
+              :placeholder "Forest, Field, Agriculture, Water"
+              :autocomplete "off"}]
+     [:br]
+     [:input.button {:type "submit" :name "create-project"
+                     :value "Create and launch this project"}]]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

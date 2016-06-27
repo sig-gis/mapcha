@@ -64,7 +64,7 @@
                            :post views/update-account-page)
    ["dashboard"]      (app (wrap-authorize #{:user :admin})
                            :get views/dashboard-page)
-   ["admin"]          (app (wrap-authorize #{:admin}) :get views/admin-page)
+   ["admin"]          (app (wrap-authorize #{:admin}) :any views/admin-page)
    ["geocode"]        (app (wrap-authorize #{:user :admin}) :post ajax/geocode)
    ["fire-score"]     (app (wrap-authorize #{:user :admin}) :post ajax/fire-score)
    ["save-report"]    (app (wrap-authorize #{:user :admin}) :post ajax/save-report)

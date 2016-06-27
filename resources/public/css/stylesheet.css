@@ -729,6 +729,36 @@ p.error-message {
     margin-left:-11px;
 }
 
+/*********/
+/* Admin */
+/*********/
+
+#admin h1 {
+    font-size:1.5em;
+    font-style:normal;
+    font-weight:bold;
+}
+
+#admin h2 {
+    font-size:1.2em;
+    font-style:normal;
+    font-weight:bold;
+}
+
+#admin input.button {
+    font-size:1em;
+    padding:5px;
+    margin:20px 0;
+    color:white;
+    background-color:#55f;
+    border-radius:8px;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    box-shadow:3px 3px 6px rgba(21,21,153,0.6);
+    -moz-box-shadow:3px 3px 6px rgba(21,21,153,0.6);
+    -webkit-box-shadow:3px 3px 6px rgba(21,21,153,0.6);
+}
+
 /**************/
 /* New Report */
 /**************/
