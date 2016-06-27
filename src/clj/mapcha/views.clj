@@ -11,7 +11,8 @@
                                                  add-password-reset-key
                                                  remove-password-reset-key
                                                  send-password-reset-key
-                                                 find-user-reports]]))
+                                                 find-user-reports
+                                                 create-new-project]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -490,6 +491,14 @@
      [:br]
      [:input.button {:type "submit" :name "create-project"
                      :value "Create and launch this project"}]]]))
+
+(defn create-new-project-page
+  [request]
+  (let [flash-message (if (create-new-project (:params request))
+                        (str "New project " (-> request :params :project-name)
+                             " created and launched!")
+                        "Error with project creation!")]
+    (admin-page (assoc request :flash flash-message))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

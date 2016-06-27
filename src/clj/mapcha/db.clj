@@ -158,3 +158,16 @@
      :local-mean    local_mean
      :local-stddev  local_stddev
      :histogram     (map #(select-keys % [:midpoint :width :percent]) results)}))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Project management functions
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn create-new-project
+  [{:keys [project-name project-description boundary-lon-min
+           boundary-lon-max boundary-lat-min boundary-lat-max
+           plots buffer-radius samples-per-plot sample-values]}]
+  true
+  )
