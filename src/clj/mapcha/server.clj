@@ -92,7 +92,7 @@
 ;;   Add authentication map to request map below
 ;;     [:session :cemerick.friend/identity :authentications]
 ;;     (retrievable with (identity request))
-;;   Either redirect to one of thes uris (if they exist)
+;;   Either redirect to one of these uris (if they exist)
 ;;     1. :cemerick.friend/unauthorized-uri field on the :session map
 ;;     2. :cemerick.friend/redirect-on-auth? field from workflow-result metadata
 ;;     3. :default-landing-uri on the :cemerick.friend/auth-config map
