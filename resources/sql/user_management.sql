@@ -11,14 +11,14 @@ INSERT INTO mapcha.users (email, password, role)
   RETURNING email, password, role;
 
 -- name: set-user-email-sql
--- Resets the email for the given user. This cascades to mapcha.user_roles and mapcha.user_reports as well.
+-- Resets the email for the given user.
 UPDATE mapcha.users
   SET email = :new_email
   WHERE email = :old_email
   RETURNING email;
 
 -- name: set-user-password-sql
--- Sets the password for the given user. If one already exists, it is replaced.
+-- Resets the password for the given user.
 UPDATE mapcha.users
   SET password = :password
   WHERE email = :email
