@@ -59,13 +59,15 @@
    ["password-reset"] {:any views/password-reset-page}
    ["logout"]         (app logout :any (fn [_] (redirect "/")))
    ;; Private pages (must be logged in to access)
-   ["account"]        (app (wrap-authorize #{:user})
+   ["account"]        (app (wrap-authorize #{:user :admin})
                            :get views/account-page
                            :post views/update-account-page)
-   ["dashboard"]      (app (wrap-authorize #{:user}) :get views/dashboard-page)
-   ["geocode"]        (app (wrap-authorize #{:user}) :post ajax/geocode)
-   ["fire-score"]     (app (wrap-authorize #{:user}) :post ajax/fire-score)
-   ["save-report"]    (app (wrap-authorize #{:user}) :post ajax/save-report)
+   ["dashboard"]      (app (wrap-authorize #{:user :admin})
+                           :get views/dashboard-page)
+   ["admin"]          (app (wrap-authorize #{:admin}) :get views/admin-page)
+   ["geocode"]        (app (wrap-authorize #{:user :admin}) :post ajax/geocode)
+   ["fire-score"]     (app (wrap-authorize #{:user :admin}) :post ajax/fire-score)
+   ["save-report"]    (app (wrap-authorize #{:user :admin}) :post ajax/save-report)
    ;; Page not found (matches everything else)
    [&]                views/page-not-found-page))
 

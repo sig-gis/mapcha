@@ -15,6 +15,25 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
+;;; Friend helper functions
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn logged-in?
+  [request]
+  (boolean (friend/identity request)))
+
+(defn current-email
+  [request]
+  (:current (friend/identity request)))
+
+(defn current-role
+  [request]
+  (when-let [{:keys [current authentications]} (friend/identity request)]
+    (first (:roles (authentications current)))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; Site-wide header and footer
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -55,20 +74,26 @@
         [:h1 (link-active "/" "Mapcha")]
         [:nav
          [:ul
-          (if (friend/identity request)
-            (list
-             [:li (link-active "/account" "Account")]
-             [:li (link-active "/dashboard" "Dashboard")]
-             [:li (link-active "/about" "About")]
-             [:li (link-active "/contact" "Contact")])
+          (case (current-role request)
+            :admin (list
+                    [:li (link-active "/account" "Account")]
+                    [:li (link-active "/dashboard" "Dashboard")]
+                    [:li (link-active "/admin" "Admin")]
+                    [:li (link-active "/about" "About")]
+                    [:li (link-active "/contact" "Contact")])
+            :user  (list
+                    [:li (link-active "/account" "Account")]
+                    [:li (link-active "/dashboard" "Dashboard")]
+                    [:li (link-active "/about" "About")]
+                    [:li (link-active "/contact" "Contact")])
             (list
              [:li (link-active "/about" "About")]
              [:li (link-active "/contact" "Contact")]))]]
         [:div#login-info
          [:p
-          (if (friend/identity request)
+          (if (logged-in? request)
             (list
-             (str "Logged in as " (:current (friend/identity request)) " ")
+             (str "Logged in as " (current-email request) " ")
              (link-active "/logout" "Logout"))
             (list
              (link-active "/login" "Login")
@@ -341,7 +366,7 @@
 (defn update-account-page
   [{{:keys [email password password-confirmation current-password]} :params
     :as request}]
-  (let [current-email (:current (friend/identity request))]
+  (let [current-email (current-email request)]
     (if (authenticate-user current-email current-password)
       (let [request (assoc request :flash
                            (remove nil?
@@ -392,7 +417,7 @@
      [:input#new-report-button.button {:type "button" :name "new-report"
                                        :value "Loading..."}]]
     [:h2 "Summary of Previous Reports"]
-    (if-let [reports (seq (find-user-reports (:current (friend/identity request))))]
+    (if-let [reports (seq (find-user-reports (current-email request)))]
       (let [overall-score (combine-scores reports)
             overall-cost  (reduce + (map :cost reports))]
         [:table#all-reports
@@ -425,6 +450,18 @@
    [:div#content-pane]
    (include-js "/mapcha.js")
    (javascript-tag "mapcha.new_report_reagent.main()")))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Admin page
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn admin-page
+  [request]
+  (wrap-header-footer
+   request
+   [:h3 "Admin page...in progress"]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
