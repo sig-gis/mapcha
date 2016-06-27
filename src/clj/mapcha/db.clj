@@ -26,23 +26,19 @@
 (defqueries "sql/user_management.sql" {:connection db-spec})
 
 (defn find-user-info [email]
-  (with-db-transaction [conn db-spec]
-    (if-let [user-info (first (find-user-info-sql {:email email}
-                                                  {:connection conn}))]
-      (update-in user-info [:roles] #(set (map keyword (.getArray ^PgArray %)))))))
+  (when-let [user-info (first (find-user-info-sql {:email email}))]
+    (-> user-info
+        (assoc :roles (hash-set (keyword (:role user-info))))
+        (dissoc :role))))
 
 (defn add-user [email password role]
   (when-not (find-user-info email)
-    (with-db-transaction [conn db-spec]
-      (let [user-info (first (add-user-sql {:email    email
-                                            :password (hash-bcrypt password)}
-                                           {:connection conn}))
-            user-role (first (add-user-role-sql {:email email
-                                                 :role  (name role)}
-                                                {:connection conn}))]
-        {:identity (:identity user-info)
-         :password (:password user-info)
-         :roles    (hash-set (keyword (:role user-role)))}))))
+    (let [user-info (first (add-user-sql {:email    email
+                                          :password (hash-bcrypt password)
+                                          :role     (name role)}))]
+      {:identity (:email user-info)
+       :password (:password user-info)
+       :roles    (hash-set (keyword (:role user-info)))})))
 
 (defn set-user-email [old-email new-email]
   (when-not (find-user-info new-email)
@@ -50,6 +46,18 @@
 
 (defn set-user-password [email password]
   (first (set-user-password-sql {:password (hash-bcrypt password) :email email})))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; User sample functions
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn add-user-sample
+  [user-id sample-id value]
+  (first (add-user-sample-sql {:user_id   user-id
+                               :sample_id sample-id
+                               :value     value})))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
