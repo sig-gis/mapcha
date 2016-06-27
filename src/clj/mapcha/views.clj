@@ -118,11 +118,11 @@
                 :placeholder "Password confirmation" :autocomplete "off"}]
        [:input.button {:type "submit" :name "register" :value "Register"}]]]]]
    [:section#home-content
-    [:p "Enter a description of " [:span.trademark "Mapcha"] " here..."]
     [:p#overview-map-wait-message "Overview map is loading. Please wait..."]
     [:div#overview-map
      [:div#popup.ol-popup
-      [:div#popup-content]]]]
+      [:div#popup-content]]]
+    [:p "Enter a description of " [:span.trademark "Mapcha"] " here..."]]
    (include-js "/mapcha.js")
    (javascript-tag "mapcha.overview_plot.main()")))
 
