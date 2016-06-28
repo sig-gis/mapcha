@@ -431,7 +431,8 @@
               :autocomplete "off"}]
      [:br]
      [:input.button {:type "submit" :name "create-project"
-                     :value "Create and launch this project"}]]]))
+                     :value "Create and launch this project"
+                     :onclick "this.disabled=true"}]]]))
 
 (defn create-new-project-page
   [request]
