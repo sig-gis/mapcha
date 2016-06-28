@@ -65,24 +65,16 @@ Submission procedure:
 
 * Initial Study Area: Mekong River Region
 
-- Laos
-- Cambodia
-- Vietnam
-- Thailand
-- Myanmar
-
-Inside this bounding box, put 10,000 plots (with 100m radius buffers) each with 15 samples.
-
-Categories:
-- Forest
-- Grassland
-- Bare Surface
-- Impervious Surface
-- Agriculture
-- Urban
-- Water
-- Cloud
-- Unknown
+- Name :: Mekong River Region
+- Description :: Laos, Cambodia, Vietnam, Thailand, Myanmar
+- Longitude Min :: 95
+- Longitude Max :: 107
+- Latitude Min :: 10.5
+- Latitude Max :: 22.5
+- Number of plots :: 10000
+- Plot radius in meters :: 100
+- Number of samples per plot :: 15
+- Categories per sample :: Forest, Grassland, Bare Surface, Impervious Surface, Agriculture, Urban, Water, Cloud, Unknown
 
 * MAPCHA Users and Samples
 

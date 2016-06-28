@@ -3,8 +3,7 @@
             [clojure.java.jdbc           :refer [with-db-transaction]]
             [yesql.core                  :refer [defqueries]]
             [postal.core                 :refer [send-message]]
-            [clojure.string              :as str])
-  (:import org.postgresql.jdbc.PgArray))
+            [clojure.string              :as str]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
