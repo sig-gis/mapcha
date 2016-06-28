@@ -31,3 +31,8 @@ INSERT INTO mapcha.sample_values (project_id, value)
 INSERT INTO mapcha.user_samples (user_id, sample_id, value_id)
   VALUES (:user_id, :sample_id, :value_id)
   RETURNING *;
+
+-- name: get-all-projects-sql
+-- Returns all rows in mapcha.projects.
+SELECT id, name, description, ST_AsGeoJSON(boundary) AS boundary
+  FROM mapcha.projects;

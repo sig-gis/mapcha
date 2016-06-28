@@ -162,6 +162,10 @@
       true)
     (catch Exception e false)))
 
+(defn get-all-projects
+  []
+  (get-all-projects-sql))
+
 (defn add-user-sample
   [user-id sample-id value-id]
   (first (add-user-sample-sql {:user_id   user-id

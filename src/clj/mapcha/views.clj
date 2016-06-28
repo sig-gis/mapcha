@@ -11,7 +11,8 @@
                                                  add-password-reset-key
                                                  remove-password-reset-key
                                                  send-password-reset-key
-                                                 create-new-project]]))
+                                                 create-new-project
+                                                 get-all-projects]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -391,7 +392,17 @@
   [request]
   (wrap-header-footer
    request
-   [:h3 "Dashboard page...in progress"]))
+   [:div#dashboard
+    [:h1 "Dashboard"]
+    [:div#sidebar
+     [:h2 "Select Project"]
+     [:select {:name "project-id" :size "1"}
+      (for [{:keys [id name]} (get-all-projects)]
+        [:option {:label name :value id}])]
+     [:input#new-plot-button.button {:type "button" :name "new-plot"
+                                     :value "Analyze Plot"}]
+     [:div#plot-categories-container]]
+    [:div#map-view]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
