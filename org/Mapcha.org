@@ -1,29 +1,28 @@
 * Home Page
 
-Title of project
-Description of project
-Study area on a map with plots on the map (color ramp for plots red-green based on number of samples filled in)
+1. [X] Title of project
+2. [X] Description of project
+3. [ ] Study area on a map with plots on the map (color ramp for plots red-green based on number of samples filled in)
 
 * Admin Page
 
-1. Create Project
-2. Upload bounding box
-3. Input number of plots per areal units
-4. Input buffer size for each plot
-5. Input number of samples per plot
-6. Input list of categories per sample
+Alpha Features:
 
-1. Upload a plots and point shapefile (point features are the categories list)
+1. [X] Create Project
+2. [X] Input bounding box
+3. [X] Input number of plots
+4. [X] Input buffer size for each plot
+5. [X] Input number of samples per plot
+6. [X] Input list of categories per sample
 
-1. Satellite Imagery Selection:
+Beta Features:
+
+1. [ ] Upload a plots and point shapefile (point features are the categories list)
+2. [ ] Satellite Imagery Selection:
    Admin should be able to select the imagery datasource (Google Earth Engine, locally hosted "chipset", other image server)
    NOTE: Imagery for the prototype should be drawn from Google Earth API (DEPRECATED!)
          Our best alternative is https://www.digitalglobe.com/ (Maps API, GBDX, Basemap)
-
-1. Launch Project
-
-1. God Screen
-   - show map
+3. [ ] God Screen (show map)
 
 * User Page
 
@@ -125,14 +124,6 @@ CREATE INDEX mapcha_plots_project_id ON mapcha.plots (project_id);
 
 #+name: create-mapcha-sample-tables
 #+begin_src sql :engine postgresql :cmdline mapcha :results silent :exports code
-CREATE TABLE mapcha.sample_values (
-  id         serial primary key,
-  project_id integer not null references mapcha.projects (id) on delete restrict on update cascade,
-  value      text not null
-);
-
-CREATE INDEX mapcha_sample_values_project_id ON mapcha.sample_values (project_id);
-
 CREATE TABLE mapcha.samples (
   id      serial primary key,
   plot_id integer not null references mapcha.plots (id) on delete restrict on update cascade,
@@ -140,6 +131,14 @@ CREATE TABLE mapcha.samples (
 );
 
 CREATE INDEX mapcha_samples_plot_id ON mapcha.samples (plot_id);
+
+CREATE TABLE mapcha.sample_values (
+  id         serial primary key,
+  project_id integer not null references mapcha.projects (id) on delete restrict on update cascade,
+  value      text not null
+);
+
+CREATE INDEX mapcha_sample_values_project_id ON mapcha.sample_values (project_id);
 #+end_src
 
 #+name: create-mapcha-user-tables
