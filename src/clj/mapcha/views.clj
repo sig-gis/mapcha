@@ -433,33 +433,57 @@
    [:div#admin
     [:h1 "Create New Project"]
     [:form {:method "post" :action "/admin"}
-     [:h2 "Name"]
-     [:input {:type "text" :name "project-name" :autocomplete "off"}]
-     [:h2 "Description"]
-     [:input {:type "text" :name "project-description" :autocomplete "off"}]
-     [:h2 "Define bounding box"]
-     [:input {:type "text" :name "boundary-lon-min"
-              :placeholder "Longitude Min" :autocomplete "off"}]
-     [:input {:type "text" :name "boundary-lon-max"
-              :placeholder "Longitude Max" :autocomplete "off"}]
-     [:input {:type "text" :name "boundary-lat-min"
-              :placeholder "Latitude Min" :autocomplete "off"}]
-     [:input {:type "text" :name "boundary-lat-max"
-              :placeholder "Latitude Max" :autocomplete "off"}]
-     [:h2 "Number of plots"]
-     [:input {:type "text" :name "plots" :autocomplete "off"}]
-     [:h2 "Plot radius in meters"]
-     [:input {:type "text" :name "buffer-radius" :autocomplete "off"}]
-     [:h2 "Number of samples per plot"]
-     [:input {:type "text" :name "samples-per-plot" :autocomplete "off"}]
-     [:h2 "Categories per sample"]
-     [:input {:type "text" :name "sample-values"
-              :placeholder "Forest, Field, Agriculture, Water"
-              :autocomplete "off"}]
-     [:br]
+     [:fieldset#project-info
+      [:legend "Project Info"]
+      [:table
+       [:tr
+        [:td [:label "Name"]]
+        [:td [:input {:type "text" :name "project-name"
+                      :size "28" :autocomplete "off"}]]]
+       [:tr
+        [:td [:label "Description"]]
+        [:td [:textarea {:name "project-description" :rows "3" :cols "41"}]]]]]
+     [:fieldset#plot-info
+      [:legend "Plot Info"]
+      [:table
+       [:tr
+        [:td [:label "Number of plots"]]
+        [:td [:input {:type "number" :name "plots"
+                      :autocomplete "off" :min "0" :step "1"}]]]
+       [:tr
+        [:td [:label "Plot radius in meters"]]
+        [:td [:input {:type "number" :name "buffer-radius"
+                      :autocomplete "off" :min "0.0" :step "any"}]]]]]
+     [:fieldset#sample-info
+      [:legend "Sample Info"]
+      [:table
+       [:tr
+        [:td [:label "Samples per plot"]]
+        [:td [:input#samples-per-plot {:type "number" :name "samples-per-plot"
+                                       :autocomplete "off" :min "0" :step "1"}]]]
+       [:tr
+        [:td [:label "Sample values"]]
+        [:td [:textarea {:name "sample-values" :rows "3" :cols "35"}
+              "Forest, Field, Agriculture, Water"]]]]]
+     [:fieldset#bounding-box
+      [:legend "Define Bounding Box"]
+      [:input#lat-max {:type "number" :name "boundary-lat-max"
+                       :placeholder "Latitude Max" :autocomplete "off"
+                       :min "-90.0" :max "90.0" :step "any"}]
+      [:input#lon-min {:type "number" :name "boundary-lon-min"
+                       :placeholder "Longitude Min" :autocomplete "off"
+                       :min "-180.0" :max "180.0" :step "any"}]
+      [:input#lon-max {:type "number" :name "boundary-lon-max"
+                       :placeholder "Longitude Max" :autocomplete "off"
+                       :min "-180.0" :max "180.0" :step "any"}]
+      [:input#lat-min {:type "number" :name "boundary-lat-min"
+                       :placeholder "Latitude Min" :autocomplete "off"
+                       :min "-90.0" :max "90.0" :step "any"}]]
      [:input.button {:type "submit" :name "create-project"
                      :value "Create and launch this project"
-                     :onclick "this.disabled=true"}]]]))
+                     :onclick "this.disabled=true"}]]
+    [:img#compass-rose {:src "img/compass_rose.png"}]
+    [:div#new-project-map]]))
 
 (defn create-new-project-page
   [request]

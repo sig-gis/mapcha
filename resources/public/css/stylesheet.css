@@ -624,7 +624,7 @@ p.error-message {
 
 #dashboard {
     position:relative;
-    height:675px;
+    height:575px;
     padding:10px;
     background-color:#e0e0e0;
     border-radius:10px;
@@ -724,22 +724,105 @@ p.error-message {
 /* Admin */
 /*********/
 
+#admin {
+    position:relative;
+    height:575px;
+    padding:10px;
+    background-color:#e0e0e0;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+}
+
 #admin h1 {
     font-size:1.5em;
     font-style:normal;
     font-weight:bold;
+    padding:5px;
 }
 
-#admin h2 {
+#admin fieldset {
+    margin-top:10px;
+    padding:10px;
+    background-color:#eee;
+}
+
+#admin legend {
     font-size:1.2em;
     font-style:normal;
     font-weight:bold;
+    color:#55f;
+}
+
+#admin label {
+    margin:0px 10px;
+    color:#55f;
+    font-weight:bold;
+}
+
+#admin fieldset {
+    width:450px;
+}
+
+#admin fieldset#plot-info input {
+    width:225px;
+}
+
+#admin input[type=number] {
+    height:20px;
+    padding:5px;
+}
+
+#admin fieldset#sample-info input#samples-per-plot {
+    width:250px;
+}
+
+#admin fieldset#sample-info textarea {
+    color:#666;
+    padding:5px 0px;
+}
+
+#admin fieldset#bounding-box {
+    position:absolute;
+    top:54px;
+    left:500px;
+}
+
+#admin fieldset#bounding-box input {
+    display:block;
+    width:135px;
+}
+
+#admin fieldset#bounding-box input#lat-max {
+    margin:auto;
+}
+
+#admin fieldset#bounding-box input#lon-min {
+    float:left;
+}
+
+#admin fieldset#bounding-box input#lon-max {
+    float:right;
+}
+
+#admin fieldset#bounding-box input#lat-min {
+    margin:auto;
+}
+
+#admin #new-project-map {
+    position:absolute;
+    top:235px;
+    left:500px;
+    border:1px solid #777;
+    width:730px;
+    height:340px;
 }
 
 #admin input.button {
-    font-size:1em;
+    display:block;
+    font-size:1.2em;
     padding:5px;
-    margin:20px 0;
+    margin:20px 80px;
     color:white;
     background-color:#55f;
     border-radius:8px;
@@ -748,6 +831,12 @@ p.error-message {
     box-shadow:3px 3px 6px rgba(21,21,153,0.6);
     -moz-box-shadow:3px 3px 6px rgba(21,21,153,0.6);
     -webkit-box-shadow:3px 3px 6px rgba(21,21,153,0.6);
+}
+
+#admin img#compass-rose {
+    position:absolute;
+    top:20px;
+    left:1020px;
 }
 
 /**************/
