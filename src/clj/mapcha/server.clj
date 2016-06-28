@@ -18,8 +18,7 @@
             [net.cgrand.moustache           :refer [app]]
             [mapcha.validation              :refer [validate-params]]
             [mapcha.db                      :refer [find-user-info add-user]]
-            [mapcha.views                   :as    views]
-            [mapcha.ajax                    :as    ajax]))
+            [mapcha.views                   :as    views]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -67,9 +66,6 @@
    ["admin"]          (app (wrap-authorize #{:admin})
                            :get views/admin-page
                            :post views/create-new-project-page)
-   ["geocode"]        (app (wrap-authorize #{:user :admin}) :post ajax/geocode)
-   ["fire-score"]     (app (wrap-authorize #{:user :admin}) :post ajax/fire-score)
-   ["save-report"]    (app (wrap-authorize #{:user :admin}) :post ajax/save-report)
    ;; Page not found (matches everything else)
    [&]                views/page-not-found-page))
 

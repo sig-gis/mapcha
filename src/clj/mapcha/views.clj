@@ -11,7 +11,6 @@
                                                  add-password-reset-key
                                                  remove-password-reset-key
                                                  send-password-reset-key
-                                                 find-user-reports
                                                  create-new-project]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -387,70 +386,6 @@
 ;;; Dashboard page
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defn report-summary-row
-  [idx {:keys [address longitude latitude date_completed
-               fire_risk_mean fire_hazard_mean fire_weather_mean
-               combined_score cost]}]
-  [:tr {:class (if (even? idx) "report-summary-even" "report-summary-odd")}
-   [:td.address        address]
-   [:td.longitude      longitude]
-   [:td.latitude       latitude]
-   [:td.date-completed date_completed]
-   [:td.fire-risk      (if fire_risk_mean (format "%.2f" fire_risk_mean) "")]
-   [:td.fire-hazard    (if fire_hazard_mean (format "%.2f" fire_hazard_mean) "")]
-   [:td.fire-weather   (if fire_weather_mean (format "%.2f" fire_weather_mean) "")]
-   [:td.combined-score (if combined_score (format "%.2f" combined_score) "")]
-   [:td.cost           (format "$%.2f" cost)]])
-
-(defn combine-scores [reports]
-  (if-let [values (seq (remove nil? (map :combined_score reports)))]
-    (/ (reduce + values)
-       (count values))))
-
-(defn dashboard-page
-  [request]
-  (wrap-header-footer
-   request
-   [:div#dashboard
-    [:h1 "Dashboard"]
-    [:div#new-report-button-container
-     [:input#new-report-button.button {:type "button" :name "new-report"
-                                       :value "Loading..."}]]
-    [:h2 "Summary of Previous Reports"]
-    (if-let [reports (seq (find-user-reports (current-email request)))]
-      (let [overall-score (combine-scores reports)
-            overall-cost  (reduce + (map :cost reports))]
-        [:table#all-reports
-         [:tr#report-summary-header
-          [:th.address        "Address"]
-          [:th.longitude      "Longitude"]
-          [:th.latitude       "Latitude"]
-          [:th.date-completed "Date Completed"]
-          [:th.fire-risk      "Fire Risk"]
-          [:th.fire-hazard    "Fire Hazard"]
-          [:th.fire-weather   "Fire Weather"]
-          [:th.combined-score "Score"]
-          [:th.cost           "Cost"]]
-         (map-indexed report-summary-row reports)
-         [:tr#report-summary-footer
-          [:td.address        ""]
-          [:td.longitude      ""]
-          [:td.latitude       ""]
-          [:td.date-completed ""]
-          [:td.fire-risk      ""]
-          [:td.fire-hazard    ""]
-          [:td.fire-weatder   ""]
-          [:td.combined-score (if overall-score (format "%.2f" overall-score) "")]
-          [:td.cost           (if overall-cost (format "$%.2f" overall-cost) "")]]])
-      [:p.error-message "You have no previous reports."])
-    [:p#overview-map-wait-message "Overview map is loading. Please wait..."]
-    [:div#overview-map
-     [:div#popup.ol-popup
-      [:div#popup-content]]]]
-   [:div#content-pane]
-   (include-js "/mapcha.js")
-   (javascript-tag "mapcha.new_report_reagent.main()")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
