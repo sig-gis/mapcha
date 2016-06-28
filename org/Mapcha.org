@@ -1,82 +1,4 @@
-* Home Page
-
-1. [X] Title of project
-2. [X] Description of project
-3. [ ] Study area on a map with plots on the map (color ramp for plots red-green based on number of samples filled in)
-
-* Admin Page
-
-Alpha Features:
-
-1. [X] Create Project
-2. [X] Input bounding box
-3. [X] Input number of plots
-4. [X] Input buffer size for each plot
-5. [X] Input number of samples per plot
-6. [X] Input list of categories per sample
-
-Beta Features:
-
-1. [ ] Upload a plots and point shapefile (point features are the categories list)
-2. [ ] Satellite Imagery Selection:
-   Admin should be able to select the imagery datasource (Google Earth Engine, locally hosted "chipset", other image server)
-   NOTE: Imagery for the prototype should be drawn from Google Earth API (DEPRECATED!)
-         Our best alternative is https://www.digitalglobe.com/ (Maps API, GBDX, Basemap)
-3. [ ] God Screen (show map)
-
-* User Page
-
-Unique URL per project (e.g., http://mapcha.sig-gis.com/project/my-project-name
-
-Register/Login/Logout pages
-- First Name
-- Last Name
-- Institution
-- Username
-- Password
-- Optional: Facebook authentication
-
-* User Page
-
-Page Components:
-
-1. Map image front and center (hi-res imagery, plot boundary, samples in gray)
-2. List of categories to fill in with description and example
-3. Date of hi-res imagery (month and year)
-4. Plots completed
-5. Percent agreement with other users
-
-User workflow:
-
-1. Randomly assign a plot to the user based on those that have been analyzed by the least number of users
-2. Click sample
-3. Click category (or unknown)
-4. Once all are assigned, click Submit
-5. Increment metadata on this plot for number of users that have worked on this one
-6. Perform submission procedure (see below)
-7. Show next plot
-
-Submission procedure:
-
-1. Record sample assignments
-2. Record date and source of the imagery
-3. Record username
-4. Record IP address of the user
-
-* Initial Study Area: Mekong River Region
-
-- Name :: Mekong River Region
-- Description :: Laos, Cambodia, Vietnam, Thailand, Myanmar
-- Longitude Min :: 95
-- Longitude Max :: 107
-- Latitude Min :: 10.5
-- Latitude Max :: 22.5
-- Number of plots :: 10000
-- Plot radius in meters :: 100
-- Number of samples per plot :: 15
-- Categories per sample :: Forest, Grassland, Bare Surface, Impervious Surface, Agriculture, Urban, Water, Cloud, Unknown
-
-* MAPCHA Users and Samples
+* Database Description
 
 In order to maintain records of the MAPCHA image samples analyzed by
 our users, we will need to add a few tables to our database. To keep
@@ -156,62 +78,76 @@ CREATE INDEX mapcha_user_samples_user_id ON mapcha.user_samples (user_id);
 CREATE INDEX mapcha_user_samples_sample_id ON mapcha.user_samples (sample_id);
 #+end_src
 
-Now that our tables are set up, we can try some simple experiments to
-verify that inserting and querying are working correctly.
+* Home Page
 
-#+name: insert-mapcha-users-test-data
-#+begin_src sql :engine postgresql :cmdline mapcha_fire_weather :results silent :exports code
-INSERT INTO mapcha.users (identity, password)
-  VALUES ('admin@sig-gis.com'   , '$2a$10$i0k5ea41qhO7cyEqhffdz.Ck7XqzpxMmWxgZdJObvIYabS7L3txCy'),
-         ('gjohnson@sig-gis.com', '$2a$10$FgDZDsUPacZrRbqe0Ia0guVpxb.z7oKPEW6ONf0b6tRVJ3ZlNh4fu')
-  RETURNING identity, password;
+1. [X] Title of project
+2. [X] Description of project
+3. [ ] Study area on a map with plots on the map (color ramp for plots red-green based on number of samples filled in)
 
-INSERT INTO mapcha.user_roles (identity, role)
-  VALUES ('admin@sig-gis.com'   , 'admin'),
-         ('admin@sig-gis.com'   , 'user'),
-         ('gjohnson@sig-gis.com', 'user')
-  RETURNING identity, role;
+* Account Pages
 
-INSERT INTO mapcha.user_reports (identity, address, longitude,
-                               latitude, date_completed,
-                               fire_risk_mean, fire_risk_stddev,
-                               fire_hazard_mean, fire_hazard_stddev,
-                               fire_weather_mean, fire_weather_stddev,
-                               combined_score, cost)
-  VALUES ('gjohnson@sig-gis.com', '135 North Champlain St, APT 4, Burlington, VT 05401', -73.217975, 44.484324,
-          to_timestamp('2012-11-12', 'YYYY-MM-DD'), 80.0, 2.5, 75.3, 4.0, 32.0, 28.8, 62.4333333, 90.0),
-         ('gjohnson@sig-gis.com', '69 Pearl St, APT 302, Burlington, VT 05401', -73.216039, 44.480246,
-          to_timestamp('2012-11-18', 'YYYY-MM-DD'), 74.0, 33.0, 89.0, 50.4, 25.0, 1.6, 62.6666666, 90.0),
-         ('gjohnson@sig-gis.com', '3248 Northhampton Court, Pleasanton, CA 94588', -121.871221, 37.69435199999999,
-          to_timestamp('2013-07-05', 'YYYY-MM-DD'), 45.0, 3.3, 15.0, 6.7, 58.0, 24.0, 39.3333333, 90.0)
-  RETURNING *;
-#+end_src
+Beta Features:
 
-#+name: show-mapcha-user-info
-#+begin_src sql :engine postgresql :cmdline mapcha_fire_weather :exports both
-SELECT identity, password, array_agg(role) AS roles
-  FROM mapcha.users
-  INNER JOIN mapcha.user_roles USING (identity)
-  WHERE identity = 'gjohnson@sig-gis.com'
-  GROUP BY identity, password;
-#+end_src
+1. Optional: Facebook authentication
 
-#+RESULTS: show-mapcha-user-info
-| identity             | password                                                     | roles  |
-|----------------------+--------------------------------------------------------------+--------|
-| gjohnson@sig-gis.com | $2a$10$FgDZDsUPacZrRbqe0Ia0guVpxb.z7oKPEW6ONf0b6tRVJ3ZlNh4fu | {user} |
+* Admin Page
 
-#+name: show-mapcha-user-reports
-#+begin_src sql :engine postgresql :cmdline mapcha_fire_weather :exports both
-SELECT *
-  FROM mapcha.user_reports
-  WHERE identity = 'gjohnson@sig-gis.com';
-#+end_src
+Alpha Features:
 
-#+RESULTS: show-mapcha-user-reports
-| id | identity             | address                                             |   longitude |  latitude | date_completed | fire_risk_mean | fire_risk_stddev | fire_hazard_mean | fire_hazard_stddev | fire_weather_mean | fire_weather_stddev | combined_score | cost |
-|----+----------------------+-----------------------------------------------------+-------------+-----------+----------------+----------------+------------------+------------------+--------------------+-------------------+---------------------+----------------+------|
-|  1 | gjohnson@sig-gis.com | 135 North Champlain St, APT 4, Burlington, VT 05401 |  -73.217975 | 44.484324 |     2012-11-12 |             80 |              2.5 |             75.3 |                  4 |                32 |                28.8 |     62.4333333 |   90 |
-|  2 | gjohnson@sig-gis.com | 69 Pearl St, APT 302, Burlington, VT 05401          |  -73.216039 | 44.480246 |     2012-11-18 |             74 |               33 |               89 |               50.4 |                25 |                 1.6 |     62.6666666 |   90 |
-|  3 | gjohnson@sig-gis.com | 3248 Northhampton Court, Pleasanton, CA 94588       | -121.871221 | 37.694352 |     2013-07-05 |             45 |              3.3 |               15 |                6.7 |                58 |                  24 |     39.3333333 |   90 |
+1. [X] Create Project
+2. [X] Input bounding box
+3. [X] Input number of plots
+4. [X] Input buffer size for each plot
+5. [X] Input number of samples per plot
+6. [X] Input list of categories per sample
 
+Beta Features:
+
+1. Upload a plots and point shapefile (point features are the categories list)
+2. Satellite Imagery Selection:
+   Admin should be able to select the imagery datasource (Google Earth Engine, locally hosted "chipset", other image server)
+   NOTE: Imagery for the prototype should be drawn from Google Earth API (DEPRECATED!)
+         Our best alternative is https://www.digitalglobe.com/ (Maps API, GBDX, Basemap)
+3. God Screen (show map)
+
+* User Page
+
+Unique URL per project (e.g., http://mapcha.sig-gis.com/project/my-project-name
+
+Page Components:
+
+1. Map image front and center (hi-res imagery, plot boundary, samples in gray)
+2. List of categories to fill in with description and example
+3. Date of hi-res imagery (month and year)
+4. Plots completed
+5. Percent agreement with other users
+
+User workflow:
+
+1. Randomly assign a plot to the user based on those that have been analyzed by the least number of users
+2. Click sample
+3. Click category (or unknown)
+4. Once all are assigned, click Submit
+5. Increment metadata on this plot for number of users that have worked on this one
+6. Perform submission procedure (see below)
+7. Show next plot
+
+Submission procedure:
+
+1. Record sample assignments
+2. Record date and source of the imagery
+3. Record username
+4. Record IP address of the user
+
+* Initial Study Area: Mekong River Region
+
+- Name :: Mekong River Region
+- Description :: Laos, Cambodia, Vietnam, Thailand, Myanmar
+- Longitude Min :: 95
+- Longitude Max :: 107
+- Latitude Min :: 10.5
+- Latitude Max :: 22.5
+- Number of plots :: 10000
+- Plot radius in meters :: 100
+- Number of samples per plot :: 15
+- Categories per sample :: Forest, Grassland, Bare Surface, Impervious Surface, Agriculture, Urban, Water, Cloud, Unknown
