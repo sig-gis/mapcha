@@ -104,7 +104,14 @@
       ;; 1. Insert project-name, project-description, and boundary (as a
       ;;    polygon) into mapcha.projects.
 
-      (let [project-info (first
+      (let [boundary-lon-min (Double/parseDouble boundary-lon-min)
+            boundary-lon-max (Double/parseDouble boundary-lon-max)
+            boundary-lat-min (Double/parseDouble boundary-lat-min)
+            boundary-lat-max (Double/parseDouble boundary-lat-max)
+            plots            (Integer/parseInt plots)
+            buffer-radius    (Double/parseDouble buffer-radius)
+            samples-per-plot (Integer/parseInt samples-per-plot)
+            project-info (first
                           (add-project-sql {:name        project-name
                                             :description project-description
                                             :lon_min     boundary-lon-min
@@ -152,9 +159,9 @@
         (doseq [value (str/split sample-values #"\s*,\s*")]
           (add-sample-value-sql {:project_id project-id
                                  :value      value}
-                                {:connection conn}))))
-    (catch Exception e false))
-  true)
+                                {:connection conn})))
+      true)
+    (catch Exception e false)))
 
 (defn add-user-sample
   [user-id sample-id value-id]
