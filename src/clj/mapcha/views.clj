@@ -12,7 +12,8 @@
                                                  remove-password-reset-key
                                                  send-password-reset-key
                                                  create-new-project
-                                                 get-all-projects]]))
+                                                 get-all-projects
+                                                 get-sample-values]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -392,17 +393,32 @@
   [request]
   (wrap-header-footer
    request
-   [:div#dashboard
-    [:h1 "Dashboard"]
-    [:div#sidebar
-     [:h2 "Select Project"]
-     [:select {:name "project-id" :size "1"}
-      (for [{:keys [id name]} (get-all-projects)]
-        [:option {:label name :value id}])]
-     [:input#new-plot-button.button {:type "button" :name "new-plot"
-                                     :value "Analyze Plot"}]
-     [:div#plot-categories-container]]
-    [:div#map-view]]))
+   (let [projects      (get-all-projects)
+         project1      (first projects)
+         sample-values (get-sample-values (:id project1))]
+     [:div#dashboard
+      [:h1 "Dashboard"]
+      [:div#sidebar
+       [:fieldset
+        [:legend "Select Project"]
+        [:select {:name "project-id" :size "1"}
+         [:option {:value (:id project1) :selected "true"} (:name project1)]
+         (for [{:keys [id name]} (rest projects)]
+           [:option {:value id} name])]
+        [:input#new-plot-button.button {:type "button" :name "new-plot"
+                                        :value "Analyze Plot"}]]
+       [:fieldset
+        [:legend "Land Use Classifications"]
+        [:ul
+         (for [{:keys [id value]} sample-values]
+           [:li
+            [:input.sample-values {:type "radio" :name "sample-values"
+                                   :id (str value "_" id) :value id
+                                   :disabled "true"}]
+            [:label.sample-values {:for (str value "_" id)} value]])]
+        [:input#select-value-button.button {:type "button" :name "select-value"
+                                            :value "Select Value"}]]]
+      [:div#image-analysis-pane]])))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
