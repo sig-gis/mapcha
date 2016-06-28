@@ -24,32 +24,6 @@ UPDATE mapcha.users
   WHERE email = :email
   RETURNING email, password;
 
--- name: find-user-reports-sql
--- Returns all reports associated with the provided email.
-SELECT *
-  FROM mapcha.user_reports
-  WHERE email = :email;
-
--- name: add-user-report-sql
--- Adds a new report for the given user.
-INSERT INTO mapcha.user_reports (email, address, longitude, latitude,
-                               fire_risk_mean, fire_risk_stddev,
-                               fire_hazard_mean, fire_hazard_stddev,
-                               fire_weather_mean, fire_weather_stddev,
-                               combined_score, cost)
-  VALUES (:email, :address, :longitude, :latitude,
-          :fire_risk_mean, :fire_risk_stddev,
-          :fire_hazard_mean, :fire_hazard_stddev,
-          :fire_weather_mean, :fire_weather_stddev,
-          :combined_score, :cost)
-  RETURNING *;
-
--- name: add-user-sample-sql
--- Adds a new sample record for the given user.
-INSERT INTO mapcha.user_samples (user_id, sample_id, value)
-  VALUES (:user_id, :sample_id, :value)
-  RETURNING *;
-
 -- name: set-password-reset-key-sql
 -- Sets the password reset key for the given user. If one already exists, it is replaced.
 UPDATE mapcha.users

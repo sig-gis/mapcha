@@ -1,8 +1,9 @@
 (ns mapcha.db
   (:require [cemerick.friend.credentials :refer [hash-bcrypt]]
             [clojure.java.jdbc           :refer [with-db-transaction]]
-            [yesql.core                  :refer [defquery defqueries]]
-            [postal.core                 :refer [send-message]])
+            [yesql.core                  :refer [defqueries]]
+            [postal.core                 :refer [send-message]]
+            [clojure.string              :as str])
   (:import org.postgresql.jdbc.PgArray))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -47,50 +48,6 @@
 (defn set-user-password [email password]
   (first (set-user-password-sql {:password (hash-bcrypt password) :email email})))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; User sample functions
-;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defn add-user-sample
-  [user-id sample-id value]
-  (first (add-user-sample-sql {:user_id   user-id
-                               :sample_id sample-id
-                               :value     value})))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; User report functions
-;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defn find-user-reports
-  [email]
-  (find-user-reports-sql {:email email}))
-
-(defn add-user-report
-  [email address longitude latitude fire_risk_mean fire_risk_stddev fire_hazard_mean
-   fire_hazard_stddev fire_weather_mean fire_weather_stddev combined_score cost]
-  (first (add-user-report-sql {:email email
-                               :address address
-                               :longitude longitude
-                               :latitude latitude
-                               :fire_risk_mean fire_risk_mean
-                               :fire_risk_stddev fire_risk_stddev
-                               :fire_hazard_mean fire_hazard_mean
-                               :fire_hazard_stddev fire_hazard_stddev
-                               :fire_weather_mean fire_weather_mean
-                               :fire_weather_stddev fire_weather_stddev
-                               :combined_score combined_score
-                               :cost cost})))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Password reset functions
-;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (defn random-hex-string [length]
   (->> #(rand-nth [1 2 3 4 5 6 7 8 9 0 \a \b \c \d \e \f])
        (repeatedly length)
@@ -132,42 +89,75 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Fire score queries
-;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defquery query-fire-risk-sql    "sql/query_fire_risk.sql"    {:connection db-spec})
-(defquery query-fire-hazard-sql  "sql/query_fire_hazard.sql"  {:connection db-spec})
-(defquery query-fire-weather-sql "sql/query_fire_weather.sql" {:connection db-spec})
-
-(defonce query-fns
-  {:fire-risk    query-fire-risk-sql
-   :fire-hazard  query-fire-hazard-sql
-   :fire-weather query-fire-weather-sql})
-
-(defn run-fire-score-query
-  [fire-score-type address-lon address-lat radius power-factor]
-  (let [query-fn (query-fns fire-score-type)
-        results  (query-fn {:lon          address-lon
-                            :lat          address-lat
-                            :radius       radius
-                            :power_factor power-factor})
-        {:keys [global_mean global_stddev local_mean local_stddev]} (first results)]
-    {:global-mean   global_mean
-     :global-stddev global_stddev
-     :local-mean    local_mean
-     :local-stddev  local_stddev
-     :histogram     (map #(select-keys % [:midpoint :width :percent]) results)}))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Project management functions
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defqueries "sql/project_management.sql" {:connection db-spec})
 
 (defn create-new-project
   [{:keys [project-name project-description boundary-lon-min
            boundary-lon-max boundary-lat-min boundary-lat-max
            plots buffer-radius samples-per-plot sample-values]}]
-  true
-  )
+  (try
+    (with-db-transaction [conn db-spec]
+      ;; 1. Insert project-name, project-description, and boundary (as a
+      ;;    polygon) into mapcha.projects.
+
+      (let [project-info (first
+                          (add-project-sql {:name        project-name
+                                            :description project-description
+                                            :lon_min     boundary-lon-min
+                                            :lon_max     boundary-lon-max
+                                            :lat_min     boundary-lat-min
+                                            :lat_max     boundary-lat-max}
+                                           {:connection conn}))
+            project-id   (project-info :id)
+            lon-range    (- boundary-lon-max boundary-lon-min)
+            lat-range    (- boundary-lat-max boundary-lat-min)]
+
+        ;; 2. Insert plots rows into mapcha.plots with random centers
+        ;;    within boundary and radius=buffer-radius.
+
+        (dotimes [_ plots]
+          (let [plot-lon  (+ boundary-lon-min (rand lon-range))
+                plot-lat  (+ boundary-lat-min (rand lat-range))
+                plot-info (first
+                           (add-plot-sql {:project_id project-id
+                                          :lon        plot-lon
+                                          :lat        plot-lat
+                                          :radius     buffer-radius}
+                                         {:connection conn}))
+                plot-id   (plot-info :id)
+                plot-x    (plot-info :web_mercator_x)
+                plot-y    (plot-info :web_mercator_y)]
+
+            ;; 3. Insert samples-per-plot rows into mapcha.samples for each
+            ;;    plot with a randomly selected point within the plot's
+            ;;    buffer
+
+            (dotimes [_ samples-per-plot]
+              (let [offset-angle     (rand (* 2.0 Math/PI))
+                    offset-magnitude (rand buffer-radius)
+                    x-offset         (* offset-magnitude (Math/cos offset-angle))
+                    y-offset         (* offset-magnitude (Math/sin offset-angle))]
+                (add-sample-sql {:plot_id  plot-id
+                                 :sample_x (+ plot-x x-offset)
+                                 :sample_y (+ plot-y y-offset)}
+                                {:connection conn})))))
+
+        ;; 4. Split sample-values on ",", trim off whitespace, and insert
+        ;;    them into mapcha.sample_values.
+
+        (doseq [value (str/split sample-values #"\s*,\s*")]
+          (add-sample-value-sql {:project_id project-id
+                                 :value      value}
+                                {:connection conn}))))
+    (catch Exception e false))
+  true)
+
+(defn add-user-sample
+  [user-id sample-id value-id]
+  (first (add-user-sample-sql {:user_id   user-id
+                               :sample_id sample-id
+                               :value_id  value-id})))
