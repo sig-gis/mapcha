@@ -710,10 +710,8 @@ p.error-message {
 #dashboard #image-analysis-pane {
     position:absolute;
     left:24%;
-    width:73%;
-    height:500px;
-    padding:5px 10px;
-    background-color:#eee;
+    width:75%;
+    height:510px;
     border:2px solid #55f;
     border-radius:10px;
     -moz-border-radius:10px;
@@ -813,9 +811,9 @@ p.error-message {
     position:absolute;
     top:235px;
     left:500px;
-    border:1px solid #777;
     width:730px;
     height:340px;
+    border:1px solid #777;
 }
 
 #admin input.button {

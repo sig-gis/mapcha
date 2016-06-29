@@ -47,20 +47,19 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn mapquest-base-map [div-name]
-  (let [wichita-kansas #js [-97.3426776 37.6906938]]
-    (js/ol.Map.
-     #js {:target div-name
-          :layers #js [(js/ol.layer.Tile.
-                        #js {:source (js/ol.source.MapQuest. #js {:layer "sat"})})
-                       (js/ol.layer.Tile.
-                        #js {:source (js/ol.source.MapQuest. #js {:layer "hyb"})})]
-          :controls (.extend (js/ol.control.defaults)
-                             #js [(js/ol.control.ScaleLine.)])
-          :view (js/ol.View.
-                 #js {:projection "EPSG:3857"
-                      :center (js/ol.proj.fromLonLat wichita-kansas)
-                      :zoom 4})})))
+(defn mapquest-base-map [{:keys [div-name center-coords zoom-level]}]
+  (js/ol.Map.
+   #js {:target div-name
+        :layers #js [(js/ol.layer.Tile.
+                      #js {:source (js/ol.source.MapQuest. #js {:layer "sat"})})
+                     (js/ol.layer.Tile.
+                      #js {:source (js/ol.source.MapQuest. #js {:layer "hyb"})})]
+        :controls (.extend (js/ol.control.defaults)
+                           #js [(js/ol.control.ScaleLine.)])
+        :view (js/ol.View.
+               #js {:projection "EPSG:3857"
+                    :center (js/ol.proj.fromLonLat (clj->js center-coords))
+                    :zoom zoom-level})}))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -71,7 +70,9 @@
 (defonce map-ref (atom nil))
 
 (defn init-map [div-name]
-  (reset! map-ref (mapquest-base-map div-name)))
+  (reset! map-ref (mapquest-base-map {:div-name      div-name
+                                      :center-coords [-97.3426776 37.6906938]
+                                      :zoom-level    4})))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -124,7 +125,9 @@
   (.setPosition overlay js/undefined))
 
 (defn init-overview-map [div-name report-addresses]
-  (let [overview-map    (mapquest-base-map div-name)
+  (let [overview-map    (mapquest-base-map {:div-name      div-name
+                                            :center-coords [-97.3426776 37.6906938]
+                                            :zoom-level    4})
         address-layer   (create-address-overview-layer report-addresses)
         address-overlay (js/ol.Overlay. #js {:element (dom/getElement "popup")})]
     (reset! overview-map-ref
