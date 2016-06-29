@@ -698,7 +698,7 @@ p.error-message {
 }
 
 #dashboard input.sample-values {
-    margin-right:5px;
+    margin:0px 5px;
 }
 
 #dashboard label.sample-values {

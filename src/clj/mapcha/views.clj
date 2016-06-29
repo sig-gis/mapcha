@@ -408,7 +408,7 @@
         [:input#new-plot-button.button {:type "button" :name "new-plot"
                                         :value "Analyze Plot"}]]
        [:fieldset
-        [:legend "Land Use Classifications"]
+        [:legend "Sample Values"]
         [:ul
          (for [{:keys [id value]} sample-values]
            [:li
