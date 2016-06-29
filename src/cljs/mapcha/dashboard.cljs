@@ -1,4 +1,4 @@
-(ns mapcha.overview-plot
+(ns mapcha.dashboard
   (:require [goog.dom :as dom]
             [mapcha.map-utils :as map]))
 
@@ -10,5 +10,7 @@
    ["Myanmar"      "96.1"       "19.75"     "10.0"]])
 
 (defn ^:export main []
-  (map/init-overview-map "overview-map" plot-list)
-  (dom/removeNode (dom/getElement "overview-map-wait-message")))
+  (js/alert "Welcome to the Dashboard page!")
+  ;;(map/init-overview-map "overview-map" plot-list)
+  ;;(dom/removeNode (dom/getElement "overview-map-wait-message"))
+  )

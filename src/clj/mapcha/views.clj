@@ -151,7 +151,7 @@
       [:div#popup-content]]]
     [:p "Enter a description of " [:span.trademark "Mapcha"] " here..."]]
    (include-js "/mapcha.js")
-   (javascript-tag "mapcha.overview_plot.main()")))
+   (javascript-tag "mapcha.homepage.main()")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -418,7 +418,9 @@
             [:label.sample-values {:for (str value "_" id)} value]])]
         [:input#select-value-button.button {:type "button" :name "select-value"
                                             :value "Select Value"}]]]
-      [:div#image-analysis-pane]])))
+      [:div#image-analysis-pane]])
+   (include-js "/mapcha.js")
+   (javascript-tag "mapcha.dashboard.main()")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -483,7 +485,9 @@
                      :value "Create and launch this project"
                      :onclick "this.disabled=true"}]]
     [:img#compass-rose {:src "img/compass_rose.png"}]
-    [:div#new-project-map]]))
+    [:div#new-project-map]]
+   (include-js "/mapcha.js")
+   (javascript-tag "mapcha.admin.main()")))
 
 (defn create-new-project-page
   [request]
