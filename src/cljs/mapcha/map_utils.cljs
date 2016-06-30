@@ -6,6 +6,7 @@
             [ol.layer.Vector]
             [ol.source.MapQuest]
             [ol.source.Vector]
+            [ol.source.XYZ]
             [ol.control]
             [ol.control.ScaleLine]
             [ol.View]
@@ -60,6 +61,39 @@
                #js {:projection "EPSG:3857"
                     :center (js/ol.proj.fromLonLat (clj->js center-coords))
                     :zoom zoom-level})}))
+
+(defn digitalglobe-base-map [{:keys [div-name center-coords zoom-level]}]
+  (let [digital-globe-access-token   (str "pk.eyJ1IjoiZGlnaXRhbGdsb2JlIiwiYS"
+                                          "I6ImNpcTJ3ZTlyZTAwOWNuam00ZWU3aTk"
+                                          "xdWIifQ.9OFrmevVe0YB2dJokKhhdA")
+        recent-imagery-url           "digitalglobe.nal0g75k"
+        recent-imagery-+-streets-url "digitalglobe.nal0mpda"]
+    (js/ol.Map.
+     #js {:target div-name
+          :layers #js [(js/ol.layer.Tile.
+                        #js {:title  "DigitalGlobe Maps API: Recent Imagery"
+                             :source (js/ol.source.XYZ.
+                                      #js {:url (str
+                                                 "http://api.tiles.mapbox.com/v4/"
+                                                 recent-imagery-url
+                                                 "/{z}/{x}/{y}.png?access_token="
+                                                 digital-globe-access-token)
+                                           :attribution "© DigitalGlobe, Inc"})})
+                       (js/ol.layer.Tile.
+                        #js {:title  "DigitalGlobe Maps API: Recent Imagery+Streets"
+                             :source (js/ol.source.XYZ.
+                                      #js {:url (str
+                                                 "http://api.tiles.mapbox.com/v4/"
+                                                 recent-imagery-+-streets-url
+                                                 "/{z}/{x}/{y}.png?access_token="
+                                                 digital-globe-access-token)
+                                           :attribution "© DigitalGlobe, Inc"})})]
+          :controls (.extend (js/ol.control.defaults)
+                             #js [(js/ol.control.ScaleLine.)])
+          :view (js/ol.View.
+                 #js {:projection "EPSG:3857"
+                      :center (js/ol.proj.fromLonLat (clj->js center-coords))
+                      :zoom zoom-level})})))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
