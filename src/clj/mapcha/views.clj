@@ -414,8 +414,7 @@
          (for [{:keys [id value]} sample-values]
            [:li
             [:input.sample-values {:type "radio" :name "sample-values"
-                                   :id (str value "_" id) :value id
-                                   :disabled "true"}]
+                                   :id (str value "_" id) :value id}]
             [:label.sample-values {:for (str value "_" id)} value]])]
         [:input#select-value-button.button {:type "button" :name "select-value"
                                             :value "Select Value"}]]]])
