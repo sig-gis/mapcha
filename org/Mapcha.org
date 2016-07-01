@@ -89,88 +89,88 @@ UPDATE mapcha.users
 
 * Initial Study Area: Mekong River Region
 
-- Name :: Mekong River Region
-- Description :: Laos, Cambodia, Vietnam, Thailand, Myanmar
-- Number of plots :: 10000
-- Plot radius in meters :: 100
-- Number of samples per plot :: 15
-- Categories per sample :: Forest, Grassland, Bare Surface, Impervious Surface, Agriculture, Urban, Water, Cloud, Unknown
-- Latitude Max :: 22.5
-- Longitude Min :: 95
-- Longitude Max :: 107
-- Latitude Min :: 10.5
-
-* Home Page
-
-1. [X] Title of project
-2. [X] Description of project
-3. [ ] Study area on a map with plots on the map (color ramp for plots red-green based on number of samples filled in)
-
-* Account Pages
-
-Beta Features:
-
-1. Optional: Facebook authentication
-
-* Admin Page
-
-Alpha Features:
-
-1. [X] Create Project
-2. [X] Input bounding box
-3. [X] Input number of plots
-4. [X] Input buffer size for each plot
-5. [X] Input number of samples per plot
-6. [X] Input list of categories per sample
-
-Beta Features:
-
-1. Upload a plots and point shapefile (point features are the categories list)
-2. Satellite Imagery Selection:
-   Admin should be able to select the imagery datasource (Google Earth Engine, locally hosted "chipset", other image server)
-   NOTE: Imagery for the prototype should be drawn from Google Earth API (DEPRECATED!)
-         Our best alternative is https://www.digitalglobe.com/ (Maps API, GBDX, Basemap)
-3. God Screen (show map)
-
-* User Page
-
-Unique URL per project (e.g., http://mapcha.sig-gis.com/project/my-project-name
-
-Page Components:
-
-1. Map image front and center (hi-res imagery, plot boundary, samples in gray)
-2. List of categories to fill in with description and example
-3. Date of hi-res imagery (month and year)
-4. Plots completed
-5. Percent agreement with other users
-
-User workflow:
-
-1. Randomly assign a plot to the user based on those that have been analyzed by the least number of users
-2. Click sample
-3. Click category (or unknown)
-4. Once all are assigned, click Submit
-5. Increment metadata on this plot for number of users that have worked on this one
-6. Perform submission procedure (see below)
-7. Show next plot
-
-Submission procedure:
-
-1. Record sample assignments
-2. Record date and source of the imagery
-3. Record username
-4. Record IP address of the user
+  - Name :: Mekong River Region
+  - Description :: Laos, Cambodia, Vietnam, Thailand, Myanmar
+  - Number of plots :: 10000
+  - Plot radius in meters :: 100
+  - Number of samples per plot :: 15
+  - Categories per sample :: Forest, Grassland, Bare Surface, Impervious Surface, Agriculture, Urban, Water, Cloud, Unknown
+  - Latitude Max :: 22.5
+  - Longitude Min :: 95
+  - Longitude Max :: 107
+  - Latitude Min :: 10.5
 
 * Web Mapping Options
 
-- Google Earth :: desktop application (OpenForis CollectEarth is built on this)
-- Google Earth API :: 3D globe in browser (DEPRECATED)
-- Google Earth Engine (API) :: web-based tool for geospatial analysis (NOT FOR CUSTOM WEB INTERFACES)
-- Google Maps API :: commercial 2D web mapping API with 15m earth imagery
-- Bing Maps API :: commercial 2D web mapping API from Microsoft
-- OpenLayers :: open source 2D web mapping API (BIG)
-- Leaflet :: open source 2D web mapping API (SMALL)
-- Cesium :: open source 3D globe in browser
+  - Google Earth :: desktop application (OpenForis CollectEarth is built on this)
+  - Google Earth API :: 3D globe in browser (DEPRECATED)
+  - Google Earth Engine (API) :: web-based tool for geospatial analysis (NOT FOR CUSTOM WEB INTERFACES)
+  - Google Maps API :: commercial 2D web mapping API with 15m earth imagery
+  - Bing Maps API :: commercial 2D web mapping API from Microsoft
+  - OpenLayers :: open source 2D web mapping API (BIG)
+  - Leaflet :: open source 2D web mapping API (SMALL)
+  - Cesium :: open source 3D globe in browser
 
-Solution: OpenLayers w/ hi-res DigitGlobe basemap imagery.
-          Incorporate Cesium through ol3-cesium module.
+  *Solution*: OpenLayers w/ hi-res DigitGlobe basemap imagery.
+              Incorporate Cesium through ol3-cesium module.
+
+* TODOs
+** Database changes
+
+   - Add a date field and an imagery field to the user_samples table and recreate it on euclid and mapcha
+   - Create a mapcha.imagery table with fields (id, source, date, url) on euclid and mapcha
+
+** Map coding (w/ Reagent and OpenLayers)
+
+   - Dashboard page
+     - Change "Select Project":
+       1. Record project-id in an atom
+       2. Show project boundary
+     - Push "Analyze New Plot":
+       1. Record plot-id in an atom
+       2. Zoom to randomly selected plot (chosen by least number of samples)
+       3. Show the buffer boundary
+       4. Show 15 sample points in red
+       5. Disable this button
+     - Click sample point:
+       1. Record the sample-id in an atom
+       2. Change the point's color to yellow
+     - Click sample value:
+       1. Record the sample-value-id in an atom
+       2. Set chosen=true on the radio button corresponding to @sample-value-id in the @user-samples map (if any)
+     - Push "Select Value":
+       1. Change the point's color to green
+       2. Assoc a user-samples atom (holding a map) to set {@sample-id @sample-value-id}
+     - Push "Save"
+       1. Call mapcha.db/add-user-samples @user-samples (include sample date and source+date of the imagery)
+       2. Disable this button
+       3. Enable the "Analyze New Plot" button
+     - Hover over sample values:
+       1. Show text descriptions and example images
+   - Admin page
+     - Create separate buttons for previewing the project and launching it
+     - Show bounding box on map as lat/lon coords are input
+     - Create a preview image of the aggregated plot points (use color ramp green-red or circle size to indicate number of points per area)
+   - Home page
+     - Show study area on a map with plots highlighted (use color ramp red-green based on number of samples filled in)
+
+** UI improvements
+
+   - Add "Plots completed" label to Dashboard UI
+   - Add "Percent agreement with other users" label to Dashboard UI
+   - Add date of hi-res imagery (month and year) to Dashboard UI
+   - Add a Quit button to the Dashboard UI
+   - Add UA form validators (through html input tag options) to the Admin page
+   - Add a Mapcha description to the Home page (use dl/dt/dd tags for text sections)
+   - Add the spinner.gif after the "Create and launch this project" button on the Admin page, disable the button, and change the text to "Processing...please wait..."
+   - Add "First Name", "Last Name", and "Institution" fields to Register and Account pages
+
+** Next week
+
+   - Create a unique URL per project (e.g., http://mapcha.sig-gis.com/project/my-project-name) <-- do we really need this?
+   - Allow an admin to select the imagery datasource (Digital Globe, Google Earth Engine?, locally hosted "chipset", other image server)
+   - Allow an admin to upload a plots and points shapefile to create a new project (point features are the categories list)
+   - Make https://github.com/sig-gis/mapcha/settings a private repository (probably need to delete another repository first)
+   - Include imagery date in user_samples (look up DigitalGlobe imagery vintage)
+   - Incorporate Cesium into the map interfaces for a 3D globe option https://github.com/openlayers/ol3-cesium
+   - Include Facebook authentication as a login option
