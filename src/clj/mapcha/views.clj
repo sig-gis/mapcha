@@ -398,6 +398,7 @@
          sample-values (get-sample-values (:id project1))]
      [:div#dashboard
       [:h1 "Dashboard"]
+      [:div#image-analysis-pane]
       [:div#sidebar
        [:fieldset
         [:legend "Select Project"]
@@ -417,8 +418,7 @@
                                    :disabled "true"}]
             [:label.sample-values {:for (str value "_" id)} value]])]
         [:input#select-value-button.button {:type "button" :name "select-value"
-                                            :value "Select Value"}]]]
-      [:div#image-analysis-pane]])
+                                            :value "Select Value"}]]]])
    (include-js "/mapcha.js")
    (javascript-tag "mapcha.dashboard.main()")))
 

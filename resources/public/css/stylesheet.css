@@ -641,6 +641,7 @@ p.error-message {
 
 #dashboard #sidebar {
     position:absolute;
+    left:77%;
     width:20%;
     height:500px;
     padding:5px 10px;
@@ -709,7 +710,6 @@ p.error-message {
 
 #dashboard #image-analysis-pane {
     position:absolute;
-    left:24%;
     width:75%;
     height:510px;
     border:2px solid #55f;
