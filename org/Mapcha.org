@@ -51,6 +51,16 @@ CREATE TABLE mapcha.sample_values (
 CREATE INDEX mapcha_sample_values_project_id ON mapcha.sample_values (project_id);
 #+end_src
 
+#+name: create-mapcha-imagery-table
+#+begin_src sql :engine postgresql :cmdline mapcha :results silent :exports code
+CREATE TABLE mapcha.imagery (
+  id     serial primary key,
+  source text not null,
+  date   date,
+  url    text not null
+);
+#+end_src
+
 #+name: create-mapcha-user-tables
 #+begin_src sql :engine postgresql :cmdline mapcha :results silent :exports code
 CREATE TABLE mapcha.users (
@@ -68,7 +78,8 @@ CREATE TABLE mapcha.user_samples (
   user_id      integer not null references mapcha.users (id) on delete cascade on update cascade,
   sample_id    integer not null references mapcha.samples (id) on delete cascade on update cascade,
   value_id     integer not null references mapcha.sample_values (id) on delete cascade on update cascade,
-  imagery_date date
+  imagery_id   integer not null references mapcha.imagery (id) on delete cascade on update cascade,
+  date         date
 );
 
 CREATE INDEX mapcha_user_samples_user_id ON mapcha.user_samples (user_id);
@@ -115,11 +126,6 @@ UPDATE mapcha.users
               Incorporate Cesium through ol3-cesium module.
 
 * TODOs
-** Database changes
-
-   - Add a date field and an imagery field to the user_samples table and recreate it on euclid and mapcha
-   - Create a mapcha.imagery table with fields (id, source, date, url) on euclid and mapcha
-
 ** Map coding (w/ Reagent and OpenLayers)
 
    - Dashboard page
