@@ -15,19 +15,15 @@
                     :exclusions [commons-codec]]
                    [net.cgrand/moustache        "1.2.0-alpha2"
                     :exclusions [org.clojure/clojure ring/ring-core]]
-                   [enlive                      "1.1.6"]
-                   [enfocus                     "2.1.1"]
-                   [domina                      "1.0.3"]
                    [hiccup                      "1.0.5"]
-                   [reagent                     "0.6.0-alpha"]
                    [org.clojure/java.jdbc       "0.5.0"]
                    [org.postgresql/postgresql   "9.4.1208.jre7"]
                    [yesql                       "0.5.2"]
                    [com.draines/postal          "1.11.4"]
+                   [reagent                     "0.6.0-alpha"]
                    [cljsjs/openlayers           "3.15.1"]
                    [adzerk/boot-cljs            "1.7.228-1" :scope "test"]
                    [adzerk/boot-cljs-repl       "0.3.0"     :scope "test"]
-                   [adzerk/boot-reload          "0.4.7"     :scope "test"]
                    [pandeiro/boot-http          "0.7.3"     :scope "test"]
                    [crisptrutski/boot-cljs-test "0.2.1"     :scope "test"]
                    [com.cemerick/piggieback     "0.2.1"     :scope "test"]
@@ -37,7 +33,6 @@
 (require
   '[adzerk.boot-cljs            :refer [cljs]]
   '[adzerk.boot-cljs-repl       :refer [cljs-repl start-repl]]
-  '[adzerk.boot-reload          :refer [reload]]
   '[pandeiro.boot-http          :refer [serve]]
   '[crisptrutski.boot-cljs-test :refer [test-cljs]])
 
