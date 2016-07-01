@@ -1,21 +1,17 @@
 * Database Description
 
-In order to maintain records of the MAPCHA image samples analyzed by
-our users, we will need to add a few tables to our database. To keep
-these organized, we create the *mapcha* schema.
+#+name: create-mapcha-database
+#+begin_src sql :engine postgresql :cmdline -U postgres :results silent :exports code
+--CREATE ROLE gjohnson WITH LOGIN CREATEDB;
+CREATE DATABASE mapcha WITH OWNER gjohnson;
+\c mapcha
+CREATE EXTENSION postgis;
+#+end_src
 
 #+name: create-mapcha-schema
 #+begin_src sql :engine postgresql :cmdline mapcha :results silent :exports code
 CREATE SCHEMA mapcha;
 #+end_src
-
-We will store each user's email and password in the mapcha.users
-table. Emails must be unique but may be changed by the user through
-the web interface. Each user will also have a role assigned to them,
-which determines which pages on the site they are allowed to access.
-Whenever a user assigns a value to an image sample, this assignment
-will be recorded in the mapcha.user_samples table along with the date
-it was completed.
 
 #+name: create-mapcha-plot-tables
 #+begin_src sql :engine postgresql :cmdline mapcha :results silent :exports code
@@ -28,7 +24,7 @@ CREATE TABLE mapcha.projects (
 
 CREATE TABLE mapcha.plots (
   id         serial primary key,
-  project_id integer not null references mapcha.projects (id) on delete restrict on update cascade,
+  project_id integer not null references mapcha.projects (id) on delete cascade on update cascade,
   center     geometry(Point,4326),
   radius     double precision not null
 );
@@ -40,7 +36,7 @@ CREATE INDEX mapcha_plots_project_id ON mapcha.plots (project_id);
 #+begin_src sql :engine postgresql :cmdline mapcha :results silent :exports code
 CREATE TABLE mapcha.samples (
   id      serial primary key,
-  plot_id integer not null references mapcha.plots (id) on delete restrict on update cascade,
+  plot_id integer not null references mapcha.plots (id) on delete cascade on update cascade,
   point   geometry(Point,4326)
 );
 
@@ -48,7 +44,7 @@ CREATE INDEX mapcha_samples_plot_id ON mapcha.samples (plot_id);
 
 CREATE TABLE mapcha.sample_values (
   id         serial primary key,
-  project_id integer not null references mapcha.projects (id) on delete restrict on update cascade,
+  project_id integer not null references mapcha.projects (id) on delete cascade on update cascade,
   value      text not null
 );
 
@@ -68,15 +64,41 @@ CREATE TABLE mapcha.users (
 CREATE INDEX mapcha_users_email ON mapcha.users (email);
 
 CREATE TABLE mapcha.user_samples (
-  id        serial primary key,
-  user_id   integer not null references mapcha.users (id) on delete restrict on update cascade,
-  sample_id integer not null references mapcha.samples (id) on delete restrict on update cascade,
-  value_id  integer not null references mapcha.sample_values (id) on delete restrict on update cascade
+  id           serial primary key,
+  user_id      integer not null references mapcha.users (id) on delete cascade on update cascade,
+  sample_id    integer not null references mapcha.samples (id) on delete cascade on update cascade,
+  value_id     integer not null references mapcha.sample_values (id) on delete cascade on update cascade,
+  imagery_date date
 );
 
 CREATE INDEX mapcha_user_samples_user_id ON mapcha.user_samples (user_id);
 CREATE INDEX mapcha_user_samples_sample_id ON mapcha.user_samples (sample_id);
 #+end_src
+
+After creating the admin@sig-gis.com (password: administrator) and
+gjohnson@sig-gis.com (password: 2bitxfer) users through the web
+interface, run the following code to elevate admin@sig-gis.com to the
+admin role.
+
+#+name: grant-admin-role-to-admin-user
+#+begin_src sql :engine postgresql :cmdline mapcha :results silent :exports code
+UPDATE mapcha.users
+  SET role='admin'
+  WHERE email='admin@sig-gis.com';
+#+end_src
+
+* Initial Study Area: Mekong River Region
+
+- Name :: Mekong River Region
+- Description :: Laos, Cambodia, Vietnam, Thailand, Myanmar
+- Number of plots :: 10000
+- Plot radius in meters :: 100
+- Number of samples per plot :: 15
+- Categories per sample :: Forest, Grassland, Bare Surface, Impervious Surface, Agriculture, Urban, Water, Cloud, Unknown
+- Latitude Max :: 22.5
+- Longitude Min :: 95
+- Longitude Max :: 107
+- Latitude Min :: 10.5
 
 * Home Page
 
@@ -139,15 +161,16 @@ Submission procedure:
 3. Record username
 4. Record IP address of the user
 
-* Initial Study Area: Mekong River Region
+* Web Mapping Options
 
-- Name :: Mekong River Region
-- Description :: Laos, Cambodia, Vietnam, Thailand, Myanmar
-- Longitude Min :: 95
-- Longitude Max :: 107
-- Latitude Min :: 10.5
-- Latitude Max :: 22.5
-- Number of plots :: 10000
-- Plot radius in meters :: 100
-- Number of samples per plot :: 15
-- Categories per sample :: Forest, Grassland, Bare Surface, Impervious Surface, Agriculture, Urban, Water, Cloud, Unknown
+- Google Earth :: desktop application (OpenForis CollectEarth is built on this)
+- Google Earth API :: 3D globe in browser (DEPRECATED)
+- Google Earth Engine (API) :: web-based tool for geospatial analysis (NOT FOR CUSTOM WEB INTERFACES)
+- Google Maps API :: commercial 2D web mapping API with 15m earth imagery
+- Bing Maps API :: commercial 2D web mapping API from Microsoft
+- OpenLayers :: open source 2D web mapping API (BIG)
+- Leaflet :: open source 2D web mapping API (SMALL)
+- Cesium :: open source 3D globe in browser
+
+Solution: OpenLayers w/ hi-res DigitGlobe basemap imagery.
+          Incorporate Cesium through ol3-cesium module.
