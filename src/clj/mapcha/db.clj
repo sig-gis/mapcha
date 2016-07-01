@@ -1,5 +1,6 @@
 (ns mapcha.db
   (:require [cemerick.friend.credentials :refer [hash-bcrypt]]
+            [shoreleave.middleware.rpc   :refer [defremote]]
             [clojure.java.jdbc           :refer [with-db-transaction]]
             [yesql.core                  :refer [defqueries]]
             [postal.core                 :refer [send-message]]
@@ -162,11 +163,11 @@
       true)
     (catch Exception e false)))
 
-(defn get-all-projects
+(defremote get-all-projects
   []
   (get-all-projects-sql))
 
-(defn get-sample-values
+(defremote get-sample-values
   [project-id]
   (get-sample-values-sql {:project_id project-id}))
 

@@ -11,6 +11,7 @@
             [ring.middleware.lint           :refer [wrap-lint]]
             [ring.middleware.stacktrace     :refer [wrap-stacktrace]]
             [ring.util.response             :refer [redirect]]
+            [shoreleave.middleware.rpc      :refer [wrap-rpc]]
             [cemerick.friend                :refer [authenticate
                                                     logout
                                                     wrap-authorize]]
@@ -214,6 +215,7 @@
 
 (def secure-app
   (-> route-handler
+      (wrap-rpc)
       (wrap-resource "public")
       (wrap-file-info)
       (wrap-authenticate)

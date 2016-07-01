@@ -393,31 +393,10 @@
   [request]
   (wrap-header-footer
    request
-   (let [projects      (get-all-projects)
-         project1      (first projects)
-         sample-values (get-sample-values (:id project1))]
-     [:div#dashboard
-      [:h1 "Dashboard"]
-      [:div#image-analysis-pane]
-      [:div#sidebar
-       [:fieldset
-        [:legend "Select Project"]
-        [:select {:name "project-id" :size "1"}
-         [:option {:value (:id project1) :selected "true"} (:name project1)]
-         (for [{:keys [id name]} (rest projects)]
-           [:option {:value id} name])]
-        [:input#new-plot-button.button {:type "button" :name "new-plot"
-                                        :value "Analyze Plot"}]]
-       [:fieldset
-        [:legend "Sample Values"]
-        [:ul
-         (for [{:keys [id value]} sample-values]
-           [:li
-            [:input.sample-values {:type "radio" :name "sample-values"
-                                   :id (str value "_" id) :value id}]
-            [:label.sample-values {:for (str value "_" id)} value]])]
-        [:input#select-value-button.button {:type "button" :name "select-value"
-                                            :value "Select Value"}]]]])
+   [:div#dashboard
+    [:h1 "Dashboard"]
+    [:div#image-analysis-pane]
+    [:div#sidebar]]
    (include-js "/mapcha.js")
    (javascript-tag "mapcha.dashboard.main()")))
 
