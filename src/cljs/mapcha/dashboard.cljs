@@ -15,6 +15,26 @@
 
 (defonce current-samples (atom ()))
 
+(defonce user-samples (atom {}))
+
+(defn select-value []
+  ;; 1. Change the point's color to green
+  (if-let [sample (map/get-selected-sample)]
+    (let [sample-id (.get sample "sample_id")]
+      (if-let [sample-value-id (some->> "input[name=\"sample-values\"]:checked"
+                                        (.querySelector js/document)
+                                        (.-value)
+                                        (js/parseInt))]
+        (let [sample-value (->> @sample-values-list
+                                (filter #(= sample-value-id (:id %)))
+                                (first)
+                                (:value))]
+          (swap! user-samples assoc sample-id sample-value-id)
+          (map/highlight-sample sample)
+          (js/alert (str "Selected " sample-value " for sample #" sample-id ".")))
+        (js/alert "No sample value selected. Please choose one from the list.")))
+    (js/alert "No sample point selected. Please click one first.")))
+
 (defn load-sample-points! [plot-id]
   (remote-callback :get-sample-points
                    [plot-id]
@@ -23,6 +43,7 @@
                       (map/draw-points new-samples))))
 
 (defn load-random-plot! []
+  ;; 5. Disable this button
   (remote-callback :get-random-plot
                    [(:id @current-project)]
                    #(let [new-plot %]
@@ -30,20 +51,6 @@
                       (map/draw-buffer (:center new-plot)
                                        (:radius new-plot))
                       (load-sample-points! (:id new-plot)))))
-
-(defn zoom-to-plot []
-  ;; 1. Record plot-id in an atom
-  ;; 2. Zoom to randomly selected plot (chosen by least number of samples)
-  ;; 3. Show the buffer boundary
-  ;; 4. Show 15 sample points in red
-  ;; 5. Disable this button
-  (load-random-plot!))
-
-(defn select-value []
-  ;; 1. Change the point's color to green
-  ;; 2. Assoc a user-samples atom (holding a map) to set
-  ;;    {@sample-id @sample-value-id}
-   (js/alert (map/get-selected-sample-id)))
 
 (defn load-sample-values! [project-id]
   (remote-callback :get-sample-values
@@ -59,7 +66,7 @@
                       (load-sample-values! (:id project1))
                       (map/draw-polygon (:boundary project1)))))
 
-(defn switch-project
+(defn switch-project!
   [evt]
   (let [new-project-id (js/parseInt (.-value (.-currentTarget evt)))]
     (when-let [new-project (->> @project-list
@@ -77,12 +84,12 @@
      [:fieldset
       [:legend "Select Project"]
       [:select {:name "project-id" :size "1" :default-value (:id project1)
-                :on-change switch-project}
+                :on-change switch-project!}
        (for [{:keys [id name]} projects]
          [:option {:key id :value id} name])]
       [:input#new-plot-button.button {:type "button" :name "new-plot"
                                       :value "Analyze New Plot"
-                                      :on-click zoom-to-plot}]]
+                                      :on-click load-random-plot!}]]
      [:fieldset
       [:legend "Sample Values"]
       [:ul

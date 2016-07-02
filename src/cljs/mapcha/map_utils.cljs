@@ -73,22 +73,29 @@
     (.fit view extent size)))
 
 (def styles
-  {:icon    (js/ol.style.Style.
-             #js {:image (js/ol.style.Icon.
-                          #js {:src "/favicon.ico"})})
-   :point   (js/ol.style.Style.
-             #js {:image (js/ol.style.Circle.
-                          #js {:radius 5,
-                               :fill   nil,
-                               :stroke (js/ol.style.Stroke.
-                                        #js {:color "#8b2323"
-                                             :width 1})})})
-   :polygon (js/ol.style.Style.
-             #js {:fill   (js/ol.style.Fill.
-                           #js {:color "rgba(200,200,200,0.2)"})
-                  :stroke (js/ol.style.Stroke.
-                           #js {:color "#8b2323"
-                                :width 3})})})
+  {:icon       (js/ol.style.Style.
+                #js {:image (js/ol.style.Icon.
+                             #js {:src "/favicon.ico"})})
+   :red-point  (js/ol.style.Style.
+                #js {:image (js/ol.style.Circle.
+                             #js {:radius 5,
+                                  :fill   nil,
+                                  :stroke (js/ol.style.Stroke.
+                                           #js {:color "#8b2323"
+                                                :width 2})})})
+   :blue-point (js/ol.style.Style.
+                 #js {:image (js/ol.style.Circle.
+                              #js {:radius 5,
+                                   :fill   nil,
+                                   :stroke (js/ol.style.Stroke.
+                                            #js {:color "#23238b"
+                                                 :width 2})})})
+   :polygon    (js/ol.style.Style.
+                #js {:fill   (js/ol.style.Fill.
+                              #js {:color "rgba(200,200,200,0.2)"})
+                     :stroke (js/ol.style.Stroke.
+                              #js {:color "#8b2323"
+                                   :width 3})})})
 
 (defonce current-boundary (atom nil))
 
@@ -154,7 +161,7 @@
         samples (js/ol.layer.Vector.
                  #js {:source (js/ol.source.Vector.
                                #js {:features (clj->js points)})
-                      :style  (styles :point)})]
+                      :style  (styles :red-point)})]
     (when @current-samples
       (.removeLayer @map-ref @current-samples))
     (reset! current-samples samples)
@@ -164,10 +171,13 @@
       (.addLayer samples)
       (enable-selection samples))))
 
-(defn get-selected-sample-id []
-  (some-> (.getFeatures @select-interaction)
-          (.item 0)
-          (.get "sample_id")))
+(defn get-selected-sample []
+  (some-> @select-interaction
+          (.getFeatures)
+          (.item 0)))
+
+(defn highlight-sample [sample]
+  (.setStyle sample (styles :blue-point)))
 
 ;;;;;;;;;;;;;;;;;;;;;;; IWAP CODE BELOW HERE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
