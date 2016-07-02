@@ -51,7 +51,7 @@
 
 (defn switch-project
   [evt]
-  (let [new-project-id (.-value (.-currentTarget evt))]
+  (let [new-project-id (js/parseInt (.-value (.-currentTarget evt)))]
     (when-let [new-project (->> @project-list
                                 (filter #(= new-project-id (:id %)))
                                 (first))]
