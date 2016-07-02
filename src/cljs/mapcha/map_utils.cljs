@@ -240,9 +240,10 @@
   (.setPosition overlay js/undefined))
 
 (defn init-overview-map [div-name report-addresses]
-  (let [overview-map    (mapquest-base-map {:div-name      div-name
-                                            :center-coords [-97.3426776 37.6906938]
-                                            :zoom-level    4})
+  (let [overview-map    (digitalglobe-base-map
+                         {:div-name      div-name
+                          :center-coords [-97.3426776 37.6906938]
+                          :zoom-level    4})
         address-layer   (create-address-overview-layer report-addresses)
         address-overlay (js/ol.Overlay. #js {:element (dom/getElement "popup")})]
     (reset! overview-map-ref
