@@ -19,9 +19,11 @@
   ;;    {@sample-id @sample-value-id}
    (js/alert "Called select-value"))
 
-(def project-list (r/atom ()))
+(defonce project-list (r/atom ()))
 
-(def sample-values-list (r/atom ()))
+(defonce current-project (r/atom {}))
+
+(defonce sample-values-list (r/atom ()))
 
 (defn load-sample-values! [project-id]
   (remote-callback :get-sample-values
@@ -31,8 +33,21 @@
 (defn load-projects-and-sample-values! []
   (remote-callback :get-all-projects
                    []
-                   #(do (reset! project-list %)
-                        (load-sample-values! (:id (first %))))))
+                   #(let [project1 (first %)]
+                      (reset! project-list %)
+                      (reset! current-project project1)
+                      (load-sample-values! (:id project1))
+                      (map/draw-polygon (:boundary project1)))))
+
+(defn switch-project
+  [evt]
+  (let [new-project-id (.-value (.-currentTarget evt))]
+    (when-let [new-project (->> @project-list
+                                (filter #(= new-project-id (:id %)))
+                                (first))]
+      (reset! current-project new-project)
+      (load-sample-values! new-project-id)
+      (map/draw-polygon (:boundary new-project)))))
 
 (defn sidebar-contents []
   (let [projects      @project-list
@@ -41,7 +56,8 @@
     [:div#sidebar-contents
      [:fieldset
       [:legend "Select Project"]
-      [:select {:name "project-id" :size "1" :default-value (:id project1)}
+      [:select {:name "project-id" :size "1" :default-value (:id project1)
+                :on-change switch-project}
        (for [{:keys [id name]} projects]
          [:option {:key id :value id} name])]
       [:input#new-plot-button.button {:type "button" :name "new-plot"
@@ -60,8 +76,8 @@
                                           :on-click select-value}]]]))
 
 (defn ^:export main []
+  (load-projects-and-sample-values!)
+  (r/render [sidebar-contents] (dom/getElement "sidebar"))
   (map/digitalglobe-base-map {:div-name      "image-analysis-pane"
                               :center-coords [102.0 17.0]
-                              :zoom-level    5})
-  (load-projects-and-sample-values!)
-  (r/render [sidebar-contents] (dom/getElement "sidebar")))
+                              :zoom-level    5}))

@@ -20,7 +20,97 @@
             [ol.Overlay]
             [ol.interaction.Select]
             [ol.interaction.Translate]
-            [ol.extent]))
+            [ol.extent]
+            [ol.format.GeoJSON]))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Create the default OpenLayers Map Object used on all pages
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defonce map-ref (atom nil))
+
+(defn digitalglobe-base-map [{:keys [div-name center-coords zoom-level]}]
+  (let [digital-globe-access-token   (str "pk.eyJ1IjoiZGlnaXRhbGdsb2JlIiwiYS"
+                                          "I6ImNpcTJ3ZTlyZTAwOWNuam00ZWU3aTk"
+                                          "xdWIifQ.9OFrmevVe0YB2dJokKhhdA")
+        recent-imagery-url           "digitalglobe.nal0g75k"
+        recent-imagery-+-streets-url "digitalglobe.nal0mpda"]
+    (->>
+     (js/ol.Map.
+      #js {:target div-name
+           :layers #js [(js/ol.layer.Tile.
+                         #js {:title "DigitalGlobe Maps API: Recent Imagery"
+                              :source (js/ol.source.XYZ.
+                                       #js {:url (str
+                                                  "http://api.tiles.mapbox.com/v4/"
+                                                  recent-imagery-url
+                                                  "/{z}/{x}/{y}.png?access_token="
+                                                  digital-globe-access-token)
+                                            :attribution "© DigitalGlobe, Inc"})})
+                        (js/ol.layer.Tile.
+                         #js {:title "DigitalGlobe Maps API: Recent Imagery+Streets"
+                              :source (js/ol.source.XYZ.
+                                       #js {:url (str
+                                                  "http://api.tiles.mapbox.com/v4/"
+                                                  recent-imagery-+-streets-url
+                                                  "/{z}/{x}/{y}.png?access_token="
+                                                  digital-globe-access-token)
+                                            :attribution "© DigitalGlobe, Inc"})})]
+           :controls (.extend (js/ol.control.defaults)
+                              #js [(js/ol.control.ScaleLine.)])
+           :view (js/ol.View.
+                  #js {:projection "EPSG:3857"
+                       :center (js/ol.proj.fromLonLat (clj->js center-coords))
+                       :zoom zoom-level})})
+     (reset! map-ref))))
+
+(defn ensure-valid-extent [[ulx uly lrx lry]]
+  (let [pad 100]
+    (if (= ulx lrx)
+      (if (= uly lry)
+        #js [(- ulx pad) (- uly pad) (+ lrx pad) (+ lry pad)]
+        #js [(- ulx pad) uly (+ lrx pad) lry])
+      (if (= uly lry)
+        #js [ulx (- uly pad) lrx (+ lry pad)]
+        #js [ulx uly lrx lry]))))
+
+(defn zoom-map-to-layer [map layer]
+  (let [view   (.getView map)
+        size   (.getSize map)
+        extent (ensure-valid-extent (.getExtent (.getSource layer)))]
+    (.fit view extent size #js {:padding #js [50 50 50 50] :minResolution 1})))
+
+(def styles
+  {:point   (js/ol.style.Style.
+             #js {:image (js/ol.style.Icon. #js {:src "/favicon.ico"})})
+   :polygon (js/ol.style.Style.
+             #js {:fill   (js/ol.style.Fill.
+                           #js {:color "rgba(200,200,200,0.2)"})
+                  :stroke (js/ol.style.Stroke.
+                           #js {:color "#8b2323"
+                                :width 3})})})
+
+(defonce current-boundary (atom nil))
+
+(defn draw-polygon [polygon]
+  (let [geometry (-> (js/ol.format.GeoJSON.)
+                     (.readGeometry polygon)
+                     (.transform "EPSG:4326" "EPSG:3857"))
+        polygon  (js/ol.layer.Vector.
+                  #js {:source (js/ol.source.Vector.
+                                #js {:features #js [(js/ol.Feature.
+                                                     #js {:geometry geometry})]})
+                       :style  (styles :polygon)})]
+    (when @current-boundary
+      (.removeLayer @map-ref @current-boundary))
+    (reset! current-boundary polygon)
+    (doto @map-ref
+      (.addLayer polygon)
+      (zoom-map-to-layer polygon))))
+
+;;;;;;;;;;;;;;;;;;;;;;; IWAP CODE BELOW HERE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -62,39 +152,6 @@
                     :center (js/ol.proj.fromLonLat (clj->js center-coords))
                     :zoom zoom-level})}))
 
-(defn digitalglobe-base-map [{:keys [div-name center-coords zoom-level]}]
-  (let [digital-globe-access-token   (str "pk.eyJ1IjoiZGlnaXRhbGdsb2JlIiwiYS"
-                                          "I6ImNpcTJ3ZTlyZTAwOWNuam00ZWU3aTk"
-                                          "xdWIifQ.9OFrmevVe0YB2dJokKhhdA")
-        recent-imagery-url           "digitalglobe.nal0g75k"
-        recent-imagery-+-streets-url "digitalglobe.nal0mpda"]
-    (js/ol.Map.
-     #js {:target div-name
-          :layers #js [(js/ol.layer.Tile.
-                        #js {:title  "DigitalGlobe Maps API: Recent Imagery"
-                             :source (js/ol.source.XYZ.
-                                      #js {:url (str
-                                                 "http://api.tiles.mapbox.com/v4/"
-                                                 recent-imagery-url
-                                                 "/{z}/{x}/{y}.png?access_token="
-                                                 digital-globe-access-token)
-                                           :attribution "© DigitalGlobe, Inc"})})
-                       (js/ol.layer.Tile.
-                        #js {:title  "DigitalGlobe Maps API: Recent Imagery+Streets"
-                             :source (js/ol.source.XYZ.
-                                      #js {:url (str
-                                                 "http://api.tiles.mapbox.com/v4/"
-                                                 recent-imagery-+-streets-url
-                                                 "/{z}/{x}/{y}.png?access_token="
-                                                 digital-globe-access-token)
-                                           :attribution "© DigitalGlobe, Inc"})})]
-          :controls (.extend (js/ol.control.defaults)
-                             #js [(js/ol.control.ScaleLine.)])
-          :view (js/ol.View.
-                 #js {:projection "EPSG:3857"
-                      :center (js/ol.proj.fromLonLat (clj->js center-coords))
-                      :zoom zoom-level})})))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Create the OpenLayers Map Object for the New Report Map
@@ -129,22 +186,6 @@
                    #js {:features (clj->js address-points)})
           :style  (js/ol.style.Style.
                    #js {:image (js/ol.style.Icon. #js {:src "/favicon.ico"})})})))
-
-(defn ensure-valid-extent [[ulx uly lrx lry]]
-  (let [pad 100]
-    (if (= ulx lrx)
-      (if (= uly lry)
-        #js [(- ulx pad) (- uly pad) (+ lrx pad) (+ lry pad)]
-        #js [(- ulx pad) uly (+ lrx pad) lry])
-      (if (= uly lry)
-        #js [ulx (- uly pad) lrx (+ lry pad)]
-        #js [ulx uly lrx lry]))))
-
-(defn zoom-map-to-layer [overview-map address-layer]
-  (let [view   (.getView overview-map)
-        size   (.getSize overview-map)
-        extent (ensure-valid-extent (.getExtent (.getSource address-layer)))]
-    (.fit view extent size #js {:padding #js [50 50 50 50] :minResolution 1})))
 
 (defn show-address-popup [overlay feature evt]
   (set! (.-innerHTML (dom/getElement "popup-content"))
