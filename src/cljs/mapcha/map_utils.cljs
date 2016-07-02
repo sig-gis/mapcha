@@ -130,6 +130,17 @@
       (.addLayer buffer)
       (zoom-map-to-layer buffer))))
 
+(defonce select-interaction (atom nil))
+
+(defn enable-selection [map layer]
+  (let [layer-select (js/ol.interaction.Select. #js {:layers #js [layer]})]
+    (.addInteraction map layer-select)
+    (reset! select-interaction layer-select)))
+
+(defn disable-selection [map]
+  (.removeInteraction map @select-interaction)
+  (reset! select-interaction nil))
+
 (defonce current-samples (atom nil))
 
 (defn draw-points [samples]
@@ -147,8 +158,16 @@
     (when @current-samples
       (.removeLayer @map-ref @current-samples))
     (reset! current-samples samples)
+    (when @select-interaction
+      (disable-selection @map-ref))
     (doto @map-ref
-      (.addLayer samples))))
+      (.addLayer samples)
+      (enable-selection samples))))
+
+(defn get-selected-sample-id []
+  (some-> (.getFeatures @select-interaction)
+          (.item 0)
+          (.get "sample_id")))
 
 ;;;;;;;;;;;;;;;;;;;;;;; IWAP CODE BELOW HERE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

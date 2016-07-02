@@ -43,7 +43,7 @@
   ;; 1. Change the point's color to green
   ;; 2. Assoc a user-samples atom (holding a map) to set
   ;;    {@sample-id @sample-value-id}
-   (js/alert "Called select-value"))
+   (js/alert (map/get-selected-sample-id)))
 
 (defn load-sample-values! [project-id]
   (remote-callback :get-sample-values
