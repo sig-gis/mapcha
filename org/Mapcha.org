@@ -98,7 +98,7 @@ UPDATE mapcha.users
   WHERE email='admin@sig-gis.com';
 #+end_src
 
-* Initial Study Area: Mekong River Region
+* Primary Study Area: Mekong River Region
 
   - Name :: Mekong River Region
   - Description :: Laos, Cambodia, Vietnam, Thailand, Myanmar
@@ -110,6 +110,19 @@ UPDATE mapcha.users
   - Longitude Min :: 95
   - Longitude Max :: 107
   - Latitude Min :: 10.5
+
+* Secondary Study Area: California, USA
+
+  - Name :: California, USA
+  - Description :: The most populous state in the United States.
+  - Number of plots :: 1000
+  - Plot radius in meters :: 50
+  - Number of samples per plot :: 5
+  - Categories per sample :: Rock/Sand, Grasses, Crops, Shrubs, Trees, Roads/Parking Lots, Buildings, Water, Unknown
+  - Latitude Max :: 42.0
+  - Longitude Min :: -124.6
+  - Longitude Max :: -114.0
+  - Latitude Min :: 32.3
 
 * Web Mapping Options
 
@@ -129,30 +142,7 @@ UPDATE mapcha.users
 ** Map coding (w/ Reagent and OpenLayers)
 
    - Dashboard page
-     - Change "Select Project":
-       1. Record project-id in an atom
-       2. Show project boundary
-     - Push "Analyze New Plot":
-       1. Record plot-id in an atom
-       2. Zoom to randomly selected plot (chosen by least number of samples)
-       3. Show the buffer boundary
-       4. Show 15 sample points in red
-       5. Disable this button
-     - Click sample point:
-       1. Record the sample-id in an atom
-       2. Change the point's color to yellow
-     - Click sample value:
-       1. Record the sample-value-id in an atom
-       2. Set chosen=true on the radio button corresponding to @sample-value-id in the @user-samples map (if any)
-     - Push "Select Value":
-       1. Change the point's color to green
-       2. Assoc a user-samples atom (holding a map) to set {@sample-id @sample-value-id}
-     - Push "Save"
-       1. Call mapcha.db/add-user-samples @user-samples (include sample date and source+date of the imagery)
-       2. Disable this button
-       3. Enable the "Analyze New Plot" button
-     - Hover over sample values:
-       1. Show text descriptions and example images
+     - Push "Save" -> (mapcha.db/add-user-samples @user-samples) (include sample date and source+date of the imagery)
    - Admin page
      - Create separate buttons for previewing the project and launching it
      - Show bounding box on map as lat/lon coords are input
@@ -173,6 +163,9 @@ UPDATE mapcha.users
 
 ** Next week
 
+   - Show text descriptions and example images when hovering over sample values in the radio list
+   - Change random point distribution algorithm to something else?
+   - Adjust the SQL query for get-random-plot-sql to try and pick less sampled plots
    - Create a unique URL per project (e.g., http://mapcha.sig-gis.com/project/my-project-name) <-- do we really need this?
    - Allow an admin to select the imagery datasource (Digital Globe, Google Earth Engine?, locally hosted "chipset", other image server)
    - Allow an admin to upload a plots and points shapefile to create a new project (point features are the categories list)
