@@ -5,25 +5,35 @@
             [shoreleave.remotes.http-rpc :refer [remote-callback]])
   (:require-macros [shoreleave.remotes.macros :as macros]))
 
+(defonce project-list (r/atom ()))
+
+(defonce current-project (atom {}))
+
+(defonce current-plot (atom {}))
+
+(defonce sample-values-list (r/atom ()))
+
+(defn load-random-plot! []
+  (remote-callback :get-random-plot
+                   [(:id @current-project)]
+                   #(let [new-plot %]
+                      (reset! current-plot new-plot)
+                      (map/draw-buffer (:center new-plot)
+                                       (:radius new-plot)))))
+
 (defn zoom-to-plot []
   ;; 1. Record plot-id in an atom
   ;; 2. Zoom to randomly selected plot (chosen by least number of samples)
   ;; 3. Show the buffer boundary
   ;; 4. Show 15 sample points in red
   ;; 5. Disable this button
-  (js/alert "Called zoom-to-plot"))
+  (load-random-plot!))
 
 (defn select-value []
   ;; 1. Change the point's color to green
   ;; 2. Assoc a user-samples atom (holding a map) to set
   ;;    {@sample-id @sample-value-id}
    (js/alert "Called select-value"))
-
-(defonce project-list (r/atom ()))
-
-(defonce current-project (r/atom {}))
-
-(defonce sample-values-list (r/atom ()))
 
 (defn load-sample-values! [project-id]
   (remote-callback :get-sample-values

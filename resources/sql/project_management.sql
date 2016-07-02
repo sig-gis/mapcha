@@ -42,3 +42,11 @@ SELECT id, name, description, ST_AsGeoJSON(boundary) AS boundary
 SELECT id, value
   FROM mapcha.sample_values
   WHERE project_id = :project_id;
+
+-- name: get-random-plot-sql
+-- Returns a random row from mapcha.plots associated with the given project_id.
+SELECT id, project_id, ST_AsGeoJSON(center) AS center, radius
+  FROM mapcha.plots
+  WHERE project_id = :project_id
+  ORDER BY random()
+  LIMIT 1;

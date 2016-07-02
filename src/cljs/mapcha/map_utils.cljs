@@ -66,21 +66,11 @@
                        :zoom zoom-level})})
      (reset! map-ref))))
 
-(defn ensure-valid-extent [[ulx uly lrx lry]]
-  (let [pad 100]
-    (if (= ulx lrx)
-      (if (= uly lry)
-        #js [(- ulx pad) (- uly pad) (+ lrx pad) (+ lry pad)]
-        #js [(- ulx pad) uly (+ lrx pad) lry])
-      (if (= uly lry)
-        #js [ulx (- uly pad) lrx (+ lry pad)]
-        #js [ulx uly lrx lry]))))
-
 (defn zoom-map-to-layer [map layer]
   (let [view   (.getView map)
         size   (.getSize map)
-        extent (ensure-valid-extent (.getExtent (.getSource layer)))]
-    (.fit view extent size #js {:padding #js [50 50 50 50] :minResolution 1})))
+        extent (.getExtent (.getSource layer))]
+    (.fit view extent size)))
 
 (def styles
   {:point   (js/ol.style.Style.
@@ -109,6 +99,28 @@
     (doto @map-ref
       (.addLayer polygon)
       (zoom-map-to-layer polygon))))
+
+(defonce current-buffer (atom nil))
+
+(defn draw-buffer [center radius]
+  (let [coordinates (-> (js/ol.format.GeoJSON.)
+                        (.readGeometry center)
+                        (.transform "EPSG:4326" "EPSG:3857")
+                        (.getCoordinates))
+        buffer      (js/ol.layer.Vector.
+                     #js {:source (js/ol.source.Vector.
+                                   #js {:features #js [(js/ol.Feature.
+                                                        #js {:geometry
+                                                             (js/ol.geom.Circle.
+                                                              coordinates
+                                                              radius)})]})
+                          :style  (styles :polygon)})]
+    (when @current-buffer
+      (.removeLayer @map-ref @current-buffer))
+    (reset! current-buffer buffer)
+    (doto @map-ref
+      (.addLayer buffer)
+      (zoom-map-to-layer buffer))))
 
 ;;;;;;;;;;;;;;;;;;;;;;; IWAP CODE BELOW HERE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -358,3 +370,20 @@
           size       (.getSize @map-ref)]
       (.fit view max-extent size #js {:padding #js [50 50 50 50]
                                       :constrainResolution false}))))
+
+(defn ensure-valid-extent [[ulx uly lrx lry]]
+  (let [pad 100]
+    (if (= ulx lrx)
+      (if (= uly lry)
+        #js [(- ulx pad) (- uly pad) (+ lrx pad) (+ lry pad)]
+        #js [(- ulx pad) uly (+ lrx pad) lry])
+      (if (= uly lry)
+        #js [ulx (- uly pad) lrx (+ lry pad)]
+        #js [ulx uly lrx lry]))))
+
+(defn zoom-map-to-layer-safe [map layer]
+  (let [view   (.getView map)
+        size   (.getSize map)
+        extent (ensure-valid-extent (.getExtent (.getSource layer)))]
+    (.fit view extent size #js {:padding #js [50 50 50 50] :minResolution 1})))
+

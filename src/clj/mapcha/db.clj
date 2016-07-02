@@ -171,6 +171,10 @@
   [project-id]
   (get-sample-values-sql {:project_id project-id}))
 
+(defremote get-random-plot
+  [project-id]
+  (first (get-random-plot-sql {:project_id project-id})))
+
 (defn add-user-sample
   [user-id sample-id value-id]
   (first (add-user-sample-sql {:user_id   user-id
