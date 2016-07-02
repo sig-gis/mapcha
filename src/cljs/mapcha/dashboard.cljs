@@ -9,6 +9,8 @@
 
 (defonce sample-values-list (r/atom ()))
 
+(defonce analyze-plot? (r/atom true))
+
 (defonce current-project (atom {}))
 
 (defonce current-plot (atom {}))
@@ -18,7 +20,6 @@
 (defonce user-samples (atom {}))
 
 (defn select-value []
-  ;; 1. Change the point's color to green
   (if-let [sample (map/get-selected-sample)]
     (let [sample-id (.get sample "sample_id")]
       (if-let [sample-value-id (some->> "input[name=\"sample-values\"]:checked"
@@ -43,14 +44,14 @@
                       (map/draw-points new-samples))))
 
 (defn load-random-plot! []
-  ;; 5. Disable this button
   (remote-callback :get-random-plot
                    [(:id @current-project)]
                    #(let [new-plot %]
                       (reset! current-plot new-plot)
                       (map/draw-buffer (:center new-plot)
                                        (:radius new-plot))
-                      (load-sample-points! (:id new-plot)))))
+                      (load-sample-points! (:id new-plot))))
+  (reset! analyze-plot? false))
 
 (defn load-sample-values! [project-id]
   (remote-callback :get-sample-values
@@ -76,6 +77,9 @@
       (load-sample-values! new-project-id)
       (map/draw-polygon (:boundary new-project)))))
 
+(defn save-values! []
+  (reset! analyze-plot? true))
+
 (defn sidebar-contents []
   (let [projects      @project-list
         project1      (first projects)
@@ -87,9 +91,13 @@
                 :on-change switch-project!}
        (for [{:keys [id name]} projects]
          [:option {:key id :value id} name])]
-      [:input#new-plot-button.button {:type "button" :name "new-plot"
-                                      :value "Analyze New Plot"
-                                      :on-click load-random-plot!}]]
+      (if @analyze-plot?
+        [:input#new-plot-button.button {:type "button" :name "new-plot"
+                                        :value "Analyze New Plot"
+                                        :on-click load-random-plot!}]
+        [:input#save-values-button.button {:type "button" :name "save-values"
+                                           :value "Save Assignments"
+                                           :on-click save-values!}])]
      [:fieldset
       [:legend "Sample Values"]
       [:ul
