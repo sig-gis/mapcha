@@ -73,8 +73,16 @@
     (.fit view extent size)))
 
 (def styles
-  {:point   (js/ol.style.Style.
-             #js {:image (js/ol.style.Icon. #js {:src "/favicon.ico"})})
+  {:icon    (js/ol.style.Style.
+             #js {:image (js/ol.style.Icon.
+                          #js {:src "/favicon.ico"})})
+   :point   (js/ol.style.Style.
+             #js {:image (js/ol.style.Circle.
+                          #js {:radius 5,
+                               :fill   nil,
+                               :stroke (js/ol.style.Stroke.
+                                        #js {:color "#8b2323"
+                                             :width 1})})})
    :polygon (js/ol.style.Style.
              #js {:fill   (js/ol.style.Fill.
                            #js {:color "rgba(200,200,200,0.2)"})
@@ -121,6 +129,26 @@
     (doto @map-ref
       (.addLayer buffer)
       (zoom-map-to-layer buffer))))
+
+(defonce current-samples (atom nil))
+
+(defn draw-points [samples]
+  (let [points  (for [{:keys [id point]} samples]
+                  (let [geom (-> (js/ol.format.GeoJSON.)
+                                 (.readGeometry point)
+                                 (.transform "EPSG:4326" "EPSG:3857"))]
+                    (js/ol.Feature.
+                     #js {:geometry  geom
+                          :sample_id id})))
+        samples (js/ol.layer.Vector.
+                 #js {:source (js/ol.source.Vector.
+                               #js {:features (clj->js points)})
+                      :style  (styles :point)})]
+    (when @current-samples
+      (.removeLayer @map-ref @current-samples))
+    (reset! current-samples samples)
+    (doto @map-ref
+      (.addLayer samples))))
 
 ;;;;;;;;;;;;;;;;;;;;;;; IWAP CODE BELOW HERE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

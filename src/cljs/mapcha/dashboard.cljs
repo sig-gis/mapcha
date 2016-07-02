@@ -7,11 +7,20 @@
 
 (defonce project-list (r/atom ()))
 
+(defonce sample-values-list (r/atom ()))
+
 (defonce current-project (atom {}))
 
 (defonce current-plot (atom {}))
 
-(defonce sample-values-list (r/atom ()))
+(defonce current-samples (atom ()))
+
+(defn load-sample-points! [plot-id]
+  (remote-callback :get-sample-points
+                   [plot-id]
+                   #(let [new-samples %]
+                      (reset! current-samples new-samples)
+                      (map/draw-points new-samples))))
 
 (defn load-random-plot! []
   (remote-callback :get-random-plot
@@ -19,7 +28,8 @@
                    #(let [new-plot %]
                       (reset! current-plot new-plot)
                       (map/draw-buffer (:center new-plot)
-                                       (:radius new-plot)))))
+                                       (:radius new-plot))
+                      (load-sample-points! (:id new-plot)))))
 
 (defn zoom-to-plot []
   ;; 1. Record plot-id in an atom

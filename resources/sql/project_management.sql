@@ -45,8 +45,14 @@ SELECT id, value
 
 -- name: get-random-plot-sql
 -- Returns a random row from mapcha.plots associated with the given project_id.
-SELECT id, project_id, ST_AsGeoJSON(center) AS center, radius
+SELECT id, ST_AsGeoJSON(center) AS center, radius
   FROM mapcha.plots
   WHERE project_id = :project_id
   ORDER BY random()
   LIMIT 1;
+
+-- name: get-sample-points-sql
+-- Returns all rows in mapcha.samples associated with the given plot_id.
+SELECT id, ST_AsGeoJSON(point) AS point
+  FROM mapcha.samples
+  WHERE plot_id = :plot_id;
