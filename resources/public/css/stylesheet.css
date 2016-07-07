@@ -745,6 +745,14 @@ p.error-message {
     background-color:#eee;
 }
 
+#admin fieldset#project-info table {
+    height:110px;
+}
+
+#admin fieldset#plot-info table {
+    height:110px;
+}
+
 #admin legend {
     font-size:1.2em;
     font-style:normal;
@@ -758,12 +766,33 @@ p.error-message {
     font-weight:bold;
 }
 
-#admin fieldset {
+#admin fieldset#project-info {
+    width:375px;
+    height:130px;
+}
+
+#admin fieldset#plot-info {
+    position:absolute;
+    top:54px;
+    left:425px;
+    width:285px;
+    height:130px;
+}
+
+#admin fieldset#sample-info {
     width:450px;
 }
 
+#admin fieldset#bounding-box {
+    position:absolute;
+    top:54px;
+    left:750px;
+    width:265px;
+    height:130px;
+}
+
 #admin fieldset#plot-info input {
-    width:225px;
+    width:80px;
 }
 
 #admin input[type=number] {
@@ -772,7 +801,7 @@ p.error-message {
 }
 
 #admin fieldset#sample-info input#samples-per-plot {
-    width:250px;
+    width:80px;
 }
 
 #admin fieldset#sample-info textarea {
@@ -780,15 +809,9 @@ p.error-message {
     padding:5px 0px;
 }
 
-#admin fieldset#bounding-box {
-    position:absolute;
-    top:54px;
-    left:500px;
-}
-
 #admin fieldset#bounding-box input {
     display:block;
-    width:135px;
+    width:80px;
 }
 
 #admin fieldset#bounding-box input#lat-max {
@@ -833,8 +856,9 @@ p.error-message {
 
 #admin img#compass-rose {
     position:absolute;
-    top:20px;
-    left:1020px;
+    top:35px;
+    left:1055px;
+    width:180px;
 }
 
 /***************/

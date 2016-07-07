@@ -419,10 +419,10 @@
        [:tr
         [:td [:label "Name"]]
         [:td [:input {:type "text" :name "project-name"
-                      :size "28" :autocomplete "off"}]]]
+                      :size "21" :autocomplete "off"}]]]
        [:tr
         [:td [:label "Description"]]
-        [:td [:textarea {:name "project-description" :rows "3" :cols "41"}]]]]]
+        [:td [:textarea {:name "project-description" :rows "3" :cols "31"}]]]]]
      [:fieldset#plot-info
       [:legend "Plot Info"]
       [:table
@@ -436,11 +436,10 @@
                       :autocomplete "off" :min "0.0" :step "any"}]]]]]
      [:fieldset#sample-info
       [:legend "Sample Info"]
+      [:label "Samples per plot"]
+      [:input#samples-per-plot {:type "number" :name "samples-per-plot"
+                                :autocomplete "off" :min "0" :step "1"}]
       [:table
-       [:tr
-        [:td [:label "Samples per plot"]]
-        [:td [:input#samples-per-plot {:type "number" :name "samples-per-plot"
-                                       :autocomplete "off" :min "0" :step "1"}]]]
        [:tr
         [:td [:label "Sample values"]]
         [:td [:textarea {:name "sample-values" :rows "3" :cols "35"}
@@ -448,16 +447,16 @@
      [:fieldset#bounding-box
       [:legend "Define Bounding Box"]
       [:input#lat-max {:type "number" :name "boundary-lat-max"
-                       :placeholder "Latitude Max" :autocomplete "off"
+                       :placeholder "Lat Max" :autocomplete "off"
                        :min "-90.0" :max "90.0" :step "any"}]
       [:input#lon-min {:type "number" :name "boundary-lon-min"
-                       :placeholder "Longitude Min" :autocomplete "off"
+                       :placeholder "Lon Min" :autocomplete "off"
                        :min "-180.0" :max "180.0" :step "any"}]
       [:input#lon-max {:type "number" :name "boundary-lon-max"
-                       :placeholder "Longitude Max" :autocomplete "off"
+                       :placeholder "Lon Max" :autocomplete "off"
                        :min "-180.0" :max "180.0" :step "any"}]
       [:input#lat-min {:type "number" :name "boundary-lat-min"
-                       :placeholder "Latitude Min" :autocomplete "off"
+                       :placeholder "Lat Min" :autocomplete "off"
                        :min "-90.0" :max "90.0" :step "any"}]]
      [:input.button {:type "submit" :name "create-project"
                      :value "Create and launch this project"
