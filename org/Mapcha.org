@@ -139,6 +139,25 @@ UPDATE mapcha.users
               Incorporate Cesium through ol3-cesium module.
 
 * TODOs
+** This week
+
+   Admin page:
+   - table of attributes with color field and reference image file upload
+
+   Dashboard page:
+   - assign colors to points and to labels
+   - highlight points that are clicked a second time
+   - # of samples completed in current plot
+   - # of plots completed in the project
+   - download link for plot-level aggregate data
+     - filename: mapcha_<project>_<date>.csv
+     - fields: plot_id, center_lat, center_lon, radius_m, sample_points, user_assigments, value1_mean, value1_stddev, value2_mean, value2_stddev, ..., valueN_mean, valueN_stddev
+
+   Database:
+   - add date field to user_samples table
+   - add imagery date to user_samples table
+   - add ip addresses to user table at registration time
+
 ** Map coding (w/ Reagent and OpenLayers)
 
    - Dashboard page
