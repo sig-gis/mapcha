@@ -83,18 +83,18 @@
       (str "#" new-color))))
 
 (defn highlight-border [element color]
-  (let [border-style (str "4px solid " (complementary-color color))]
+  (let [border-style (str "3px solid " (complementary-color color))]
     (style/setStyle element "border" border-style)))
 
 (defn lowlight-border [element]
-  (style/setStyle element "border" "0px"))
+  (style/setStyle element "border" "1px solid #999"))
 
 ;; FIXME: Stub
 (defn set-current-value! [evt {:keys [id value color] :as new-value}]
   (let [button (.-currentTarget evt)]
     (when @current-value-button
       (lowlight-border @current-value-button))
-    (highlight-border button color)
+    (highlight-border button (or color "#666666"))
     (reset! current-value-button button)
     (reset! current-value new-value)))
 

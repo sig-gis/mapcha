@@ -699,6 +699,7 @@ p.error-message {
     height:30px;
     width:100%;
     color:#55f;
+    border:1px solid #999;
     border-radius:4px;
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
