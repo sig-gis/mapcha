@@ -1,5 +1,6 @@
 (ns mapcha.dashboard
   (:require [goog.dom :as dom]
+            [goog.style :as style]
             [reagent.core :as r]
             [mapcha.map-utils :as map]
             [shoreleave.remotes.http-rpc :refer [remote-callback]])
@@ -17,24 +18,11 @@
 
 (defonce current-samples (atom ()))
 
-(defonce user-samples (atom {}))
+(defonce current-value (atom {}))
 
-(defn select-value []
-  (if-let [sample (map/get-selected-sample)]
-    (let [sample-id (.get sample "sample_id")]
-      (if-let [sample-value-id (some->> "input[name=\"sample-values\"]:checked"
-                                        (.querySelector js/document)
-                                        (.-value)
-                                        (js/parseInt))]
-        (let [sample-value (->> @sample-values-list
-                                (filter #(= sample-value-id (:id %)))
-                                (first)
-                                (:value))]
-          (swap! user-samples assoc sample-id sample-value-id)
-          (map/highlight-sample sample)
-          (js/alert (str "Selected " sample-value " for sample #" sample-id ".")))
-        (js/alert "No sample value selected. Please choose one from the list.")))
-    (js/alert "No sample point selected. Please click one first.")))
+(defonce current-value-button (atom nil))
+
+(defonce user-samples (atom {}))
 
 (defn load-sample-points! [plot-id]
   (remote-callback :get-sample-points
@@ -77,12 +65,9 @@
       (load-sample-values! new-project-id)
       (map/draw-polygon (:boundary new-project)))))
 
+;; FIXME: Stub
 (defn save-values! []
   (reset! analyze-plot? true))
-
-(defn set-current-value! [evt {:keys [id value color]}]
-  (js/alert (str "You called set-current-value! with inputs: "
-                 id " " value " " color)))
 
 (defn convert-base [x from-base to-base]
   (-> x
@@ -96,6 +81,40 @@
     (if (< (count new-color) 6)
       (apply str (concat "#" (repeat (- 6 (count new-color)) "0") new-color))
       (str "#" new-color))))
+
+(defn highlight-border [element color]
+  (let [border-style (str "4px solid " (complementary-color color))]
+    (style/setStyle element "border" border-style)))
+
+(defn lowlight-border [element]
+  (style/setStyle element "border" "0px"))
+
+;; FIXME: Stub
+(defn set-current-value! [evt {:keys [id value color] :as new-value}]
+  (let [button (.-currentTarget evt)]
+    (when @current-value-button
+      (lowlight-border @current-value-button))
+    (highlight-border button color)
+    (reset! current-value-button button)
+    (reset! current-value new-value)))
+
+;; FIXME: Deprecated. Fold this logic into set-current-value! above.
+(defn select-value []
+  (if-let [sample (map/get-selected-sample)]
+    (let [sample-id (.get sample "sample_id")]
+      (if-let [sample-value-id (some->> "input[name=\"sample-values\"]:checked"
+                                        (.querySelector js/document)
+                                        (.-value)
+                                        (js/parseInt))]
+        (let [sample-value (->> @sample-values-list
+                                (filter #(= sample-value-id (:id %)))
+                                (first)
+                                (:value))]
+          (swap! user-samples assoc sample-id sample-value-id)
+          (map/highlight-sample sample)
+          (js/alert (str "Selected " sample-value " for sample #" sample-id ".")))
+        (js/alert "No sample value selected. Please choose one from the list.")))
+    (js/alert "No sample point selected. Please click one first.")))
 
 (defn sidebar-contents []
   (let [projects      @project-list
