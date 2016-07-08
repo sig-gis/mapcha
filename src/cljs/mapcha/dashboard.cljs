@@ -120,9 +120,11 @@
       [:ul
        (for [{:keys [id value color] :as sample-value} sample-values]
          [:li {:key id}
-          [:input {:type "button" :name (str value "_" id)
-                   :value value :style {:background-color color
-                                        :color (complementary-color color)}
+          [:input {:type "button" :name (str value "_" id) :value value
+                   :style (if color
+                            {:background-color color
+                             :color (complementary-color color)}
+                            {})
                    :on-click #(set-current-value! sample-value)}]])]
       [:input#select-value-button.button {:type "button" :name "select-value"
                                           :value "Select Value"
