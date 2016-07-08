@@ -739,20 +739,6 @@ p.error-message {
     padding:5px;
 }
 
-#admin fieldset {
-    margin-top:10px;
-    padding:10px;
-    background-color:#eee;
-}
-
-#admin fieldset#project-info table {
-    height:110px;
-}
-
-#admin fieldset#plot-info table {
-    height:110px;
-}
-
 #admin legend {
     font-size:1.2em;
     font-style:normal;
@@ -766,9 +752,24 @@ p.error-message {
     font-weight:bold;
 }
 
+#admin input[type=number] {
+    height:20px;
+    padding:5px;
+}
+
+#admin fieldset {
+    margin-top:10px;
+    padding:10px;
+    background-color:#eee;
+}
+
 #admin fieldset#project-info {
     width:375px;
     height:130px;
+}
+
+#admin fieldset#project-info table {
+    height:110px;
 }
 
 #admin fieldset#plot-info {
@@ -779,8 +780,12 @@ p.error-message {
     height:130px;
 }
 
-#admin fieldset#sample-info {
-    width:450px;
+#admin fieldset#plot-info table {
+    height:110px;
+}
+
+#admin fieldset#plot-info input {
+    width:80px;
 }
 
 #admin fieldset#bounding-box {
@@ -789,24 +794,6 @@ p.error-message {
     left:750px;
     width:265px;
     height:130px;
-}
-
-#admin fieldset#plot-info input {
-    width:80px;
-}
-
-#admin input[type=number] {
-    height:20px;
-    padding:5px;
-}
-
-#admin fieldset#sample-info input#samples-per-plot {
-    width:80px;
-}
-
-#admin fieldset#sample-info textarea {
-    color:#666;
-    padding:5px 0px;
 }
 
 #admin fieldset#bounding-box input {
@@ -830,16 +817,50 @@ p.error-message {
     margin:auto;
 }
 
+#admin fieldset#sample-info {
+    width:720px;
+}
+
+#admin fieldset#sample-info th {
+    font-size:1em;
+    color:#55f;
+    background-color:#aaa;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+}
+
+#admin fieldset#sample-info th.empty {
+    background-color:#eee;
+}
+
+#admin fieldset#sample-info td {
+    text-align:center;
+}
+
+#admin fieldset#sample-info .circle {
+    width:25px;
+    height:25px;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    margin:0px auto;
+}
+
+#admin fieldset#sample-info input[name=value-color] {
+    margin:0px 10px;
+}
+
 #admin #new-project-map {
     position:absolute;
-    top:235px;
-    left:500px;
-    width:730px;
-    height:340px;
+    top:241px;
+    left:770px;
+    width:470px;
+    height:235px;
     border:1px solid #777;
 }
 
-#admin input.button {
+#admin input.button[name=create-project] {
     display:block;
     font-size:1.2em;
     padding:5px;

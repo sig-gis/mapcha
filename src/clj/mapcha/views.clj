@@ -412,56 +412,7 @@
    request
    [:div#admin
     [:h1 "Create New Project"]
-    [:form {:method "post" :action "/admin"}
-     [:fieldset#project-info
-      [:legend "Project Info"]
-      [:table
-       [:tr
-        [:td [:label "Name"]]
-        [:td [:input {:type "text" :name "project-name"
-                      :size "21" :autocomplete "off"}]]]
-       [:tr
-        [:td [:label "Description"]]
-        [:td [:textarea {:name "project-description" :rows "3" :cols "31"}]]]]]
-     [:fieldset#plot-info
-      [:legend "Plot Info"]
-      [:table
-       [:tr
-        [:td [:label "Number of plots"]]
-        [:td [:input {:type "number" :name "plots"
-                      :autocomplete "off" :min "0" :step "1"}]]]
-       [:tr
-        [:td [:label "Plot radius in meters"]]
-        [:td [:input {:type "number" :name "buffer-radius"
-                      :autocomplete "off" :min "0.0" :step "any"}]]]]]
-     [:fieldset#sample-info
-      [:legend "Sample Info"]
-      [:label "Samples per plot"]
-      [:input#samples-per-plot {:type "number" :name "samples-per-plot"
-                                :autocomplete "off" :min "0" :step "1"}]
-      [:table
-       [:tr
-        [:td [:label "Sample values"]]
-        [:td [:textarea {:name "sample-values" :rows "3" :cols "35"}
-              "Forest, Field, Agriculture, Water"]]]]]
-     [:fieldset#bounding-box
-      [:legend "Define Bounding Box"]
-      [:input#lat-max {:type "number" :name "boundary-lat-max"
-                       :placeholder "Lat Max" :autocomplete "off"
-                       :min "-90.0" :max "90.0" :step "any"}]
-      [:input#lon-min {:type "number" :name "boundary-lon-min"
-                       :placeholder "Lon Min" :autocomplete "off"
-                       :min "-180.0" :max "180.0" :step "any"}]
-      [:input#lon-max {:type "number" :name "boundary-lon-max"
-                       :placeholder "Lon Max" :autocomplete "off"
-                       :min "-180.0" :max "180.0" :step "any"}]
-      [:input#lat-min {:type "number" :name "boundary-lat-min"
-                       :placeholder "Lat Min" :autocomplete "off"
-                       :min "-90.0" :max "90.0" :step "any"}]]
-     [:input.button {:type "submit" :name "create-project"
-                     :value "Create and launch this project"
-                     :onclick "this.disabled=true"}]]
-    [:img#compass-rose {:src "img/compass_rose.png"}]
+    [:div#create-project-form]
     [:div#new-project-map]]
    (include-js "/mapcha.js")
    (javascript-tag "mapcha.admin.main()")))
