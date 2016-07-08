@@ -70,7 +70,8 @@ CREATE TABLE mapcha.users (
   email     text not null,
   password  text not null,
   role      text not null,
-  reset_key text
+  reset_key text,
+  ip_addr   inet
 );
 
 CREATE INDEX mapcha_users_email ON mapcha.users (email);
@@ -154,59 +155,44 @@ UPDATE mapcha.users
               Incorporate Cesium through ol3-cesium module.
 
 * TODOs
-** This week
-
-   Admin page:
-   - fix image file upload http://www.html5rocks.com/en/tutorials/file/dndfiles/
-
-   Registration page:
-   - store the user's IP address in the mapcha.users table when they make a new account
-
-   Dashboard page:
-   - assign colors to points
-   - highlight points that are clicked a second time
-   - # of samples completed in current plot
-   - # of plots completed in the project
-   - download link for plot-level aggregate data
-     - filename: mapcha_<project>_<date>.csv
-     - fields: plot_id, center_lat, center_lon, radius_m, sample_points, user_assigments, value1_mean, value1_stddev, value2_mean, value2_stddev, ..., valueN_mean, valueN_stddev
-
-   Database:
-   - add date field to user_samples table
-   - add imagery date to user_samples table
-   - add ip addresses to user table at registration time
-
-** Map coding (w/ Reagent and OpenLayers)
-
-   - Dashboard page
-     - Push "Save" -> (mapcha.db/add-user-samples @user-samples) (include sample date and source+date of the imagery)
-   - Admin page
-     - Create separate buttons for previewing the project and launching it
-     - Show bounding box on map as lat/lon coords are input
-     - Create a preview image of the aggregated plot points (use color ramp green-red or circle size to indicate number of points per area)
-   - Home page
-     - Show study area on a map with plots highlighted (use color ramp red-green based on number of samples filled in)
-
-** UI improvements
-
-   - Add "Plots completed" label to Dashboard UI
-   - Add "Percent agreement with other users" label to Dashboard UI
-   - Add date of hi-res imagery (month and year) to Dashboard UI
-   - Add a Quit button to the Dashboard UI
-   - Add UA form validators (through html input tag options) to the Admin page
-   - Add a Mapcha description to the Home page (use dl/dt/dd tags for text sections)
+** Admin page
    - Add the spinner.gif after the "Create and launch this project" button on the Admin page, disable the button, and change the text to "Processing...please wait..."
+   - Fix image file upload http://www.html5rocks.com/en/tutorials/file/dndfiles/
+   - Show bounding box on map as lat/lon coords are input
+   - Batch together the database inserts into just a few calls
+   - Change random point distribution algorithm to one which prevents overlap
+   - Create a panel for reviewing and deleting existing projects
+   - Add UA form validators (through html input tag options)
+   - Allow selecting the imagery datasource (Digital Globe, Google Earth Engine?, locally hosted "chipset", other image server)
+   - Allow uploading a plots and points shapefile to create a new project (point features are the categories list)
+
+** Dashboard page
+   - Assign colors to points
+   - Highlight points that are clicked a second time
+   - Implement "Save Assignments" to record [user_id, sample_id, value_id, imagery_id, date] in mapcha.user_samples for each point (use DigitalGlobe imagery vintage)
+   - Add meters to Sidebar for:
+     - "Samples completed" :: # of samples completed in current plot
+     - "Plots completed" :: # of plots completed in current project
+     - "Agreement with other users" :: % of samples matching other users' samples in current project
+   - Add a download link for plot-level aggregate data
+     - Filename: mapcha_<project>_<date>.csv
+     - Fields: plot_id, center_lat, center_lon, radius_m, sample_points, user_assigments, value1_mean, value1_stddev, value2_mean, value2_stddev, ..., valueN_mean, valueN_stddev
+   - Show date of hi-res imagery (month and year) on bottom edge map
+   - Show text descriptions and example images when hovering over sample values in the radio list
+   - Adjust the SQL query for get-random-plot-sql to try and pick less sampled plots
+
+** Login page
+   - Include Facebook authentication as a login option
+
+** Registration page
+   - Store the user's IP address in the mapcha.users table when they make a new account
    - Add "First Name", "Last Name", and "Institution" fields to Register and Account pages
 
-** Next week
+** Home page
+   - Add a Mapcha description (use dl/dt/dd tags for text sections)
+   - Show study area on a map with plots highlighted (use color ramp red-green based on number of samples filled in)
 
-   - Show text descriptions and example images when hovering over sample values in the radio list
-   - Change random point distribution algorithm to something else?
-   - Adjust the SQL query for get-random-plot-sql to try and pick less sampled plots
+** Misc ideas
+   - Make https://github.com/sig-gis/mapcha/settings a private repository (need to delete another repository first)
    - Create a unique URL per project (e.g., http://mapcha.sig-gis.com/project/my-project-name) <-- do we really need this?
-   - Allow an admin to select the imagery datasource (Digital Globe, Google Earth Engine?, locally hosted "chipset", other image server)
-   - Allow an admin to upload a plots and points shapefile to create a new project (point features are the categories list)
-   - Make https://github.com/sig-gis/mapcha/settings a private repository (probably need to delete another repository first)
-   - Include imagery date in user_samples (look up DigitalGlobe imagery vintage)
    - Incorporate Cesium into the map interfaces for a 3D globe option https://github.com/openlayers/ol3-cesium
-   - Include Facebook authentication as a login option
