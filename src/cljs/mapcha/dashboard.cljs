@@ -80,7 +80,7 @@
 (defn save-values! []
   (reset! analyze-plot? true))
 
-(defn set-current-value! [{:keys [id value color]}]
+(defn set-current-value! [evt {:keys [id value color]}]
   (js/alert (str "You called set-current-value! with inputs: "
                  id " " value " " color)))
 
@@ -125,10 +125,9 @@
                             {:background-color color
                              :color (complementary-color color)}
                             {})
-                   :on-click #(set-current-value! sample-value)}]])]
-      [:input#select-value-button.button {:type "button" :name "select-value"
-                                          :value "Select Value"
-                                          :on-click select-value}]]]))
+                   :on-click #(set-current-value! % sample-value)}]])]]
+     [:input.button {:type "button" :name "dashboard-quit" :value "Quit"
+                     :on-click #(set! (.-location js/window) "/")}]]))
 
 (defn ^:export main []
   (load-projects-and-sample-values!)
