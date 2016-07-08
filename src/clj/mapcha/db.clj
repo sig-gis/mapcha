@@ -153,12 +153,14 @@
                                  :sample_y (+ plot-y y-offset)}
                                 {:connection conn})))))
 
-        ;; 4. Split sample-values on ",", trim off whitespace, and insert
-        ;;    them into mapcha.sample_values.
+        ;; 4. Read sample-values (EDN string -> [[name color image]*])
+        ;;    and insert them into mapcha.sample_values.
 
-        (doseq [value (str/split sample-values #"\s*,\s*")]
+        (doseq [[name color image] (read-string sample-values)]
           (add-sample-value-sql {:project_id project-id
-                                 :value      value}
+                                 :value      name
+                                 :color      color
+                                 :image      image}
                                 {:connection conn})))
       true)
     (catch Exception e false)))

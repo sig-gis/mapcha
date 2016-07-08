@@ -22,9 +22,9 @@ INSERT INTO mapcha.samples (plot_id, point)
 
 -- name: add-sample-value-sql
 -- Adds a new sample value for the given project_id.
-INSERT INTO mapcha.sample_values (project_id, value)
-  VALUES (:project_id, :value)
-  RETURNING id, project_id, value;
+INSERT INTO mapcha.sample_values (project_id, value, color, image)
+  VALUES (:project_id, :value, :color, :image)
+  RETURNING id, project_id, value, color, image;
 
 -- name: add-user-sample-sql
 -- Adds a new sample record for the given user_id.
