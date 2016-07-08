@@ -156,12 +156,12 @@ UPDATE mapcha.users
 
 * TODOs
 ** Admin page
-   - Add the spinner.gif after the "Create and launch this project" button on the Admin page, disable the button, and change the text to "Processing...please wait..."
+   - Add the spinner.gif after the "Create and launch this project" button on the Admin page, and change the text to "Processing...please wait..."
    - Fix image file upload http://www.html5rocks.com/en/tutorials/file/dndfiles/
    - Show bounding box on map as lat/lon coords are input
    - Batch together the database inserts into just a few calls
    - Change random point distribution algorithm to one which prevents overlap
-   - Create a panel for reviewing and deleting existing projects
+   - Create a panel for reviewing, editing (add new user-specified plots w/ unique user_entered field), and deleting existing projects
    - Add UA form validators (through html input tag options)
    - Allow selecting the imagery datasource (Digital Globe, Google Earth Engine?, locally hosted "chipset", other image server)
    - Allow uploading a plots and points shapefile to create a new project (point features are the categories list)
@@ -169,6 +169,9 @@ UPDATE mapcha.users
 ** Dashboard page
    - Assign colors to points
    - Highlight points that are clicked a second time
+   - Allow for multiple points to be selected and assigned the same value
+   - Make the size of sample circles vary with the zoom level
+   - Increase the sensitivity of the point selection tool
    - Implement "Save Assignments" to record [user_id, sample_id, value_id, imagery_id, date] in mapcha.user_samples for each point (use DigitalGlobe imagery vintage)
    - Add meters to Sidebar for:
      - "Samples completed" :: # of samples completed in current plot
