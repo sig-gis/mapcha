@@ -1,9 +1,7 @@
 (ns mapcha.admin
   (:require [goog.dom :as dom]
             [reagent.core :as r]
-            [mapcha.map-utils :as map]
-            [shoreleave.remotes.http-rpc :refer [remote-callback]])
-  (:require-macros [shoreleave.remotes.macros :as macros]))
+            [mapcha.map-utils :as map]))
 
 (defonce sample-values (r/atom []))
 
