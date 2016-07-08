@@ -14,7 +14,8 @@
     (if (not= name "")
       (do (swap! sample-values conj [name color image])
           (set! (.-value (dom/getElement "value-name")) "")
-          (set! (.-value (dom/getElement "value-color")) "#000000"))
+          (set! (.-value (dom/getElement "value-color")) "#000000")
+          (set! (.-value (dom/getElement "value-image")) ""))
       (js/alert "A sample value must possess both a name and a color."))))
 
 (defn delete-element [vc pos]
@@ -77,7 +78,11 @@
     [:table
      [:thead
       [:tr
-       [:th.empty ""] [:th "Name"] [:th "Color"] [:th "Image"] [:th.empty ""]]]
+       [:th.empty ""]
+       [:th "Name"]
+       [:th "Color"]
+       [:th "Reference Image"]
+       [:th.empty ""]]]
      [:tbody
       (map-indexed
        (fn [idx [name color image]]
