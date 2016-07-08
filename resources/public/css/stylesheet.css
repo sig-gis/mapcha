@@ -690,22 +690,18 @@ p.error-message {
 }
 
 #dashboard ul {
+    width:90%;
+    margin:5px auto;
     list-style-type:none;
 }
 
-#dashboard li {
-    position:relative;
-    padding:3px;
-}
-
-#dashboard input.sample-values {
-    margin:0px 5px;
-}
-
-#dashboard label.sample-values {
-    position:relative;
-    top:-2px;
+#dashboard ul li input {
+    height:30px;
+    width:100%;
     color:#55f;
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
 }
 
 #dashboard #image-analysis-pane {

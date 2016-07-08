@@ -80,6 +80,23 @@
 (defn save-values! []
   (reset! analyze-plot? true))
 
+(defn set-current-value! [{:keys [id value color]}]
+  (js/alert (str "You called set-current-value! with inputs: "
+                 id " " value " " color)))
+
+(defn convert-base [x from-base to-base]
+  (-> x
+      (js/parseInt from-base)
+      (.toString to-base)))
+
+(defn complementary-color [color]
+  (let [max-color  (convert-base "FFFFFF" 16 10)
+        this-color (convert-base (subs color 1) 16 10)
+        new-color  (convert-base (- max-color this-color) 10 16)]
+    (if (< (count new-color) 6)
+      (apply str (concat "#" (repeat (- 6 (count new-color)) "0") new-color))
+      (str "#" new-color))))
+
 (defn sidebar-contents []
   (let [projects      @project-list
         project1      (first projects)
@@ -101,11 +118,12 @@
      [:fieldset
       [:legend "Sample Values"]
       [:ul
-       (for [{:keys [id value]} sample-values]
+       (for [{:keys [id value color] :as sample-value} sample-values]
          [:li {:key id}
-          [:input.sample-values {:type "radio" :name "sample-values"
-                                 :id (str value "_" id) :value id}]
-          [:label.sample-values {:for (str value "_" id)} value]])]
+          [:input {:type "button" :name (str value "_" id)
+                   :value value :style {:background-color color
+                                        :color (complementary-color color)}
+                   :on-click #(set-current-value! sample-value)}]])]
       [:input#select-value-button.button {:type "button" :name "select-value"
                                           :value "Select Value"
                                           :on-click select-value}]]]))

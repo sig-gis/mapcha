@@ -39,7 +39,7 @@ SELECT id, name, description, ST_AsGeoJSON(boundary) AS boundary
 
 -- name: get-sample-values-sql
 -- Returns all rows in mapcha.sample_values with the given project_id.
-SELECT id, value
+SELECT id, value, color, image
   FROM mapcha.sample_values
   WHERE project_id = :project_id;
 
