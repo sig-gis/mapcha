@@ -126,6 +126,19 @@ UPDATE mapcha.users
   - Longitude Max :: -114.0
   - Latitude Min :: 32.3
 
+* Tertiary Study Area: Mongolia
+
+  - Name :: Mongolia
+  - Description :: The land of yurt-dwelling pastoral nomads.
+  - Number of plots :: 5000
+  - Plot radius in meters :: 200
+  - Number of samples per plot :: 20
+  - Categories per sample :: Settlement, Road, Rock/Sand, Grasses, Trees, Water, Snow, Unknown
+  - Latitude Max :: 52.5
+  - Longitude Min :: 87.0
+  - Longitude Max :: 120.5
+  - Latitude Min :: 41.5
+
 * Web Mapping Options
 
   - Google Earth :: desktop application (OpenForis CollectEarth is built on this)
@@ -144,10 +157,13 @@ UPDATE mapcha.users
 ** This week
 
    Admin page:
-   - table of attributes with color field and reference image file upload
+   - fix image file upload http://www.html5rocks.com/en/tutorials/file/dndfiles/
+
+   Registration page:
+   - store the user's IP address in the mapcha.users table when they make a new account
 
    Dashboard page:
-   - assign colors to points and to labels
+   - assign colors to points
    - highlight points that are clicked a second time
    - # of samples completed in current plot
    - # of plots completed in the project
