@@ -26,6 +26,9 @@
   (when (> (count @sample-values) idx)
     (swap! sample-values delete-element idx)))
 
+(defn disable-element! [evt]
+  (set! (.-disabled (.-currentTarget evt)) true))
+
 (defn create-project-form-contents []
   [:form {:method "post" :action "/admin"}
    [:fieldset#project-info
@@ -95,10 +98,10 @@
                                  :accept "image/*"}]]
        [:td [:input.button {:type "button" :value "Add sample value"
                             :on-click add-sample-value-row!}]]]]]
-    [:input {:type "hidden" :name "sample-values" :value @sample-values}]]
+    [:input {:type "hidden" :name "sample-values" :value (pr-str @sample-values)}]]
    [:input.button {:type "submit" :name "create-project"
                    :value "Create and launch this project"
-                   :on-click "this.disabled=true"}]
+                   :on-click disable-element!}]
    [:img#compass-rose {:src "img/compass_rose.png"}]])
 
 (defn ^:export main []
