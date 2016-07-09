@@ -864,7 +864,8 @@ p.error-message {
 #admin input.button[name=create-project] {
     position:absolute;
     top:15px;
-    left:950px;
+    left:900px;
+    width:270px;
     display:block;
     font-size:1.1em;
     padding:5px;
@@ -884,6 +885,21 @@ p.error-message {
     left:1070px;
     width:150px;
 }
+
+#admin #spinner {
+    position:absolute;
+    top:15px;
+    left:1185px;
+    width:30px;
+    height:30px;
+    border-radius:15px;
+    -moz-border-radius:15px;
+    -webkit-border-radius:15px;
+    border-bottom:3px solid #55f;
+    -webkit-animation:sweep 1s infinite linear;
+    visibility:hidden;
+}
+@-webkit-keyframes sweep { to { -webkit-transform: rotate(360deg); } }
 
 /***************/
 /* SVG Styles  */

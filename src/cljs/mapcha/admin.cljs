@@ -1,5 +1,6 @@
 (ns mapcha.admin
   (:require [goog.dom :as dom]
+            [goog.style :as style]
             [reagent.core :as r]
             [mapcha.map-utils :as map]))
 
@@ -25,8 +26,9 @@
   (when (> (count @sample-values) idx)
     (swap! sample-values delete-element idx)))
 
-(defn disable-element! [evt]
-  (set! (.-disabled (.-currentTarget evt)) true))
+(defn submit-form [evt]
+  (set! (.-value (.-currentTarget evt)) "Processing...please wait...")
+  (style/setStyle (dom/getElement "spinner") "visibility" "visible"))
 
 (defn create-project-form-contents []
   [:form {:method "post" :action "/admin"}
@@ -103,7 +105,9 @@
                             :on-click add-sample-value-row!}]]]]]
     [:input {:type "hidden" :name "sample-values" :value (pr-str @sample-values)}]]
    [:input.button {:type "submit" :name "create-project"
-                   :value "Create and launch this project"}]
+                   :value "Create and launch this project"
+                   :on-click submit-form}]
+   [:div#spinner]
    [:img#compass-rose {:src "img/compass_rose.png"}]])
 
 (defn ^:export main []
