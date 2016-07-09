@@ -210,4 +210,5 @@ UPDATE mapcha.users
    - Show study area on a map with plots highlighted (use color ramp red-green based on number of samples filled in)
 
 ** Misc ideas
+   - Setup SSL communications for the website, so that it works over HTTPS
    - Incorporate Cesium into the map interfaces for a 3D globe option https://github.com/openlayers/ol3-cesium

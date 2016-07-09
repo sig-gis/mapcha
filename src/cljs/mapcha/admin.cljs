@@ -103,8 +103,7 @@
                             :on-click add-sample-value-row!}]]]]]
     [:input {:type "hidden" :name "sample-values" :value (pr-str @sample-values)}]]
    [:input.button {:type "submit" :name "create-project"
-                   :value "Create and launch this project"
-                   :on-click disable-element!}]
+                   :value "Create and launch this project"}]
    [:img#compass-rose {:src "img/compass_rose.png"}]])
 
 (defn ^:export main []

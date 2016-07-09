@@ -749,7 +749,7 @@ p.error-message {
     font-weight:bold;
 }
 
-#admin input[type=number] {
+#admin input[type=number], #admin input[type=text] {
     height:20px;
     padding:5px;
 }
@@ -761,6 +761,8 @@ p.error-message {
 }
 
 #admin fieldset#project-info {
+    position:absolute;
+    top:54px;
     width:375px;
     height:130px;
 }
@@ -772,7 +774,7 @@ p.error-message {
 #admin fieldset#plot-info {
     position:absolute;
     top:54px;
-    left:425px;
+    left:428px;
     width:285px;
     height:130px;
 }
@@ -815,6 +817,8 @@ p.error-message {
 }
 
 #admin fieldset#sample-info {
+    position:absolute;
+    top:218px;
     width:720px;
 }
 
@@ -850,18 +854,20 @@ p.error-message {
 
 #admin #new-project-map {
     position:absolute;
-    top:241px;
-    left:770px;
+    top:240px;
+    left:765px;
     width:470px;
     height:335px;
     border:1px solid #777;
 }
 
 #admin input.button[name=create-project] {
+    position:absolute;
+    top:15px;
+    left:950px;
     display:block;
-    font-size:1.2em;
+    font-size:1.1em;
     padding:5px;
-    margin:20px 80px;
     color:white;
     background-color:#55f;
     border-radius:8px;
@@ -874,9 +880,9 @@ p.error-message {
 
 #admin img#compass-rose {
     position:absolute;
-    top:35px;
-    left:1055px;
-    width:180px;
+    top:75px;
+    left:1070px;
+    width:150px;
 }
 
 /***************/
