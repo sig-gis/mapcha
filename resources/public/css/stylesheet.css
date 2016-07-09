@@ -865,7 +865,7 @@ p.error-message {
     position:absolute;
     top:15px;
     left:900px;
-    width:270px;
+    width:285px;
     display:block;
     font-size:1.1em;
     padding:5px;
@@ -889,7 +889,7 @@ p.error-message {
 #admin #spinner {
     position:absolute;
     top:15px;
-    left:1185px;
+    left:1195px;
     width:30px;
     height:30px;
     border-radius:15px;
