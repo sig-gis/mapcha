@@ -140,7 +140,7 @@ h1,h2,h3,h4,h5,h6 {
 
 #right-block input:not(.button) {
     width:15rem;
-    margin:0.25rem;
+    margin:0.3rem;
     border:1px solid #999;
     border-radius:0.25rem;
 }
@@ -152,8 +152,8 @@ h1,h2,h3,h4,h5,h6 {
 
 #right-block input.button {
     width:15rem;
-    margin:0.25rem;
-    padding:0.25rem;
+    margin:0.3rem;
+    padding:0.3rem;
     color:white;
     background-color:#55f;
     border-radius:1rem;
@@ -199,6 +199,7 @@ h1,h2,h3,h4,h5,h6 {
 
 #home-content p {
     margin:1rem 0rem;
+    display:none;
 }
 
 .trademark {
@@ -266,39 +267,38 @@ h1,h2,h3,h4,h5,h6 {
 /*********/
 
 #login-form {
-    width:30%;
-    padding:10px;
+    width:19rem;
+    padding:1rem;
     background-color:#e0e0e0;
-    border-radius:10px;
+    border-radius:1rem;
 }
 
 #login-form h1 {
-    font-size:1.5em;
-    font-style:normal;
+    font-size:1.5rem;
     font-weight:bold;
-    padding:5px;
+    padding:0.5rem;
 }
 
 #login-form input:not(.button) {
-    width:90%;
+    width:18rem;
     border:1px solid #999;
-    border-radius:3px;
-    margin:4px;
+    border-radius:0.25rem;
+    margin:0.3rem;
 }
 
 #login-form input:not(.button):focus {
     border:1px solid #55f;
-    box-shadow:0px 0px 6px rgba(21,21,153,0.8);
+    box-shadow:0rem 0rem 0.5rem rgba(21,21,153,0.8);
 }
 
 #login-form input.button {
-    width:90%;
-    margin:4px;
-    padding:5px;
+    width:18rem;
+    margin:0.3rem;
+    padding:0.5rem;
     color:white;
     background-color:#55f;
-    border-radius:8px;
-    box-shadow:3px 3px 6px rgba(21,21,153,0.6);
+    border-radius:1rem;
+    box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6);
 }
 
 #login-form input.button:focus {
@@ -306,13 +306,10 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 #login-form p#forgot-password a {
-    font-size:0.8em;
+    font-size:0.8rem;
     font-weight:bold;
     font-style:italic;
-    margin-left:5px;
-}
-
-#login-form p#forgot-password a {
+    margin-left:0.5rem;
     color:#009;
     text-decoration:none;
 }
@@ -322,39 +319,38 @@ h1,h2,h3,h4,h5,h6 {
 /************/
 
 #register-form {
-    width:30%;
-    padding:10px;
+    width:19rem;
+    padding:1rem;
     background-color:#e0e0e0;
-    border-radius:10px;
+    border-radius:1rem;
 }
 
 #register-form h1 {
-    font-size:1.5em;
-    font-style:normal;
+    font-size:1.5rem;
     font-weight:bold;
-    padding:5px;
+    padding:0.5rem;
 }
 
 #register-form input:not(.button) {
-    width:90%;
+    width:18rem;
     border:1px solid #999;
-    border-radius:3px;
-    margin:4px;
+    border-radius:0.25rem;
+    margin:0.3rem;
 }
 
 #register-form input:not(.button):focus {
     border:1px solid #55f;
-    box-shadow:0px 0px 6px rgba(21,21,153,0.8);
+    box-shadow:0rem 0rem 0.5rem rgba(21,21,153,0.8);
 }
 
 #register-form input.button {
-    width:90%;
-    margin:4px;
-    padding:5px;
+    width:18rem;
+    margin:0.3rem;
+    padding:0.5rem;
     color:white;
     background-color:#55f;
-    border-radius:8px;
-    box-shadow:3px 3px 6px rgba(21,21,153,0.6);
+    border-radius:1rem;
+    box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6);
 }
 
 #register-form input.button:focus {
@@ -366,46 +362,44 @@ h1,h2,h3,h4,h5,h6 {
 /************/
 
 #account-form {
-    width:30%;
-    padding:10px;
+    width:19rem;
+    padding:1rem;
     background-color:#e0e0e0;
-    border-radius:10px;
+    border-radius:1rem;
 }
 
 #account-form h1 {
-    font-size:1.5em;
-    font-style:normal;
+    font-size:1.5rem;
     font-weight:bold;
-    padding:5px;
+    padding:0.5rem;
 }
 
 #account-form h2 {
-    font-size:1.2em;
-    font-style:normal;
+    font-size:1.2rem;
     font-weight:bold;
-    padding:5px;
+    padding:0.5rem;
 }
 
 #account-form input:not(.button) {
-    width:90%;
+    width:18rem;
     border:1px solid #999;
-    border-radius:3px;
-    margin:4px;
+    border-radius:0.25rem;
+    margin:0.3rem;
 }
 
 #account-form input:not(.button):focus {
     border:1px solid #55f;
-    box-shadow:0px 0px 6px rgba(21,21,153,0.8);
+    box-shadow:0rem 0rem 0.5rem rgba(21,21,153,0.8);
 }
 
 #account-form input.button {
-    width:90%;
-    margin:4px;
-    padding:5px;
+    width:18rem;
+    margin:0.3rem;
+    padding:0.5rem;
     color:white;
     background-color:#55f;
-    border-radius:8px;
-    box-shadow:3px 3px 6px rgba(21,21,153,0.6);
+    border-radius:1rem;
+    box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6);
 }
 
 #account-form input.button:focus {
@@ -417,39 +411,38 @@ h1,h2,h3,h4,h5,h6 {
 /************/
 
 #password-form {
-    width:30%;
-    padding:10px;
+    width:19rem;
+    padding:1rem;
     background-color:#e0e0e0;
-    border-radius:10px;
+    border-radius:1rem;
 }
 
 #password-form h1 {
-    font-size:1.5em;
-    font-style:normal;
+    font-size:1.5rem;
     font-weight:bold;
-    padding:5px;
+    padding:0.5rem;
 }
 
 #password-form input:not(.button) {
-    width:90%;
+    width:18rem;
     border:1px solid #999;
-    border-radius:3px;
-    margin:4px;
+    border-radius:0.25rem;
+    margin:0.3rem;
 }
 
 #password-form input:not(.button):focus {
     border:1px solid #55f;
-    box-shadow:0px 0px 6px rgba(21,21,153,0.8);
+    box-shadow:0rem 0rem 0.5rem rgba(21,21,153,0.8);
 }
 
 #password-form input.button {
-    width:90%;
-    margin:4px;
-    padding:5px;
+    width:18rem;
+    margin:0.3rem;
+    padding:0.5rem;
     color:white;
     background-color:#55f;
-    border-radius:8px;
-    box-shadow:3px 3px 6px rgba(21,21,153,0.6);
+    border-radius:1rem;
+    box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6);
 }
 
 #password-form input.button:focus {
@@ -461,22 +454,22 @@ h1,h2,h3,h4,h5,h6 {
 /***************/
 
 p.alert {
-    font-size:0.8em;
+    font-size:0.8rem;
     font-style:italic;
-    width:27%;
-    margin:1em 1em;
-    padding:10px;
+    width:19rem;
+    margin-bottom:1rem;
+    padding:1rem;
     border:1px solid #009;
-    border-radius:10px;
+    border-radius:1rem;
 }
 
 p.error-message {
-    width:45%;
-    margin:10px;
-    padding:10px;
+    font-size:1rem;
+    width:30rem;
+    margin-top:1rem;
+    padding:1rem;
     border:1px solid #009;
-    font-size:1em;
-    border-radius:10px;
+    border-radius:1rem;
 }
 
 /*************/
