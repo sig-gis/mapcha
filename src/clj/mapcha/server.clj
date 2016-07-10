@@ -51,7 +51,6 @@
    []                 {:get views/home-page}
    ["about"]          {:get views/about-page}
    ["contact"]        {:get views/contact-page}
-   ["learn"]          {:get views/learn-page}
    ;; Login/Registration/Password-Reset/Logout pages
    ["login"]          {:any views/login-page}
    ["register"]       {:any views/register-page}

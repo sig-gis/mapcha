@@ -123,11 +123,12 @@
   (wrap-header-footer
    request
    [:section#home-top
+    [:div#overview-map
+     [:div#popup.ol-popup
+      [:div#popup-content]]]
     [:div#left-block
      [:h1 "Mapcha: " [:em "Earth Image Identification"]]
-     [:h2 "Collaborate. Play. Map the world."]
-     [:input.button {:type "button" :value "Learn more »"
-                     :onclick "window.location='/learn'"}]]
+     [:h2 "Collaborate. Play. Map the world."]]
     [:div#right-block
      [:div#login
       [:form {:method "post" :action "/login"}
@@ -147,10 +148,6 @@
                 :placeholder "Password confirmation" :autocomplete "off"}]
        [:input.button {:type "submit" :name "register" :value "Register"}]]]]]
    [:section#home-content
-    [:p#overview-map-wait-message "Overview map is loading. Please wait..."]
-    [:div#overview-map
-     [:div#popup.ol-popup
-      [:div#popup-content]]]
     [:p "Enter a description of " [:span.trademark "Mapcha"] " here..."]]
    (include-js "/mapcha.js")
    (javascript-tag "mapcha.homepage.main()")))
@@ -178,18 +175,6 @@
   (wrap-header-footer
    request
    [:h3 "Contact page...in progress"]))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Learn page
-;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defn learn-page
-  [request]
-  (wrap-header-footer
-   request
-   [:h3 "Learn page...in progress"]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

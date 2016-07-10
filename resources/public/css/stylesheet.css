@@ -109,15 +109,11 @@ h1,h2,h3,h4,h5,h6 {
 
 #left-block {
     position:absolute;
-    top:1rem;
-    left:0rem;
-    height:265px;
-    width:685px;
-    padding:1.5rem 3.5rem;
-    background-image:url(/img/earth_from_space.jpg);
-    background-repeat:no-repeat;
-    background-position:left top;
+    top:3rem;
+    left:4rem;
+    border:1px solid blue;
     border-radius:1rem;
+    background-color:rgba(255,255,255,0.8);
 }
 
 #left-block h1 {
@@ -125,8 +121,6 @@ h1,h2,h3,h4,h5,h6 {
     font-weight:bold;
     width:32rem;
     padding:0.5rem 0.5rem 0.5rem 1rem;
-    background-color:rgba(255,255,255,0.8);
-    border-radius:1rem 1rem 0rem 0rem;
 }
 
 #left-block h2 {
@@ -134,30 +128,14 @@ h1,h2,h3,h4,h5,h6 {
     font-style:italic;
     width:32rem;
     padding:0.5rem 0.5rem 0.75rem 1rem;
-    background-color:rgba(255,255,255,0.8);
-    border-radius:0rem 0rem 1rem 1rem;
-}
-
-#left-block input.button {
-    font-size:1rem;
-    margin:1.5rem 2rem;
-    padding:0.5rem;
-    color:white;
-    background-color:#55f;
-    border-radius:1rem;
-    box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6);
-}
-
-#left-block input.button:focus {
-    border:1px solid #999;
 }
 
 #right-block {
     position:absolute;
     top:1rem;
-    left:56rem;
+    right:0rem;
     height:20rem;
-    width:20rem;
+    width:17rem;
 }
 
 #right-block input:not(.button) {
@@ -227,15 +205,12 @@ h1,h2,h3,h4,h5,h6 {
     font-style:italic;
 }
 
-#overview-map-wait-message {
-    font-size:0.9rem;
-    font-weight:bold;
-    color:#009;
-}
-
 #overview-map {
-    height:300px;
-    width:100%;
+    position:absolute;
+    top:1rem;
+    left:0rem;
+    height:20rem;
+    width:60rem;
     border:1px solid #55f;
 }
 
