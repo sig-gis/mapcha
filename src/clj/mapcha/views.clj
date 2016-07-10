@@ -69,7 +69,9 @@
        [:meta {:name "keyword" :content keywords}]
        [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]
        [:link {:rel "shortcut icon" :href "/favicon.ico"}]
-       (include-css "/css/stylesheet.css" "/css/openlayers_3.13.0.css")
+       (include-css "/css/cssreset-min.css"
+                    "/css/openlayers_3.13.0.css"
+                    "/css/stylesheet.css")
        html5shiv]
       [:body
        [:header
