@@ -100,7 +100,7 @@
 
 ;; FIXME: Deprecated. Fold this logic into set-current-value! above.
 (defn select-value []
-  (if-let [sample (map/get-selected-sample)]
+  (if-let [sample (first (map/get-selected-samples))]
     (let [sample-id (.get sample "sample_id")]
       (if-let [sample-value-id (some->> "input[name=\"sample-values\"]:checked"
                                         (.querySelector js/document)

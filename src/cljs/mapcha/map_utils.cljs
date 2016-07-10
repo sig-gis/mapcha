@@ -19,8 +19,10 @@
             [ol.style.Stroke]
             [ol.Overlay]
             [ol.interaction.Select]
+            [ol.interaction.DragBox]
             [ol.interaction.Translate]
             [ol.extent]
+            [ol.events.condition]
             [ol.format.GeoJSON]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -139,14 +141,39 @@
 
 (defonce select-interaction (atom nil))
 
+(defonce dragbox-interaction (atom nil))
+
+(defn make-dragbox-select [layer selected-features]
+  (let [dragbox (js/ol.interaction.DragBox.
+                 #js {:condition js/ol.events.condition.platformModifierKeyOnly})
+        source  (.getSource layer)]
+    (doto dragbox
+      (.on "boxend"
+           #(let [extent (.. dragbox getGeometry getExtent)]
+              (.forEachFeatureIntersectingExtent source extent
+                                                 (fn [feature]
+                                                   (.push selected-features
+                                                          feature)
+                                                   false))))
+      (.on "boxstart"
+           #(.clear selected-features)))))
+
 (defn enable-selection [map layer]
-  (let [layer-select (js/ol.interaction.Select. #js {:layers #js [layer]})]
-    (.addInteraction map layer-select)
-    (reset! select-interaction layer-select)))
+  (let [click-select      (js/ol.interaction.Select. #js {:layers #js [layer]})
+        selected-features (.getFeatures click-select)
+        dragbox-select    (make-dragbox-select layer selected-features)]
+    (.addInteraction map click-select)
+    (.addInteraction map dragbox-select)
+    (reset! select-interaction click-select)
+    (reset! dragbox-interaction dragbox-select)))
 
 (defn disable-selection [map]
-  (.removeInteraction map @select-interaction)
-  (reset! select-interaction nil))
+  (when @select-interaction
+    (.removeInteraction map @select-interaction)
+    (reset! select-interaction nil))
+  (when @dragbox-interaction
+    (.removeInteraction map @dragbox-interaction)
+    (reset! dragbox-interaction nil)))
 
 (defonce current-samples (atom nil))
 
@@ -165,16 +192,15 @@
     (when @current-samples
       (.removeLayer @map-ref @current-samples))
     (reset! current-samples samples)
-    (when @select-interaction
-      (disable-selection @map-ref))
+    (disable-selection @map-ref)
     (doto @map-ref
       (.addLayer samples)
       (enable-selection samples))))
 
-(defn get-selected-sample []
+(defn get-selected-samples []
   (some-> @select-interaction
           (.getFeatures)
-          (.item 0)))
+          (.getArray)))
 
 (defn highlight-sample [sample]
   (.setStyle sample (styles :blue-point)))
