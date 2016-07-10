@@ -28,3 +28,11 @@
 (defn enable-element! [elem]
   (set! (.-disabled elem) false)
   (style/setStyle elem "opacity" "1.0"))
+
+(defn highlight-border [elem]
+  (let [shadow-style (str "0px 0px 4px 4px black inset,"
+                          "0px 0px 4px 4px white inset")]
+    (style/setStyle elem "box-shadow" shadow-style)))
+
+(defn lowlight-border [elem]
+  (style/setStyle elem "box-shadow" "initial"))

@@ -17,11 +17,57 @@
 
 (defonce current-samples (atom ()))
 
-(defonce current-value (atom {}))
-
 (defonce current-value-button (atom nil))
 
+(defonce current-value (atom {}))
+
+(defn set-current-value! [evt new-value]
+  (let [button (.-currentTarget evt)]
+    (when @current-value-button
+      (u/lowlight-border @current-value-button))
+    (u/highlight-border button)
+    (reset! current-value-button button)
+    (reset! current-value new-value)))
+
+;;=================== IN PROGRESS ================================
+
 (defonce user-samples (atom {}))
+
+(defn save-values! []
+  true)
+
+(defn convert-base [x from-base to-base]
+  (-> x
+      (js/parseInt from-base)
+      (.toString to-base)))
+
+(defn complementary-color [color]
+  (let [max-color  (convert-base "FFFFFF" 16 10)
+        this-color (convert-base (subs color 1) 16 10)
+        new-color  (convert-base (- max-color this-color) 10 16)]
+    (if (< (count new-color) 6)
+      (apply str (concat "#" (repeat (- 6 (count new-color)) "0") new-color))
+      (str "#" new-color))))
+
+;; FIXME: Deprecated. Fold this logic into set-current-value! above.
+(defn select-value []
+  (if-let [sample (first (map/get-selected-samples))]
+    (let [sample-id (.get sample "sample_id")]
+      (if-let [sample-value-id (some->> "input[name=\"sample-values\"]:checked"
+                                        (.querySelector js/document)
+                                        (.-value)
+                                        (js/parseInt))]
+        (let [sample-value (->> @sample-values-list
+                                (filter #(= sample-value-id (:id %)))
+                                (first)
+                                (:value))]
+          (swap! user-samples assoc sample-id sample-value-id)
+          (map/highlight-sample sample)
+          (js/alert (str "Selected " sample-value " for sample #" sample-id ".")))
+        (js/alert "No sample value selected. Please choose one from the list.")))
+    (js/alert "No sample point selected. Please click one first.")))
+
+;;=================== IN PROGRESS ================================
 
 (defn load-sample-points! [plot-id]
   (remote-callback :get-sample-points
@@ -64,57 +110,6 @@
       (u/enable-element! (dom/getElement "new-plot-button"))
       (u/disable-element! (dom/getElement "save-values-button"))
       (map/draw-polygon (:boundary new-project)))))
-
-;; FIXME: Stub
-(defn save-values! []
-  true)
-
-(defn convert-base [x from-base to-base]
-  (-> x
-      (js/parseInt from-base)
-      (.toString to-base)))
-
-(defn complementary-color [color]
-  (let [max-color  (convert-base "FFFFFF" 16 10)
-        this-color (convert-base (subs color 1) 16 10)
-        new-color  (convert-base (- max-color this-color) 10 16)]
-    (if (< (count new-color) 6)
-      (apply str (concat "#" (repeat (- 6 (count new-color)) "0") new-color))
-      (str "#" new-color))))
-
-(defn highlight-border [element color]
-  (let [border-style (str "3px solid " (complementary-color color))]
-    (style/setStyle element "border" border-style)))
-
-(defn lowlight-border [element]
-  (style/setStyle element "border" "1px solid #999"))
-
-;; FIXME: Stub
-(defn set-current-value! [evt {:keys [id value color] :as new-value}]
-  (let [button (.-currentTarget evt)]
-    (when @current-value-button
-      (lowlight-border @current-value-button))
-    (highlight-border button (or color "#666666"))
-    (reset! current-value-button button)
-    (reset! current-value new-value)))
-
-;; FIXME: Deprecated. Fold this logic into set-current-value! above.
-(defn select-value []
-  (if-let [sample (first (map/get-selected-samples))]
-    (let [sample-id (.get sample "sample_id")]
-      (if-let [sample-value-id (some->> "input[name=\"sample-values\"]:checked"
-                                        (.querySelector js/document)
-                                        (.-value)
-                                        (js/parseInt))]
-        (let [sample-value (->> @sample-values-list
-                                (filter #(= sample-value-id (:id %)))
-                                (first)
-                                (:value))]
-          (swap! user-samples assoc sample-id sample-value-id)
-          (map/highlight-sample sample)
-          (js/alert (str "Selected " sample-value " for sample #" sample-id ".")))
-        (js/alert "No sample value selected. Please choose one from the list.")))
-    (js/alert "No sample point selected. Please click one first.")))
 
 (defn sidebar-contents []
   [:div#sidebar-contents
