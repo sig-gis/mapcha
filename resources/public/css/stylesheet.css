@@ -579,169 +579,200 @@ p.error-message {
 
 #admin {
     position:relative;
-    height:575px;
-    padding:10px;
+    height:36rem;
+    padding:1rem;
     background-color:#e0e0e0;
-    border-radius:10px;
+    border-radius:1rem;
 }
 
 #admin h1 {
-    font-size:1.5em;
-    font-style:normal;
+    font-size:1.5rem;
     font-weight:bold;
-    padding:5px;
 }
 
 #admin legend {
-    font-size:1.2em;
-    font-style:normal;
+    font-size:1.2rem;
     font-weight:bold;
     color:#55f;
 }
 
 #admin label {
-    margin:0px 10px;
-    color:#55f;
     font-weight:bold;
+    color:#55f;
+    margin-right:1rem;
 }
 
 #admin input[type=number], #admin input[type=text] {
-    height:20px;
-    padding:5px;
+    height:1rem;
+    padding:0.3rem;
 }
 
 #admin fieldset {
-    margin-top:10px;
-    padding:10px;
+    padding:1rem;
     background-color:#eee;
+    border:1px solid #55f;
 }
 
 #admin fieldset#project-info {
     position:absolute;
-    top:54px;
-    width:375px;
-    height:130px;
+    top:3.5rem;
+    width:21.5rem;
+    height:8rem;
 }
 
 #admin fieldset#project-info table {
-    height:110px;
+    height:7.5rem;
+}
+
+#admin fieldset#project-info input[type=text] {
+    width:13rem;
+}
+
+#admin fieldset#project-info textarea {
+    height:4rem;
+    width:13rem;
+    padding:0.3rem;
 }
 
 #admin fieldset#plot-info {
     position:absolute;
-    top:54px;
-    left:428px;
-    width:285px;
-    height:130px;
+    top:3.5rem;
+    left:26rem;
+    width:17rem;
+    height:8rem;
 }
 
 #admin fieldset#plot-info table {
-    height:110px;
+    height:7.5rem;
 }
 
 #admin fieldset#plot-info input {
-    width:80px;
+    width:5rem;
 }
 
 #admin fieldset#bounding-box {
     position:absolute;
-    top:54px;
-    left:750px;
-    width:265px;
-    height:130px;
+    top:3.5rem;
+    left:46.5rem;
+    width:16rem;
+    height:8rem;
 }
 
 #admin fieldset#bounding-box input {
     display:block;
-    width:80px;
+    width:5rem;
 }
 
 #admin fieldset#bounding-box input#lat-max {
-    margin:auto;
+    margin:0rem auto 0.25rem auto;
 }
 
 #admin fieldset#bounding-box input#lon-min {
+    margin:0.25rem 0rem;
     float:left;
 }
 
 #admin fieldset#bounding-box input#lon-max {
+    margin:0.25rem 0rem;
     float:right;
 }
 
 #admin fieldset#bounding-box input#lat-min {
-    margin:auto;
+    margin:0.25rem auto;
 }
 
 #admin fieldset#sample-info {
     position:absolute;
-    top:218px;
-    width:720px;
+    top:15rem;
+    width:40.75rem;
 }
 
 #admin fieldset#sample-info th {
-    font-size:1em;
+    font-weight:bold;
     color:#55f;
+    text-align:center;
+    padding:0.25rem;
     background-color:#aaa;
-    border-radius:10px;
+    border:1px solid #55f;
 }
 
 #admin fieldset#sample-info th.empty {
     background-color:#eee;
+    border:0px;
 }
 
 #admin fieldset#sample-info td {
     text-align:center;
+    padding:0.25rem;
 }
 
 #admin fieldset#sample-info .circle {
-    width:25px;
-    height:25px;
-    border-radius:50%;
-    margin:0px auto;
+    width:1rem;
+    height:1rem;
+    border-radius:0.5rem;
+    margin:0rem auto;
 }
 
-#admin fieldset#sample-info input[name=value-color] {
-    margin:0px 10px;
+#admin fieldset#sample-info input#value-name {
+    width:10rem;
+}
+
+#admin fieldset#sample-info input#value-color {
+    margin:0rem 1rem;
+    height:1.5rem;
+}
+
+#admin fieldset#sample-info input.button {
+    padding:0.25rem;
+    color:white;
+    min-width:2rem;
+    background-color:#55f;
+    border-radius:0.5rem;
+    box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6);
+}
+
+#admin input.button[name=add-sample-value] {
+    margin:0.5rem;
 }
 
 #admin #new-project-map {
     position:absolute;
-    top:240px;
-    left:765px;
-    width:470px;
-    height:335px;
-    border:1px solid #777;
+    top:15.6rem;
+    left:45rem;
+    width:33.5rem;
+    height:21rem;
+    border:1px solid #55f;
 }
 
 #admin input.button[name=create-project] {
     position:absolute;
-    top:15px;
-    left:900px;
-    width:285px;
+    top:0.5rem;
+    right:5rem;
+    width:17rem;
     display:block;
-    font-size:1.1em;
-    padding:5px;
+    font-size:1.1rem;
+    padding:0.5rem;
     color:white;
     background-color:#55f;
-    border-radius:8px;
-    box-shadow:3px 3px 6px rgba(21,21,153,0.6);
+    border-radius:1rem;
+    box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6);
 }
 
 #admin img#compass-rose {
     position:absolute;
-    top:75px;
-    left:1070px;
-    width:150px;
+    top:4.25rem;
+    right:3rem;
+    width:10rem;
 }
 
 #admin #spinner {
     position:absolute;
-    top:15px;
-    left:1195px;
-    width:30px;
-    height:30px;
-    border-radius:15px;
-    border-bottom:3px solid #55f;
+    top:0.6rem;
+    right:2rem;
+    width:2rem;
+    height:2rem;
+    border-radius:1rem;
+    border-bottom:0.25rem solid #55f;
     -webkit-animation:sweep 1s infinite linear;
     visibility:hidden;
 }

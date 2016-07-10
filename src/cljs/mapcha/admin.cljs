@@ -38,11 +38,10 @@
      [:tbody
       [:tr
        [:td [:label "Name"]]
-       [:td [:input {:type "text" :name "project-name"
-                     :size "21" :auto-complete "off"}]]]
+       [:td [:input {:type "text" :name "project-name" :auto-complete "off"}]]]
       [:tr
        [:td [:label "Description"]]
-       [:td [:textarea {:name "project-description" :rows "3" :cols "31"}]]]]]]
+       [:td [:textarea {:name "project-description"}]]]]]]
    [:fieldset#plot-info
     [:legend "Plot Info"]
     [:table
@@ -81,8 +80,7 @@
        [:th.empty ""]
        [:th "Name"]
        [:th "Color"]
-       [:th "Reference Image"]
-       [:th.empty ""]]]
+       [:th "Reference Image"]]]
      [:tbody
       (map-indexed
        (fn [idx [name color image]]
@@ -91,18 +89,18 @@
                                :on-click #(remove-sample-value-row! idx)}]]
           [:td name]
           [:td [:div.circle {:style {:background-color color}}]]
-          [:td image]
-          [:td ""]])
+          [:td image]])
        @sample-values)
       [:tr
        [:td ""]
        [:td [:input#value-name {:type "text" :name "value-name"
-                                :size "12" :auto-complete "off"}]]
+                                :auto-complete "off"}]]
        [:td [:input#value-color {:type "color" :name "value-color"}]]
        [:td [:input#value-image {:type "file" :name "value-image"
-                                 :accept "image/*"}]]
-       [:td [:input.button {:type "button" :value "Add sample value"
-                            :on-click add-sample-value-row!}]]]]]
+                                 :accept "image/*"}]]]]]
+    [:input.button {:type "button" :name "add-sample-value"
+                    :value "Add sample value"
+                    :on-click add-sample-value-row!}]
     [:input {:type "hidden" :name "sample-values" :value (pr-str @sample-values)}]]
    [:input.button {:type "submit" :name "create-project"
                    :value "Create and launch this project"
