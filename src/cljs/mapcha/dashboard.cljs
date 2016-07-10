@@ -3,14 +3,13 @@
             [goog.style :as style]
             [reagent.core :as r]
             [mapcha.map-utils :as map]
+            [mapcha.utils :as u]
             [shoreleave.remotes.http-rpc :refer [remote-callback]])
   (:require-macros [shoreleave.remotes.macros :as macros]))
 
 (defonce project-list (r/atom ()))
 
 (defonce sample-values-list (r/atom ()))
-
-(defonce analyze-plot? (r/atom true))
 
 (defonce current-project (atom {}))
 
@@ -38,8 +37,7 @@
                       (reset! current-plot new-plot)
                       (map/draw-buffer (:center new-plot)
                                        (:radius new-plot))
-                      (load-sample-points! (:id new-plot))))
-  (reset! analyze-plot? false))
+                      (load-sample-points! (:id new-plot)))))
 
 (defn load-sample-values! [project-id]
   (remote-callback :get-sample-values
@@ -63,11 +61,13 @@
                                 (first))]
       (reset! current-project new-project)
       (load-sample-values! new-project-id)
+      (u/enable-element! (dom/getElement "new-plot-button"))
+      (u/disable-element! (dom/getElement "save-values-button"))
       (map/draw-polygon (:boundary new-project)))))
 
 ;; FIXME: Stub
 (defn save-values! []
-  (reset! analyze-plot? true))
+  true)
 
 (defn convert-base [x from-base to-base]
   (-> x
@@ -117,36 +117,50 @@
     (js/alert "No sample point selected. Please click one first.")))
 
 (defn sidebar-contents []
-  (let [projects      @project-list
-        project1      (first projects)
-        sample-values @sample-values-list]
-    [:div#sidebar-contents
-     [:fieldset
-      [:legend "Select Project"]
-      [:select {:name "project-id" :size "1" :default-value (:id project1)
-                :on-change switch-project!}
-       (for [{:keys [id name]} projects]
-         [:option {:key id :value id} name])]
-      (if @analyze-plot?
+  [:div#sidebar-contents
+   [:fieldset
+    [:legend "Select Project"]
+    [:select {:name "project-id" :size "1"
+              :default-value (:id (first @project-list))
+              :on-change switch-project!}
+     (for [{:keys [id name]} @project-list]
+       [:option {:key id :value id} name])]
+    [:table
+     [:tbody
+      [:tr
+       [:td
         [:input#new-plot-button.button {:type "button" :name "new-plot"
                                         :value "Analyze New Plot"
-                                        :on-click load-random-plot!}]
-        [:input#save-values-button.button {:type "button" :name "save-values"
-                                           :value "Save Assignments"
-                                           :on-click save-values!}])]
-     [:fieldset
-      [:legend "Sample Values"]
-      [:ul
-       (for [{:keys [id value color] :as sample-value} sample-values]
-         [:li {:key id}
-          [:input {:type "button" :name (str value "_" id) :value value
-                   :style (if color
-                            {:background-color color
-                             :color (complementary-color color)}
-                            {})
-                   :on-click #(set-current-value! % sample-value)}]])]]
-     [:input.button {:type "button" :name "dashboard-quit" :value "Quit"
-                     :on-click #(set! (.-location js/window) "/")}]]))
+                                        :on-click (fn [evt]
+                                                    (load-random-plot!)
+                                                    (u/disable-element!
+                                                     (.-currentTarget evt)))}]]
+       [:td "or"]
+       [:td
+        [:input#quit-button.button {:type "button" :name "dashboard-quit"
+                                    :value "Quit"
+                                    :on-click #(set! (.-location js/window)
+                                                     "/")}]]]]]]
+   [:fieldset
+    [:legend "Sample Values"]
+    [:ul
+     (for [{:keys [id value color] :as sample-value} @sample-values-list]
+       [:li {:key id}
+        [:input {:type "button" :name (str value "_" id) :value value
+                 :style (if color
+                          {:background-color color
+                           :color "white"
+                           :font-weight "bold"
+                           :text-shadow (str "1px 1px 2px black,"
+                                             "0px 0px 25px blue,"
+                                             "0px 0px 5px darkblue")}
+                          {})
+                 :on-click #(set-current-value! % sample-value)}]])]
+    [:input#save-values-button.button {:type "button" :name "save-values"
+                                       :value "Save Assignments"
+                                       :on-click save-values!
+                                       :disabled true
+                                       :style {:opacity "0.5"}}]]])
 
 (defn ^:export main []
   (load-projects-and-sample-values!)

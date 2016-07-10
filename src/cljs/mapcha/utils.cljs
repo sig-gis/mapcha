@@ -1,5 +1,6 @@
 (ns mapcha.utils
   (:require [goog.Uri.QueryData :as gqd]
+            [goog.style         :as style]
             [clojure.string     :as s]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -19,3 +20,11 @@
 
 (defn ajax-format [obj]
   (.toString (gqd/createFromMap obj)))
+
+(defn disable-element! [elem]
+  (set! (.-disabled elem) true)
+  (style/setStyle elem "opacity" "0.5"))
+
+(defn enable-element! [elem]
+  (set! (.-disabled elem) false)
+  (style/setStyle elem "opacity" "1.0"))

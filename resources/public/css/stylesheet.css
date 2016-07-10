@@ -678,7 +678,6 @@ p.error-message {
     display:block;
     font-size:1em;
     padding:5px;
-    margin:10px auto;
     color:white;
     background-color:#55f;
     border-radius:8px;
@@ -687,6 +686,18 @@ p.error-message {
     box-shadow:3px 3px 6px rgba(21,21,153,0.6);
     -moz-box-shadow:3px 3px 6px rgba(21,21,153,0.6);
     -webkit-box-shadow:3px 3px 6px rgba(21,21,153,0.6);
+}
+
+#dashboard table {
+    margin:10px auto;
+}
+
+#dashboard td {
+    padding:0px 3px;
+}
+
+#dashboard #save-values-button {
+    margin:10px auto;
 }
 
 #dashboard ul {
