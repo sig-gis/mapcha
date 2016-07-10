@@ -155,11 +155,7 @@ UPDATE mapcha.users
               Incorporate Cesium through ol3-cesium module.
 
 * TODOs
-** Cross-browser compatibility
-   - [X] Install chromium and test the site (why isn't the create project button working?)
-
 ** Admin page
-   - [X] Add the spinner.gif after the "Create and launch this project" button on the Admin page, and change the text to "Processing...please wait..."
    - [X] Show bounding box on map as lat/lon coords are input
    - [X] Create a panel for reviewing, editing (add new user-specified plots w/ unique user_entered field), and deleting existing projects
    - [X] Allow drawing a bounding box on the map or uploading a shapefile
@@ -181,18 +177,13 @@ UPDATE mapcha.users
    - [ ] Create a panel for reviewing, editing (change role to user or admin), and deleting users
 
 ** Dashboard page
-   - [X] Assign colors to points
-   - [X] Highlight points that are clicked a second time
-   - [X] Allow for multiple points to be selected and assigned the same value
-   - [ ] Make the size of sample circles vary with the zoom level
-   - [X] Increase the sensitivity of the point selection tool
    - [X] Implement "Save Assignments" to record [user_id, sample_id, value_id, imagery_id, date] in mapcha.user_samples for each point (use DigitalGlobe imagery vintage)
-   - [ ] Add meters to Sidebar for:
+   - [X] Add meters to Sidebar for:
      - "Samples completed" :: # of samples completed in current plot
      - "Plots completed" :: # of plots completed in current project
      - "Agreement with other users on this plot" :: % of samples matching other users' samples in this plot
      - "Agreement with other users" :: % of samples matching other users' samples in current project
-   - [ ] Move Save Assignments button below Sample Values and disable it until all samples are assigned values
+   - [ ] Make the size of sample circles vary with the zoom level
    - [ ] Show text descriptions and example images when hovering over sample values in the radio list
    - [ ] Adjust the SQL query for get-random-plot-sql to try and pick less sampled plots
      - Assign plots in order by plot_id to users and track last plot_id analyzed by each user
