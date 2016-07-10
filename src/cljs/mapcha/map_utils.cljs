@@ -139,7 +139,22 @@
       (.addLayer buffer)
       (zoom-map-to-layer buffer))))
 
+(defonce feature-styles (atom {}))
+
 (defonce select-interaction (atom nil))
+
+(defn make-click-select [layer]
+  (doto (js/ol.interaction.Select. #js {:layers #js [layer]})
+    (.on "select"
+         (fn [evt]
+           (.forEach (.-selected evt)
+                     (fn [feature]
+                       (swap! feature-styles assoc feature (.getStyle feature))
+                       (.setStyle feature nil)))
+           (.forEach (.-deselected evt)
+                     (fn [feature]
+                       (when-let [saved-style (@feature-styles feature)]
+                         (.setStyle feature saved-style))))))))
 
 (defonce dragbox-interaction (atom nil))
 
@@ -150,16 +165,19 @@
     (doto dragbox
       (.on "boxend"
            #(let [extent (.. dragbox getGeometry getExtent)]
-              (.forEachFeatureIntersectingExtent source extent
-                                                 (fn [feature]
-                                                   (.push selected-features
-                                                          feature)
-                                                   false))))
+              (.forEachFeatureIntersectingExtent
+               source
+               extent
+               (fn [feature]
+                 (.push selected-features feature)
+                 (swap! feature-styles assoc feature (.getStyle feature))
+                 (.setStyle feature nil)
+                 false))))
       (.on "boxstart"
            #(.clear selected-features)))))
 
 (defn enable-selection [map layer]
-  (let [click-select      (js/ol.interaction.Select. #js {:layers #js [layer]})
+  (let [click-select      (make-click-select layer)
         selected-features (.getFeatures click-select)
         dragbox-select    (make-dragbox-select layer selected-features)]
     (.addInteraction map click-select)
@@ -207,7 +225,7 @@
                      #js {:image (js/ol.style.Circle.
                                   #js {:radius 5,
                                        :fill   (js/ol.style.Fill.
-                                                #js {:color color})
+                                                #js {:color (or color "#999999")})
                                        :stroke (js/ol.style.Stroke.
                                                 #js {:color "#000000"
                                                      :width 2})})})))
