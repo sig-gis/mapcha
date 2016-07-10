@@ -43,15 +43,6 @@
      (js/ol.Map.
       #js {:target div-name
            :layers #js [(js/ol.layer.Tile.
-                         #js {:title "DigitalGlobe Maps API: Recent Imagery"
-                              :source (js/ol.source.XYZ.
-                                       #js {:url (str
-                                                  "http://api.tiles.mapbox.com/v4/"
-                                                  recent-imagery-url
-                                                  "/{z}/{x}/{y}.png?access_token="
-                                                  digital-globe-access-token)
-                                            :attribution "© DigitalGlobe, Inc"})})
-                        (js/ol.layer.Tile.
                          #js {:title "DigitalGlobe Maps API: Recent Imagery+Streets"
                               :source (js/ol.source.XYZ.
                                        #js {:url (str
