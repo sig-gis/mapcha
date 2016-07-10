@@ -202,8 +202,15 @@
           (.getFeatures)
           (.getArray)))
 
-(defn highlight-sample [sample]
-  (.setStyle sample (styles :blue-point)))
+(defn highlight-sample [sample color]
+  (.setStyle sample (js/ol.style.Style.
+                     #js {:image (js/ol.style.Circle.
+                                  #js {:radius 5,
+                                       :fill   (js/ol.style.Fill.
+                                                #js {:color color})
+                                       :stroke (js/ol.style.Stroke.
+                                                #js {:color "#000000"
+                                                     :width 2})})})))
 
 ;;;;;;;;;;;;;;;;;;;;;;; IWAP CODE BELOW HERE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

@@ -34,8 +34,7 @@
       (doseq [sample samples]
         (let [sample-id (.get sample "sample_id")]
           (swap! user-samples assoc sample-id id)
-          ;;(map/highlight-sample sample) ;; FIXME: add color
-          ))
+          (map/highlight-sample sample color)))
       (when (= (set (keys @user-samples))
                (into #{} (map :id) @current-samples))
         (u/enable-element! (dom/getElement "save-values-button"))))
