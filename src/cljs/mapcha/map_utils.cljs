@@ -220,6 +220,56 @@
                                                 #js {:color "#000000"
                                                      :width 2})})})))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Create the OpenLayers Map Object for the Home Page
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defonce overview-map-ref (atom nil))
+
+(defn create-overview-layer [location-records]
+  (let [points (for [[location longitude latitude] location-records]
+                 (js/ol.Feature.
+                  #js {:geometry (js/ol.geom.Point.
+                                  (reproject-to-map longitude latitude))
+                       :location  location}))]
+    (js/ol.layer.Vector.
+     #js {:source (js/ol.source.Vector.
+                   #js {:features (clj->js points)})
+          :style  (styles :icon)})))
+
+(defn show-popup [overlay feature evt]
+  (set! (.-innerHTML (dom/getElement "popup-content"))
+        (str "<ul><li><span class=\"popup-label\">Location: </span>"
+             (.get feature "location")
+             "</li></ul>"))
+  (.setPosition overlay (.-coordinate evt)))
+
+(defn hide-popup [overlay]
+  (.setPosition overlay js/undefined))
+
+(defn init-overview-map [div-name location-records]
+  (let [overview-map     (digitalglobe-base-map
+                          {:div-name      div-name
+                           :center-coords [-97.3426776 37.6906938]
+                           :zoom-level    4})
+        overview-layer   (create-overview-layer location-records)
+        overview-overlay (js/ol.Overlay. #js {:element (dom/getElement "popup")})]
+    (reset! overview-map-ref
+            (doto overview-map
+              (.addLayer overview-layer)
+              (.addOverlay overview-overlay)
+              (zoom-map-to-layer overview-layer)
+              (.on "click"
+                   (fn [evt]
+                     (if-let [feature (.forEachFeatureAtPixel
+                                       overview-map
+                                       (.-pixel evt)
+                                       (fn [feature] feature))]
+                       (show-popup overview-overlay feature evt)
+                       (hide-popup overview-overlay))))))))
+
 ;;;;;;;;;;;;;;;;;;;;;;; IWAP CODE BELOW HERE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -274,61 +324,6 @@
   (reset! map-ref (mapquest-base-map {:div-name      div-name
                                       :center-coords [-97.3426776 37.6906938]
                                       :zoom-level    4})))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Create the OpenLayers Map Object for the Overview Map
-;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defonce overview-map-ref (atom nil))
-
-(defn create-address-overview-layer [report-addresses]
-  (let [address-points (for [[address longitude latitude combined-score]
-                             report-addresses]
-                         (js/ol.Feature.
-                          #js {:geometry (js/ol.geom.Point.
-                                          (reproject-to-map longitude latitude))
-                               :address  address
-                               :score    combined-score}))]
-    (js/ol.layer.Vector.
-     #js {:source (js/ol.source.Vector.
-                   #js {:features (clj->js address-points)})
-          :style  (js/ol.style.Style.
-                   #js {:image (js/ol.style.Icon. #js {:src "/favicon.ico"})})})))
-
-(defn show-address-popup [overlay feature evt]
-  (set! (.-innerHTML (dom/getElement "popup-content"))
-        (str "<ul><li><span class=\"popup-label\">Address: </span>"
-             (.get feature "address")
-             "</li><li><span class=\"popup-label\">Score: </span>"
-             (.get feature "score")
-             "</li></ul>"))
-  (.setPosition overlay (.-coordinate evt)))
-
-(defn hide-address-popup [overlay]
-  (.setPosition overlay js/undefined))
-
-(defn init-overview-map [div-name report-addresses]
-  (let [overview-map    (digitalglobe-base-map
-                         {:div-name      div-name
-                          :center-coords [-97.3426776 37.6906938]
-                          :zoom-level    4})
-        address-layer   (create-address-overview-layer report-addresses)
-        address-overlay (js/ol.Overlay. #js {:element (dom/getElement "popup")})]
-    (reset! overview-map-ref
-            (doto overview-map
-              (.addLayer address-layer)
-              (.addOverlay address-overlay)
-              (zoom-map-to-layer address-layer)
-              (.on "click"
-                   (fn [evt]
-                     (if-let [feature (.forEachFeatureAtPixel
-                                       overview-map
-                                       (.-pixel evt)
-                                       (fn [feature] feature))]
-                       (show-address-popup address-overlay feature evt)
-                       (hide-address-popup address-overlay))))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
