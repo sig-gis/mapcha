@@ -7,15 +7,15 @@ body {
     font-size:16px;
 }
 
+header, nav, section, footer {
+    display:block;
+}
+
 header {
     position:relative;
     height:37px;
-    display:block;
     color:#eee;
     background-color:#1a1a1a;
-    margin-bottom:10px;
-    font-size:0.8em;
-    /* border:1px solid #009; */
 }
 
 header a:link,
@@ -42,7 +42,7 @@ header h1 {
     top:0px;
     left:30px;
     padding:5px;
-    font-size:1.75em;
+    font-size:1.4rem;
     font-weight:bold;
 }
 
@@ -51,12 +51,11 @@ nav {
     top:0px;
     left:200px;
     height:37px;
-    display:block;
 }
 
 nav ul {
     padding:10px;
-    font-size:1.1em;
+    font-size:0.9rem;
 }
 
 nav ul li {
@@ -70,6 +69,7 @@ nav ul li {
     top:0px;
     right:27px;
     padding:10px 8px;
+    font-size:0.8rem;
 }
 
 #login-info a {
@@ -80,21 +80,14 @@ nav ul li {
 }
 
 #content {
-    padding:0 3em;
+    padding:10px 40px;
 }
 
 footer {
-    display:block;
-    margin-top:10px;
-    padding:0.8em 3em;
+    padding:10px 30px;
     color:#eee;
     background-color:#1a1a1a;
-    /* border:1px solid #009; */
-    font-size:0.8em;
-}
-
-section {
-    display:block;
+    font-size:0.9rem;
 }
 
 h1,h2,h3,h4,h5,h6 {
