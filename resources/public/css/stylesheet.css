@@ -2,13 +2,9 @@
 /* Universal Styles */
 /********************/
 
-* {
-    margin:0px;
-    padding:0px;
-}
-
 body {
-    font-family:Helvetica, Arial, sans-serif;
+    font-family:Arial;
+    font-size:16px;
 }
 
 header {
@@ -43,43 +39,37 @@ header a.active-link {
 
 header h1 {
     position:absolute;
-    left:30px;
     top:0px;
+    left:30px;
     padding:5px;
-    font-family:sans-serif;
     font-size:1.75em;
     font-weight:bold;
-    /* border:1px solid #009; */
 }
 
 nav {
     position:absolute;
-    left:200px;
     top:0px;
+    left:200px;
+    height:37px;
     display:block;
 }
 
 nav ul {
-    padding:10px 20px;
-    font-family:sans-serif;
+    padding:10px;
     font-size:1.1em;
-    /* border:1px solid green; */
 }
 
 nav ul li {
     display:inline;
     list-style-type:none;
     padding:5px;
-    /* border:1px solid orange; */
 }
-
 
 #login-info {
     position:absolute;
-    right:27px;
     top:0px;
+    right:27px;
     padding:10px 8px;
-    /* border:1px solid purple; */
 }
 
 #login-info a {
