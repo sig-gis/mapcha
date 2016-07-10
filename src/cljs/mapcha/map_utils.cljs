@@ -93,8 +93,7 @@
                                             #js {:color "#23238b"
                                                  :width 2})})})
    :polygon    (js/ol.style.Style.
-                #js {:fill   (js/ol.style.Fill.
-                              #js {:color "rgba(200,200,200,0.2)"})
+                #js {:fill   nil
                      :stroke (js/ol.style.Stroke.
                               #js {:color "#8b2323"
                                    :width 3})})})
