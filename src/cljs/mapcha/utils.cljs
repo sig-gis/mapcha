@@ -36,3 +36,16 @@
 
 (defn lowlight-border [elem]
   (style/setStyle elem "box-shadow" "initial"))
+
+(defn convert-base [x from-base to-base]
+  (-> x
+      (js/parseInt from-base)
+      (.toString to-base)))
+
+(defn complementary-color [color]
+  (let [max-color  (convert-base "FFFFFF" 16 10)
+        this-color (convert-base (subs color 1) 16 10)
+        new-color  (convert-base (- max-color this-color) 10 16)]
+    (if (< (count new-color) 6)
+      (apply str (concat "#" (repeat (- 6 (count new-color)) "0") new-color))
+      (str "#" new-color))))

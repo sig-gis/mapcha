@@ -1,6 +1,6 @@
 (ns mapcha.dashboard
   (:require [goog.dom :as dom]
-            [goog.style :as style]
+            [goog.Timer :as timer]
             [reagent.core :as r]
             [mapcha.map-utils :as map]
             [mapcha.utils :as u]
@@ -11,69 +11,42 @@
 
 (defonce sample-values-list (r/atom ()))
 
-(defonce current-project (atom {}))
+(defonce current-project (atom nil))
 
-(defonce current-plot (atom {}))
+(defonce current-plot (atom nil))
 
 (defonce current-samples (atom ()))
 
-(defonce current-value-button (atom nil))
-
-(defonce current-value (atom {}))
-
-(defn set-current-value! [evt new-value]
-  (let [button (.-currentTarget evt)]
-    (when @current-value-button
-      (u/lowlight-border @current-value-button))
-    (u/highlight-border button)
-    (reset! current-value-button button)
-    (reset! current-value new-value)))
-
-;;=================== IN PROGRESS ================================
-
 (defonce user-samples (atom {}))
 
-(defn save-values! []
-  true)
+;; FIXME: stub
+(defn save-values! [evt]
+  (js/alert "Saving your values to the database...")
+  (u/disable-element! (.-currentTarget evt))
+  (u/enable-element! (dom/getElement "new-plot-button"))
+  (map/disable-selection @map/map-ref))
 
-(defn convert-base [x from-base to-base]
-  (-> x
-      (js/parseInt from-base)
-      (.toString to-base)))
-
-(defn complementary-color [color]
-  (let [max-color  (convert-base "FFFFFF" 16 10)
-        this-color (convert-base (subs color 1) 16 10)
-        new-color  (convert-base (- max-color this-color) 10 16)]
-    (if (< (count new-color) 6)
-      (apply str (concat "#" (repeat (- 6 (count new-color)) "0") new-color))
-      (str "#" new-color))))
-
-;; FIXME: Deprecated. Fold this logic into set-current-value! above.
-(defn select-value []
-  (if-let [sample (first (map/get-selected-samples))]
-    (let [sample-id (.get sample "sample_id")]
-      (if-let [sample-value-id (some->> "input[name=\"sample-values\"]:checked"
-                                        (.querySelector js/document)
-                                        (.-value)
-                                        (js/parseInt))]
-        (let [sample-value (->> @sample-values-list
-                                (filter #(= sample-value-id (:id %)))
-                                (first)
-                                (:value))]
-          (swap! user-samples assoc sample-id sample-value-id)
-          (map/highlight-sample sample)
-          (js/alert (str "Selected " sample-value " for sample #" sample-id ".")))
-        (js/alert "No sample value selected. Please choose one from the list.")))
-    (js/alert "No sample point selected. Please click one first.")))
-
-;;=================== IN PROGRESS ================================
+(defn set-current-value! [evt {:keys [id value color]}]
+  (if-let [samples (seq (map/get-selected-samples))]
+    (let [button (.-currentTarget evt)]
+      (u/highlight-border button)
+      (timer/callOnce #(u/lowlight-border button) 500)
+      (doseq [sample samples]
+        (let [sample-id (.get sample "sample_id")]
+          (swap! user-samples assoc sample-id id)
+          ;;(map/highlight-sample sample) ;; FIXME: add color
+          ))
+      (when (= (set (keys @user-samples))
+               (into #{} (map :id) @current-samples))
+        (u/enable-element! (dom/getElement "save-values-button"))))
+    (js/alert "No sample points selected. Please click some first.")))
 
 (defn load-sample-points! [plot-id]
   (remote-callback :get-sample-points
                    [plot-id]
                    #(let [new-samples %]
                       (reset! current-samples new-samples)
+                      (reset! user-samples {})
                       (map/draw-points new-samples))))
 
 (defn load-random-plot! []
@@ -106,6 +79,10 @@
                                 (filter #(= new-project-id (:id %)))
                                 (first))]
       (reset! current-project new-project)
+      (reset! current-plot nil)
+      (reset! current-samples ())
+      (reset! user-samples {})
+      (map/disable-selection @map/map-ref)
       (load-sample-values! new-project-id)
       (u/enable-element! (dom/getElement "new-plot-button"))
       (u/disable-element! (dom/getElement "save-values-button"))
