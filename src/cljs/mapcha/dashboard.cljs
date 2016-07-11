@@ -81,7 +81,10 @@
       (reset! current-plot nil)
       (reset! current-samples ())
       (reset! user-samples {})
-      (map/disable-selection @map/map-ref)
+      (doto @map/map-ref
+        (map/remove-plot-layer)
+        (map/remove-sample-layer)
+        (map/disable-selection))
       (load-sample-values! new-project-id)
       (u/enable-element! (dom/getElement "new-plot-button"))
       (u/disable-element! (dom/getElement "save-values-button"))

@@ -129,6 +129,11 @@
 
 (defonce current-buffer (atom nil))
 
+(defn remove-plot-layer [map]
+  (when-let [layer @current-buffer]
+    (.removeLayer map layer)
+    (reset! current-buffer nil)))
+
 (defn draw-buffer [center radius]
   (let [coordinates (-> (js/ol.format.GeoJSON.)
                         (.readGeometry center)
@@ -142,8 +147,7 @@
                                                               coordinates
                                                               radius)})]})
                           :style  (styles :polygon)})]
-    (when @current-buffer
-      (.removeLayer @map-ref @current-buffer))
+    (remove-plot-layer @map-ref)
     (reset! current-buffer buffer)
     (doto @map-ref
       (.addLayer buffer)
@@ -205,6 +209,11 @@
 
 (defonce current-samples (atom nil))
 
+(defn remove-sample-layer [map]
+  (when-let [layer @current-samples]
+    (.removeLayer map layer)
+    (reset! current-samples nil)))
+
 (defn draw-points [samples]
   (let [points  (for [{:keys [id point]} samples]
                   (let [geom (-> (js/ol.format.GeoJSON.)
@@ -217,8 +226,7 @@
                  #js {:source (js/ol.source.Vector.
                                #js {:features (clj->js points)})
                       :style  (styles :red-point)})]
-    (when @current-samples
-      (.removeLayer @map-ref @current-samples))
+    (remove-sample-layer @map-ref)
     (reset! current-samples samples)
     (disable-selection @map-ref)
     (doto @map-ref
