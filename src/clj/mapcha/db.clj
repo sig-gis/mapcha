@@ -181,8 +181,10 @@
   [plot-id]
   (get-sample-points-sql {:plot_id plot-id}))
 
-(defn add-user-sample
-  [user-id sample-id value-id]
-  (first (add-user-sample-sql {:user_id   user-id
-                               :sample_id sample-id
-                               :value_id  value-id})))
+(defremote add-user-samples
+  [user-id imagery-id sample-value-map]
+  (doseq [[sample-id value-id] sample-value-map]
+    (add-user-sample-sql {:user_id   user-id
+                          :sample_id sample-id
+                          :value_id  value-id
+                          :imagery_id imagery-id})))

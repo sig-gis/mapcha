@@ -25,6 +25,11 @@
   [request]
   (boolean (friend/identity request)))
 
+(defn current-user-id
+  [request]
+  (when-let [{:keys [current authentications]} (friend/identity request)]
+    (:id (authentications current))))
+
 (defn current-email
   [request]
   (:current (friend/identity request)))
@@ -385,7 +390,9 @@
     [:input#quit-button.button {:type "button" :name "dashboard-quit" :value "Quit"
                                 :onclick "window.location='/'"}]
     [:div#image-analysis-pane]
-    [:div#sidebar]]
+    [:div#sidebar]
+    [:input#user-id {:type "hidden" :name "user-id"
+                     :value (str (current-user-id request))}]]
    (include-js "/mapcha.js")
    (javascript-tag "mapcha.dashboard.main()")))
 

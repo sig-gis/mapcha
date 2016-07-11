@@ -19,12 +19,16 @@
 
 (defonce user-samples (atom {}))
 
-;; FIXME: stub
 (defn save-values! [evt]
-  (js/alert "Saving your values to the database...")
-  (u/disable-element! (.-currentTarget evt))
-  (u/enable-element! (dom/getElement "new-plot-button"))
-  (map/disable-selection @map/map-ref))
+  (let [user-id    (js/parseInt (.-value (dom/getElement "user-id")))
+        imagery-id 2] ;; DigitalGlobe Maps API: Recent Imagery+Streets
+    (remote-callback :add-user-samples
+                     [user-id imagery-id @user-samples]
+                     #(js/alert
+                       "Your assignments have been saved to the database."))
+    (u/disable-element! (.-currentTarget evt))
+    (u/enable-element! (dom/getElement "new-plot-button"))
+    (map/disable-selection @map/map-ref)))
 
 (defn set-current-value! [evt {:keys [id value color]}]
   (if-let [samples (seq (map/get-selected-samples))]

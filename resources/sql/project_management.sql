@@ -26,12 +26,6 @@ INSERT INTO mapcha.sample_values (project_id, value, color, image)
   VALUES (:project_id, :value, :color, :image)
   RETURNING id, project_id, value, color, image;
 
--- name: add-user-sample-sql
--- Adds a new sample record for the given user_id.
-INSERT INTO mapcha.user_samples (user_id, sample_id, value_id)
-  VALUES (:user_id, :sample_id, :value_id)
-  RETURNING *;
-
 -- name: get-all-projects-sql
 -- Returns all rows in mapcha.projects.
 SELECT id, name, description, ST_AsGeoJSON(boundary) AS boundary
@@ -56,3 +50,9 @@ SELECT id, ST_AsGeoJSON(center) AS center, radius
 SELECT id, ST_AsGeoJSON(point) AS point
   FROM mapcha.samples
   WHERE plot_id = :plot_id;
+
+-- name: add-user-sample-sql
+-- Adds a new sample record for the given user_id.
+INSERT INTO mapcha.user_samples (user_id, sample_id, value_id, imagery_id, date)
+  VALUES (:user_id, :sample_id, :value_id, :imagery_id, CURRENT_DATE)
+  RETURNING *;
