@@ -27,6 +27,26 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
+;;; Lon/Lat Reprojection
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Default map projection for OpenLayers is "Web Mercator"
+;; (EPSG:3857), which is also the default for OpenStreetMap, Google
+;; Maps, MapQuest, and Bing Maps.
+
+(defn reproject-to-map [longitude latitude]
+  (js/ol.proj.transform #js [(js/Number longitude) (js/Number latitude)]
+                        "EPSG:4326"
+                        "EPSG:3857"))
+
+(defn reproject-from-map [x y]
+  (js/ol.proj.transform #js [(js/Number x) (js/Number y)]
+                        "EPSG:3857"
+                        "EPSG:4326"))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; Create the default OpenLayers Map Object used on all pages
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -271,26 +291,6 @@
                        (hide-popup overview-overlay))))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;; IWAP CODE BELOW HERE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Lon/Lat Reprojection
-;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Default map projection for OpenLayers is "Web Mercator"
-;; (EPSG:3857), which is also the default for OpenStreetMap, Google
-;; Maps, MapQuest, and Bing Maps.
-
-(defn reproject-to-map [longitude latitude]
-  (js/ol.proj.transform #js [(js/Number longitude) (js/Number latitude)]
-                        "EPSG:4326"
-                        "EPSG:3857"))
-
-(defn reproject-from-map [x y]
-  (js/ol.proj.transform #js [(js/Number x) (js/Number y)]
-                        "EPSG:3857"
-                        "EPSG:4326"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
