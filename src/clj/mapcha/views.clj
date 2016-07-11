@@ -382,6 +382,8 @@
    request
    [:div#dashboard
     [:h1 "Dashboard"]
+    [:input#quit-button.button {:type "button" :name "dashboard-quit" :value "Quit"
+                                :onclick "window.location='/'"}]
     [:div#image-analysis-pane]
     [:div#sidebar]]
    (include-js "/mapcha.js")

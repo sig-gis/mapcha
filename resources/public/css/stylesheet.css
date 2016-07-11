@@ -478,99 +478,94 @@ p.error-message {
 
 #dashboard {
     position:relative;
-    height:575px;
-    padding:10px;
+    height:37rem;
+    padding:1rem;
     background-color:#e0e0e0;
-    border-radius:10px;
+    border-radius:1rem;
 }
 
 #dashboard h1 {
-    font-size:1.5em;
-    font-style:normal;
+    font-size:1.5rem;
     font-weight:bold;
-    padding:5px;
+}
+
+#dashboard input#quit-button {
+    position:absolute;
+    top:0rem;
+    right:2rem;
+}
+
+#dashboard #image-analysis-pane {
+    position:absolute;
+    top:3.5rem;
+    width:59.5rem;
+    height:34rem;
+    border:2px solid #55f;
+}
+
+#dashboard .ol-dragbox {
+    background-color:rgba(255,255,255,0.4);
+    border-color:rgba(100,150,0,1);
 }
 
 #dashboard #sidebar {
     position:absolute;
-    left:77%;
-    width:20%;
-    height:500px;
-    padding:5px 10px;
+    top:3.5rem;
+    right:1rem;
+    width:15rem;
+    padding:0.5rem 0.75rem;
     background-color:#eee;
     border:2px solid #55f;
-    border-radius:10px;
+    border-radius:1rem;
 }
 
 #dashboard fieldset {
-    margin-top:10px;
+    padding:0.5rem;
+    margin-bottom:1rem;
+    border:1px solid #55f;
 }
 
 #dashboard legend {
-    font-size:1.2em;
-    font-style:normal;
+    font-size:1.2rem;
     font-weight:bold;
     color:#55f;
 }
 
 #dashboard select {
     display:block;
+    height:2.5rem;
     margin:auto;
+    padding:0.5rem;
     color:#55f;
+    border:1px solid #55f;
 }
 
 #dashboard option {
     color:#55f;
-    padding:5px;
 }
 
 #dashboard input.button {
     display:block;
-    font-size:1em;
-    padding:5px;
+    padding:0.5rem;
+    margin:0.5rem auto 0rem auto;
     color:white;
     background-color:#55f;
-    border-radius:8px;
-    box-shadow:3px 3px 6px rgba(21,21,153,0.6);
-}
-
-#dashboard table {
-    margin:10px auto;
-}
-
-#dashboard td {
-    padding:0px 3px;
-}
-
-#dashboard #save-values-button {
-    margin:10px auto;
+    border-radius:0.5rem;
+    box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6);
 }
 
 #dashboard ul {
-    width:90%;
-    margin:5px auto;
+    width:13rem;
+    margin:auto;
     list-style-type:none;
 }
 
 #dashboard ul li input {
-    height:30px;
-    width:100%;
+    height:2rem;
+    width:13rem;
     color:#55f;
     border:1px solid #999;
-    border-radius:4px;
-}
-
-#dashboard #image-analysis-pane {
-    position:absolute;
-    width:75%;
-    height:510px;
-    border:2px solid #55f;
-    border-radius:10px;
-}
-
-#dashboard .ol-dragbox {
-    background-color:rgba(255,255,255,0.4);
-    border-color:rgba(100,150,0,1);
+    border-radius:0.5rem;
 }
 
 /*********/

@@ -96,22 +96,12 @@
               :on-change switch-project!}
      (for [{:keys [id name]} @project-list]
        [:option {:key id :value id} name])]
-    [:table
-     [:tbody
-      [:tr
-       [:td
-        [:input#new-plot-button.button {:type "button" :name "new-plot"
-                                        :value "Analyze New Plot"
-                                        :on-click (fn [evt]
-                                                    (load-random-plot!)
-                                                    (u/disable-element!
-                                                     (.-currentTarget evt)))}]]
-       [:td "or"]
-       [:td
-        [:input#quit-button.button {:type "button" :name "dashboard-quit"
-                                    :value "Quit"
-                                    :on-click #(set! (.-location js/window)
-                                                     "/")}]]]]]]
+    [:input#new-plot-button.button {:type "button" :name "new-plot"
+                                    :value "Analyze New Plot"
+                                    :on-click (fn [evt]
+                                                (load-random-plot!)
+                                                (u/disable-element!
+                                                 (.-currentTarget evt)))}]]
    [:fieldset
     [:legend "Sample Values"]
     [:ul
