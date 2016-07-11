@@ -407,7 +407,7 @@
   (wrap-header-footer
    request
    [:div#admin
-    [:h1 "Create New Project"]
+    [:h1 "Project Management"]
     [:div#create-project-form]
     [:div#new-project-map]]
    (include-js "/mapcha.js")

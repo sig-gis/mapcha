@@ -585,6 +585,29 @@ p.error-message {
     font-weight:bold;
 }
 
+#admin #project-selection {
+    position:absolute;
+    top:0.75rem;
+    left:20rem;
+    width:35rem;
+}
+
+#admin #project-selection label {
+    font-size:1.2rem;
+    margin-right:0.5rem;
+}
+
+#admin #project-selection select {
+    height:2.5rem;
+    padding:0.5rem;
+    color:#55f;
+    border:1px solid #55f;
+}
+
+#admin #project-selection option {
+    color:#55f;
+}
+
 #admin legend {
     font-size:1.2rem;
     font-weight:bold;
