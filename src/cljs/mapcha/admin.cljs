@@ -124,7 +124,8 @@
          (fn [idx [name color image]]
            [:tr {:key idx}
             [:td [:input.button {:type "button" :value "-"
-                                 :on-click #(remove-sample-value-row! idx)}]]
+                                 :on-click #(remove-sample-value-row! idx)
+                                 :disabled (if num_plots true false)}]]
             [:td name]
             [:td [:div.circle {:style {:background-color color}}]]
             [:td image]])
@@ -132,17 +133,22 @@
         [:tr
          [:td ""]
          [:td [:input#value-name {:type "text" :name "value-name"
-                                  :auto-complete "off"}]]
-         [:td [:input#value-color {:type "color" :name "value-color"}]]
+                                  :auto-complete "off"
+                                  :disabled (if num_plots true false)}]]
+         [:td [:input#value-color {:type "color" :name "value-color"
+                                   :disabled (if num_plots true false)}]]
          [:td [:input#value-image {:type "file" :name "value-image"
-                                   :accept "image/*"}]]]]]
+                                   :accept "image/*"
+                                   :disabled (if num_plots true false)}]]]]]
       [:input.button {:type "button" :name "add-sample-value"
                       :value "Add sample value"
-                      :on-click add-sample-value-row!}]
+                      :on-click add-sample-value-row!
+                      :disabled (if num_plots true false)}]
       [:input {:type "hidden" :name "sample-values" :value (pr-str @sample-values)}]]
      [:input.button {:type "submit" :name "create-project"
                      :value "Create and launch this project"
-                     :on-click submit-form}]
+                     :on-click submit-form
+                     :disabled (if num_plots true false)}]
      [:div#spinner]
      [:img#compass-rose {:src "img/compass_rose.png"}]]))
 
