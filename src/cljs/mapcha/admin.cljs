@@ -20,7 +20,8 @@
 (defn load-project-info! [project-id]
   (remote-callback :get-project-info
                    [project-id]
-                   #(reset! current-project %)))
+                   #(do (set! (.-value (dom/getElement "description")) "")
+                        (reset! current-project %))))
 
 (defn load-sample-values! [project-id]
   (remote-callback :get-sample-values
@@ -79,7 +80,8 @@
                        :auto-complete "off" :value name}]]]
         [:tr
          [:td [:label "Description"]]
-         [:td [:textarea {:name "project-description" :value description}]]]]]]
+         [:td [:textarea#description
+               {:name "project-description" :value description}]]]]]]
      [:fieldset#plot-info
       [:legend "Plot Info"]
       [:table
