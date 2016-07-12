@@ -169,6 +169,10 @@
   []
   (get-all-projects-sql))
 
+(defremote get-project-info
+  [project-id]
+  (first (get-project-info-sql {:project_id project-id})))
+
 (defremote get-sample-values
   [project-id]
   (get-sample-values-sql {:project_id project-id}))

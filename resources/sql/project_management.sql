@@ -31,6 +31,29 @@ INSERT INTO mapcha.sample_values (project_id, value, color, image)
 SELECT id, name, description, ST_AsGeoJSON(boundary) AS boundary
   FROM mapcha.projects;
 
+-- name: get-project-info-sql
+-- Returns all of the properties of the project matching project_id.
+WITH plots      AS (SELECT count(id) AS num_plots
+                      FROM mapcha.plots
+                      WHERE project_id = :project_id),
+     first_plot AS (SELECT id AS plot_id, radius
+                      FROM mapcha.plots
+                      WHERE project_id = :project_id
+                      LIMIT 1),
+     samples    AS (SELECT count(id) AS num_samples
+                      FROM first_plot
+                      INNER JOIN mapcha.samples USING (plot_id))
+  SELECT name, description, num_plots, radius, num_samples,
+         ST_XMin(boundary) AS lon_min,
+         ST_XMax(boundary) AS lon_max,
+         ST_YMin(boundary) AS lat_min,
+         ST_YMax(boundary) AS lat_max
+    FROM mapcha.projects
+    CROSS JOIN plots
+    CROSS JOIN first_plot
+    CROSS JOIN samples
+    WHERE id = :project_id;
+
 -- name: get-sample-values-sql
 -- Returns all rows in mapcha.sample_values with the given project_id.
 SELECT id, value, color, image
