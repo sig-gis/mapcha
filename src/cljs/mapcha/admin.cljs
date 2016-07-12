@@ -49,9 +49,20 @@
   (when (> (count @sample-values) idx)
     (swap! sample-values delete-element idx)))
 
+(defn delete-current-project! []
+  (let [project-id (js/parseInt (.-value (dom/getElement "project-selector")))]
+    (js/alert (str "Whoops! This feature hasn't been implemented yet."
+                   " Looks like project " project-id
+                   " lives to fight another day..."))))
+
 (defn submit-form [evt]
-  (set! (.-value (.-currentTarget evt)) "Processing...please wait...")
-  (style/setStyle (dom/getElement "spinner") "visibility" "visible"))
+  (if @current-project
+    (when (js/confirm "Do you REALLY want to delete this project?!")
+      (delete-current-project!))
+    (do
+      (set! (.-value (.-currentTarget evt)) "Processing...please wait...")
+      (style/setStyle (dom/getElement "spinner") "visibility" "visible")
+      (.submit (dom/getElement "project-management-form")))))
 
 (defn set-current-project! [evt]
   (let [project-id (js/parseInt (.-value (.-currentTarget evt)))]
@@ -61,12 +72,12 @@
 (defn create-project-form-contents []
   (let [{:keys [name description num_plots radius num_samples
                 lon_min lon_max lat_min lat_max]} @current-project]
-    [:form {:method "post" :action "/admin"}
+    [:form#project-management-form {:method "post" :action "/admin"}
      [:div#project-selection
       [:label "Currently Viewing:"]
-      [:select {:name "project-selector" :size "1"
-                :default-value "0"
-                :on-change set-current-project!}
+      [:select#project-selector {:name "project-selector" :size "1"
+                                 :default-value "0"
+                                 :on-change set-current-project!}
        [:option {:key 0 :value 0} "New Project"]
        (for [{:keys [id name]} @project-list]
          [:option {:key id :value id} name])]]
@@ -147,10 +158,11 @@
                       :on-click add-sample-value-row!
                       :disabled (if num_plots true false)}]
       [:input {:type "hidden" :name "sample-values" :value (pr-str @sample-values)}]]
-     [:input.button {:type "submit" :name "create-project"
-                     :value "Create and launch this project"
-                     :on-click submit-form
-                     :disabled (if num_plots true false)}]
+     [:input.button {:type "button" :name "create-project"
+                     :value (if num_plots
+                              "Delete this project"
+                              "Create and launch this project")
+                     :on-click submit-form}]
      [:div#spinner]
      [:img#compass-rose {:src "img/compass_rose.png"}]]))
 
