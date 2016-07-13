@@ -71,7 +71,8 @@
 
 (defn create-project-form-contents []
   (let [{:keys [name description num_plots radius num_samples
-                lon_min lon_max lat_min lat_max]} @current-project]
+                lon_min lon_max lat_min lat_max]} @current-project
+        {:keys [minlon minlat maxlon maxlat]} @map/current-bbox]
     [:form#project-management-form {:method "post" :action "/admin"}
      [:div#project-selection
       [:label "Currently Viewing:"]
@@ -111,16 +112,20 @@
                        :auto-complete "off" :min "0" :step "1"}]]]]]]
      [:fieldset#bounding-box
       [:legend "Define Bounding Box"]
-      [:input#lat-max {:type "number" :name "boundary-lat-max" :value lat_max
+      [:input#lat-max {:type "number" :name "boundary-lat-max"
+                       :value (or lat_max maxlat)
                        :placeholder "Lat Max" :auto-complete "off"
                        :min "-90.0" :max "90.0" :step "any"}]
-      [:input#lon-min {:type "number" :name "boundary-lon-min" :value lon_min
+      [:input#lon-min {:type "number" :name "boundary-lon-min"
+                       :value (or lon_min minlon)
                        :placeholder "Lon Min" :auto-complete "off"
                        :min "-180.0" :max "180.0" :step "any"}]
-      [:input#lon-max {:type "number" :name "boundary-lon-max" :value lon_max
+      [:input#lon-max {:type "number" :name "boundary-lon-max"
+                       :value (or lon_max maxlon)
                        :placeholder "Lon Max" :auto-complete "off"
                        :min "-180.0" :max "180.0" :step "any"}]
-      [:input#lat-min {:type "number" :name "boundary-lat-min" :value lat_min
+      [:input#lat-min {:type "number" :name "boundary-lat-min"
+                       :value (or lat_min minlat)
                        :placeholder "Lat Min" :auto-complete "off"
                        :min "-90.0" :max "90.0" :step "any"}]]
      [:fieldset#sample-info
@@ -157,7 +162,8 @@
                       :value "Add sample value"
                       :on-click add-sample-value-row!
                       :disabled (if num_plots true false)}]
-      [:input {:type "hidden" :name "sample-values" :value (pr-str @sample-values)}]]
+      [:input {:type "hidden" :name "sample-values"
+               :value (pr-str @sample-values)}]]
      [:input.button {:type "button" :name "create-project"
                      :value (if num_plots
                               "Delete this project"
@@ -171,4 +177,5 @@
   (r/render [create-project-form-contents] (dom/getElement "create-project-form"))
   (map/digitalglobe-base-map {:div-name      "new-project-map"
                               :center-coords [102.0 17.0]
-                              :zoom-level    5}))
+                              :zoom-level    5})
+  (map/enable-dragbox-draw @map/map-ref))

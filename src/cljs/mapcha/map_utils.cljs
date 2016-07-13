@@ -1,5 +1,6 @@
 (ns mapcha.map-utils
   (:require [goog.dom :as dom]
+            [reagent.core :as r]
             [ol.proj]
             [ol.Map]
             [ol.layer.Tile]
@@ -247,6 +248,54 @@
                                        :stroke (js/ol.style.Stroke.
                                                 #js {:color "#000000"
                                                      :width 2})})})))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Bounding Box Selector for Admin Page
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defonce dragbox-draw-layer (atom nil))
+
+(defonce dragbox-draw-interaction (atom nil))
+
+(defonce current-bbox (r/atom nil))
+
+(defn enable-dragbox-draw [map]
+  (let [draw-layer (js/ol.layer.Vector.
+                    #js {:source (js/ol.source.Vector.
+                                  #js {:features #js []})
+                         :style  (styles :polygon)})
+        source (.getSource draw-layer)
+        dragbox (js/ol.interaction.DragBox.
+                 #js {:condition js/ol.events.condition.platformModifierKeyOnly})]
+    (doto dragbox
+      (.on "boxend"
+           #(let [geom    (.getGeometry dragbox)
+                  feature (js/ol.Feature. #js {:geometry geom})
+                  extent  (-> (.clone geom)
+                              (.transform "EPSG:3857" "EPSG:4326")
+                              (.getExtent))
+                  [minlon minlat maxlon maxlat] extent]
+              (.clear source)
+              (.addFeature source feature)
+              (reset! current-bbox {:minlon minlon
+                                    :minlat minlat
+                                    :maxlon maxlon
+                                    :maxlat maxlat}))))
+    (.addLayer map draw-layer)
+    (.addInteraction map dragbox)
+    (reset! dragbox-draw-layer draw-layer)
+    (reset! dragbox-draw-interaction dragbox)))
+
+(defn disable-dragbox-draw [map]
+  (when @dragbox-draw-layer
+    (.removeLayer map @dragbox-draw-layer)
+    (reset! dragbox-draw-layer nil))
+  (when @dragbox-draw-interaction
+    (.removeInteraction map @dragbox-draw-interaction)
+    (reset! dragbox-draw-interaction nil))
+  (reset! current-bbox nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
