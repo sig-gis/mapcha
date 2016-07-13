@@ -496,6 +496,7 @@ p.error-message {
 
 #dashboard #image-analysis-pane {
     float:left;
+    margin-top:1rem;
     width:59.5rem;
     height:34rem;
     border:2px solid #55f;
@@ -508,6 +509,7 @@ p.error-message {
 
 #dashboard #sidebar {
     float:right;
+    margin-top:1rem;
     width:15rem;
     padding:0.5rem 0.75rem;
     background-color:#eee;
@@ -530,7 +532,7 @@ p.error-message {
 #dashboard select {
     display:block;
     height:2.5rem;
-    margin:auto;
+    width:100%;
     padding:0.5rem;
     color:#55f;
     border:1px solid #55f;
