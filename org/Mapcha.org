@@ -56,10 +56,11 @@ CREATE INDEX mapcha_sample_values_project_id ON mapcha.sample_values (project_id
 #+name: create-mapcha-imagery-table
 #+begin_src sql :engine postgresql :cmdline mapcha :results silent :exports code
 CREATE TABLE mapcha.imagery (
-  id     serial primary key,
-  source text not null,
-  date   date,
-  url    text not null
+  id          serial primary key,
+  title       text not null,
+  date        date,
+  url         text not null,
+  attribution text
 );
 #+end_src
 
@@ -155,10 +156,13 @@ UPDATE mapcha.users
               Incorporate Cesium through ol3-cesium module.
 
 * TODOs
+** WTF?
+   - [X] Where is that rogue XMLHttpRequest coming from on every page of mapcha.sig-gis.com? Have I been hacked?
+
 ** Admin page
    - [X] Show bounding box on map as lat/lon coords are input
    - [X] Create a panel for reviewing, editing (add new user-specified plots w/ unique user_entered field), and deleting existing projects
-   - [X] Allow drawing a bounding box on the map or uploading a shapefile
+   - [X] Allow drawing a polygon on the map or uploading a shapefile
    - [X] Add a download link for plot-level aggregate data for the current project
      - Filename: mapcha_<project>_<date>.csv
      - Fields: plot_id, center_lat, center_lon, radius_m, sample_points, user_assigments, value1_mean, value1_stddev, value2_mean, value2_stddev, ..., valueN_mean, valueN_stddev
@@ -172,12 +176,12 @@ UPDATE mapcha.users
    - [ ] Allow selecting the imagery datasource (Digital Globe, Google Earth Engine?, locally hosted "chipset", other image server)
    - [ ] Add UA form validators (through html input tag options)
    - [ ] Remove compass_rose.png
+   - [X] Add regular grid for samples
 
 ** User Management page
    - [ ] Create a panel for reviewing, editing (change role to user or admin), and deleting users
 
 ** Dashboard page
-   - [X] Implement "Save Assignments" to record [user_id, sample_id, value_id, imagery_id, date] in mapcha.user_samples for each point (use DigitalGlobe imagery vintage)
    - [X] Add meters to Sidebar for:
      - "Samples completed" :: # of samples completed in current plot
      - "Plots completed" :: # of plots completed in current project
@@ -197,7 +201,7 @@ UPDATE mapcha.users
    - Add "First Name", "Last Name", "Institution", and "Phone#" fields to Register and Account pages
 
 ** Home page
-   - Add a Mapcha description (use dl/dt/dd tags for text sections)
+   - Add a Mapcha description
    - Show study area on a map with plots highlighted (use color ramp red-green based on number of samples filled in)
 
 ** Misc ideas
