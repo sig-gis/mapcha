@@ -192,3 +192,11 @@
                           :sample_id sample-id
                           :value_id  value-id
                           :imagery_id imagery-id})))
+
+(defremote archive-project
+  [project-id]
+  (first (archive-project-sql {:project_id project-id})))
+
+(defremote revive-project
+  [project-id]
+  (first (revive-project-sql {:project_id project-id})))

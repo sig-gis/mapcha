@@ -49,11 +49,18 @@
   (when (> (count @sample-values) idx)
     (swap! sample-values delete-element idx)))
 
+(defn set-current-project! [project-id]
+  (set! (.-value (dom/getElement "project-selector")) project-id)
+  (load-project-info! project-id)
+  (load-sample-values! project-id))
+
 (defn delete-current-project! []
   (let [project-id (js/parseInt (.-value (dom/getElement "project-selector")))]
-    (js/alert (str "Whoops! This feature hasn't been implemented yet."
-                   " Looks like project " project-id
-                   " lives to fight another day..."))))
+    (remote-callback :archive-project
+                     [project-id]
+                     #(do (js/alert (str "Project " project-id
+                                         " has been deleted."))
+                          (set-current-project! 0)))))
 
 (defn submit-form [evt]
   (if @current-project
@@ -64,11 +71,6 @@
       (style/setStyle (dom/getElement "spinner") "visibility" "visible")
       (.submit (dom/getElement "project-management-form")))))
 
-(defn set-current-project! [evt]
-  (let [project-id (js/parseInt (.-value (.-currentTarget evt)))]
-    (load-project-info! project-id)
-    (load-sample-values! project-id)))
-
 (defn create-project-form-contents []
   (let [{:keys [name description num_plots radius num_samples
                 lon_min lon_max lat_min lat_max]} @current-project
@@ -78,7 +80,10 @@
       [:label "Currently Viewing:"]
       [:select#project-selector {:name "project-selector" :size "1"
                                  :default-value "0"
-                                 :on-change set-current-project!}
+                                 :on-change #(-> (.-currentTarget %)
+                                                 (.-value)
+                                                 (js/parseInt)
+                                                 (set-current-project!))}
        [:option {:key 0 :value 0} "New Project"]
        (for [{:keys [id name]} @project-list]
          [:option {:key id :value id} name])]]

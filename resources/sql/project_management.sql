@@ -79,3 +79,17 @@ SELECT id, ST_AsGeoJSON(point) AS point
 INSERT INTO mapcha.user_samples (user_id, sample_id, value_id, imagery_id, date)
   VALUES (:user_id, :sample_id, :value_id, :imagery_id, CURRENT_DATE)
   RETURNING *;
+
+-- name: archive-project-sql
+-- Sets the archived field to true in mapcha.projects for the given project_id.
+UPDATE mapcha.projects
+  SET archived = true
+  WHERE id = :project_id
+  RETURNING id;
+
+-- name: revive-project-sql
+-- Sets the archived field to false in mapcha.projects for the given project_id.
+UPDATE mapcha.projects
+  SET archived = false
+  WHERE id = :project_id
+  RETURNING id;

@@ -19,7 +19,8 @@ CREATE TABLE mapcha.projects (
   id          serial primary key,
   name        text not null,
   description text,
-  boundary    geometry(Polygon,4326)
+  boundary    geometry(Polygon,4326),
+  archived    boolean default false
 );
 
 CREATE TABLE mapcha.plots (
