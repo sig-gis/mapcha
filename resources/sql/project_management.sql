@@ -27,9 +27,11 @@ INSERT INTO mapcha.sample_values (project_id, value, color, image)
   RETURNING id, project_id, value, color, image;
 
 -- name: get-all-projects-sql
--- Returns all rows in mapcha.projects.
+-- Returns all rows in mapcha.projects for which archived = false.
 SELECT id, name, description, ST_AsGeoJSON(boundary) AS boundary
-  FROM mapcha.projects;
+  FROM mapcha.projects
+  WHERE archived = false
+  ORDER BY id;
 
 -- name: get-project-info-sql
 -- Returns all of the properties of the project matching project_id.
@@ -58,7 +60,8 @@ WITH plots      AS (SELECT count(id) AS num_plots
 -- Returns all rows in mapcha.sample_values with the given project_id.
 SELECT id, value, color, image
   FROM mapcha.sample_values
-  WHERE project_id = :project_id;
+  WHERE project_id = :project_id
+  ORDER BY id;
 
 -- name: get-random-plot-sql
 -- Returns a random row from mapcha.plots associated with the given project_id.

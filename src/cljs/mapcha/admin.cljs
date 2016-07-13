@@ -60,7 +60,8 @@
                      [project-id]
                      #(do (js/alert (str "Project " project-id
                                          " has been deleted."))
-                          (set-current-project! 0)))))
+                          (set-current-project! 0)
+                          (load-projects!)))))
 
 (defn submit-form [evt]
   (if @current-project
