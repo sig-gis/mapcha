@@ -478,7 +478,6 @@ p.error-message {
 
 #dashboard {
     position:relative;
-    height:37rem;
     padding:1rem;
     background-color:#e0e0e0;
     border-radius:1rem;
@@ -496,8 +495,7 @@ p.error-message {
 }
 
 #dashboard #image-analysis-pane {
-    position:absolute;
-    top:3.5rem;
+    float:left;
     width:59.5rem;
     height:34rem;
     border:2px solid #55f;
@@ -509,9 +507,7 @@ p.error-message {
 }
 
 #dashboard #sidebar {
-    position:absolute;
-    top:3.5rem;
-    right:1rem;
+    float:right;
     width:15rem;
     padding:0.5rem 0.75rem;
     background-color:#eee;
@@ -566,6 +562,12 @@ p.error-message {
     color:#55f;
     border:1px solid #999;
     border-radius:0.5rem;
+}
+
+#dashboard p#imagery-info {
+    clear:both;
+    padding:1rem 1rem 0rem 1rem;
+    color:#55f;
 }
 
 /*********/

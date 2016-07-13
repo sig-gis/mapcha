@@ -391,6 +391,9 @@
                                 :onclick "window.location='/'"}]
     [:div#image-analysis-pane]
     [:div#sidebar]
+    [:p#imagery-info (str "DigitalGlobe Maps API: Recent Imagery+Streets | "
+                          "June 2015 | "
+                          "© DigitalGlobe, Inc")]
     [:input#user-id {:type "hidden" :name "user-id"
                      :value (str (current-user-id request))}]]
    (include-js "/mapcha.js")
