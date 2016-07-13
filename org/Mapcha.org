@@ -162,7 +162,7 @@ UPDATE mapcha.users
 
 ** Admin page
    - [X] Show bounding box on map as lat/lon coords are input
-   - [X] Create a panel for reviewing, editing (add new user-specified plots w/ unique user_entered field), and deleting existing projects
+   - [X] Enable editing the names and colors of sample values in existing projects
    - [X] Allow drawing a polygon on the map or uploading a shapefile
    - [X] Add a download link for plot-level aggregate data for the current project
      - Filename: mapcha_<project>_<date>.csv
@@ -170,14 +170,13 @@ UPDATE mapcha.users
    - [X] Add a download link for all samples in the current project
      - Filename: mapcha_<project>_<date>.csv
      - Fields: plot_id, center_lat, center_lon, radius_m, sample_points, user_assigments, value1_mean, value1_stddev, value2_mean, value2_stddev, ..., valueN_mean, valueN_stddev
+   - [X] Add regular grid for samples
    - [ ] Fix image file upload http://www.html5rocks.com/en/tutorials/file/dndfiles/
    - [ ] Batch together the database inserts into just a few calls
    - [ ] Change random point distribution algorithm to one which prevents overlap
    - [ ] Allow uploading a plot file
    - [ ] Allow selecting the imagery datasource (Digital Globe, Google Earth Engine?, locally hosted "chipset", other image server)
    - [ ] Add UA form validators (through html input tag options)
-   - [ ] Remove compass_rose.png
-   - [X] Add regular grid for samples
 
 ** User Management page
    - [ ] Create a panel for reviewing, editing (change role to user or admin), and deleting users

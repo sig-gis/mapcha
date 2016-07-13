@@ -20,7 +20,7 @@
 (defn load-project-info! [project-id]
   (remote-callback :get-project-info
                    [project-id]
-                   #(do (set! (.-value (dom/getElement "description")) "")
+                   #(do (set! (.-value (dom/getElement "project-description")) "")
                         (reset! current-project %))))
 
 (defn load-sample-values! [project-id]
@@ -94,11 +94,11 @@
        [:tbody
         [:tr
          [:td [:label "Name"]]
-         [:td [:input {:type "text" :name "project-name"
+         [:td [:input#project-name {:type "text" :name "project-name"
                        :auto-complete "off" :value name}]]]
         [:tr
          [:td [:label "Description"]]
-         [:td [:textarea#description
+         [:td [:textarea#project-description
                {:name "project-description" :value description}]]]]]]
      [:fieldset#plot-info
       [:legend "Plot Info"]
