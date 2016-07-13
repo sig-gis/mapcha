@@ -776,13 +776,6 @@ p.error-message {
     box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6);
 }
 
-#admin img#compass-rose {
-    position:absolute;
-    top:4.25rem;
-    right:3rem;
-    width:10rem;
-}
-
 #admin #spinner {
     position:absolute;
     top:0.6rem;

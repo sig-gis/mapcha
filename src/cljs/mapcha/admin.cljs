@@ -169,8 +169,7 @@
                               "Delete this project"
                               "Create and launch this project")
                      :on-click submit-form}]
-     [:div#spinner]
-     [:img#compass-rose {:src "img/compass_rose.png"}]]))
+     [:div#spinner]]))
 
 (defn ^:export main []
   (load-projects!)
