@@ -394,6 +394,7 @@
     [:p#imagery-info (str "DigitalGlobe Maps API: Recent Imagery+Streets | "
                           "June 2015 | "
                           "© DigitalGlobe, Inc")]
+    [:div#page-stretcher]
     [:input#user-id {:type "hidden" :name "user-id"
                      :value (str (current-user-id request))}]]
    (include-js "/mapcha.js")
@@ -411,8 +412,7 @@
    request
    [:div#admin
     [:h1 "Project Management"]
-    [:div#create-project-form]
-    [:div#new-project-map]]
+    [:div#create-project-form]]
    (include-js "/mapcha.js")
    (javascript-tag "mapcha.admin.main()")))
 

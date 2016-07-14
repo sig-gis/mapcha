@@ -181,6 +181,8 @@
                       :disabled (if num_plots true false)}]
       [:input {:type "hidden" :name "sample-values"
                :value (pr-str @sample-values)}]]
+     [:div#new-project-map]
+     [:div#page-stretcher]
      [:input.button {:type "button" :name "create-project"
                      :value (if num_plots
                               "Delete this project"

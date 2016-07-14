@@ -567,9 +567,13 @@ p.error-message {
 }
 
 #dashboard p#imagery-info {
-    clear:both;
+    float:left;
     padding:1rem 1rem 0rem 1rem;
     color:#55f;
+}
+
+#dashboard #page-stretcher {
+    clear:both;
 }
 
 /*********/
@@ -578,7 +582,6 @@ p.error-message {
 
 #admin {
     position:relative;
-    height:36rem;
     padding:1rem;
     background-color:#e0e0e0;
     border-radius:1rem;
@@ -648,8 +651,9 @@ p.error-message {
 }
 
 #admin fieldset#project-info {
-    position:absolute;
-    top:3.5rem;
+    float:left;
+    margin-top:1.2rem;
+    margin-right:8rem;
     width:21.5rem;
     height:8rem;
 }
@@ -669,9 +673,9 @@ p.error-message {
 }
 
 #admin fieldset#plot-info {
-    position:absolute;
-    top:3.5rem;
-    left:26rem;
+    float:left;
+    margin-top:1.2rem;
+    margin-right:8rem;
     width:17rem;
     height:8rem;
 }
@@ -685,9 +689,8 @@ p.error-message {
 }
 
 #admin fieldset#bounding-box {
-    position:absolute;
-    top:3.5rem;
-    left:46.5rem;
+    float:left;
+    margin-top:1.2rem;
     width:16rem;
     height:8rem;
 }
@@ -716,8 +719,9 @@ p.error-message {
 }
 
 #admin fieldset#sample-info {
-    position:absolute;
-    top:15rem;
+    clear:left;
+    float:left;
+    margin-top:1rem;
     width:40.75rem;
 }
 
@@ -770,12 +774,15 @@ p.error-message {
 }
 
 #admin #new-project-map {
-    position:absolute;
-    top:15.6rem;
-    left:45rem;
+    float:right;
+    margin-top:1.5rem;
     width:33.5rem;
     height:21rem;
     border:1px solid #55f;
+}
+
+#admin #page-stretcher {
+    clear:both;
 }
 
 #admin input.button[name=create-project] {
