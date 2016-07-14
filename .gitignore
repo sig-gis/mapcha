@@ -3,3 +3,4 @@
 /.lein*
 /out
 /target
+/resources/public/downloads/*.csv
