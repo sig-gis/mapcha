@@ -20,6 +20,7 @@
                    [org.postgresql/postgresql   "9.4.1208.jre7"]
                    [yesql                       "0.5.2"]
                    [com.draines/postal          "1.11.4"]
+                   [org.clojure/data.csv        "0.1.3"]
                    [org.clojars.magomimmo/shoreleave-remote-ring "0.3.2"]
                    [org.clojars.magomimmo/shoreleave-remote      "0.3.1"]
                    [javax.servlet/servlet-api   "2.5"]

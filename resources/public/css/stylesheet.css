@@ -592,8 +592,8 @@ p.error-message {
 #admin #project-selection {
     position:absolute;
     top:0.75rem;
-    left:20rem;
-    width:35rem;
+    left:18rem;
+    width:25rem;
 }
 
 #admin #project-selection label {
@@ -603,6 +603,7 @@ p.error-message {
 
 #admin #project-selection select {
     height:2.5rem;
+    width:13rem;
     padding:0.5rem;
     color:#55f;
     border:1px solid #55f;
@@ -610,6 +611,17 @@ p.error-message {
 
 #admin #project-selection option {
     color:#55f;
+}
+
+#admin input#download-plot-data {
+    position:absolute;
+    top:0.9rem;
+    left:45rem;
+    padding:0.25rem;
+    color:white;
+    background-color:#55f;
+    border-radius:0.5rem;
+    box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6);
 }
 
 #admin legend {

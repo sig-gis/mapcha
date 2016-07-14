@@ -72,6 +72,13 @@
       (style/setStyle (dom/getElement "spinner") "visibility" "visible")
       (.submit (dom/getElement "project-management-form")))))
 
+(defn export-current-plot-data []
+  (let [project-id (js/parseInt (.-value (dom/getElement "project-selector")))]
+    (when-not (zero? project-id)
+      (remote-callback :dump-project-aggregate-data
+                       [project-id]
+                       #(.open js/window %)))))
+
 (defn create-project-form-contents []
   (let [{:keys [name description num_plots radius num_samples
                 lon_min lon_max lat_min lat_max]} @current-project
@@ -88,6 +95,10 @@
        [:option {:key 0 :value 0} "New Project"]
        (for [{:keys [id name]} @project-list]
          [:option {:key id :value id} name])]]
+     [:input#download-plot-data {:type "button" :value "Download Data"
+                                 :on-click export-current-plot-data
+                                 :style {:visibility
+                                         (if num_plots "visible" "hidden")}}]
      [:fieldset#project-info
       [:legend "Project Info"]
       [:table

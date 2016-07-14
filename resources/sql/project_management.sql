@@ -96,3 +96,27 @@ UPDATE mapcha.projects
   SET archived = false
   WHERE id = :project_id
   RETURNING id;
+
+-- name: dump-project-aggregate-data-sql
+-- Returns an overview of the sample data entered thus far for the given project_id.
+WITH plot_data AS (SELECT plt.id AS plot_id, ST_X(center) AS center_lon,
+                          ST_Y(center) AS center_lat, radius AS radius_m,
+                          sample_id, user_id, value_id, value
+                     FROM mapcha.plots AS plt
+                     INNER JOIN mapcha.samples AS smp ON plt.id = plot_id
+                     INNER JOIN mapcha.user_samples ON smp.id = sample_id
+                     INNER JOIN mapcha.sample_values AS val ON value_id = val.id
+                     WHERE plt.project_id = :project_id),
+     plot_overview AS (SELECT plot_id, center_lon, center_lat, radius_m,
+                              count(sample_id) AS sample_points,
+                              count(distinct user_id) AS user_assignments
+                         FROM plot_data
+                         GROUP BY plot_id, center_lon, center_lat, radius_m),
+     plot_values AS (SELECT plot_id, value, (100.0*count(value_id)/sample_points)::float AS percent
+                       FROM plot_data
+                       INNER JOIN plot_overview USING (plot_id)
+                       GROUP BY plot_id, value, sample_points
+                       ORDER BY plot_id)
+  SELECT *
+    FROM plot_overview
+    INNER JOIN plot_values USING (plot_id);

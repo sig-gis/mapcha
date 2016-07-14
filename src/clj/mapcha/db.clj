@@ -4,7 +4,9 @@
             [clojure.java.jdbc           :refer [with-db-transaction]]
             [yesql.core                  :refer [defqueries]]
             [postal.core                 :refer [send-message]]
-            [clojure.string              :as str]))
+            [clojure.string              :as str]
+            [clojure.java.io             :as io]
+            [clojure.data.csv            :as csv]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -200,3 +202,51 @@
 (defremote revive-project
   [project-id]
   (first (revive-project-sql {:project_id project-id})))
+
+;; Filename: mapcha_<project>_<date>.csv
+;; Fields: plot_id, center_lon, center_lat, radius_m, sample_points,
+;;         user_assignments, value1_%, value2_%, ..., valueN_%
+(defremote dump-project-aggregate-data
+  [project-id]
+  (let [sample-values   (->> (get-sample-values project-id)
+                             (sort-by :id)
+                             (mapv :value))
+        plot-data-raw   (dump-project-aggregate-data-sql {:project_id project-id})
+        plot-data-clean (for [[plot-id records] (group-by :plot_id plot-data-raw)]
+                          (if (= 1 (count records))
+                            (let [record (first records)]
+                              (-> record
+                                  (assoc :values {(:value record)
+                                                  (:percent record)})
+                                  (dissoc :value :percent)))
+                            (-> (first records)
+                                (dissoc :value :percent)
+                                (assoc :values
+                                       (into {}
+                                             (for [{:keys [value percent]} records]
+                                               [value percent]))))))
+        plot-data-table (cons
+                         (map str/upper-case
+                              (concat ["plot_id" "center_lon" "center_lat"
+                                       "radius_m" "sample_points"
+                                       "user_assignments"]
+                                      sample-values))
+                         (mapv
+                          (fn [{:keys [plot_id center_lon center_lat radius_m
+                                       sample_points user_assignments values]}]
+                            (concat [plot_id center_lon center_lat radius_m
+                                     sample_points user_assignments]
+                                    (mapv #(values % 0.0) sample-values)))
+                          plot-data-clean))
+        project-name    (-> (get-project-info project-id)
+                            (:name)
+                            (str/replace #" " "_")
+                            (str/replace #"," "")
+                            (str/lower-case))
+        current-date    (str (java.time.LocalDate/now))
+        output-url      (str "/downloads/mapcha_" project-name "_"
+                             current-date ".csv")
+        output-filename (str "resources/public" output-url)]
+    (with-open [out-file (io/writer output-filename)]
+      (csv/write-csv out-file plot-data-table))
+    output-url))
