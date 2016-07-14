@@ -161,7 +161,9 @@ UPDATE mapcha.users
    - [X] Where is that rogue XMLHttpRequest coming from on every page of mapcha.sig-gis.com? Have I been hacked?
 
 ** Admin page
+   - [X] Zoom out to worldview when page first loads
    - [X] Show bounding box on map as lat/lon coords are input
+   - [X] Show project bounding box on map when switching between projects
    - [X] Enable editing the names and colors of sample values in existing projects
    - [X] Allow drawing a polygon on the map or uploading a shapefile
    - [X] Add a download link for plot-level aggregate data for the current project
@@ -171,6 +173,7 @@ UPDATE mapcha.users
      - Filename: mapcha_<project>_<date>.csv
      - Fields: plot_id, center_lat, center_lon, radius_m, sample_points, user_assigments, value1_mean, value1_stddev, value2_mean, value2_stddev, ..., valueN_mean, valueN_stddev
    - [X] Add regular grid for samples
+   - [X] Fix styles so the page grows and shrinks with the Sample Values table
    - [ ] Fix image file upload http://www.html5rocks.com/en/tutorials/file/dndfiles/
    - [ ] Batch together the database inserts into just a few calls
    - [ ] Change random point distribution algorithm to one which prevents overlap
@@ -189,6 +192,7 @@ UPDATE mapcha.users
      - "Agreement with other users" :: % of samples matching other users' samples in current project
    - [ ] Make the size of sample circles vary with the zoom level
    - [ ] Show text descriptions and example images when hovering over sample values in the radio list
+   - [ ] Make the p#imagery-source element's contents dynamic (and check on the month and year of the DigitalGlobe data)
    - [ ] Adjust the SQL query for get-random-plot-sql to try and pick less sampled plots
      - Assign plots in order by plot_id to users and track last plot_id analyzed by each user
      - After a plot has been assessed three times, remove it from the selection pool and start with the next consecutive plot_id
