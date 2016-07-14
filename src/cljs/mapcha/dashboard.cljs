@@ -31,14 +31,16 @@
     (map/disable-selection @map/map-ref)))
 
 (defn set-current-value! [evt {:keys [id value color]}]
-  (if-let [samples (seq (map/get-selected-samples))]
-    (let [button (.-currentTarget evt)]
+  (if-let [selected-features (map/get-selected-samples)]
+    (let [samples (seq (.getArray selected-features))
+          button  (.-currentTarget evt)]
       (u/highlight-border button)
       (timer/callOnce #(u/lowlight-border button) 500)
       (doseq [sample samples]
         (let [sample-id (.get sample "sample_id")]
           (swap! user-samples assoc sample-id id)
           (map/highlight-sample sample color)))
+      (.clear selected-features)
       (when (= (set (keys @user-samples))
                (into #{} (map :id) @current-samples))
         (u/enable-element! (dom/getElement "save-values-button"))))

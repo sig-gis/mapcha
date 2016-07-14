@@ -236,8 +236,7 @@
 
 (defn get-selected-samples []
   (some-> @select-interaction
-          (.getFeatures)
-          (.getArray)))
+          (.getFeatures)))
 
 (defn highlight-sample [sample color]
   (.setStyle sample (js/ol.style.Style.
