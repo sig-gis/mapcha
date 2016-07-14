@@ -13,7 +13,7 @@
 
 (defonce current-project (atom nil))
 
-(defonce current-plot (atom nil))
+(defonce current-plot (r/atom nil))
 
 (defonce current-samples (atom ()))
 
@@ -27,7 +27,7 @@
                      #(js/alert
                        "Your assignments have been saved to the database."))
     (u/disable-element! (.-currentTarget evt))
-    (u/enable-element! (dom/getElement "new-plot-button"))
+    (reset! current-plot nil)
     (map/disable-selection @map/map-ref)))
 
 (defn set-current-value! [evt {:keys [id value color]}]
@@ -94,6 +94,10 @@
       (u/disable-element! (dom/getElement "save-values-button"))
       (map/draw-polygon (:boundary new-project)))))
 
+(defn flag-plot!
+  [plot-id]
+  (js/alert (str "Flagging plot " plot-id " as bad!")))
+
 (defn sidebar-contents []
   [:div#sidebar-contents
    [:fieldset
@@ -104,11 +108,13 @@
      (for [{:keys [id name]} @project-list]
        [:option {:key id :value id} name])]
     [:input#new-plot-button.button {:type "button" :name "new-plot"
-                                    :value "Analyze New Plot"
-                                    :on-click (fn [evt]
-                                                (load-random-plot!)
-                                                (u/disable-element!
-                                                 (.-currentTarget evt)))}]]
+                                    :value (if @current-plot
+                                             "Flag Plot as Bad"
+                                             "Analyze New Plot")
+                                    :on-click (fn [_]
+                                                (when @current-plot
+                                                  (flag-plot! (:id @current-plot)))
+                                                (load-random-plot!))}]]
    [:fieldset
     [:legend "Sample Values"]
     [:ul
