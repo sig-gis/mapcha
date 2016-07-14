@@ -203,6 +203,10 @@
   [project-id]
   (first (revive-project-sql {:project_id project-id})))
 
+(defremote flag-plot
+  [plot-id]
+  (first (flag-plot-sql {:plot_id plot-id})))
+
 ;; Filename: mapcha_<project>_<date>.csv
 ;; Fields: plot_id, center_lon, center_lat, radius_m, sample_points,
 ;;         user_assignments, value1_%, value2_%, ..., valueN_%
@@ -228,14 +232,15 @@
         plot-data-table (cons
                          (map str/upper-case
                               (concat ["plot_id" "center_lon" "center_lat"
-                                       "radius_m" "sample_points"
+                                       "radius_m" "flagged" "sample_points"
                                        "user_assignments"]
                                       sample-values))
                          (mapv
                           (fn [{:keys [plot_id center_lon center_lat radius_m
-                                       sample_points user_assignments values]}]
+                                       flagged sample_points user_assignments
+                                       values]}]
                             (concat [plot_id center_lon center_lat radius_m
-                                     sample_points user_assignments]
+                                     flagged sample_points user_assignments]
                                     (mapv #(values % 0.0) sample-values)))
                           plot-data-clean))
         project-name    (-> (get-project-info project-id)

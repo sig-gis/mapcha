@@ -98,7 +98,9 @@
 
 (defn flag-plot!
   [plot-id]
-  (js/alert (str "Flagging plot " plot-id " as bad!")))
+  (remote-callback :flag-plot
+                   [plot-id]
+                   #(js/alert (str "Plot " plot-id " has been flagged."))))
 
 (defn sidebar-contents []
   [:div#sidebar-contents
