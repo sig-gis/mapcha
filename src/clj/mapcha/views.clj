@@ -128,9 +128,7 @@
   (wrap-header-footer
    request
    [:section#home-top
-    [:div#overview-map
-     [:div#popup.ol-popup
-      [:div#popup-content]]]
+    [:div#splash-image]
     [:div#left-block
      [:h1 "Mapcha: " [:em "Earth Image Identification"]]
      [:h2 "Collaborate. Play. Map the world."]]
@@ -153,9 +151,7 @@
                 :placeholder "Password confirmation" :autocomplete "off"}]
        [:input.button {:type "submit" :name "register" :value "Register"}]]]]]
    [:section#home-content
-    [:p "Enter a description of " [:span.trademark "Mapcha"] " here..."]]
-   (include-js "/mapcha.js")
-   (javascript-tag "mapcha.homepage.main()")))
+    [:p "Enter a description of " [:span.trademark "Mapcha"] " here..."]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

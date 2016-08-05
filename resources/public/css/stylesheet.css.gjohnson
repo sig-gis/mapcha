@@ -102,6 +102,20 @@ h1,h2,h3,h4,h5,h6 {
 /* Home */
 /********/
 
+#splash-image {
+    position:absolute;
+    top:1rem;
+    left:0rem;
+    height:20rem;
+    width:60rem;
+    border:1px solid #55f;
+    background-image:url(../img/chaBG.jpg);
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    background-size:cover;
+}
+
 #home-top {
     position:relative;
     height:22rem;
@@ -204,62 +218,6 @@ h1,h2,h3,h4,h5,h6 {
 
 .trademark {
     font-style:italic;
-}
-
-#overview-map {
-    position:absolute;
-    top:1rem;
-    left:0rem;
-    height:20rem;
-    width:60rem;
-    border:1px solid #55f;
-}
-
-#overview-map ul {
-    list-style-type:none;
-    font-size:1rem;
-    color:#55f;
-}
-
-#overview-map .popup-label {
-    font-weight:bold;
-}
-
-.ol-popup {
-    position:absolute;
-    bottom:1rem;
-    left:-3rem;
-    min-width:10rem;
-    padding:1rem;
-    border-radius:1rem;
-    border:1px solid #cccccc;
-    background-color:white;
-    -webkit-filter:drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-    filter:drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-}
-
-.ol-popup:after,.ol-popup:before {
-    position:absolute;
-    top:100%;
-    height:0rem;
-    width:0rem;
-    border:solid transparent;
-    content:" ";
-    pointer-events:none;
-}
-
-.ol-popup:after {
-    border-top-color:white;
-    border-width:1rem;
-    left:3rem;
-    margin-left:-1rem;
-}
-
-.ol-popup:before {
-    border-top-color:#cccccc;
-    border-width:1rem;
-    left:3rem;
-    margin-left:-1rem;
 }
 
 /*********/

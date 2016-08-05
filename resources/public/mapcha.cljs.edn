@@ -1,1 +1,1 @@
-{:require [mapcha.homepage mapcha.admin mapcha.dashboard]}
+{:require [mapcha.admin mapcha.dashboard]}

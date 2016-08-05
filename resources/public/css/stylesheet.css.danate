@@ -1,16 +1,13 @@
-/* CSS alpha version 0.1 Danate 4 Aug 16   */
-
+/* CSS alpha version 0.1 Danate 2016-08-04 */
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:100,400,700|Oswald:normal|Cabin+Sketch:normal|Lobster:normal);
 
 /* Animation */
 
 @keyframes iMapcha {
-     from {color: red;}
-     to {color: yellow;}
+    from {color:red;}
+    to {color:yellow;}
 }
-
-
 
 /********************/
 /* Universal Styles */
@@ -20,93 +17,85 @@ body {
     font-family:Open Sans;
     font-size:16px;
     height:100vh;
-    
-background-image:url(../image/chaBG.jpg);
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover;
+    background-image:url(../img/chaBG.jpg);
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    background-size:cover;
 }
 
 header, nav, section, footer {
     display:block;
-
 }
 
-
-.button{
-	line-height:100% !important;
-	text-overflow: ellipsis;
-	cursor:pointer;
-	background-color:#3FABC6 !important;
-	color:white;
-	font-family:Oswald !important;
-	text-transform: uppercase;
-	border-radius:0px !important
-	/* Safari 3-4, iOS 1-3.2, Android 1.6- */
-	-webkit-border-radius: 0px !important; 
-	
-	/* Firefox 1-3.6 */
-	-moz-border-radius: 0px  !important; 
-	
-	/* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
-	border-radius: 0px  !important; 
+.button {
+    line-height:100% !important;
+    text-overflow:ellipsis;
+    cursor:pointer;
+    background-color:#3FABC6 !important;
+    color:white;
+    font-family:Oswald !important;
+    text-transform:uppercase;
+    border-radius:0px !important
+    /* Safari 3-4, iOS 1-3.2, Android 1.6- */
+    -webkit-border-radius:0px !important;
+    /* Firefox 1-3.6 */
+    -moz-border-radius:0px !important;
+    /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
+    border-radius:0px !important;
 }
-
-
 
 header {
-	height:2.4rem;
-	height:6.5rem;
-	color:#eee;
-	background-color:white;
-	display:fixed;
-	display:block;
-	z-index: 100; 
-	top: 0;
-	
-	background-image: url(http://www.adpc.net/igo/images/SERVIR/usaid.png), url(http://www.adpc.net/igo/images/SERVIR/nasa.png), url(http://www.adpc.net/igo/images/SERVIR/ADPC.jpg), url(http://www.adpc.net/igo/images/SERVIR/servir.png) ;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-position: 1rem 15px, 9rem 15px,  12rem 15px, right 15px; 
-	background-size: auto 35px, auto 35px, auto 35px, auto 25px;
-	z-index:20;
-
+    position:fixed;
+    top:0rem;
+    left:0rem;
+    height:6.5rem;
+    width:100%;
+    color:#eee;
+    background-color:white;
+    background-image:url(http://www.adpc.net/igo/images/SERVIR/usaid.png),
+                     url(http://www.adpc.net/igo/images/SERVIR/nasa.png),
+                     url(http://www.adpc.net/igo/images/SERVIR/ADPC.jpg),
+                     url(http://www.adpc.net/igo/images/SERVIR/servir.png);
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position:1rem 15px, 9rem 15px, 12rem 15px, calc(100% - 1rem) 15px;
+    background-size:auto 35px, auto 35px, auto 35px, auto 25px;
+    z-index:100;
 }
 
-	header a:link,
-	header a:visited,
-	header a:active,
-	footer a:link,
-	footer a:visited,
-	footer a:active {
-	color:#eee;
-	color:black !important;
-	text-decoration:none;
+header a:link,
+header a:visited,
+header a:active {
+    color:black;
+    text-decoration:none;
+}
+
+footer a:link,
+footer a:visited,
+footer a:active {
+    color:#eee;
+    text-decoration:none;
 }
 
 header a:hover,
-	footer a:hover {
-	color:#999;
-}
-
+footer a:hover,
 header a.active-link {
-    color:#999;
+    color:#555;
 }
 
 header h1 {
-	z-index:2;
-	width:calc(60vw -200px);
-top:4rem !important;
-	left:1rem !important;
-	position:absolute;
-
-	font-family:Lobster;
-	text-transform: uppercase;
-	text-decoration: underline;
-	font-size:2rem;
-	font-weight: 400;
-	color:white !important;
+    z-index:2;
+    position:absolute;
+    top:4rem !important;
+    left:1rem !important;
+    width:calc(60vw - 200px);
+    font-family:Lobster;
+    text-transform:uppercase;
+    text-decoration:underline;
+    font-size:2rem;
+    font-weight:400;
+    color:white !important;
 }
 
 nav {
@@ -129,12 +118,11 @@ nav ul li {
 
 #login-info {
     position:absolute;
-    top:2.3rem;
+    top:2.6rem;
     right:0rem;
-    padding:0.7rem 0rem;
+    padding:0.8rem;
     font-size:0.8rem;
     z-index:30;
-
 }
 
 #login-info a {
@@ -149,43 +137,37 @@ nav ul li {
     color:black !important;
 }
 
-
-
 #content {
-	width:100%;
-	height:100%;
-	background-color:rgba(255,255,255,0.2);
-	position:fixed;
+    position:fixed;
+    top:6.5rem;
+    left:0rem;
+    height:calc(100vh - 6.5rem - 2.6rem);
+    width:100%;
+    background-color:rgba(255,255,255,0.2);
 }
 
-
-
-#content h3{
-		right:5rem !important;
-		height:100%;
-		width:350px;
-		padding:2rem;
-		background: rgba(255, 255, 255, 0.8) ;
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF) ;
-		-ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);	
-		position: fixed; /* or absolute */	
-
+#content h3 {
+    position:absolute;
+    right:5rem !important;
+    height:100%;
+    width:350px;
+    padding:2rem;
+    background:rgba(255, 255, 255, 0.8);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
 }
-
 
 footer {
-	height:2.4rem;
-	color:#eee;
-	background-color:#1a1a1a;
-
-	width:100%;
-	position: fixed;
-     bottom: 0;
-
+    position:fixed;
+    bottom:0rem;
+    left:0rem;
+    height:2.6rem;
+    width:100%;
+    background-color:#1a1a1a;
 }
 
 footer p {
-    padding:0.8rem 2.4rem;
+    padding:0.7rem 2.4rem;
     font-size:0.9rem;
 }
 
@@ -193,143 +175,62 @@ h1,h2,h3,h4,h5,h6 {
     color:#55f;
 }
 
+input {
+    display:block;
+    height:2rem;
+    border-radius:0rem !important;
+    width:100% !important;
+}
+
 /********/
 /* Home */
 /********/
 
-#home-top #left-block{
-	border-radius:0rem !Important;
-	border:none;
+#splash-image {
+    display:none;
 }
 
 #left-block {
-
-		right:5rem !important;
-		height:100%;
-		width:350px;
-		padding:2rem;
-		background: rgba(255, 255, 255, 0.8) ;
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF) ;
-		-ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);	
-		position: fixed; /* or absolute */	
+    position:absolute;
+    right:5rem !important;
+    height:100%;
+    width:350px;
+    border-radius:0rem !important;
+    padding:2rem;
+    background:rgba(255, 255, 255, 0.8);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
 }
-
-
 
 #left-block h1 {
-    font-size:2rem;
-    font-weight:bold;
+    margin:20px 0px;
     padding:0.5rem 0.5rem 0.5rem 1rem;
+    font-size:3rem;
+    font-weight:bold;
+    color:gray;
+    text-transform:uppercase;
+    line-height:80%;
 }
 
+#left-block h1 em {
+    font-size:0.8em !important;
+    font-weight:400;
+}
 
 #left-block h2 {
-    font-size:1rem;
-    font-style:italic;
     padding:0.5rem 0.5rem 0.75rem 1rem;
-}
-
-
-
-#home-top #right-block{
-display:none;
-
+    color:#3C948B;
+    font-family:Courier New;
+    font-weight:400;
+    font-size:1.1em;
+    font-style:normal;
 }
 
 #right-block {
-    position:absolute;
-    top:1rem;
-    right:0rem;
-    height:20rem;
-    width:17rem;
-}
-
-#right-block input:not(.button) {
-    width:15rem;
-    margin:0.3rem;
-    border:1px solid #999;
-    border-radius:0.25rem;
-}
-
-#right-block input:not(.button):focus {
-    border:1px solid #55f;
-    /* box-shadow:0rem 0rem 0.5rem rgba(21,21,153,0.8); */
-}
-
-#right-block input.button {
-    width:15rem;
-    margin:0.3rem;
-    padding:0.3rem;
-    color:white;
-    background-color:#55f;
-    border-radius:1rem;
-    
-    /*box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6);*/
-}
-
-	#left-block h1{
-	color:gray;
-	text-transform: uppercase;
-	margin-bottom:20px;
-	font-size:3em;
-	margin-top:20px;
-	line-height:80%;
-	}
-	
-	#left-block h1 em{
-	font-size:0.8em !important;
-	font-weight:400;
-	}
-	
-	#left-block h2{
-	color:#3C948B;
-	font-family:Courier New;
-	font-weight:400;
-	font-size:1.1em;
-	font-style: normal;
-	
-	}
-
-
-#right-block input.button:focus {
-    border:1px solid #999;
-}
-
-#login {
-    width:16rem;
-    padding:0.5rem;
-    background-color:#e0e0e0;
-
-}
-
-#login p#forgot-password a {
-    font-size:3rem;
-    font-weight:bold;
-    margin-left:0.25rem;
-}
-
-#login p#forgot-password a {
-    color:#009;
-    text-decoration:none;
-    
-}
-
-#register {
-    margin-top:1rem;
-    width:16rem;
-    padding:0.5rem;
-    background-color:#e0e0e0;
-    border-radius:1rem;
-}
-
-#register h3 {
-    font-size:1.1rem;
-    font-weight:bold;
-    padding:0.3rem;
+    display:none;
 }
 
 #home-content p {
-    margin:1rem 0rem;
     display:none;
 }
 
@@ -337,90 +238,20 @@ display:none;
     font-style:italic;
 }
 
-#overview-map {
-	display:none;
-	position:absolute;
-	top:1rem;
-	left:0rem;
-	height:20rem;
-	width:60rem;
-	border:1px solid #55f;
-}
-
-#overview-map ul {
-    list-style-type:none;
-    font-size:1rem;
-    color:#55f;
-}
-
-#overview-map .popup-label {
-    font-weight:bold;
-}
-
-.ol-popup {
-    position:absolute;
-    bottom:1rem;
-    left:-3rem;
-    min-width:10rem;
-    padding:1rem;
-    border-radius:1rem;
-    border:1px solid #cccccc;
-    background-color:white;
-    
-   /* -webkit-filter:drop-shadow(0 1px 4px rgba(0,0,0,0.2));*/
-    /* filter:drop-shadow(0 1px 4px rgba(0,0,0,0.2));*/
-}
-
-.ol-popup:after,.ol-popup:before {
-    position:absolute;
-    top:100%;
-    height:0rem;
-    width:0rem;
-    border:solid transparent;
-    content:" ";
-    pointer-events:none;
-}
-
-.ol-popup:after {
-    border-top-color:white;
-    border-width:1rem;
-    left:3rem;
-    margin-left:-1rem;
-}
-
-.ol-popup:before {
-    border-top-color:#cccccc;
-    border-width:1rem;
-    left:3rem;
-    margin-left:-1rem;
-}
-
-input{
-	display: block;
-	height: 2rem;
-	border-radius:0rem !important;
-	width:100% !important;
-}
-
-
-
 /*********/
 /* Login */
 /*********/
 
 #login-form {
-
-		right:5rem;
-		height:100%;
-		padding:2rem;
-		width:350px;
-		
-		background-color:#e0e0e0;
-		background: rgba(255, 255, 255, 0.8) ;
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF) ;
-		-ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);	
-		position: fixed; /* or absolute */
-
+    right:5rem;
+    height:100%;
+    padding:2rem;
+    width:350px;
+    background-color:#e0e0e0;
+    background:rgba(255, 255, 255, 0.8);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    position:fixed; /* or absolute */
 }
 
 #login-form h1 {
@@ -430,18 +261,14 @@ input{
     color:gray !important;
 }
 
-
-
 #login-form input:not(.button) {
     width:20rem;
     border:1px solid #ececec;
     margin:0.3rem;
-
 }
 
 #login-form input:not(.button):focus {
     border:1px solid DarkGrey;
-    
     /* box-shadow:0rem 0rem 0.5rem rgba(21,21,153,0.8); */
     cursor:grab;
 }
@@ -452,28 +279,23 @@ input{
 }
 
 #login-form input.button {
-
     width:20rem;
-    margin: -1rem 0.3rem;
+    margin:-1rem 0.3rem;
     padding:0.5rem;
     color:white;
     background-color:Darkgray;
     border:1px solid #ececec;
     cursor:pointer;
-
 }
-
 
 #login-form input.button:focus {
     border:1px solid #999;
 }
 
-
 #login-form p#forgot-password a {
-
     font-size:0.8rem;
     font-weight:700;
-    line-height: 5;
+    line-height:5;
     margin:0.5rem;
     color:gray;
     text-decoration:none;
@@ -484,21 +306,18 @@ input{
 /************/
 
 #register-form {
-		right:5rem;
-		height:100%;
-		padding:2rem;
-		width:350px;
-		
-		background-color:#e0e0e0;
-		background: rgba(255, 255, 255, 0.8) ;
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF) ;
-		-ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);	
-		position: fixed; /* or absolute */
-
+    right:5rem;
+    height:100%;
+    padding:2rem;
+    width:350px;
+    background-color:#e0e0e0;
+    background:rgba(255, 255, 255, 0.8);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    position:fixed; /* or absolute */
 }
 
 #register-form h1 {
-
     font-size:2.5rem;
     font-weight100;
     line-height:0.9;
@@ -508,27 +327,19 @@ input{
 }
 
 #register-form input:not(.button) {
-
     width:20rem;
     border:1px solid #ececec;
     margin:0.3rem;
-
 }
 
 #register-form input:not(.button):focus {
     border:1px solid #55f;
-    
    /* box-shadow:0rem 0rem 0.5rem rgba(21,21,153,0.8); */
-   
 }
 
-
-
-
 #register-form input.button {
-
     width:20rem;
-    margin: 2rem 0.3rem;
+    margin:2rem 0.3rem;
     padding:0.5rem;
     color:white;
     background-color:Darkgray;
@@ -540,26 +351,23 @@ input{
     border:1px solid #999;
 }
 
-/************/
+/***********/
 /* Account */
-/************/
+/***********/
 
 #account-form {
-		right:5rem;
-		height:100%;
-		padding:2rem;
-		width:350px;
-		
-		background-color:#e0e0e0;
-		background: rgba(255, 255, 255, 0.8) ;
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF) ;
-		-ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);	
-		position: fixed; /* or absolute */
-
+    right:5rem;
+    height:100%;
+    padding:2rem;
+    width:350px;
+    background-color:#e0e0e0;
+    background:rgba(255, 255, 255, 0.8);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    position:fixed; /* or absolute */
 }
 
 #account-form h1 {
-
     font-size:2.5rem;
     font-weight:100;
     padding:0.5rem;
@@ -572,8 +380,6 @@ input{
     padding:0.1rem;
     color:darkgray;
     font-weight:200;
-    
-    
 }
 
 #account-form input:not(.button) {
@@ -591,12 +397,12 @@ input{
 #account-form input.button {
     width:18rem;
     color:white;
-     margin:0.3rem;
+    margin:0.3rem;
     background-color:#55f;
     background-color:#3FABC6 !important;
-   	height:40px;
-    /* border-radius:1rem;
-     box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6);  */
+    height:40px;
+    /* border-radius:1rem; */
+    /* box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6); */
 }
 
 #account-form input.button:focus {
@@ -629,7 +435,7 @@ input{
 
 #password-form input:not(.button):focus {
     border:1px solid #55f;
-    /*  box-shadow:0rem 0rem 0.5rem rgba(21,21,153,0.8); */
+    /* box-shadow:0rem 0rem 0.5rem rgba(21,21,153,0.8); */
 }
 
 #password-form input.button {
@@ -639,7 +445,7 @@ input{
     color:white;
     background-color:#55f;
     border-radius:1rem;
-   /*   box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6); */
+    /* box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6); */
 }
 
 #password-form input.button:focus {
@@ -673,72 +479,55 @@ p.error-message {
 /* Dashboard */
 /*************/
 
-
 #dashboard {
-	/* position:relative; */
-	position:fixed;
-	padding:0rem;
-	background:rgba(255,255,255, 0.8); 
-	/* background-color:#a3ff4a; */
-	/* background-color:DarkGray; */
-	height:100%;   
-		
+    /* position:relative; */
+    position:fixed;
+    padding:0rem;
+    background:rgba(255,255,255, 0.8);
+    /* background-color:#a3ff4a; */
+    /* background-color:DarkGray; */
+    height:100%;
 }
-
-
 
 #dashboard h1 {
-
-	font-size:1.5rem;
-	font-weight:100;
-	padding-left:1rem !important;
-	
-	width: calc(70%- 6.4rem);
-	width: calc(70%);
-	
-	color:orange!important;
-	line-height:1.2;
-	display:none;
+    font-size:1.5rem;
+    font-weight:100;
+    padding-left:1rem !important;
+    width:calc(70% - 6.4rem);
+    width:calc(70%);
+    color:orange!important;
+    line-height:1.2;
+    display:none;
 }
 
-
-
-
 #dashboard #quit-button {
-	display:inline-block;
-	margin-top:0;
-	width:5rem !important;
-	position:fixed;
-
-	left: calc(70vw - 1*5rem);
-	z-index:10000;
-	
-	border-radius:0rem !important;
-	background-color:#3FABC6 !important;
-
-	height: 40px;
-	border: none;
-	font-size: 17;
-	text-align: center;
+    display:inline-block;
+    margin-top:0;
+    width:5rem !important;
+    position:fixed;
+    left:calc(70vw - 1 * 5rem);
+    z-index:10000;
+    border-radius:0rem !important;
+    background-color:#3FABC6 !important;
+    height:40px;
+    border:none;
+    font-size:17;
+    text-align:center;
 }
 
 #dashboard #image-analysis-pane{
-
-	float:left;	
-	width: 70% !important;
-	background-color:white;
-
-	
-background-color:darkgray;
-	/* Firefox */
-	height: -moz-calc(100% - 9rem) !important;
-	/* WebKit */
-	height: -webkit-calc(100% - 9rem) !important;
-	/* Opera */
-	height: -o-calc(100% - 9rem) !important;
-	/* Standard */
-	height: calc(100% - 9rem) !important;
-
+    float:left;
+    width:70% !important;
+    background-color:white;
+    background-color:darkgray;
+    /* Firefox */
+    height:-moz-calc(100% - 9rem) !important;
+    /* WebKit */
+    height:-webkit-calc(100% - 9rem) !important;
+    /* Opera */
+    height:-o-calc(100% - 9rem) !important;
+    /* Standard */
+    height:calc(100% - 9rem) !important;
 }
 
 #dashboard .ol-dragbox {
@@ -747,181 +536,152 @@ background-color:darkgray;
 }
 
 #dashboard #sidebar {
-
-	float:right;
-	width:30% !important;
-	position:relative;
-	padding:0;
+    float:right;
+    width:30% !important;
+    position:relative;
+    padding:0;
 }
 
-#sidebar{
-	width:100% !important;
+#sidebar {
+    width:100% !important;
 }
 
-#sidebar-contents{
-	height: 800px !important;
+#sidebar-contents {
+    height:800px !important;
 }
 
-
-#sidebar-contents fieldset legend{
-	font-family: Open Sans;
-	font-weight:400 !important;
-	text-transform: uppercase;
-	font-size:1em;
-	margin-top:-5px;	
-	color:#423A34;
-	
+#sidebar-contents fieldset legend {
+    font-family:Open Sans;
+    font-weight:400 !important;
+    text-transform:uppercase;
+    font-size:1em;
+    margin-top:-5px;
+    color:#423A34;
 }
 
-
-
-#sidebar #sidebar-contents fieldset{
-	margin-top:0px;
-	border:0px !important;
-
-
-	
+#sidebar #sidebar-contents fieldset {
+    margin-top:0px;
+    border:0px !important;
 }
 
-
-/*  Alll dash board botton  */
-
-#dashboard #sidebar input{
-	max-width: 100% !important;
-	color:#3D3B39 !important;
-	text-shadow: 0px 0px 0px rgba(255, 255, 255, 0.4) !important; 
-	font-family: Verdana,Geneva,sans-serif;
-	text-indent:5px;
-	font-size:0.8em;
-	font-weight:400;
-	cursor:pointer;
-	color:#423A34!important;
-	text-transform: uppercase;
-	/* text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white !important; */
-
-}	
-
-
-
-#sidebar-contents input[name=save-values]{
-	clear:both;
-	font-size:1em !important;
-	width:100% !important;
-	text-indent:0 !important;
-	height:40px;;
-	margin:4px 0;
-	color:white !important;
-	cursor:pointer;
-	background-color:#3FABC6 !important;
-	opacity:1.0 !important;
+/* All dash board buttons */
+#dashboard #sidebar input {
+    max-width:100% !important;
+    color:#3D3B39 !important;
+    text-shadow:0px 0px 0px rgba(255, 255, 255, 0.4) !important;
+    font-family:Verdana,Geneva,sans-serif;
+    text-indent:5px;
+    font-size:0.8em;
+    font-weight:400;
+    cursor:pointer;
+    color:#423A34!important;
+    text-transform:uppercase;
+    /* text-shadow:-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white !important; */
 }
 
+#sidebar-contents input[name=save-values] {
+    clear:both;
+    font-size:1em !important;
+    width:100% !important;
+    text-indent:0 !important;
+    height:40px;;
+    margin:4px 0;
+    color:white !important;
+    cursor:pointer;
+    background-color:#3FABC6 !important;
+    opacity:1.0 !important;
+}
 
 #sidebar #sidebar-contents select {
-	line-height: 90%;
-	font-size:1.2em Important;
-	padding:0px;
-	height:1.8em;
-	width:100% !important;
-	border:none;
-	outline:none;
-	color:#3D3B39 !important;
-
+    line-height:90%;
+    font-size:1.2em Important;
+    padding:0px;
+    height:1.8em;
+    width:100% !important;
+    border:none;
+    outline:none;
+    color:#3D3B39 !important;
 }
 
-#dashboard #sidebar fieldset:nth-child(2){
-	/* background-color:green; */
-	margin-top:10px;
+#dashboard #sidebar fieldset:nth-child(2) {
+    /* background-color:green; */
+    margin-top:10px;
 }
 
-#dashboard #sidebar legend{
-font-size:1.2em;
-font-family:Oswald;
-font-weight:400;
-padding: 10px 0;
-color:#3FABC6;
-
+#dashboard #sidebar legend {
+    font-size:1.2em;
+    font-family:Oswald;
+    font-weight:400;
+    padding:10px 0;
+    color:#3FABC6;
 }
 
 #dashboard #sidebar fieldset ul li {
-	padding:0;
+    padding:0;
 }
 
 #dashboard #sidebar fieldset input {
-
-	border-radius:0rem;
-	width: 100%;
-	height:40px;
-	float:left;
-	/*text-shadow: 0px 0px 0px rgba(255, 255, 255, 0.4) !important; */
-	
+    border-radius:0rem;
+    width:100%;
+    height:40px;
+    float:left;
+    /* text-shadow:0px 0px 0px rgba(255, 255, 255, 0.4) !important; */
 }
 
 #dashboard #sidebar-contents fieldset:nth-child(2) ul li{
-
-border-left-style: solid !important;
-border-left-width:1rem !important;
-border-color:gray;
-width: calc(100%/2);
-width: calc(100%/2 - 1*20px );
-
+    border-left-style:solid !important;
+    border-left-width:1rem !important;
+    border-color:gray;
+    width:calc(100% / 2);
+    width:calc(100% / 2 - 1 * 20px);
 }
 
-
-#sidebar #sidebar-contents input[name='new-plot'] {
-	width:100%;
-	text-indent:0 !important;
-	font-size:1em;
-	height:40px;
-	margin:4px 0;
-	color:white !important;
-	background-color:#3FABC6 !important;	
-
-	cursor:pointer !important;
-
+#sidebar #sidebar-contents input[name=new-plot] {
+    width:100%;
+    text-indent:0 !important;
+    font-size:1em;
+    height:40px;
+    margin:4px 0;
+    color:white !important;
+    background-color:#3FABC6 !important;
+    cursor:pointer !important;
 }
 
-
-#sidebar-contents fieldset select{
-	float:left;
-	width:100%;
-	font-family: Verdana,Geneva,sans-serif;
-	font-weight:200 !important;
-	font-size:0.9em !important;
-
+#sidebar-contents fieldset select {
+    float:left;
+    width:100%;
+    font-family:Verdana,Geneva,sans-serif;
+    font-weight:200 !important;
+    font-size:0.9em !important;
 }
 
 
 #sidebar-contents fieldset:nth-child(1) {
-	/* background-color:orange; */
-	text-indent:5px;
-	margin-top:1rem
+    /* background-color:orange; */
+    text-indent:5px;
+    margin-top:1rem
 }
-
 
 #sidebar-contents fieldset:nth-child(2) {
-	float:left;
-	background-color:#ececec;
-text-indent:5px;
+    float:left;
+    background-color:#ececec;
+    text-indent:5px;
 }
 
-
-
-#sidebar-contents fieldset ul{
-	width:100%;
+#sidebar-contents fieldset ul {
+    width:100%;
 }
 
-#sidebar-contents fieldset ul>li{
-	float:left;
+#sidebar-contents fieldset ul>li {
+    float:left;
 }
 
-#sidebar-contents fieldset ul input{
-	font-size:1rem;
-	font-weight:600 !important;
-	text-indent:10px;
-	text-align:left;
+#sidebar-contents fieldset ul input {
+    font-size:1rem;
+    font-weight:600 !important;
+    text-indent:10px;
+    text-align:left;
 }
-
 
 #dashboard legend {
     font-size:1.2rem;
@@ -946,7 +706,6 @@ text-indent:5px;
     display:block;
     padding:0.5rem;
     margin:0.5rem auto 0rem auto;
-
     color:white;
     background-color:#55f;
     border-radius:0.5rem;
@@ -968,59 +727,56 @@ text-indent:5px;
 }
 
 
-#imagery-info{
-	clear:both;
-	font-family: Arial;
-	font-size:0.8em;
-	color:Darkgray !important;
-	text-align:right;
-	margin-top:-200px !important;
+#imagery-info {
+    clear:both;
+    font-family:Arial;
+    font-size:0.8em;
+    color:Darkgray !important;
+    text-align:right;
+    margin-top:-200px !important;
 }
 
 #dashboard #page-stretcher {
     clear:both;
 }
+
 /*********/
 /* Admin */
 /*********/
 
 #admin {
-	overflow:show;
-	position:fixed;
-	height:calc(100%) !important;
-	width:100%;
-	padding:20px;
-	background:rgba(255,255,255,0.9);
+    overflow:show;
+    position:fixed;
+    height:calc(100%) !important;
+    width:100%;
+    padding:20px;
+    background:rgba(255,255,255,0.9);
 }
 
-
-#admin h1,h2, h3, h4, h5, h6, h7, p, label{
-font-family:Open Sans !important;
-font-weight:400 !important;
+#admin h1,h2, h3, h4, h5, h6, h7, p, label {
+    font-family:Open Sans !important;
+    font-weight:400 !important;
 }
 
-#admin input{
-width:auto !important;
+#admin input {
+    width:auto !important;
 }
 
-
-#admin label{
-color:darkgray !important;
-font-size:1rem !important;
-
+#admin label {
+    color:darkgray !important;
+    font-size:1rem !important;
 }
 
 #admin h1 {
     font-size:2rem;
     font-weight:bold;
     color:darkgray;
-    margin:0px  0 10px 0;
+    margin:0px 0 10px 0;
 }
 
 #admin #project-selection {
-	width:100%;
-	font-size:1em;
-
+    width:100%;
+    font-size:1em;
 }
 
 #admin #project-selection label {
@@ -1029,9 +785,9 @@ font-size:1rem !important;
 }
 
 #admin #project-selection select {
-	color:#55f;
-	border:1px solid #55f;
-	height:2rem;
+    color:#55f;
+    border:1px solid #55f;
+    height:2rem;
 }
 
 #admin #project-selection option {
@@ -1049,24 +805,21 @@ font-size:1rem !important;
     box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6);
 }
 
-
-#admin table{
-	width:100% !important;
+#admin table {
+    width:100% !important;
 }
 
-#admin table tr > td:nth-child(1){
-	vertical-align: top;
+#admin table tr > td:nth-child(1) {
+    vertical-align:top;
 }
 
-#admin table tr > td:nth-child(2){
-
+#admin table tr > td:nth-child(2) {
 }
 
-
-#admin legend{
-	font-family:Open Sans;
-	font-weight:100;
-	color:darkgray;
+#admin legend {
+    font-family:Open Sans;
+    font-weight:100;
+    color:darkgray;
 }
 
 #admin label {
@@ -1081,136 +834,109 @@ font-size:1rem !important;
 }
 
 #admin fieldset {
-	width: calc(50% - 2rem);
-	margin-right:1rem;
+    width:calc(50% - 2rem);
+    margin-right:1rem;
 }
 
-#admin fieldset#project-info{
-	float:left;
-	display: inline;
-	width:25%;
+#admin fieldset#project-info {
+    float:left;
+    display:inline;
+    width:25%;
 }
-
 
 #admin fieldset#project-info td {
-display: inline;
+    display:inline;
 }
 
-#admin fieldset#plot-info{
-	float:left;
-	display: inline;
-	width:25%;
+#admin fieldset#plot-info {
+    float:left;
+    display:inline;
+    width:25%;
 }
 
-#admin fieldset#plot-info td{
-	display: inline;
+#admin fieldset#plot-info td {
+    display:inline;
 }
 
-
-#admin fieldset#bounding-box input{
-	width:100px !important;
-	display: inline;
-	
-
+#admin fieldset#bounding-box input {
+    width:100px !important;
+    display:inline;
 }
 
-
-#admin fieldset#bounding-box{
-	clear:both;
-	float:left;
-	height:55px;
-	width:50vw;
-	background-color:white;
-clear:both;
+#admin fieldset#bounding-box {
+    clear:both;
+    float:left;
+    height:55px;
+    width:50vw;
+    background-color:white;
+    clear:both;
 }
 
 /* bottom */
-#admin fieldset#bounding-box input#lat-max{
-background-color:maroon;
-valign:bottom;
+#admin fieldset#bounding-box input#lat-max {
+    background-color:maroon;
+    valign:bottom;
 }
 
-
 /* top */
-#admin fieldset#bounding-box input#lon-min{
-background-color:blue;
-
-
+#admin fieldset#bounding-box input#lon-min {
+    background-color:blue;
 }
 
 /* left */
-#admin fieldset#bounding-box input#lon-max{
-background-color:pink;
-
-z-index:100;
+#admin fieldset#bounding-box input#lon-max {
+    background-color:pink;
+    z-index:100;
 }
-
 
 /* right */
-#admin fieldset#bounding-box input#lat-min{
-	background-color:olive;
-	z-index:100;
+#admin fieldset#bounding-box input#lat-min {
+    background-color:olive;
+    z-index:100;
 }
 
-#admin fieldset#bounding-box td{
-
+#admin fieldset#bounding-box td {
 }
 
-
-
-#admin fieldset#sample-info input#value-name, input#value-color, input#value-image{
-width:10vw !important;
+#admin fieldset#sample-info input#value-name, input#value-color, input#value-image {
+    width:10vw !important;
 }
 
 
-#admin #new-project-map{
-clear:both;
-float:left;
-
-border:1px solid;
-height:20vw;
-
-
-/*
-	clear:both;
-	position:absolute;
-
-top:0;	
-top:35vh;
-	padding:0 !important;
-	border:1px solid;
-		
-	height:calc(45vh);
-	width:50vw;
-	background-color:yellow;
-
-*/
-
+#admin #new-project-map {
+    clear:both;
+    float:left;
+    border:1px solid;
+    height:20vw;
+    /* clear:both; */
+    /* position:absolute; */
+    /* top:0; */
+    /* top:35vh; */
+    /* padding:0 !important; */
+    /* border:1px solid; */
+    /* height:calc(45vh); */
+    /* width:50vw; */
+    /* background-color:yellow; */
 }
-
 
 #admin fieldset#project-info {
-
 }
 
 #admin fieldset#project-info table {
-
-
 }
 
 #admin fieldset#project-info input[type=text] {
-
 }
 
 #admin fieldset#project-info textarea {
-
 }
 
-/*  box1 */
+/* box1 */
 #admin fieldset#plot-info {
     float:left;
 }
-/*  box2 */
+
+/* box2 */
 #admin fieldset#plot-info table {
 }
 
@@ -1218,38 +944,28 @@ top:35vh;
 }
 
 #admin fieldset#bounding-box {
-
 }
 
 #admin fieldset#bounding-box input {
-
 }
 
 #admin fieldset#bounding-box input#lat-max {
-
 }
 
 #admin fieldset#bounding-box input#lon-min {
-
 }
 
 #admin fieldset#bounding-box input#lon-max {
-
 }
 
 #admin fieldset#bounding-box input#lat-min {
-
 }
 
-
-
-/*  box3 */
+/* box3 */
 #admin fieldset#sample-info {
-
 }
 
 #admin fieldset#sample-info th {
-
 }
 
 #admin fieldset#sample-info th.empty {
@@ -1259,7 +975,6 @@ top:35vh;
 
 #admin fieldset#sample-info td {
     text-align:center;
-
 }
 
 #admin fieldset#sample-info .circle {
@@ -1270,11 +985,9 @@ top:35vh;
 }
 
 #admin fieldset#sample-info input#value-name {
-
 }
 
 #admin fieldset#sample-info input#value-color {
-
 }
 
 #admin fieldset#sample-info input.button {
@@ -1286,8 +999,8 @@ top:35vh;
     box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6);
 }
 
-#admin #sample-info  th, td{
-	display:table-cell;
+#admin #sample-info th, td{
+    display:table-cell;
 }
 
 #admin input.button[name=add-sample-value] {
@@ -1299,18 +1012,12 @@ top:35vh;
 }
 
 #admin input.button[name=create-project] {
-
-
     font-size:1rem;
     padding:0.5rem;
     color:white;
     background-color:#55f;
-
-    
-    /*
-    border-radius:1rem;
-    box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6);
-    */
+    /* border-radius:1rem; */
+    /* box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6); */
 }
 
 #admin #spinner {
@@ -1324,111 +1031,88 @@ top:35vh;
     -webkit-animation:sweep 1s infinite linear;
     visibility:hidden;
 }
-@-webkit-keyframes sweep { to { -webkit-transform: rotate(360deg); } }
-
+@-webkit-keyframes sweep { to { -webkit-transform:rotate(360deg); } }
 
 /* mmm */
 
-label{
-
-display:block;
-font-family:Open Sans;
-
+label {
+    display:block;
+    font-family:Open Sans;
 }
 
-
-#create-project-form table{
-background-color:red;
-width:100%;
-
+#create-project-form table {
+    background-color:red;
+    width:100%;
 }
 
+/* mmm end */
 
-
-
-/* mmm  end */
-
-
-
-@-webkit-keyframes sweep { to { -webkit-transform: rotate(360deg); } }
-
-
-
-
-
+@-webkit-keyframes sweep { to { -webkit-transform:rotate(360deg); } }
 
 @media screen and (max-width:768px) {
+    header {
+        background-image:url(http://www.adpc.net/igo/images/SERVIR/usaid.png),
+                         url(http://www.adpc.net/igo/images/SERVIR/nasa.png),
+                         url(http://www.adpc.net/igo/images/SERVIR/ADPC.jpg),
+                         url(http://www.adpc.net/igo/images/SERVIR/servir.png);
+        background-position:20px 5px, 120px 5px, 150px 5px, right 10px;
+        background-size:auto 30px, auto 30px, auto 30px, auto 20px;
+    }
 
-	header {
-	
-		background-image: url(http://www.adpc.net/igo/images/SERVIR/usaid.png), url(http://www.adpc.net/igo/images/SERVIR/nasa.png), url(http://www.adpc.net/igo/images/SERVIR/ADPC.jpg), url(http://www.adpc.net/igo/images/SERVIR/servir.png) ;
-		background-position: 20px 5px, 120px 5px,  150px 5px, right 10px; 
-		background-size: auto 30px, auto 30px, auto 30px, auto 20px;
-	}
-	
-	nav {
-	    position:absolute;
-	    top:30px;
-	    left:5px;
-	    height:2.4rem;
-	    padding:0px;	
-	}
-	
-	#login-info{
-		top:30px;
-		right:0;
-	}
+    nav {
+        position:absolute;
+        top:30px;
+        left:5px;
+        height:2.4rem;
+        padding:0px;
+    }
 
-	#login-info a:hover{	
-		border:none;
+    #login-info {
+        top:30px;
+        right:0;
+    }
 
-	}
-	
-
-
+    #login-info a:hover {
+        border:none;
+    }
 }
-
 
 @media screen and (max-width:600px) {
-	#login-info p{
-	margin-top:2.5rem;
-	}
-	
-	header h1{
-	font-size:2rem;
-	}
-	
-	#dashboard h1{
-	font-size:1.2rem;
-	}
+    #login-info p {
+        margin-top:2.5rem;
+    }
 
-	#sidebar-contents fieldset:nth-child(2){
-	padding:0rem auto;
-	}
+    header h1 {
+        font-size:2rem;
+    }
 
-#dashboard #sidebar-contents fieldset:nth-child(2) ul li{	
-	border-left-style: solid !important;
-	border-left-width:1vw !important;
-	}
+    #dashboard h1 {
+        font-size:1.2rem;
+    }
 
+    #sidebar-contents fieldset:nth-child(2) {
+        padding:0rem auto;
+    }
 
+    #dashboard #sidebar-contents fieldset:nth-child(2) ul li {
+        border-left-style:solid !important;
+        border-left-width:1vw !important;
+    }
 
-#content #account-form{
-	right:0;
-}
-
+    #content #account-form {
+        right:0;
+    }
 } /* end @width 960 */
-
-
 
 /* Chrome, Safari, Opera */
 @-webkit-keyframes menuin {
     from {width:0;}
     to {width:60vw;}
 }
+
 @keyframes menuin {
-	from {width:0;}
-	to {width:60vw;}
+    from {width:0;}
+    to {width:60vw;}
 }
 
 /* Chrome, Safari, Opera */
@@ -1436,341 +1120,309 @@ width:100%;
     from {lwidth:60vw;}
     to {width:0;}
 }
+
 @keyframes menuout {
     from {width:60vw;}
     to {width:0;}
 }
 
- 
-
 @media screen and (max-width:500px) {
+    #dashboard {
+        padding:0px;
+    }
 
-	#dashboard{
-	padding:0px;
-	}
+    header {
+        /* left:-60%; */
+        width:100%;
+        height:30px;
+        position:fixed;
+        background-image:url(http://www.adpc.net/igo/images/SERVIR/usaid.png),
+                         url(http://www.adpc.net/igo/images/SERVIR/nasa.png),
+                         url(http://www.adpc.net/igo/images/SERVIR/ADPC.jpg),
+                         url(http://www.adpc.net/igo/images/SERVIR/servir.png);
+        background-position:15px 6px, 140px 6px, 20px 55px, 70px 60px;
+        background-size:auto 35px, auto 35px, auto 20px, auto 12px;
+        background-image:none;
+    }
 
-	header{
-	/*	left:-60%; */
-	width:100%;
-	height:30px;
-	position:fixed;
+    header h1 {
+        position:fixed;
+        top:5px !important;
+        text-align:center;
+        font-size:1.2rem;
+        width:100% !important;
+    }
 
-		background-image: url(http://www.adpc.net/igo/images/SERVIR/usaid.png), url(http://www.adpc.net/igo/images/SERVIR/nasa.png), url(http://www.adpc.net/igo/images/SERVIR/ADPC.jpg), url(http://www.adpc.net/igo/images/SERVIR/servir.png) ;
-	background-position: 15px 6px, 140px 6px,  20px 55px, 70px 60px; 
-	background-size: auto 35px, auto 35px, auto 20px, auto 12px;
-	background-image:none;	
-	}
+    header nav li {
+        display:block;
+    }
 
-	header h1{
-		position:fixed;
-		display:fixed !important;
-		top:5px !important;
-		
-		text-align:center;		
-		font-size: 1.2rem;
-		width:100% !important;		
-	}
-	
-	header nav li{
-		display:block;
-	}
-	
-	header nav li:hover{
-		background-color:gray;
-	}
-	
-	header nav{
-	top:-5px !important;
-	}
-	
-	header ul{
-		height:20px;
-		font-size:0;	
-		margin-left:-10px;
-		/*  background-color:green;  */
-	}
-	
-	header nav ul{
-		display:block !important;
-		width:50px;
-		overflow:hidden;
-	}
+    header nav li:hover {
+        background-color:gray;
+    }
 
-	header nav{
+    header nav {
+        top:-5px !important;
+    }
 
-		background-image: url(../image/ic_dehaze_black_24dp_2x.png) ;
-		background-size: auto 30px;
-		background-position: 0px 6px; 
-		left:0.5rem;
-		width:30px !important;
-		height:30px;
-		z-index:500;
-		cursor:pointer;
+    header ul {
+        height:20px;
+        font-size:0;
+        margin-left:-10px;
+        /* background-color:green; */
+    }
 
-	}	
-	
+    header nav ul {
+        display:block !important;
+        width:50px;
+        overflow:hidden;
+    }
 
-	header ul:hover{
-		background-color:white;
-			background-image: url(http://www.adpc.net/igo/images/SERVIR/usaid.png), url(http://www.adpc.net/igo/images/SERVIR/nasa.png), url(http://www.adpc.net/igo/images/SERVIR/ADPC.jpg), url(http://www.adpc.net/igo/images/SERVIR/servir.png) ;
-		background-position: 15px 6px, 140px 6px,  20px 55px, 70px 60px; 
-		background-size: auto 35px, auto 35px, auto 20px, auto 12px;
-		background-image:none;
-		
-		font-size:0.8em;
-		height:100vh;
-		padding-top:50px;
-		
-		animation-name: menuin ;
-		animation-duration: 2s;
-		animation-fill-mode: forwards;
+    header nav {
+        background-image:url(../img/ic_dehaze_black_24dp_2x.png);
+        background-size:auto 30px;
+        background-position:0px 6px;
+        left:0.5rem;
+        width:30px !important;
+        height:30px;
+        z-index:500;
+        cursor:pointer;
+    }
 
-	}
-	
-		header ul:hover::before{
-		content:"menu";
-		font-size:2em;
-		padding-left:5px;
-		top:-20px;
-		color:black;
-	}
-	
-	.ol-overlaycontainer-stopevent .ol-zoom{
-		left:0.5rem;
-			top:30px;
-	}
-	.ol-overlaycontainer-stopevent .ol-scale-line{
-		left:0;
-		bottom:0;
-	}	
-	.ol-overlaycontainer-stopevent .ol-attribution{
-		right:-8px;
-		bottom:0;
-	}
+    header ul:hover {
+        background-color:white;
+        background-image:url(http://www.adpc.net/igo/images/SERVIR/usaid.png),
+                         url(http://www.adpc.net/igo/images/SERVIR/nasa.png),
+                         url(http://www.adpc.net/igo/images/SERVIR/ADPC.jpg),
+                         url(http://www.adpc.net/igo/images/SERVIR/servir.png);
+        background-position:15px 6px, 140px 6px, 20px 55px, 70px 60px;
+        background-size:auto 35px, auto 35px, auto 20px, auto 12px;
+        background-image:none;
+        font-size:0.8em;
+        height:100vh;
+        padding-top:50px;
+        animation-name:menuin;
+        animation-duration:2s;
+        animation-fill-mode:forwards;
+    }
 
-/*  home  */
+    header ul:hover::before {
+        content:"menu";
+        font-size:2em;
+        padding-left:5px;
+        top:-20px;
+        color:black;
+    }
 
+    .ol-overlaycontainer-stopevent .ol-zoom {
+        left:0.5rem;
+        top:30px;
+    }
 
-#home-top #left-block{
-	top:0;
-	height: calc(100vh) !important;
-	width:100% !important;
-	left:0;
-}
+    .ol-overlaycontainer-stopevent .ol-scale-line {
+        left:0;
+        bottom:0;
+    }
 
-#home-top #left-block h1{	
-	margin-top:40vh;
-	color:#3FABC6;
+    .ol-overlaycontainer-stopevent .ol-attribution {
+        right:-8px;
+        bottom:0;
+    }
 
-	font-size:12vw !important;	
-}
-#home-top #left-block h1 em{
-	font-size:5vw !important;
-	line-height:2vh !important;
-	color:black;
-}
+    /* home */
 
-#home-top #left-block h2{
-	font-size:4vw !important;
-	line-height:2vh !important;
-	width:auto;
-}
+    #home-top #left-block {
+        top:0;
+        height:calc(100vh) !important;
+        width:100% !important;
+        left:0;
+    }
 
-#login-info{
-	top:60vh !important;
-}
+    #home-top #left-block h1 {
+        margin-top:40vh;
+        color:#3FABC6;
+        font-size:12vw !important;
+    }
 
-/*  home  end*/	
+    #home-top #left-block h1 em {
+        font-size:5vw !important;
+        line-height:2vh !important;
+        color:black;
+    }
 
-#content #account-form{
-	display:block;
-}
+    #home-top #left-block h2 {
+        font-size:4vw !important;
+        line-height:2vh !important;
+        width:auto;
+    }
 
-#login-info{
-display:none;
-}
+    #login-info {
+        top:60vh !important;
+    }
 
+    /* home end */
 
-	#dashboard #sidebar #sidebar-contents legend{
-		height:20px;
-	}
+    #content #account-form {
+        display:block;
+    }
 
-	#dashboard #quit-button{
-		left: calc( 100vw - 1*28px);
-		height:28px;
-		top:2rem !important;
-		width:28px !important;
-		font-size:0px !important;
-		background-color:white;
-		background-image: url(../image/ic_exit_to_app_white_24dp_2x.png) ;
-		background-size: 27px 27px;
-		background-position: 2px auto;
-		cursor:pointer;
+    #login-info {
+        display:none;
+    }
 
-	}	
+    #dashboard #sidebar #sidebar-contents legend {
+        height:20px;
+    }
 
-	#dashboard #image-analysis-pane{
-	width:100%  !important;
-	height:100vw !important;
-	float:left;
-	}
-	
-	#dashboard #sidebar{
-	float:left !important;
-	width:100% !important;
-	/*background-color:olive !important; */
-	left:0px !important;
-	}
-	
-#login-info {
-	padding:0 !important;
-	right:2rem;
-	top:0;
-	margin-top:1.9rem;
-}	
-#login-info p a{
-background-color:#3FABC6;
+    #dashboard #quit-button {
+        left:calc(100vw - 1 * 28px);
+        height:28px;
+        top:2rem !important;
+        width:28px !important;
+        font-size:0px !important;
+        background-color:white;
+        background-image:url(../img/ic_exit_to_app_white_24dp_2x.png);
+        background-size:27px 27px;
+        background-position:2px auto;
+        cursor:pointer;
+    }
 
-}	
-#login-info p {
-margin-top:0px;
-font-size:0.9em;
-}	
-	
-	
-	/*   control  set */
-	
-	#sidebar-contents{
-		padding-top:-20px;
-		padding-right:0rem;
-	}
-	
+    #dashboard #image-analysis-pane {
+        width:100%  !important;
+        height:100vw !important;
+        float:left;
+    }
 
-	#sidebar-contents fieldset{
-		margin:0 !important;
-		width:100%;
-	}
-	
-	
-	
-	#sidebar #sidebar-contents fieldset select{
-		font-size:0.8em !important;
-		float:left;
-		width: calc(100% - 45px) !important;
-		height:30px;
-		margin-left:-2px;
-	}	
+    #dashboard #sidebar {
+        float:left !important;
+        width:100% !important;
+        /* background-color:olive !important; */
+        left:0px !important;
+    }
 
+    #login-info {
+        padding:0 !important;
+        right:2rem;
+        top:0;
+        margin-top:1.9rem;
+    }
+    
+    #login-info p a {
+        background-color:#3FABC6;
+    }
 
+    #login-info p {
+        margin-top:0px;
+        font-size:0.9em;
+    }
 
+    /* control set */
 
+    #sidebar-contents {
+        padding-top:-20px;
+        padding-right:0rem;
+    }
 
-#dashboard #sidebar-contents fieldset legend{
-		font-size:1em !important;
-		width:50%;
-		margin-top:1px;
-		height:40px;
-		
-		cursor:pointer;
-	}
+    #sidebar-contents fieldset {
+        margin:0 !important;
+        width:100%;
+    }
 
+    #sidebar #sidebar-contents fieldset select {
+        font-size:0.8em !important;
+        float:left;
+        width:calc(100% - 45px) !important;
+        height:30px;
+        margin-left:-2px;
+    }
 
+    #dashboard #sidebar-contents fieldset legend {
+        font-size:1em !important;
+        width:50%;
+        margin-top:1px;
+        height:40px;
+        cursor:pointer;
+    }
 
+    #dashboard #sidebar-contents fieldset:nth-child(1) legend {
+        background-color:lightgray;
+    }
 
-#dashboard #sidebar-contents fieldset:nth-child(1) legend {
-background-color:lightgray;
-}
-	
-#dashboard #sidebar-contents fieldset:nth-child(2) legend {
-	margin-top:-70px;
-	float:right;
-	text-align:left;
-	text-indent:2px;
-	background-color:lightgray;
-}
+    #dashboard #sidebar-contents fieldset:nth-child(2) legend {
+        margin-top:-70px;
+        float:right;
+        text-align:left;
+        text-indent:2px;
+        background-color:lightgray;
+    }
 
-#dashboard #sidebar-contents ul{
-	width: calc(100%) !important;
-	height:100% !important;
-	display:none;
-}
+    #dashboard #sidebar-contents ul {
+        width:calc(100%) !important;
+        height:100% !important;
+        display:none;
+    }
 
-#dashboard #sidebar-contents fieldset:nth-child(2):hover >legend {
-background-color:white;
-}
+    #dashboard #sidebar-contents fieldset:nth-child(2):hover >legend {
+        background-color:white;
+    }
 
-#dashboard #sidebar-contents fieldset:nth-child(2):hover >#sidebar-contents fieldset:nth-child(1) legend {
+    #dashboard #sidebar-contents fieldset:nth-child(2):hover >#sidebar-contents fieldset:nth-child(1) legend {
+    }
 
-}
+    #dashboard #sidebar-contents fieldset:nth-child(1) legend {
+        background-color:white;
+    }
 
+    #dashboard #sidebar-contents fieldset:nth-child(1):hover >legend {
+        background-color:white;
+    }
 
-#dashboard #sidebar-contents fieldset:nth-child(1) legend {
-background-color:white;
-}
+    #dashboard #sidebar-contents fieldset:nth-child(2):hover > ul {
+        display:block !important;
+        margin-top:-30px !important;
+    }
+    
+    #dashboard #sidebar-contents fieldset:nth-child(2):hover > ul li {
+        display:block-inline !important;
+        width:10%;
+    }
 
-#dashboard #sidebar-contents fieldset:nth-child(1):hover >legend {
-background-color:white;
-}
+    #sidebar #sidebar-contents input[name=save-values] {
+        margin:0;
+    }
 
-#dashboard #sidebar-contents fieldset:nth-child(2):hover > ul{
-	display:block !important;
-	margin-top:-30px !important;
-}
-#dashboard #sidebar-contents fieldset:nth-child(2):hover > ul li{
-	display:block-inline  !important;
-	width:10%;
-}
+    #sidebar #sidebar-contents fieldset input[name=new-plot] {
+        float:right;
+        font-size:0em;
+        height:30px;
+        margin:0;
+        width:45px !important;
+        right:0;
+        font-size:0px !important;
+        background-color:white;
+        background-image:url(../img/ic_note_add_white_24dp_2x.png);
+        background-size:25px 25px;
+        background-position: auto;
+        background-repeat:no-repeat;
+        cursor:pointer
+    }
 
+    /* Home */
 
+    #home-top #left-block {
+        width:90%;
+    }
 
+    #login-info {
+        top:calc(100vh - 50vh);
+        background-color:red;
+        text-align:center;
+    }
 
+    /* Home end */
 
-#sidebar #sidebar-contents input[name=save-values]{
-margin:0;
-
-}
-
-	
-	
-	#sidebar #sidebar-contents fieldset input[name="new-plot"]{
-		float:right;
-		font-size:0em ;
-		height:30px;
-		margin:0;
-		width:45px !important;
-		right:0;
-		font-size:0px !important;
-		background-color:white;
-		background-image: url('../image/ic_note_add_white_24dp_2x.png') ;
-		background-size: 25px 25px;
-		background-position:  auto;
-		background-repeat:no-repeat;
-		cursor:pointer
-		
-
-		}	
-		
-/* Home */
-
-#home-top #left-block{
-width:90%;
-}
-
-#login-info{
-top: calc(100vh - 50vh);
-background-color:red;
-text-align:center;
-}
-
-/* Home  end */
-	
-
-
-#home-top #left-block{
-	height:60vh;
-	width: calc(100vw -1*30px) !important;
-}
-
-	
-	
+    #home-top #left-block {
+        height:60vh;
+        width:calc(100vw - 1 * 30px) !important;
+    }
 }
