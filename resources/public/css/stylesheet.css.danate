@@ -28,6 +28,19 @@ header, nav, section, footer {
     display:block;
 }
 
+/* h1, h2, h3, h4, h5, h6, h7, p, label { */
+/*     font-family:Open Sans !important; */
+/*     font-weight:400 !important; */
+/*     color:#55f; */
+/* } */
+
+/* input { */
+/*     display:block; */
+/*     height:2rem; */
+/*     border-radius:0rem !important; */
+/*     width:100% !important; */
+/* } */
+
 .button {
     line-height:100% !important;
     text-overflow:ellipsis;
@@ -160,17 +173,6 @@ footer p {
     font-size:0.9rem;
 }
 
-h1,h2,h3,h4,h5,h6 {
-    color:#55f;
-}
-
-input {
-    display:block;
-    height:2rem;
-    border-radius:0rem !important;
-    width:100% !important;
-}
-
 /********/
 /* Home */
 /********/
@@ -209,9 +211,9 @@ input {
 #left-block h2 {
     padding:0.5rem 0.5rem 0.75rem 1rem;
     color:#3C948B;
-    font-family:Courier New;
+    font-family:Open Sans;
     font-weight:400;
-    font-size:1.1em;
+    font-size:1.1rem;
     font-style:normal;
 }
 
@@ -280,6 +282,7 @@ input {
 }
 
 #login-form input:not(.button) {
+    height:2rem;
     width:20rem;
     border:1px solid #ececec;
     margin:0.3rem;
@@ -306,12 +309,11 @@ input {
 }
 
 #login-form input.button {
+    height:2rem;
     width:20rem;
     margin:0.6rem 0.3rem;
     padding:0.5rem;
-    color:white;
     border:1px solid #ececec;
-    cursor:pointer;
 }
 
 #login-form input.button:focus {
@@ -341,6 +343,7 @@ input {
 }
 
 #register-form input:not(.button) {
+    height:2rem;
     width:20rem;
     border:1px solid #ececec;
     margin:0.3rem;
@@ -358,12 +361,11 @@ input {
 }
 
 #register-form input.button {
+    height:2rem;
     width:20rem;
     margin:0.6rem 0.3rem;
     padding:0.5rem;
-    color:white;
     border:1px solid #ececec;
-    cursor:pointer;
 }
 
 #register-form input.button:focus {
@@ -394,12 +396,13 @@ input {
 
 #account-form h2 {
     font-size:1rem;
-    font-weight:200;
+    font-weight:400;
     padding:0.1rem;
     color:Darkgrey;
 }
 
 #account-form input:not(.button) {
+    height:2rem;
     width:20rem;
     border:1px solid #ececec;
     margin:0.3rem;
@@ -417,12 +420,11 @@ input {
 }
 
 #account-form input.button {
+    height:2rem;
     width:20rem;
     margin:0.6rem 0.3rem;
     padding:0.5rem;
-    color:white;
     border:1px solid #ececec;
-    cursor:pointer;
 }
 
 #account-form input.button:focus {
@@ -452,6 +454,7 @@ input {
 }
 
 #password-form input:not(.button) {
+    height:2rem;
     width:20rem;
     border:1px solid #ececec;
     margin:0.3rem;
@@ -469,12 +472,11 @@ input {
 }
 
 #password-form input.button {
+    height:2rem;
     width:20rem;
     margin:0.6rem 0.3rem;
     padding:0.5rem;
-    color:white;
     border:1px solid #ececec;
-    cursor:pointer;
 }
 
 #password-form input.button:focus {
@@ -782,7 +784,15 @@ p.error-message {
     background:rgba(255,255,255,0.9);
 }
 
-#admin h1,h2, h3, h4, h5, h6, h7, p, label {
+#admin h1,
+#admin h2,
+#admin h3,
+#admin h4,
+#admin h5,
+#admin h6,
+#admin h7,
+#admin p,
+#admin label {
     font-family:Open Sans !important;
     font-weight:400 !important;
 }
