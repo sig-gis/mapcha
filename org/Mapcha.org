@@ -1,20 +1,109 @@
-* Database Description
+* Database Initialization
 
-#+name: create-mapcha-database
-#+begin_src sql :engine postgresql :cmdline -U postgres :results silent :exports code
---CREATE ROLE gjohnson WITH LOGIN CREATEDB;
-CREATE DATABASE mapcha WITH OWNER gjohnson;
-\c mapcha
-CREATE EXTENSION postgis;
-#+end_src
+1. Install the latest versions of Postgresql and PostGIS.
 
-#+name: create-mapcha-schema
-#+begin_src sql :engine postgresql :cmdline mapcha :results silent :exports code
+2. Start the Postgresql database server running on your machine on the
+   default port (5432).
+
+3. From your shell, run "psql -U postgres" to connect as the database
+   superuser.
+
+4. At the psql prompt, run these commands:
+
+   #+name: create-mapcha-database
+   #+begin_src sql :engine postgresql :cmdline -U postgres :results silent :exports code
+   CREATE ROLE gjohnson WITH LOGIN CREATEDB;
+   CREATE DATABASE mapcha WITH OWNER gjohnson;
+   \c mapcha
+   CREATE EXTENSION postgis;
+   #+end_src
+
+   This will create a new database called "mapcha" owned by user
+   "gjohnson" and add the PostGIS spatial extensions to it. I
+   hard-coded the "gjohnson" user name into the Mapcha website code as
+   I was developing it since that made interacting with the database
+   easier on my machine. I will likely change it to something more
+   generic (like "mapcha") before releasing the production version of
+   the site, but for now, you'll just need to work with this gjohnson
+   user account.
+
+5. From your shell, run "psql -U gjohnson -f build_mapcha_tables.sql -d
+   mapcha" to populate the new mapcha database with the table schema
+   expected by the website code.
+
+6. Launch the Mapcha website by running "boot dev" from within the
+   mapcha directory that you cloned from GitHub.
+
+7. Point your web browser at http://localhost:8080 to access the site.
+
+8. Register a new user account called "admin@sig-gis.com" with whatever
+   password you like.
+
+9, From your shell, run "psql -U gjohnson -d mapcha" to connect to the
+   mapcha database as the gjohnson user.
+
+10. At the psql prompt, run this command to elevate admin@sig-gis.com
+    to the admin role.
+
+    #+name: grant-admin-role-to-admin-user
+    #+begin_src sql :engine postgresql :cmdline mapcha :results silent :exports code
+    UPDATE mapcha.users
+      SET role='admin'
+      WHERE email='admin@sig-gis.com';
+    #+end_src
+
+11. Logout and back in as admin@sig-gis.com on the Mapcha website. You
+    should now see both the Account, Dashboard, and Admin links in the
+    navigation bar, and both of these pages should work for you.
+
+12. Visit the Admin link and create a new project. All fields must be
+    filled in. To input the bounding box coordinates, use ctrl+drag on
+    the map interface. You can repeat this as many times as you would
+    like, and it will always save the last bounding box drawn this
+    way. Remember to enter several sample value categories (try 6-8 to
+    start with) along with sensible colors.
+
+    Here are the settings for a few test projects that I created:
+
+    =========================================================
+    - Name :: Mekong River Region
+    - Description :: Laos, Cambodia, Vietnam, Thailand, Myanmar
+    - Number of plots :: 10000
+    - Plot radius in meters :: 100
+    - Number of samples per plot :: 15
+    - Categories per sample :: Forest, Grassland, Bare Surface, Impervious Surface, Agriculture, Urban, Water, Cloud, Unknown
+    - Latitude Max :: 22.5
+    - Longitude Min :: 95
+    - Longitude Max :: 107
+    - Latitude Min :: 10.5
+    =========================================================
+    - Name :: California, USA
+    - Description :: The most populous state in the United States.
+    - Number of plots :: 1000
+    - Plot radius in meters :: 50
+    - Number of samples per plot :: 5
+    - Categories per sample :: Rock/Sand, Grasses, Crops, Shrubs, Trees, Roads/Parking Lots, Buildings, Water, Unknown
+    - Latitude Max :: 42.0
+    - Longitude Min :: -124.6
+    - Longitude Max :: -114.0
+    - Latitude Min :: 32.3
+    =========================================================
+    - Name :: Mongolia
+    - Description :: The land of yurt-dwelling pastoral nomads.
+    - Number of plots :: 5000
+    - Plot radius in meters :: 200
+    - Number of samples per plot :: 20
+    - Categories per sample :: Settlement, Road, Rock/Sand, Grasses, Trees, Water, Snow, Unknown
+    - Latitude Max :: 52.5
+    - Longitude Min :: 87.0
+    - Longitude Max :: 120.5
+    - Latitude Min :: 41.5
+    =========================================================
+
+#+name: build-mapcha-tables
+#+begin_src sql :engine postgresql :cmdline mapcha :results silent :exports code :tangle ../resources/sql/build_mapcha_tables.sql :padline no
 CREATE SCHEMA mapcha;
-#+end_src
 
-#+name: create-mapcha-plot-tables
-#+begin_src sql :engine postgresql :cmdline mapcha :results silent :exports code
 CREATE TABLE mapcha.projects (
   id          serial primary key,
   name        text not null,
@@ -32,10 +121,7 @@ CREATE TABLE mapcha.plots (
 );
 
 CREATE INDEX mapcha_plots_project_id ON mapcha.plots (project_id);
-#+end_src
 
-#+name: create-mapcha-sample-tables
-#+begin_src sql :engine postgresql :cmdline mapcha :results silent :exports code
 CREATE TABLE mapcha.samples (
   id      serial primary key,
   plot_id integer not null references mapcha.plots (id) on delete cascade on update cascade,
@@ -53,10 +139,7 @@ CREATE TABLE mapcha.sample_values (
 );
 
 CREATE INDEX mapcha_sample_values_project_id ON mapcha.sample_values (project_id);
-#+end_src
 
-#+name: create-mapcha-imagery-table
-#+begin_src sql :engine postgresql :cmdline mapcha :results silent :exports code
 CREATE TABLE mapcha.imagery (
   id          serial primary key,
   title       text not null,
@@ -64,10 +147,7 @@ CREATE TABLE mapcha.imagery (
   url         text not null,
   attribution text
 );
-#+end_src
 
-#+name: create-mapcha-user-tables
-#+begin_src sql :engine postgresql :cmdline mapcha :results silent :exports code
 CREATE TABLE mapcha.users (
   id        serial primary key,
   email     text not null,
@@ -91,57 +171,6 @@ CREATE TABLE mapcha.user_samples (
 CREATE INDEX mapcha_user_samples_user_id ON mapcha.user_samples (user_id);
 CREATE INDEX mapcha_user_samples_sample_id ON mapcha.user_samples (sample_id);
 #+end_src
-
-After creating the admin@sig-gis.com (password: administrator) and
-gjohnson@sig-gis.com (password: 2bitxfer) users through the web
-interface, run the following code to elevate admin@sig-gis.com to the
-admin role.
-
-#+name: grant-admin-role-to-admin-user
-#+begin_src sql :engine postgresql :cmdline mapcha :results silent :exports code
-UPDATE mapcha.users
-  SET role='admin'
-  WHERE email='admin@sig-gis.com';
-#+end_src
-
-* Primary Study Area: Mekong River Region
-
-  - Name :: Mekong River Region
-  - Description :: Laos, Cambodia, Vietnam, Thailand, Myanmar
-  - Number of plots :: 10000
-  - Plot radius in meters :: 100
-  - Number of samples per plot :: 15
-  - Categories per sample :: Forest, Grassland, Bare Surface, Impervious Surface, Agriculture, Urban, Water, Cloud, Unknown
-  - Latitude Max :: 22.5
-  - Longitude Min :: 95
-  - Longitude Max :: 107
-  - Latitude Min :: 10.5
-
-* Secondary Study Area: California, USA
-
-  - Name :: California, USA
-  - Description :: The most populous state in the United States.
-  - Number of plots :: 1000
-  - Plot radius in meters :: 50
-  - Number of samples per plot :: 5
-  - Categories per sample :: Rock/Sand, Grasses, Crops, Shrubs, Trees, Roads/Parking Lots, Buildings, Water, Unknown
-  - Latitude Max :: 42.0
-  - Longitude Min :: -124.6
-  - Longitude Max :: -114.0
-  - Latitude Min :: 32.3
-
-* Tertiary Study Area: Mongolia
-
-  - Name :: Mongolia
-  - Description :: The land of yurt-dwelling pastoral nomads.
-  - Number of plots :: 5000
-  - Plot radius in meters :: 200
-  - Number of samples per plot :: 20
-  - Categories per sample :: Settlement, Road, Rock/Sand, Grasses, Trees, Water, Snow, Unknown
-  - Latitude Max :: 52.5
-  - Longitude Min :: 87.0
-  - Longitude Max :: 120.5
-  - Latitude Min :: 41.5
 
 * Web Mapping Options
 
