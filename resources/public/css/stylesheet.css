@@ -59,7 +59,7 @@ header {
                      url(http://www.adpc.net/igo/images/SERVIR/servir.png);
     background-repeat:no-repeat;
     background-attachment:fixed;
-    background-position:1rem 15px, 9rem 15px, 12rem 15px, right 15px;
+    background-position:1rem 15px, 9rem 15px, 12rem 15px, calc(100% - 1rem) 15px;
     background-size:auto 35px, auto 35px, auto 35px, auto 25px;
     z-index:100;
 }
@@ -70,25 +70,25 @@ header a:active,
 footer a:link,
 footer a:visited,
 footer a:active {
-    color:black !important;
+    color:black;
     text-decoration:none;
 }
 
 header a:hover,
 footer a:hover {
-    color:#999;
+    color:#555;
 }
 
 header a.active-link {
-    color:#999;
+    color:#555;
 }
 
 header h1 {
     z-index:2;
-    width:calc(60vw - 200px);
+    position:absolute;
     top:4rem !important;
     left:1rem !important;
-    position:absolute;
+    width:calc(60vw - 200px);
     font-family:Lobster;
     text-transform:uppercase;
     text-decoration:underline;
@@ -117,9 +117,9 @@ nav ul li {
 
 #login-info {
     position:absolute;
-    top:2.3rem;
+    top:2.6rem;
     right:0rem;
-    padding:0.7rem 0rem;
+    padding:0.8rem;
     font-size:0.8rem;
     z-index:30;
 }
