@@ -163,7 +163,8 @@
   [request]
   (wrap-header-footer
    request
-   [:h3 "About page...in progress"]))
+   [:div#about
+    [:h3 "About page...in progress"]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -175,7 +176,8 @@
   [request]
   (wrap-header-footer
    request
-   [:h3 "Contact page...in progress"]))
+   [:div#contact
+    [:h3 "Contact page...in progress"]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

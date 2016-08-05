@@ -146,17 +146,6 @@ nav ul li {
     background-color:rgba(255,255,255,0.2);
 }
 
-#content h3 {
-    position:absolute;
-    right:5rem !important;
-    height:100%;
-    width:350px;
-    padding:2rem;
-    background:rgba(255, 255, 255, 0.8);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
-    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
-}
-
 footer {
     position:fixed;
     bottom:0rem;
@@ -239,23 +228,52 @@ input {
 }
 
 /*********/
+/* About */
+/*********/
+
+#about {
+    position:absolute;
+    right:5rem;
+    height:100%;
+    width:350px;
+    padding:2rem;
+    background:rgba(255, 255, 255, 0.8);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+}
+
+/***********/
+/* Contact */
+/***********/
+
+#contact {
+    position:absolute;
+    right:5rem;
+    height:100%;
+    width:350px;
+    padding:2rem;
+    background:rgba(255, 255, 255, 0.8);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+}
+
+/*********/
 /* Login */
 /*********/
 
 #login-form {
+    position:absolute;
     right:5rem;
     height:100%;
-    padding:2rem;
     width:350px;
-    background-color:#e0e0e0;
+    padding:2rem;
     background:rgba(255, 255, 255, 0.8);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
     -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
-    position:fixed; /* or absolute */
 }
 
 #login-form h1 {
-    font-size:2.5rem;
+    font-size:1.9rem;
     font-weight:100;
     padding:0.5rem;
     color:gray !important;
@@ -265,11 +283,11 @@ input {
     width:20rem;
     border:1px solid #ececec;
     margin:0.3rem;
+    padding:0px 5px;
 }
 
 #login-form input:not(.button):focus {
     border:1px solid DarkGrey;
-    /* box-shadow:0rem 0rem 0.5rem rgba(21,21,153,0.8); */
     cursor:grab;
 }
 
@@ -278,12 +296,20 @@ input {
     border:1px solid gray;
 }
 
+#login-form p#forgot-password a {
+    display:block;
+    font-size:0.9rem;
+    font-weight:700;
+    margin:1rem 0.5rem 0rem 0.5rem;
+    color:gray;
+    text-decoration:none;
+}
+
 #login-form input.button {
     width:20rem;
-    margin:-1rem 0.3rem;
+    margin:0.6rem 0.3rem;
     padding:0.5rem;
     color:white;
-    background-color:Darkgray;
     border:1px solid #ececec;
     cursor:pointer;
 }
@@ -292,57 +318,50 @@ input {
     border:1px solid #999;
 }
 
-#login-form p#forgot-password a {
-    font-size:0.8rem;
-    font-weight:700;
-    line-height:5;
-    margin:0.5rem;
-    color:gray;
-    text-decoration:none;
-}
-
 /************/
 /* Register */
 /************/
 
 #register-form {
+    position:absolute;
     right:5rem;
     height:100%;
-    padding:2rem;
     width:350px;
-    background-color:#e0e0e0;
+    padding:2rem;
     background:rgba(255, 255, 255, 0.8);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
     -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
-    position:fixed; /* or absolute */
 }
 
 #register-form h1 {
-    font-size:2.5rem;
-    font-weight100;
-    line-height:0.9;
+    font-size:1.9rem;
+    font-weight:100;
     padding:0.5rem;
     color:gray !important;
-    margin-bottom:2rem;
 }
 
 #register-form input:not(.button) {
     width:20rem;
     border:1px solid #ececec;
     margin:0.3rem;
+    padding:0px 5px;
 }
 
 #register-form input:not(.button):focus {
-    border:1px solid #55f;
-   /* box-shadow:0rem 0rem 0.5rem rgba(21,21,153,0.8); */
+    border:1px solid DarkGrey;
+    cursor:grab;
+}
+
+#register-form input:not(.button):hover {
+    cursor:pointer;
+    border:1px solid gray;
 }
 
 #register-form input.button {
     width:20rem;
-    margin:2rem 0.3rem;
+    margin:0.6rem 0.3rem;
     padding:0.5rem;
     color:white;
-    background-color:Darkgray;
     border:1px solid #ececec;
     cursor:pointer;
 }
