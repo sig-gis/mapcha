@@ -432,26 +432,30 @@
   [request]
   (-> (wrap-header-footer
        request
-       [:h3 "Access Denied"]
-       [:p.error-message "Sorry, you are not authorized to access this resource."])
+       [:div#access-denied
+        [:h3 "Access Denied"]
+        [:p.error-message (str "Sorry, you are not authorized"
+                               " to access this resource.")]])
       (status 401)))
 
 (defn page-not-found-page
   [request]
   (-> (wrap-header-footer
        request
-       [:h3 "Page Not Found"]
-       [:p.error-message (str "There's no page at the address you requested. "
-                              "If you entered it by hand, check for typos. "
-                              "If you followed a link or a bookmark, it may "
-                              "need to be updated.")])
+       [:div#page-not-found
+        [:h3 "Page Not Found"]
+        [:p.error-message (str "There's no page at the address you requested. "
+                               "If you entered it by hand, check for typos. "
+                               "If you followed a link or a bookmark, it may "
+                               "need to be updated.")]])
       (status 404)))
 
 (defn error-page
   [request]
   (-> (wrap-header-footer
        request
-       [:h3 "Error"]
-       [:p.error-message (str "Something went wrong. Try again, and if the "
-                              "problem persists, please contact support.")])
+       [:div#error-page
+        [:h3 "Error"]
+        [:p.error-message (str "Something went wrong. Try again, and if the "
+                               "problem persists, please contact support.")]])
       (status 500)))

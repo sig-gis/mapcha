@@ -33,13 +33,6 @@ h1, h2, h3, h4, h5, h6, h7, p, label {
     font-weight:400;
 }
 
-/* input { */
-/*     display:block; */
-/*     height:2rem; */
-/*     border-radius:0rem !important; */
-/*     width:100% !important; */
-/* } */
-
 .button {
     line-height:100% !important;
     text-overflow:ellipsis;
@@ -503,6 +496,23 @@ p.error-message {
     padding:1rem;
     border:1px solid #009;
     border-radius:1rem;
+}
+
+#access-denied, #page-not-found, #error-page {
+    position:absolute;
+    right:5rem;
+    height:100%;
+    width:350px;
+    padding:2rem;
+    background:rgba(255, 255, 255, 0.8);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+}
+
+#access-denied, #page-not-found, #error-page h3 {
+    font-size:1.5rem;
+    font-weight:100;
+    color:gray;
 }
 
 /*************/
