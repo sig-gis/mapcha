@@ -290,7 +290,7 @@
       (wrap-header-footer
        (assoc request :flash flash-message)
        [:div#password-form
-        [:h1 "Enter your email address"]
+        [:h1 "Enter your login email"]
         [:form {:method "post" :action "/password"}
          [:input#email {:type "email" :name "email" :value ""
                         :placeholder "Email" :autocomplete "off"}]

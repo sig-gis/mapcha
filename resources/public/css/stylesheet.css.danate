@@ -375,19 +375,18 @@ input {
 /***********/
 
 #account-form {
+    position:absolute;
     right:5rem;
     height:100%;
-    padding:2rem;
     width:350px;
-    background-color:#e0e0e0;
+    padding:2rem;
     background:rgba(255, 255, 255, 0.8);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
     -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
-    position:fixed; /* or absolute */
 }
 
 #account-form h1 {
-    font-size:2.5rem;
+    font-size:1.9rem;
     font-weight:100;
     padding:0.5rem;
     color:gray !important;
@@ -395,33 +394,35 @@ input {
 
 #account-form h2 {
     font-size:1rem;
-    font-weight:bold;
-    padding:0.1rem;
-    color:darkgray;
     font-weight:200;
+    padding:0.1rem;
+    color:Darkgrey;
 }
 
 #account-form input:not(.button) {
-    width:18rem;
-    border:1px solid #999;
-    border-radius:0.25rem;
+    width:20rem;
+    border:1px solid #ececec;
     margin:0.3rem;
+    padding:0px 5px;
 }
 
 #account-form input:not(.button):focus {
-    border:1px solid #55f;
-    /* box-shadow:0rem 0rem 0.5rem rgba(21,21,153,0.8); */
+    border:1px solid DarkGrey;
+    cursor:grab;
+}
+
+#account-form input:not(.button):hover {
+    cursor:pointer;
+    border:1px solid gray;
 }
 
 #account-form input.button {
-    width:18rem;
+    width:20rem;
+    margin:0.6rem 0.3rem;
+    padding:0.5rem;
     color:white;
-    margin:0.3rem;
-    background-color:#55f;
-    background-color:#3FABC6 !important;
-    height:40px;
-    /* border-radius:1rem; */
-    /* box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6); */
+    border:1px solid #ececec;
+    cursor:pointer;
 }
 
 #account-form input.button:focus {
@@ -433,38 +434,47 @@ input {
 /************/
 
 #password-form {
-    width:19rem;
-    padding:1rem;
-    background-color:#e0e0e0;
-    border-radius:1rem;
+    position:absolute;
+    right:5rem;
+    height:100%;
+    width:350px;
+    padding:2rem;
+    background:rgba(255, 255, 255, 0.8);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
 }
 
 #password-form h1 {
-    font-size:1.5rem;
-    font-weight:bold;
+    font-size:1.9rem;
+    font-weight:100;
     padding:0.5rem;
+    color:gray !important;
 }
 
 #password-form input:not(.button) {
-    width:18rem;
-    border:1px solid #999;
-    border-radius:0.25rem;
+    width:20rem;
+    border:1px solid #ececec;
     margin:0.3rem;
+    padding:0px 5px;
 }
 
 #password-form input:not(.button):focus {
-    border:1px solid #55f;
-    /* box-shadow:0rem 0rem 0.5rem rgba(21,21,153,0.8); */
+    border:1px solid DarkGrey;
+    cursor:grab;
+}
+
+#password-form input:not(.button):hover {
+    cursor:pointer;
+    border:1px solid gray;
 }
 
 #password-form input.button {
-    width:18rem;
-    margin:0.3rem;
+    width:20rem;
+    margin:0.6rem 0.3rem;
     padding:0.5rem;
     color:white;
-    background-color:#55f;
-    border-radius:1rem;
-    /* box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6); */
+    border:1px solid #ececec;
+    cursor:pointer;
 }
 
 #password-form input.button:focus {
