@@ -28,11 +28,10 @@ header, nav, section, footer {
     display:block;
 }
 
-/* h1, h2, h3, h4, h5, h6, h7, p, label { */
-/*     font-family:Open Sans !important; */
-/*     font-weight:400 !important; */
-/*     color:#55f; */
-/* } */
+h1, h2, h3, h4, h5, h6, h7, p, label {
+    font-family:Open Sans;
+    font-weight:400;
+}
 
 /* input { */
 /*     display:block; */
@@ -310,7 +309,7 @@ footer p {
 
 #login-form input.button {
     height:2rem;
-    width:20rem;
+    width:21rem;
     margin:0.6rem 0.3rem;
     padding:0.5rem;
     border:1px solid #ececec;
@@ -362,7 +361,7 @@ footer p {
 
 #register-form input.button {
     height:2rem;
-    width:20rem;
+    width:21rem;
     margin:0.6rem 0.3rem;
     padding:0.5rem;
     border:1px solid #ececec;
@@ -421,7 +420,7 @@ footer p {
 
 #account-form input.button {
     height:2rem;
-    width:20rem;
+    width:21rem;
     margin:0.6rem 0.3rem;
     padding:0.5rem;
     border:1px solid #ececec;
@@ -473,7 +472,7 @@ footer p {
 
 #password-form input.button {
     height:2rem;
-    width:20rem;
+    width:21rem;
     margin:0.6rem 0.3rem;
     padding:0.5rem;
     border:1px solid #ececec;
