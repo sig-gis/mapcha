@@ -141,13 +141,13 @@ nav ul li {
     position:fixed;
     top:6.5rem;
     left:0rem;
-    height:calc(100vh - 6.5rem - 2.4rem);
+    height:calc(100vh - 6.5rem - 2.6rem);
     width:100%;
     background-color:rgba(255,255,255,0.2);
 }
 
 #content h3 {
-    position:fixed; /* or absolute */
+    position:absolute;
     right:5rem !important;
     height:100%;
     width:350px;
@@ -175,138 +175,16 @@ h1,h2,h3,h4,h5,h6 {
     color:#55f;
 }
 
+input {
+    display:block;
+    height:2rem;
+    border-radius:0rem !important;
+    width:100% !important;
+}
+
 /********/
 /* Home */
 /********/
-
-#home-top #left-block{
-    border-radius:0rem !Important;
-    border:none;
-}
-
-#left-block {
-    right:5rem !important;
-    height:100%;
-    width:350px;
-    padding:2rem;
-    background:rgba(255, 255, 255, 0.8);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
-    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
-    position:fixed; /* or absolute */
-}
-
-#left-block h1 {
-    font-size:2rem;
-    font-weight:bold;
-    padding:0.5rem 0.5rem 0.5rem 1rem;
-}
-
-#left-block h2 {
-    font-size:1rem;
-    font-style:italic;
-    padding:0.5rem 0.5rem 0.75rem 1rem;
-}
-
-#home-top #right-block{
-    display:none;
-}
-
-#right-block {
-    position:absolute;
-    top:1rem;
-    right:0rem;
-    height:20rem;
-    width:17rem;
-}
-
-#right-block input:not(.button) {
-    width:15rem;
-    margin:0.3rem;
-    border:1px solid #999;
-    border-radius:0.25rem;
-}
-
-#right-block input:not(.button):focus {
-    border:1px solid #55f;
-    /* box-shadow:0rem 0rem 0.5rem rgba(21,21,153,0.8); */
-}
-
-#right-block input.button {
-    width:15rem;
-    margin:0.3rem;
-    padding:0.3rem;
-    color:white;
-    background-color:#55f;
-    border-radius:1rem;
-    /* box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6); */
-}
-
-#left-block h1{
-    color:gray;
-    text-transform:uppercase;
-    margin-bottom:20px;
-    font-size:3em;
-    margin-top:20px;
-    line-height:80%;
-}
-
-#left-block h1 em{
-    font-size:0.8em !important;
-    font-weight:400;
-}
-
-#left-block h2{
-    color:#3C948B;
-    font-family:Courier New;
-    font-weight:400;
-    font-size:1.1em;
-    font-style:normal;
-}
-
-
-#right-block input.button:focus {
-    border:1px solid #999;
-}
-
-#login {
-    width:16rem;
-    padding:0.5rem;
-    background-color:#e0e0e0;
-}
-
-#login p#forgot-password a {
-    font-size:3rem;
-    font-weight:bold;
-    margin-left:0.25rem;
-}
-
-#login p#forgot-password a {
-    color:#009;
-    text-decoration:none;
-}
-
-#register {
-    margin-top:1rem;
-    width:16rem;
-    padding:0.5rem;
-    background-color:#e0e0e0;
-    border-radius:1rem;
-}
-
-#register h3 {
-    font-size:1.1rem;
-    font-weight:bold;
-    padding:0.3rem;
-}
-
-#home-content p {
-    margin:1rem 0rem;
-    display:none;
-}
-
-.trademark {
-    font-style:italic;
-}
 
 #overview-map {
     display:none;
@@ -365,11 +243,58 @@ h1,h2,h3,h4,h5,h6 {
     margin-left:-1rem;
 }
 
-input{
-    display:block;
-    height:2rem;
+#left-block {
+    position:absolute;
+    right:5rem !important;
+    height:100%;
+    width:350px;
     border-radius:0rem !important;
-    width:100% !important;
+    padding:2rem;
+    background:rgba(255, 255, 255, 0.8);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+}
+
+#left-block h1 {
+    margin:20px 0px;
+    padding:0.5rem 0.5rem 0.5rem 1rem;
+    font-size:3rem;
+    font-weight:bold;
+    color:gray;
+    text-transform:uppercase;
+    line-height:80%;
+}
+
+#left-block h1 em {
+    font-size:0.8em !important;
+    font-weight:400;
+}
+
+#left-block h2 {
+    padding:0.5rem 0.5rem 0.75rem 1rem;
+    color:#3C948B;
+    font-family:Courier New;
+    font-weight:400;
+    font-size:1.1em;
+    font-style:normal;
+}
+
+#right-block {
+    display:none;
+}
+
+#login {
+    width:16rem;
+    padding:0.5rem;
+    background-color:#e0e0e0;
+}
+
+#home-content p {
+    display:none;
+}
+
+.trademark {
+    font-style:italic;
 }
 
 /*********/
