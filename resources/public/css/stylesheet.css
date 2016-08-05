@@ -66,19 +66,20 @@ header {
 
 header a:link,
 header a:visited,
-header a:active,
-footer a:link,
-footer a:visited,
-footer a:active {
+header a:active {
     color:black;
     text-decoration:none;
 }
 
-header a:hover,
-footer a:hover {
-    color:#555;
+footer a:link,
+footer a:visited,
+footer a:active {
+    color:#eee;
+    text-decoration:none;
 }
 
+header a:hover,
+footer a:hover,
 header a.active-link {
     color:#555;
 }
@@ -160,14 +161,13 @@ footer {
     position:fixed;
     bottom:0rem;
     left:0rem;
-    height:2.4rem;
+    height:2.6rem;
     width:100%;
-    color:#eee;
-    background-color:white;
+    background-color:#1a1a1a;
 }
 
 footer p {
-    padding:0.8rem 2.4rem;
+    padding:0.7rem 2.4rem;
     font-size:0.9rem;
 }
 
