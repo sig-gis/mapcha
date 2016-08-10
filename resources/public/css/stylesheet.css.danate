@@ -1,4 +1,4 @@
-/* CSS alpha version 0.1 Danate 2016-08-04 */
+/* CSS alpha version 0.2 Danate and GJohnson 2016-08-10 */
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:100,400,700|Oswald:normal|Cabin+Sketch:normal|Lobster:normal);
 
@@ -480,22 +480,25 @@ footer p {
 /***************/
 
 p.alert {
-    font-size:0.8rem;
+    float:left;
+    clear:left;
+    margin:1rem 0rem 0rem 1rem;
+    font-size:1rem;
     font-style:italic;
-    width:19rem;
-    margin-bottom:1rem;
+    width:35rem;
     padding:1rem;
     border:1px solid #009;
     border-radius:1rem;
+    background:rgba(255, 255, 255, 0.8);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
 }
 
 p.error-message {
-    font-size:1rem;
-    width:30rem;
     margin-top:1rem;
-    padding:1rem;
-    border:1px solid #009;
-    border-radius:1rem;
+    font-size:1rem;
+    font-style:normal;
+    color:#555;
 }
 
 #access-denied, #page-not-found, #error-page {
