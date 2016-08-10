@@ -523,16 +523,13 @@ p.error-message {
 /*************/
 
 #dashboard {
-    /* position:relative; */
-    position:fixed;
+    height:100%;
     padding:0rem;
     background:rgba(255,255,255, 0.8);
-    /* background-color:#a3ff4a; */
-    /* background-color:DarkGray; */
-    height:100%;
 }
 
 #dashboard h1 {
+    display:none;
     font-size:1.5rem;
     font-weight:100;
     padding-left:1rem !important;
@@ -540,7 +537,6 @@ p.error-message {
     width:calc(70%);
     color:orange!important;
     line-height:1.2;
-    display:none;
 }
 
 #dashboard #quit-button {
@@ -560,17 +556,9 @@ p.error-message {
 
 #dashboard #image-analysis-pane{
     float:left;
-    width:70% !important;
-    background-color:white;
+    height:100%;
+    width:70%;
     background-color:darkgray;
-    /* Firefox */
-    height:-moz-calc(100% - 9rem) !important;
-    /* WebKit */
-    height:-webkit-calc(100% - 9rem) !important;
-    /* Opera */
-    height:-o-calc(100% - 9rem) !important;
-    /* Standard */
-    height:calc(100% - 9rem) !important;
 }
 
 #dashboard .ol-dragbox {
@@ -578,15 +566,15 @@ p.error-message {
     border-color:rgba(100,150,0,1);
 }
 
-#dashboard #sidebar {
-    float:right;
-    width:30% !important;
-    position:relative;
-    padding:0;
+#dashboard .ol-rotate {
+    top:4rem;
 }
 
-#sidebar {
-    width:100% !important;
+#dashboard #sidebar {
+    float:right;
+    height:100%;
+    width:30%;
+    padding:0rem;
 }
 
 #sidebar-contents {
@@ -769,18 +757,21 @@ p.error-message {
     border-radius:0.5rem;
 }
 
-
-#imagery-info {
+#dashboard #imagery-info {
     clear:both;
-    font-family:Arial;
+    position:relative;
+    top:-1.5rem;
+    left:18%;
+    width:40%;
+    text-align:center;
     font-size:0.8em;
-    color:Darkgray !important;
-    text-align:right;
-    margin-top:-200px !important;
+    color:white;
+    padding:0.25rem;
+    background-color:rgba(100,100,200,0.8);
 }
 
 #dashboard #page-stretcher {
-    clear:both;
+    display:none;
 }
 
 /*********/
