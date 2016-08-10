@@ -767,7 +767,7 @@ p.error-message {
     font-size:0.8em;
     color:white;
     padding:0.25rem;
-    background-color:rgba(100,100,200,0.8);
+    background-color:rgba(75,75,150,0.6);
 }
 
 #dashboard #page-stretcher {
