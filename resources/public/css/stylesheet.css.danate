@@ -41,7 +41,6 @@ h1, h2, h3, h4, h5, h6, h7, p, label {
     color:white;
     font-family:Oswald !important;
     text-transform:uppercase;
-    border-radius:0px !important
     /* Safari 3-4, iOS 1-3.2, Android 1.6- */
     -webkit-border-radius:0px !important;
     /* Firefox 1-3.6 */
@@ -577,184 +576,75 @@ p.error-message {
     padding:0rem;
 }
 
-#sidebar-contents {
-    height:800px !important;
+#dashboard #sidebar-contents {
+    height:100%;
+    border:1px solid green;
 }
 
-#sidebar-contents fieldset legend {
-    font-family:Open Sans;
-    font-weight:400 !important;
-    text-transform:uppercase;
-    font-size:1em;
-    margin-top:-5px;
-    color:#423A34;
-}
-
-#sidebar #sidebar-contents fieldset {
+#dashboard #sidebar-contents fieldset {
     margin-top:0px;
-    border:0px !important;
 }
 
-/* All dash board buttons */
-#dashboard #sidebar input {
-    max-width:100% !important;
-    color:#3D3B39 !important;
-    text-shadow:0px 0px 0px rgba(255, 255, 255, 0.4) !important;
-    font-family:Verdana,Geneva,sans-serif;
-    text-indent:5px;
-    font-size:0.8em;
-    font-weight:400;
-    cursor:pointer;
-    color:#423A34!important;
-    text-transform:uppercase;
-    /* text-shadow:-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white !important; */
-}
-
-#sidebar-contents input[name=save-values] {
-    clear:both;
-    font-size:1em !important;
-    width:100% !important;
-    text-indent:0 !important;
-    height:40px;;
-    margin:4px 0;
-    color:white !important;
-    cursor:pointer;
-    background-color:#3FABC6 !important;
-    opacity:1.0 !important;
-}
-
-#sidebar #sidebar-contents select {
-    line-height:90%;
-    font-size:1.2em Important;
-    padding:0px;
-    height:1.8em;
-    width:100% !important;
-    border:none;
-    outline:none;
-    color:#3D3B39 !important;
-}
-
-#dashboard #sidebar fieldset:nth-child(2) {
-    /* background-color:green; */
-    margin-top:10px;
-}
-
-#dashboard #sidebar legend {
+#dashboard #sidebar-contents legend {
     font-size:1.2em;
     font-family:Oswald;
-    font-weight:400;
+    font-weight:400 !important;
     padding:10px 0;
     color:#3FABC6;
+    text-transform:uppercase;
+    margin-top:-5px;
+    text-indent:5px;
 }
 
-#dashboard #sidebar fieldset ul li {
-    padding:0;
-}
-
-#dashboard #sidebar fieldset input {
-    border-radius:0rem;
+#dashboard #sidebar-contents select {
+    font-family:Verdana,Geneva,sans-serif;
+    font-weight:200;
+    font-size:0.9em;
+    line-height:90%;
+    padding:0rem;
+    height:1.8rem;
     width:100%;
+    border:none;
+    outline:none;
+    color:#3D3B39;
+    text-indent:5px;
+}
+
+#dashboard #sidebar-contents option {
+    color:#3D3B39;
+    text-indent:5px;
+}
+
+#dashboard #sidebar-contents input[name=new-plot] {
     height:40px;
-    float:left;
-    /* text-shadow:0px 0px 0px rgba(255, 255, 255, 0.4) !important; */
-}
-
-#dashboard #sidebar-contents fieldset:nth-child(2) ul li{
-    border-left-style:solid !important;
-    border-left-width:1rem !important;
-    border-color:gray;
-    width:calc(100% / 2);
-    width:calc(100% / 2 - 1 * 20px);
-}
-
-#sidebar #sidebar-contents input[name=new-plot] {
     width:100%;
-    text-indent:0 !important;
-    font-size:1em;
-    height:40px;
     margin:4px 0;
-    color:white !important;
-    background-color:#3FABC6 !important;
-    cursor:pointer !important;
+    font-size:1em !important;
 }
 
-#sidebar-contents fieldset select {
+#dashboard #sidebar-contents input[name=save-values] {
+    clear:both;
+    height:40px;
+    width:100%;
+    margin:4px 0;
+    font-size:1em !important;
+}
+
+#dashboard #sidebar-contents ul li {
     float:left;
+    width:50%;
+}
+
+#dashboard #sidebar-contents ul li input {
+    height:40px;
     width:100%;
     font-family:Verdana,Geneva,sans-serif;
-    font-weight:200 !important;
-    font-size:0.9em !important;
-}
-
-
-#sidebar-contents fieldset:nth-child(1) {
-    /* background-color:orange; */
-    text-indent:5px;
-    margin-top:1rem
-}
-
-#sidebar-contents fieldset:nth-child(2) {
-    float:left;
-    background-color:#ececec;
-    text-indent:5px;
-}
-
-#sidebar-contents fieldset ul {
-    width:100%;
-}
-
-#sidebar-contents fieldset ul>li {
-    float:left;
-}
-
-#sidebar-contents fieldset ul input {
-    font-size:1rem;
-    font-weight:600 !important;
-    text-indent:10px;
+    font-size:0.8em;
+    text-transform:uppercase;
+    cursor:pointer;
+    color:#ddd !important;
     text-align:left;
-}
-
-#dashboard legend {
-    font-size:1.2rem;
-    font-weight:bold;
-    color:#55f;
-}
-
-#dashboard select {
-    display:block;
-    height:2.5rem;
-    width:100%;
-    padding:0.5rem;
-    color:#55f;
-    border:1px solid #55f;
-}
-
-#dashboard option {
-    color:#55f;
-}
-
-#dashboard input.button {
-    display:block;
-    padding:0.5rem;
-    margin:0.5rem auto 0rem auto;
-    color:white;
-    background-color:#55f;
-    border-radius:0.5rem;
-    /* box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6); */
-}
-
-#dashboard ul {
-    width:13rem;
-    margin:auto;
-    list-style-type:none;
-}
-
-#dashboard ul li input {
-    height:2rem;
-    width:13rem;
-    color:#55f;
-    border:1px solid #999;
-    border-radius:0.5rem;
+    text-indent:10px;
 }
 
 #dashboard #imagery-info {
