@@ -542,11 +542,11 @@ p.error-message {
     height:100%;
     width:30%;
     padding:0rem;
+    overflow:scroll;
 }
 
 #dashboard #sidebar-contents {
     height:100%;
-    border:1px solid green;
 }
 
 #dashboard #sidebar-contents fieldset {
@@ -610,7 +610,6 @@ p.error-message {
     font-size:0.8em;
     text-transform:uppercase;
     cursor:pointer;
-    color:#ddd !important;
     text-align:left;
     text-indent:10px;
 }

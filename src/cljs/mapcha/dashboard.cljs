@@ -126,12 +126,9 @@
        [:li {:key id}
         [:input {:type "button" :name (str value "_" id) :value value
                  :style (if color
-                          {:background-color color
-                           :color "white"
-                           :font-weight "bold"
-                           :text-shadow (str "1px 1px 2px black,"
-                                             "0px 0px 25px blue,"
-                                             "0px 0px 5px darkblue")}
+                          {:border-left-style "solid"
+                           :border-left-width "1.5rem"
+                           :border-left-color color}
                           {})
                  :on-click #(set-current-value! % sample-value)}]])]
     [:input#save-values-button.button {:type "button" :name "save-values"
