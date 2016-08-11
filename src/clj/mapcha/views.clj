@@ -104,8 +104,7 @@
              (str "Logged in as " (current-email request) " ")
              (link-active "/logout" "Logout"))
             (list
-             (link-active "/login" "Login")
-             (link-active "/register" "Register")))]]]
+             (link-active "/login" "Login")))]]]
        [:section#content
         (when-let [message (:flash request)]
           (if (string? message)
@@ -181,7 +180,10 @@
      [:input {:type "email" :name "email" :value "" :placeholder "Email"}]
      [:input {:type "password" :name "password" :value "" :placeholder "Password"}]
      [:p#forgot-password (link-to "/password" "Forgot your password?")]
-     [:input.button {:type "submit" :name "login" :value "Login"}]]]))
+     [:input.button {:type "submit" :name "login" :value "Login"}]]
+    [:hr]
+    [:h1 "New to Mapcha?"]
+    [:p#register-account (link-to "/register" "Register a new account")]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

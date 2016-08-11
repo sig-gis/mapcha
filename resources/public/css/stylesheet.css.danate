@@ -261,11 +261,12 @@ footer p {
     border:1px solid gray;
 }
 
-#login-form p#forgot-password a {
+#login-form p#forgot-password a,
+#login-form p#register-account a {
     display:block;
     font-size:0.9rem;
     font-weight:700;
-    margin:1rem 0.5rem 0rem 0.5rem;
+    margin:0.5rem 0.5rem 0rem 1rem;
     color:gray;
     text-decoration:none;
 }
@@ -280,6 +281,12 @@ footer p {
 
 #login-form input.button:focus {
     border:1px solid #999;
+}
+
+#login-form hr {
+    height:12px;
+    border:0;
+    box-shadow:inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
 }
 
 /************/
