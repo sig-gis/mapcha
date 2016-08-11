@@ -9,8 +9,15 @@ To run this web application, you will need:
 
 1) Sun's JDK 1.8+
 2) Boot 2.5.5+
+3) Postgresql 9.5+
+4) PostGIS 2.2+
 
-Then simply instruct Boot to run the application as follows:
+Begin by following the Database Initialization instructions at the end
+of this file to create a new database for your Mapcha installation.
+
+Then simply enter the toplevel project directory (the same one
+containing this README file), and instruct Boot to run the web
+application as follows:
 
   In development mode:
   $ boot dev
@@ -31,9 +38,9 @@ to activate a browser-backed ClojureScript repl.
 
 ** Contact
 
-Authors: Gary W. Johnson, David S. Saah, and Peter Cutter
+Authors: Gary W. Johnson and David S. Saah
 
-Emails: gjohnson@sig-gis.com, dsaah@sig-gis.com, pcutter@sig-gis.com
+Emails: gjohnson@sig-gis.com, dsaah@sig-gis.com
 
 ** License
 
@@ -42,3 +49,121 @@ Copyright © 2016 Spatial Informatics Group, LLC.
 Mapcha is distributed by Spatial Informatics Group, LLC. under a
 restricted use license. Please contact the authors at the above-listed
 emails for a copy of this license.
+
+** Database Initialization
+
+1. Install the latest versions of Postgresql and PostGIS.
+
+2. Start the Postgresql database server running on your machine on the
+   default port (5432).
+
+3. From your shell, run "psql -U postgres" to connect as the database
+   superuser.
+
+4. At the psql prompt, run these commands:
+
+   CREATE ROLE mapcha WITH LOGIN CREATEDB;
+   CREATE DATABASE mapcha WITH OWNER mapcha;
+   \c mapcha
+   CREATE EXTENSION postgis;
+
+   This will create a new database called "mapcha" owned by user
+   "mapcha" and add the PostGIS spatial extensions to it.
+
+5. From your shell, run "psql -U mapcha -f build_mapcha_tables.sql -d
+   mapcha" to populate the new mapcha database with the table schema
+   expected by the website code. This SQL file can be found under
+   resources/sql in the toplevel project directory.
+
+6. Launch the Mapcha website by running "boot dev" from within the
+   mapcha directory that you cloned from GitHub.
+
+7. Point your web browser at http://localhost:8080 to access the site.
+
+8. Register a new user account called "admin@sig-gis.com" with whatever
+   password you like.
+
+9. From your shell, run "psql -U mapcha -d mapcha" to connect to the
+   mapcha database as the mapcha user.
+
+10. At the psql prompt, run this command to elevate admin@sig-gis.com
+    to the admin role.
+
+    UPDATE mapcha.users
+      SET role='admin'
+      WHERE email='admin@sig-gis.com';
+
+11. Logout and back in as admin@sig-gis.com on the Mapcha website. You
+    should now see the Account, Dashboard, and Admin links added to
+    the navigation bar.
+
+12. Visit the Admin link and create a new project. All fields must be
+    filled in. To input the bounding box coordinates, use ctrl+drag on
+    the map interface. You can repeat this as many times as you would
+    like, and it will always save the last bounding box drawn this
+    way. Remember to enter several sample value categories (try 6-8 to
+    start with) along with sensible colors.
+
+    Here are some examples for a few test projects:
+
+    - Name :: Mekong River Region
+    - Description :: Laos, Cambodia, Vietnam, Thailand, Myanmar
+    - Number of plots :: 10000
+    - Plot radius in meters :: 100
+    - Samples per plot :: 15
+    - Latitude Max :: 22.5
+    - Longitude Min :: 95
+    - Longitude Max :: 107
+    - Latitude Min :: 10.5
+    - Sample Values ::
+      - Forest
+      - Grassland
+      - Bare Surface
+      - Impervious Surface
+      - Agriculture
+      - Urban
+      - Water
+      - Cloud
+      - Unknown
+
+    - Name :: California, USA
+    - Description :: The most populous state in the United States.
+    - Number of plots :: 1000
+    - Plot radius in meters :: 50
+    - Samples per plot :: 5
+    - Latitude Max :: 42.0
+    - Longitude Min :: -124.6
+    - Longitude Max :: -114.0
+    - Latitude Min :: 32.3
+    - Sample Values ::
+      - Rock/Sand
+      - Grasses
+      - Crops
+      - Shrubs
+      - Trees
+      - Roads/Parking Lots
+      - Buildings
+      - Water
+      - Unknown
+
+    - Name :: Mongolia
+    - Description :: The land of yurt-dwelling pastoral nomads.
+    - Number of plots :: 5000
+    - Plot radius in meters :: 200
+    - Samples per plot :: 20
+    - Latitude Max :: 52.5
+    - Longitude Min :: 87.0
+    - Longitude Max :: 120.5
+    - Latitude Min :: 41.5
+    - Sample Values ::
+      - Settlement
+      - Road
+      - Rock/Sand
+      - Grasses
+      - Trees
+      - Water
+      - Snow
+      - Unknown
+
+13. Visit the Dashboard page, select a project, press the Analyze New
+    Plot button, and have fun!
