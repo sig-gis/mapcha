@@ -50,7 +50,6 @@
    ;; Public pages (no authentication required)
    []                 {:get views/home-page}
    ["about"]          {:get views/about-page}
-   ["contact"]        {:get views/contact-page}
    ;; Login/Registration/Password-Reset/Logout pages
    ["login"]          {:any views/login-page}
    ["register"]       {:any views/register-page}

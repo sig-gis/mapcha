@@ -80,24 +80,23 @@
        html5shiv]
       [:body
        [:header
-        [:h1 (link-active "/" "Mapcha")]
         [:nav
          [:ul
           (case (current-role request)
             :admin (list
+                    [:li (link-active "/" "Home")]
+                    [:li (link-active "/about" "About")]
                     [:li (link-active "/account" "Account")]
                     [:li (link-active "/dashboard" "Dashboard")]
-                    [:li (link-active "/admin" "Admin")]
-                    [:li (link-active "/about" "About")]
-                    [:li (link-active "/contact" "Contact")])
+                    [:li (link-active "/admin" "Admin")])
             :user  (list
-                    [:li (link-active "/account" "Account")]
-                    [:li (link-active "/dashboard" "Dashboard")]
+                    [:li (link-active "/" "Home")]
                     [:li (link-active "/about" "About")]
-                    [:li (link-active "/contact" "Contact")])
+                    [:li (link-active "/account" "Account")]
+                    [:li (link-active "/dashboard" "Dashboard")])
             (list
-             [:li (link-active "/about" "About")]
-             [:li (link-active "/contact" "Contact")]))]]
+             [:li (link-active "/" "Home")]
+             [:li (link-active "/about" "About")]))]]
         [:div#login-info
          [:p
           (if (logged-in? request)
@@ -165,19 +164,6 @@
    request
    [:div#about
     [:h3 "About page...in progress"]]))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Contact page
-;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defn contact-page
-  [request]
-  (wrap-header-footer
-   request
-   [:div#contact
-    [:h3 "Contact page...in progress"]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

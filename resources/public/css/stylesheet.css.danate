@@ -88,24 +88,10 @@ header a.active-link {
     color:#555;
 }
 
-header h1 {
-    z-index:2;
-    position:absolute;
-    top:4rem !important;
-    left:1rem !important;
-    width:calc(60vw - 200px);
-    font-family:Lobster;
-    text-transform:uppercase;
-    text-decoration:underline;
-    font-size:2rem;
-    font-weight:400;
-    color:white !important;
-}
-
 nav {
     position:absolute;
-    top:14px;
-    left:16.5rem;
+    top:3.75rem;
+    left:1rem;
     height:2.5rem;
 }
 
@@ -225,21 +211,6 @@ footer p {
 /*********/
 
 #about {
-    position:absolute;
-    right:5rem;
-    height:100%;
-    width:350px;
-    padding:2rem;
-    background:rgba(255, 255, 255, 0.8);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
-    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
-}
-
-/***********/
-/* Contact */
-/***********/
-
-#contact {
     position:absolute;
     right:5rem;
     height:100%;
@@ -1334,7 +1305,7 @@ label {
         background-color:white;
         background-image:url(../img/ic_note_add_white_24dp_2x.png);
         background-size:25px 25px;
-        background-position: auto;
+        background-position:auto;
         background-repeat:no-repeat;
         cursor:pointer
     }
