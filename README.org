@@ -62,10 +62,12 @@ emails for a copy of this license.
 
 4. At the psql prompt, run these commands:
 
+   #+begin_src sql
    CREATE ROLE mapcha WITH LOGIN CREATEDB;
    CREATE DATABASE mapcha WITH OWNER mapcha;
    \c mapcha
    CREATE EXTENSION postgis;
+   #+end_src
 
    This will create a new database called "mapcha" owned by user
    "mapcha" and add the PostGIS spatial extensions to it.
@@ -89,9 +91,11 @@ emails for a copy of this license.
 10. At the psql prompt, run this command to elevate admin@sig-gis.com
     to the admin role.
 
+    #+begin_src sql
     UPDATE mapcha.users
       SET role='admin'
       WHERE email='admin@sig-gis.com';
+    #+end_src
 
 11. Logout and back in as admin@sig-gis.com on the Mapcha website. You
     should now see the Account, Dashboard, and Admin links added to
