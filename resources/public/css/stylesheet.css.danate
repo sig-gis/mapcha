@@ -1,4 +1,4 @@
-/* CSS alpha version 0.2 Danate and GJohnson 2016-08-10 */
+/* CSS alpha version 0.2 Danate and GJohnson 2016-08-11 */
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:100,400,700|Oswald:normal|Cabin+Sketch:normal|Lobster:normal);
 
@@ -60,11 +60,12 @@ header {
     background-image:url(http://www.adpc.net/igo/images/SERVIR/usaid.png),
                      url(http://www.adpc.net/igo/images/SERVIR/nasa.png),
                      url(http://www.adpc.net/igo/images/SERVIR/ADPC.jpg),
-                     url(http://www.adpc.net/igo/images/SERVIR/servir.png);
+                     url(http://www.adpc.net/igo/images/SERVIR/servir.png),
+                     url(http://www.adpc.net/igo/images/SERVIR/mapcha-logo.jpg);
     background-repeat:no-repeat;
     background-attachment:fixed;
-    background-position:1rem 15px, 9rem 15px, 12rem 15px, calc(100% - 1rem) 15px;
-    background-size:auto 35px, auto 35px, auto 35px, auto 25px;
+    background-position:1rem 15px, 9rem 15px, 12rem 15px, calc(100% - 1rem) 15px, 45vw 15px;
+    background-size:auto 35px, auto 35px, auto 35px, auto 25px, auto 35px;
     z-index:100;
 }
 
