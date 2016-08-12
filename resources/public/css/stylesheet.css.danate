@@ -637,11 +637,10 @@ p.error-message {
 /*********/
 
 #admin {
-    overflow:show;
-    position:fixed;
-    height:calc(100%) !important;
+    overflow:scroll;
+    height:100%;
     width:100%;
-    padding:20px;
+    padding:0 20px 0 20px;
     background:rgba(255,255,255,0.9);
 }
 
@@ -658,10 +657,6 @@ p.error-message {
     font-weight:400 !important;
 }
 
-#admin input {
-    width:auto !important;
-}
-
 #admin label {
     color:darkgray !important;
     font-size:1rem !important;
@@ -670,35 +665,28 @@ p.error-message {
 #admin h1 {
     font-size:2rem;
     font-weight:bold;
-    color:darkgray;
     margin:0px 0 10px 0;
 }
 
-#admin #project-selection {
-    width:100%;
-    font-size:1em;
-}
-
 #admin #project-selection label {
-    font-size:1.2rem;
-    margin-right:0.5rem;
+    font-size:1em;
+    font-family:Oswald !important;
+    font-weight:400 !important;
+    color:#3fabc6 !important;
+    text-transform:uppercase;
 }
 
 #admin #project-selection select {
-    color:#55f;
-    border:1px solid #55f;
+    border:1px solid darkgray;
     height:2rem;
-}
-
-#admin #project-selection option {
-    color:#55f;
+    font-size:0.9em;
 }
 
 #admin input#download-plot-data {
     position:absolute;
     top:0.9rem;
-    left:45rem;
     padding:0.25rem;
+    left:45rem;
     color:white;
     background-color:#55f;
     border-radius:0.5rem;
@@ -709,23 +697,27 @@ p.error-message {
     width:100% !important;
 }
 
-#admin table tr > td:nth-child(1) {
-    vertical-align:top;
-}
-
-#admin table tr > td:nth-child(2) {
+#admin legend {
+    margin-top:1em;
+    font-size:1em;
+    font-family:Oswald !important;
+    font-weight:400 !important;
+    color:#3fabc6 !important;
+    text-transform:uppercase;
 }
 
 #admin legend {
-    font-family:Open Sans;
-    font-weight:100;
-    color:darkgray;
+    font-size:1em;
+    font-family:Oswald !important;
+    font-weight:400 !important;
+    color:#3fabc6 !important;
 }
 
-#admin label {
-    font-weight:bold;
-    color:#55f;
+#admin #project-info label, #plot-info label, #sample-info th {
+    font-size:0.8em !important;
+    font-weight:400;
     margin-right:1rem;
+    color:black !important;
 }
 
 #admin input[type=number], #admin input[type=text] {
@@ -734,7 +726,7 @@ p.error-message {
 }
 
 #admin fieldset {
-    width:calc(50% - 2rem);
+    width:calc(50% - 4rem);
     margin-right:1rem;
 }
 
@@ -748,6 +740,10 @@ p.error-message {
     display:inline;
 }
 
+#admin #project-description {
+    width:100%;
+}
+
 #admin fieldset#plot-info {
     float:left;
     display:inline;
@@ -758,24 +754,21 @@ p.error-message {
     display:inline;
 }
 
-#admin fieldset#bounding-box input {
-    width:100px !important;
-    display:inline;
-}
-
 #admin fieldset#bounding-box {
     clear:both;
     float:left;
-    height:55px;
-    width:50vw;
+    width:12.5vw;
     background-color:white;
-    clear:both;
+    position:relative;
+}
+
+#admin fieldset#bounding-box input {
+    width:100px;
 }
 
 /* bottom */
 #admin fieldset#bounding-box input#lat-max {
     background-color:maroon;
-    valign:bottom;
 }
 
 /* top */
@@ -785,47 +778,77 @@ p.error-message {
 
 /* left */
 #admin fieldset#bounding-box input#lon-max {
-    background-color:pink;
-    z-index:100;
 }
 
 /* right */
 #admin fieldset#bounding-box input#lat-min {
     background-color:olive;
-    z-index:100;
 }
 
 #admin fieldset#bounding-box td {
 }
 
-#admin fieldset#sample-info input#value-name, input#value-color, input#value-image {
-    width:10vw !important;
+#admin .empty {
+    width:auto;
+    height:auto;
 }
 
+#admin #value-name {
+    font-size:0.9em !important;
+}
+
+#admin input#value-color {
+    font-size:0.9em !important;
+    width:20px;
+    margin:0px;
+}
+
+#admin input#value-image {
+    font-size:0.9em !important;
+    width:40%;
+}
 
 #admin #new-project-map {
-    clear:both;
     float:left;
     border:1px solid;
-    height:20vw;
-    /* clear:both; */
-    /* position:absolute; */
-    /* top:0; */
-    /* top:35vh; */
-    /* padding:0 !important; */
-    /* border:1px solid; */
-    /* height:calc(45vh); */
-    /* width:50vw; */
-    /* background-color:yellow; */
+    width:37.5%;
+    z-index:49;
+    margin-top:5px !important;
+    height:auto;
 }
 
 #admin fieldset#project-info {
 }
 
-#admin fieldset#project-info table {
+#admin fieldset#project-info tr {
 }
 
 #admin fieldset#project-info input[type=text] {
+}
+
+#admin #project-info #project-name {
+}
+
+#admin #project-info input[name="project-name"],
+#project-info textarea[name="project-description"],
+#plot-info input[name="plots"],
+#plot-info input[name="buffer-radius"],
+#plot-info input[name="samples-per-plot"] {
+    width:95% !important;
+}
+
+/*project info */
+
+#admin #project-info table td {
+    display:block;
+}
+#admin #project-info textarea {
+    height:4.3em;
+    padding-right:8px;
+}
+
+#admin #plot-info table td {
+    display:block;
 }
 
 #admin fieldset#project-info textarea {
@@ -841,6 +864,7 @@ p.error-message {
 }
 
 #admin fieldset#plot-info input {
+    width:100%;
 }
 
 #admin fieldset#bounding-box {
@@ -862,10 +886,16 @@ p.error-message {
 }
 
 /* box3 */
-#admin fieldset#sample-info {
+#admin fieldset#sample-info table tr th:nth-child(4) {
+    text-align:center;
 }
 
-#admin fieldset#sample-info th {
+#admin #sample-info, #project-info, #plot-info {
+    /* background-color:darkgray !important; */
+}
+
+#admin fieldset#sample-info td {
+    text-align:center;
 }
 
 #admin fieldset#sample-info th.empty {
@@ -873,8 +903,9 @@ p.error-message {
     border:0px;
 }
 
-#admin fieldset#sample-info td {
-    text-align:center;
+#admin fieldset#sample-info input[type=file] {
+    width:100%;
+    text-align:right;
 }
 
 #admin fieldset#sample-info .circle {
@@ -888,6 +919,7 @@ p.error-message {
 }
 
 #admin fieldset#sample-info input#value-color {
+    padding:0px !important;
 }
 
 #admin fieldset#sample-info input.button {
@@ -899,7 +931,7 @@ p.error-message {
     box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6);
 }
 
-#admin #sample-info th, td{
+#admin #sample-info th, td {
     display:table-cell;
 }
 
@@ -916,6 +948,9 @@ p.error-message {
     padding:0.5rem;
     color:white;
     background-color:#55f;
+    position:fixed;
+    right:0;
+    top:100px;
     /* border-radius:1rem; */
     /* box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6); */
 }
@@ -941,7 +976,7 @@ label {
 }
 
 #create-project-form table {
-    background-color:red;
+    /* background-color:red; */
     width:100%;
 }
 
@@ -1206,7 +1241,7 @@ label {
         top:0;
         margin-top:1.9rem;
     }
-    
+
     #login-info p a {
         background-color:#3FABC6;
     }
@@ -1281,7 +1316,7 @@ label {
         display:block !important;
         margin-top:-30px !important;
     }
-    
+
     #dashboard #sidebar-contents fieldset:nth-child(2):hover > ul li {
         display:block-inline !important;
         width:10%;
