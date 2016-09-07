@@ -129,7 +129,13 @@
     [:div#splash-image]
     [:div#left-block
      [:h1 "Mapcha: " [:em "Earth Image Identification"]]
-     [:h2 "Collaborate. Play. Map the world."]]
+     [:h2 "Collaborate. Play. Map the world."]
+     [:hr]
+     [:h3
+      "MAPCHA is a collaborative effort between its developers and its "
+      "community of users. We welcome suggestions for improvements on our "
+      (link-to "https://github.com/sig-gis/mapcha/issues" "Github")
+      " issues page."]]
     [:div#right-block
      [:div#login
       [:form {:method "post" :action "/login"}

@@ -60,12 +60,11 @@ header {
     background-image:url(http://www.adpc.net/igo/images/SERVIR/usaid.png),
                      url(http://www.adpc.net/igo/images/SERVIR/nasa.png),
                      url(http://www.adpc.net/igo/images/SERVIR/ADPC.jpg),
-                     url(http://www.adpc.net/igo/images/SERVIR/servir.png),
-                     url(http://www.adpc.net/igo/images/SERVIR/mapcha-logo.jpg);
+                     url(http://www.adpc.net/igo/images/SERVIR/servir.png);
     background-repeat:no-repeat;
     background-attachment:fixed;
-    background-position:1rem 15px, 9rem 15px, 12rem 15px, calc(100% - 1rem) 15px, 45vw 15px;
-    background-size:auto 35px, auto 35px, auto 35px, auto 25px, auto 35px;
+    background-position:1rem 15px, 9rem 15px, 12rem 15px, calc(100% - 1rem) 15px;
+    background-size:auto 35px, auto 35px, auto 35px, auto 25px;
     z-index:100;
 }
 
