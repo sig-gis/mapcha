@@ -369,6 +369,22 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
+;;; Select Project page
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn select-project
+  [request]
+  (wrap-header-footer
+   request
+   [:div#select-project-form
+    [:h1 "Select a Project"]
+    [:ul
+     (for [{:keys [id name]} (get-all-projects)]
+       [:li (link-to (str "/dashboard?project=" id) name)])]]))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; Dashboard page
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -388,7 +404,9 @@
                           "© DigitalGlobe, Inc")]
     [:div#page-stretcher]
     [:input#user-id {:type "hidden" :name "user-id"
-                     :value (str (current-user-id request))}]]
+                     :value (str (current-user-id request))}]
+    [:input#initial-project-id {:type "hidden" :name "initial-project-id"
+                                :value (str (-> request :params :project))}]]
    (include-js "/mapcha.js")
    (javascript-tag "mapcha.dashboard.main()")))
 

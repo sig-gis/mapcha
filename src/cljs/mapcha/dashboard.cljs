@@ -78,23 +78,22 @@
                       (map/draw-polygon (:boundary project1)))))
 
 (defn switch-project!
-  [evt]
-  (let [new-project-id (js/parseInt (.-value (.-currentTarget evt)))]
-    (when-let [new-project (->> @project-list
-                                (filter #(= new-project-id (:id %)))
-                                (first))]
-      (reset! current-project new-project)
-      (reset! current-plot nil)
-      (reset! current-samples ())
-      (reset! user-samples {})
-      (doto @map/map-ref
-        (map/remove-plot-layer)
-        (map/remove-sample-layer)
-        (map/disable-selection))
-      (load-sample-values! new-project-id)
-      (u/enable-element! (dom/getElement "new-plot-button"))
-      (u/disable-element! (dom/getElement "save-values-button"))
-      (map/draw-polygon (:boundary new-project)))))
+  [new-project-id]
+  (when-let [new-project (->> @project-list
+                              (filter #(= new-project-id (:id %)))
+                              (first))]
+    (reset! current-project new-project)
+    (reset! current-plot nil)
+    (reset! current-samples ())
+    (reset! user-samples {})
+    (doto @map/map-ref
+      (map/remove-plot-layer)
+      (map/remove-sample-layer)
+      (map/disable-selection))
+    (load-sample-values! new-project-id)
+    (u/enable-element! (dom/getElement "new-plot-button"))
+    (u/disable-element! (dom/getElement "save-values-button"))
+    (map/draw-polygon (:boundary new-project))))
 
 (defn flag-plot!
   [plot-id]
@@ -107,8 +106,9 @@
    [:fieldset
     [:legend "Select Project"]
     [:select {:name "project-id" :size "1"
-              :default-value (:id (first @project-list))
-              :on-change switch-project!}
+              :default-value (:id @current-project)
+              :on-change #(switch-project!
+                           (js/parseInt (.-value (.-currentTarget %))))}
      (for [{:keys [id name]} @project-list]
        [:option {:key id :value id} name])]
     [:input#new-plot-button.button {:type "button" :name "new-plot"
@@ -142,4 +142,9 @@
   (r/render [sidebar-contents] (dom/getElement "sidebar"))
   (map/digitalglobe-base-map {:div-name      "image-analysis-pane"
                               :center-coords [102.0 17.0]
-                              :zoom-level    5}))
+                              :zoom-level    5})
+  ;; (when-let [project-id (js/parseInt (.-value
+  ;;                                     (dom/getElement "initial-project-id")))]
+  ;;   (js/alert project-id)
+  ;;   (switch-project! project-id))
+  )

@@ -57,6 +57,8 @@
    ["password-reset"] {:any views/password-reset-page}
    ["logout"]         (app logout :any (fn [_] (redirect "/")))
    ;; Private pages (must be logged in to access)
+   ["select-project"] (app (wrap-authorize #{:user :admin})
+                           :get views/select-project)
    ["account"]        (app (wrap-authorize #{:user :admin})
                            :get views/account-page
                            :post views/update-account-page)
@@ -164,6 +166,7 @@
                  :allow-anon?         true
                  :login-uri           "/login"
                  :default-landing-uri "/"
+                 ;; :default-landing-uri "/select-project"
                  :unauthorized-handler views/access-denied-page}))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

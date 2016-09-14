@@ -331,6 +331,45 @@ footer p {
     border:1px solid #999;
 }
 
+/******************/
+/* Select Project */
+/******************/
+
+#select-project-form {
+    position:absolute;
+    right:5rem;
+    height:100%;
+    width:350px;
+    padding:2rem;
+    background:rgba(255, 255, 255, 0.8);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+}
+
+#select-project-form h1 {
+    font-size:1.9rem;
+    font-weight:100;
+    padding:0.5rem;
+    color:gray !important;
+}
+
+#select-project-form ul {
+    list-style-type:none;
+    padding:0.5rem;
+}
+
+#select-project-form li a {
+    display:block;
+    width:98%;
+    border:1px solid blue;
+    margin-bottom:0.5rem;
+    padding:0.25rem;
+    text-align:center;
+    font-size:1.2rem;
+    color:#3C948B;
+    text-decoration:none;
+}
+
 /***********/
 /* Account */
 /***********/
