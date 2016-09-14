@@ -78,6 +78,11 @@ SELECT id, ST_AsGeoJSON(point) AS point
   FROM mapcha.samples
   WHERE plot_id = :plot_id;
 
+-- name: increment-plot-analyses-sql
+-- Adds 1 to the analyses column in mapcha.plots for the given plot_id.
+UPDATE mapcha.plots SET analyses = analyses + 1 WHERE id = :plot_id
+  RETURNING analyses;
+
 -- name: add-user-sample-sql
 -- Adds a new sample record for the given user_id.
 INSERT INTO mapcha.user_samples (user_id, sample_id, value_id, imagery_id, date)

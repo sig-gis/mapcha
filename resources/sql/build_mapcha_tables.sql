@@ -13,10 +13,12 @@ CREATE TABLE mapcha.plots (
   project_id integer not null references mapcha.projects (id) on delete cascade on update cascade,
   center     geometry(Point,4326),
   radius     double precision not null,
-  flagged    boolean default false
+  flagged    boolean default false,
+  analyses   integer default 0
 );
 
 CREATE INDEX mapcha_plots_project_id ON mapcha.plots (project_id);
+CREATE INDEX mapcha_plots_analyses ON mapcha.plots (analyses);
 
 CREATE TABLE mapcha.samples (
   id      serial primary key,

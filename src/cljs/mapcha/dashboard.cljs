@@ -21,9 +21,10 @@
 
 (defn save-values! [evt]
   (let [user-id    (js/parseInt (.-value (dom/getElement "user-id")))
+        plot-id    (:id @current-plot)
         imagery-id 2] ;; DigitalGlobe Maps API: Recent Imagery+Streets
     (remote-callback :add-user-samples
-                     [user-id imagery-id @user-samples]
+                     [user-id plot-id imagery-id @user-samples]
                      #(js/alert
                        "Your assignments have been saved to the database."))
     (u/disable-element! (.-currentTarget evt))

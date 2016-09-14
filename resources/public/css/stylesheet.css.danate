@@ -356,6 +356,7 @@ footer p {
 #select-project-form ul {
     list-style-type:none;
     padding:0.5rem;
+    overflow:scroll;
 }
 
 #select-project-form li a {
