@@ -144,8 +144,7 @@
   (map/digitalglobe-base-map {:div-name      "image-analysis-pane"
                               :center-coords [102.0 17.0]
                               :zoom-level    5})
-  ;; (when-let [project-id (js/parseInt (.-value
-  ;;                                     (dom/getElement "initial-project-id")))]
-  ;;   (js/alert project-id)
-  ;;   (switch-project! project-id))
-  )
+  (when-let [project-id (js/parseInt (.-value
+                                      (dom/getElement "initial-project-id")))]
+    (js/alert (str "Switching to Project ") project-id)
+    (switch-project! project-id)))
