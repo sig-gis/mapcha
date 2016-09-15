@@ -165,8 +165,7 @@
                                                find-user-info) ;; not used
                  :allow-anon?         true
                  :login-uri           "/login"
-                 :default-landing-uri "/"
-                 ;; :default-landing-uri "/select-project"
+                 :default-landing-uri "/select-project"
                  :unauthorized-handler views/access-denied-page}))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
