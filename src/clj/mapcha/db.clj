@@ -181,7 +181,8 @@
 
 (defremote get-random-plot
   [project-id]
-  (first (get-random-plot-by-min-analyses-sql {:project_id project-id})))
+  (first (get-random-plot-by-min-analyses-no-flag-check-sql
+          {:project_id project-id})))
 
 (defremote get-sample-points
   [plot-id]
