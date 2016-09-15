@@ -234,15 +234,16 @@
         plot-data-table (cons
                          (map str/upper-case
                               (concat ["plot_id" "center_lon" "center_lat"
-                                       "radius_m" "flagged" "sample_points"
-                                       "user_assignments"]
+                                       "radius_m" "flagged" "analyses"
+                                       "sample_points" "user_assignments"]
                                       sample-values))
                          (mapv
                           (fn [{:keys [plot_id center_lon center_lat radius_m
-                                       flagged sample_points user_assignments
-                                       values]}]
+                                       flagged analyses sample_points
+                                       user_assignments values]}]
                             (concat [plot_id center_lon center_lat radius_m
-                                     flagged sample_points user_assignments]
+                                     flagged analyses sample_points
+                                     user_assignments]
                                     (mapv #(values % 0.0) sample-values)))
                           plot-data-clean))
         project-name    (-> (get-project-info project-id)

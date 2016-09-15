@@ -137,18 +137,18 @@ UPDATE mapcha.plots
 -- Returns an overview of the sample data entered thus far for the given project_id.
 WITH plot_data AS (SELECT plt.id AS plot_id, ST_X(center) AS center_lon,
                           ST_Y(center) AS center_lat, radius AS radius_m,
-                          flagged, sample_id, user_id, value_id, value
+                          flagged, analyses, sample_id, user_id, value_id, value
                      FROM mapcha.plots AS plt
                      INNER JOIN mapcha.samples AS smp ON plt.id = plot_id
                      INNER JOIN mapcha.user_samples ON smp.id = sample_id
                      INNER JOIN mapcha.sample_values AS val ON value_id = val.id
                      WHERE plt.project_id = :project_id),
      plot_overview AS (SELECT plot_id, center_lon, center_lat, radius_m, flagged,
-                              count(sample_id) AS sample_points,
+                              analyses, count(sample_id) AS sample_points,
                               count(distinct user_id) AS user_assignments
                          FROM plot_data
                          GROUP BY plot_id, center_lon, center_lat,
-                                  radius_m, flagged),
+                                  radius_m, flagged, analyses),
      plot_values AS (SELECT plot_id, value,
                             (100.0 * count(value_id) /
                               (sample_points*user_assignments))::float AS percent
