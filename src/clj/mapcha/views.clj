@@ -168,7 +168,16 @@
   (wrap-header-footer
    request
    [:div#about
-    [:h3 "About page...in progress"]]))
+    [:h1 "About MAPCHA"]
+    [:p (str "MAPCHA is a custom built, open-source, high resolution satellite"
+             " image viewing and interpretation system that is being developed"
+             " by SERVIR-Mekong as a tool for use in projects that require land"
+             " cover and/or land use reference data. MAPCHA promotes consistency"
+             " in locating, interpreting, and labeling reference data plots for"
+             " use in classifying and monitoring land cover / land use change."
+             " The full functionality of MAPCHA including collaborative"
+             " compilation of reference point databases is implemented online"
+             " so there is no need for desktop installation.")]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
