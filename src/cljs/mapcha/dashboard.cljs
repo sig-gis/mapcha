@@ -78,6 +78,14 @@
                       (load-sample-values! (:id project1))
                       (map/draw-polygon (:boundary project1)))))
 
+(defn set-project-dropdown!
+  [project-id]
+  (let [ddl  (dom/getElement "project-id")
+        opts (.-options ddl)]
+    (dotimes [i (.-length opts)]
+      (if (= project-id (js/parseInt (.-value (aget opts i))))
+        (set! (.-selected (aget opts i)) true)))))
+
 (defn switch-project!
   [new-project-id]
   (when-let [new-project (->> @project-list
@@ -106,10 +114,10 @@
   [:div#sidebar-contents
    [:fieldset
     [:legend "Select Project"]
-    [:select {:name "project-id" :size "1"
-              :default-value (:id @current-project)
-              :on-change #(switch-project!
-                           (js/parseInt (.-value (.-currentTarget %))))}
+    [:select#project-id {:name "project-id" :size "1"
+                         :default-value (:id @current-project)
+                         :on-change #(switch-project!
+                                      (js/parseInt (.-value (.-currentTarget %))))}
      (for [{:keys [id name]} @project-list]
        [:option {:key id :value id} name])]
     [:input#new-plot-button.button {:type "button" :name "new-plot"
@@ -144,7 +152,9 @@
   (map/digitalglobe-base-map {:div-name      "image-analysis-pane"
                               :center-coords [102.0 17.0]
                               :zoom-level    5})
-  (when-let [project-id (js/parseInt (.-value
-                                      (dom/getElement "initial-project-id")))]
-    (js/alert (str "Switching to Project ") project-id)
-    (switch-project! project-id)))
+  ;; (let [project-id (js/parseInt (.-value (dom/getElement "initial-project-id")))]
+  ;;   (when-not (js/isNaN project-id)
+  ;;     (js/alert (str "Switching to Project " project-id))
+  ;;     (set-project-dropdown! project-id)
+  ;;     (switch-project! project-id)))
+  )
