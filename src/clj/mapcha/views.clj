@@ -116,9 +116,7 @@
             [:p {:class "alert"} message]
             (for [sub-message message]
               [:p {:class "alert"} sub-message])))
-        content]
-       [:footer
-        [:p (link-to "http://www.sig-gis.com" "&copy; SIG-GIS 2016")]]]))))
+        content]]))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -183,7 +181,9 @@
              " use in classifying and monitoring land cover / land use change."
              " The full functionality of MAPCHA including collaborative"
              " compilation of reference point databases is implemented online"
-             " so there is no need for desktop installation.")]]))
+             " so there is no need for desktop installation.")]
+    [:hr]
+    [:p "Copyright &copy; " (link-to "http://www.sig-gis.com" "SIG-GIS") " 2016"]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
