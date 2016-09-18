@@ -167,23 +167,18 @@ footer p {
 /* Home */
 /********/
 
-#splash-image {
-    display:none;
-}
-
-#left-block {
+#home {
     position:absolute;
     right:5rem !important;
     height:100%;
     width:350px;
-    border-radius:0rem !important;
     padding:2rem;
     background:rgba(255, 255, 255, 0.8);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
     -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
 }
 
-#left-block h1 {
+#home h1 {
     margin-top:20px;
     padding:0.5rem 0.5rem 0.5rem 1rem;
     font-size:3.5rem;
@@ -192,7 +187,7 @@ footer p {
     line-height:80%;
 }
 
-#left-block h2 {
+#home h2 {
     margin-bottom:20px;
     padding:0.5rem 0.5rem 0.5rem 1rem;
     font-size:2.5rem;
@@ -201,7 +196,7 @@ footer p {
     line-height:110%;
 }
 
-#left-block h3 {
+#home h3 {
     padding:0.5rem 0.5rem 0.75rem 1rem;
     color:#3C948B;
     font-family:Open Sans;
@@ -210,16 +205,8 @@ footer p {
     font-style:normal;
 }
 
-#right-block {
-    display:none;
-}
-
-#home-content p {
-    display:none;
-}
-
-.trademark {
-    font-style:italic;
+#home p {
+    padding:0.5rem;
 }
 
 /*********/
@@ -241,7 +228,7 @@ footer p {
     font-size:1.9rem;
     font-weight:100;
     padding:0.5rem;
-    color:gray !important;
+    color:gray;
 }
 
 #about p {
@@ -1242,26 +1229,26 @@ label {
 
     /* home */
 
-    #home-top #left-block {
+    #home {
         top:0;
         height:calc(100vh) !important;
         width:100% !important;
         left:0;
     }
 
-    #home-top #left-block h1 {
+    #home h1 {
         margin-top:40vh;
         color:#3FABC6;
         font-size:12vw !important;
     }
 
-    #home-top #left-block h1 em {
+    #home h2 {
         font-size:5vw !important;
         line-height:2vh !important;
         color:black;
     }
 
-    #home-top #left-block h2 {
+    #home h3 {
         font-size:4vw !important;
         line-height:2vh !important;
         width:auto;
@@ -1420,7 +1407,7 @@ label {
 
     /* Home */
 
-    #home-top #left-block {
+    #home {
         width:90%;
     }
 
@@ -1432,7 +1419,7 @@ label {
 
     /* Home end */
 
-    #home-top #left-block {
+    #home {
         height:60vh;
         width:calc(100vw - 1 * 30px) !important;
     }

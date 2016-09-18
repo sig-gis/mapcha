@@ -128,38 +128,16 @@
   [request]
   (wrap-header-footer
    request
-   [:section#home-top
-    [:div#splash-image]
-    [:div#left-block
-     [:h1 "Mapcha"]
-     [:h2 "Earth Image Identification"]
-     [:h3 "Collaborate. Play. Map the world."]
-     [:hr]
-     [:p
-      "Mapcha is a collaborative effort between its developers and its "
-      "community of users. We welcome suggestions for improvements on our "
-      (link-to "https://github.com/sig-gis/mapcha/issues" "Github")
-      " issues page."]]
-    [:div#right-block
-     [:div#login
-      [:form {:method "post" :action "/login"}
-       [:input {:type "email" :name "email" :value "" :placeholder "Email"}]
-       [:input {:type "password" :name "password" :value ""
-                :placeholder "Password"}]
-       [:p#forgot-password (link-to "/password" "Forgot your password?")]
-       [:input.button {:type "submit" :name "login" :value "Login"}]]]
-     [:div#register
-      [:form {:method "post" :action "/register"}
-       [:h3 "New to Mapcha?"]
-       [:input {:type "email" :name "email" :value ""
-                :placeholder "Email" :autocomplete "off"}]
-       [:input {:type "password" :name "password" :value ""
-                :placeholder "Password" :autocomplete "off"}]
-       [:input {:type "password" :name "password-confirmation" :value ""
-                :placeholder "Password confirmation" :autocomplete "off"}]
-       [:input.button {:type "submit" :name "register" :value "Register"}]]]]]
-   [:section#home-content
-    [:p "Enter a description of " [:span.trademark "Mapcha"] " here..."]]))
+   [:div#home
+    [:h1 "Mapcha"]
+    [:h2 "Earth Image Identification"]
+    [:h3 "Collaborate. Play. Map the world."]
+    [:hr]
+    [:p
+     "Mapcha is a collaborative effort between its developers and its "
+     "community of users. We welcome suggestions for improvements on our "
+     (link-to "https://github.com/sig-gis/mapcha/issues" "Github")
+     " issues page."]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
