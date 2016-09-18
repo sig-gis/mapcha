@@ -136,7 +136,7 @@
      [:h3 "Collaborate. Play. Map the world."]
      [:hr]
      [:p
-      "MAPCHA is a collaborative effort between its developers and its "
+      "Mapcha is a collaborative effort between its developers and its "
       "community of users. We welcome suggestions for improvements on our "
       (link-to "https://github.com/sig-gis/mapcha/issues" "Github")
       " issues page."]]
@@ -172,14 +172,14 @@
   (wrap-header-footer
    request
    [:div#about
-    [:h1 "About MAPCHA"]
-    [:p (str "MAPCHA is a custom built, open-source, high resolution satellite"
+    [:h1 "About Mapcha"]
+    [:p (str "Mapcha is a custom built, open-source, high resolution satellite"
              " image viewing and interpretation system that is being developed"
              " by SERVIR-Mekong as a tool for use in projects that require land"
-             " cover and/or land use reference data. MAPCHA promotes consistency"
+             " cover and/or land use reference data. Mapcha promotes consistency"
              " in locating, interpreting, and labeling reference data plots for"
              " use in classifying and monitoring land cover / land use change."
-             " The full functionality of MAPCHA including collaborative"
+             " The full functionality of Mapcha including collaborative"
              " compilation of reference point databases is implemented online"
              " so there is no need for desktop installation.")]
     [:hr]
