@@ -81,9 +81,9 @@
       [:body
        [:header
         [:div#logos
-         (image "/img/usaid.png")
-         (image "/img/nasa.png")
-         (image "/img/ADPC.jpg")
+         (image {:id "usaid"} "/img/usaid.png")
+         (image {:id "nasa"} "/img/nasa.png")
+         (image {:id "adpc"} "/img/ADPC.jpg")
          (image {:id "servir"} "/img/servir.png")]
         [:nav
          [:ul
