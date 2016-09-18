@@ -24,7 +24,7 @@
                    [org.clojars.magomimmo/shoreleave-remote-ring "0.3.2"]
                    [org.clojars.magomimmo/shoreleave-remote      "0.3.1"]
                    [javax.servlet/servlet-api   "2.5"]
-                   [reagent                     "0.6.0-alpha"]
+                   [reagent                     "0.6.0"]
                    [cljsjs/openlayers           "3.15.1"]
                    [adzerk/boot-cljs            "1.7.228-1" :scope "test"]
                    [adzerk/boot-cljs-repl       "0.3.0"     :scope "test"]
