@@ -41,7 +41,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Site-wide header and footer
+;;; Site-wide header
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -51,7 +51,7 @@
    :headers {"Content-Type" "text/html"}
    :body    body})
 
-(defn wrap-header-footer
+(defn wrap-header
   [request & content]
   (let [description (str "Mapcha is an Image Analysis Crowdsourcing Platform "
                          "by Spatial Informatics Group")
@@ -126,7 +126,7 @@
 
 (defn home-page
   [request]
-  (wrap-header-footer
+  (wrap-header
    request
    [:div#home
     [:h1 "Mapcha"]
@@ -147,7 +147,7 @@
 
 (defn about-page
   [request]
-  (wrap-header-footer
+  (wrap-header
    request
    [:div#about
     [:h1 "About Mapcha"]
@@ -171,7 +171,7 @@
 
 (defn login-page
   [request]
-  (wrap-header-footer
+  (wrap-header
    request
    [:div#login-form
     [:h1 "Sign into your account"]
@@ -194,7 +194,7 @@
 
 (defn register-page
   [request]
-  (wrap-header-footer
+  (wrap-header
    request
    [:div#register-form
     [:h1 "Register a new account"]
@@ -229,7 +229,7 @@
   [request]
   (let [email              (-> request :params :email)
         password-reset-key (-> request :params :password-reset-key)]
-    (wrap-header-footer
+    (wrap-header
      (if (= (:request-method request) :post)
        (assoc request :flash (try-reset-password (:params request)))
        request)
@@ -276,7 +276,7 @@
            (assoc :request-method :get)
            (assoc :flash flash-message)
            (assoc-in [:params :email] email)))
-      (wrap-header-footer
+      (wrap-header
        (assoc request :flash flash-message)
        [:div#password-form
         [:h1 "Enter your login email"]
@@ -287,13 +287,29 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
+;;; Select Project page
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn select-project
+  [request]
+  (wrap-header
+   request
+   [:div#select-project-form
+    [:h1 "Select a Project"]
+    [:ul
+     (for [{:keys [id name]} (get-all-projects)]
+       [:li (link-to (str "/dashboard?project=" id) name)])]]))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; Account page
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn account-page
   [request]
-  (wrap-header-footer
+  (wrap-header
    request
    [:div#account-form
     [:h1 "Account Settings"]
@@ -364,29 +380,13 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Select Project page
-;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defn select-project
-  [request]
-  (wrap-header-footer
-   request
-   [:div#select-project-form
-    [:h1 "Select a Project"]
-    [:ul
-     (for [{:keys [id name]} (get-all-projects)]
-       [:li (link-to (str "/dashboard?project=" id) name)])]]))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
 ;;; Dashboard page
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn dashboard-page
   [request]
-  (wrap-header-footer
+  (wrap-header
    request
    [:div#dashboard
     [:h1 "Dashboard"]
@@ -413,7 +413,7 @@
 
 (defn admin-page
   [request]
-  (wrap-header-footer
+  (wrap-header
    request
    [:div#admin
     [:h1 "Project Management"]
@@ -437,7 +437,7 @@
 
 (defn access-denied-page
   [request]
-  (-> (wrap-header-footer
+  (-> (wrap-header
        request
        [:div#access-denied
         [:h3 "Access Denied"]
@@ -447,7 +447,7 @@
 
 (defn page-not-found-page
   [request]
-  (-> (wrap-header-footer
+  (-> (wrap-header
        request
        [:div#page-not-found
         [:h3 "Page Not Found"]
@@ -459,7 +459,7 @@
 
 (defn error-page
   [request]
-  (-> (wrap-header-footer
+  (-> (wrap-header
        request
        [:div#error-page
         [:h3 "Error"]

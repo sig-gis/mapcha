@@ -24,7 +24,7 @@ body {
     background-size:cover;
 }
 
-header, nav, section, footer {
+header, nav, section {
     display:block;
 }
 
@@ -66,15 +66,7 @@ header a:active {
     text-decoration:none;
 }
 
-footer a:link,
-footer a:visited,
-footer a:active {
-    color:#eee;
-    text-decoration:none;
-}
-
 header a:hover,
-footer a:hover,
 header a.active-link {
     color:#eee;
     text-shadow: 0px 0px 4px #fff;
@@ -147,20 +139,6 @@ nav ul li {
     height:calc(100vh - 5.5rem);
     width:100%;
     background-color:rgba(255,255,255,0.2);
-}
-
-footer {
-    position:fixed;
-    bottom:0rem;
-    left:0rem;
-    height:2.5rem;
-    width:100%;
-    background-color:#1a1a1a;
-}
-
-footer p {
-    padding:0.7rem 2.4rem;
-    font-size:0.9rem;
 }
 
 /********/
@@ -354,6 +332,58 @@ footer p {
     border:1px solid #999;
 }
 
+/************/
+/* Password */
+/************/
+
+#password-form {
+    position:absolute;
+    right:5rem;
+    height:100%;
+    width:350px;
+    padding:2rem;
+    background:rgba(255, 255, 255, 0.8);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+}
+
+#password-form h1 {
+    font-size:1.9rem;
+    font-weight:100;
+    padding:0.5rem;
+    color:gray !important;
+}
+
+#password-form input:not(.button) {
+    height:2rem;
+    width:20rem;
+    border:1px solid #ececec;
+    margin:0.3rem;
+    padding:0px 5px;
+}
+
+#password-form input:not(.button):focus {
+    border:1px solid DarkGrey;
+    cursor:grab;
+}
+
+#password-form input:not(.button):hover {
+    cursor:pointer;
+    border:1px solid gray;
+}
+
+#password-form input.button {
+    height:2rem;
+    width:21rem;
+    margin:0.6rem 0.3rem;
+    padding:0.5rem;
+    border:1px solid #ececec;
+}
+
+#password-form input.button:focus {
+    border:1px solid #999;
+}
+
 /******************/
 /* Select Project */
 /******************/
@@ -379,18 +409,18 @@ footer p {
 #select-project-form ul {
     list-style-type:none;
     padding:0.5rem;
-    height:70%;
+    height:80%;
     overflow:scroll;
 }
 
 #select-project-form li a {
     display:block;
-    width:98%;
+    width:95%;
     border:1px solid blue;
     margin-bottom:0.5rem;
     padding:0.25rem;
     text-align:center;
-    font-size:1.2rem;
+    font-size:1rem;
     color:#3C948B;
     text-decoration:none;
 }
@@ -451,58 +481,6 @@ footer p {
 }
 
 #account-form input.button:focus {
-    border:1px solid #999;
-}
-
-/************/
-/* Password */
-/************/
-
-#password-form {
-    position:absolute;
-    right:5rem;
-    height:100%;
-    width:350px;
-    padding:2rem;
-    background:rgba(255, 255, 255, 0.8);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
-    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
-}
-
-#password-form h1 {
-    font-size:1.9rem;
-    font-weight:100;
-    padding:0.5rem;
-    color:gray !important;
-}
-
-#password-form input:not(.button) {
-    height:2rem;
-    width:20rem;
-    border:1px solid #ececec;
-    margin:0.3rem;
-    padding:0px 5px;
-}
-
-#password-form input:not(.button):focus {
-    border:1px solid DarkGrey;
-    cursor:grab;
-}
-
-#password-form input:not(.button):hover {
-    cursor:pointer;
-    border:1px solid gray;
-}
-
-#password-form input.button {
-    height:2rem;
-    width:21rem;
-    margin:0.6rem 0.3rem;
-    padding:0.5rem;
-    border:1px solid #ececec;
-}
-
-#password-form input.button:focus {
     border:1px solid #999;
 }
 
