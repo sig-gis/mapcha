@@ -56,16 +56,7 @@ header {
     height:5.5rem;
     width:100%;
     color:#eee;
-    background-color:#1a1a1a;
-    background-image:url(../img/usaid.png),
-                     url(../img/nasa.png),
-                     url(../img/ADPC.jpg),
-                     url(../img/servir.png);
-    background-repeat:no-repeat;
-    background-attachment:fixed;
-    background-position:1rem 15px, 9rem 15px, 12rem 15px, calc(100% - 1rem) 15px;
-    background-size:auto 35px, auto 35px, auto 35px, auto 25px;
-    z-index:100;
+    background-color:#2a2a2a;
 }
 
 header a:link,
@@ -87,6 +78,21 @@ footer a:hover,
 header a.active-link {
     color:#eee;
     text-shadow: 0px 0px 5px #fff;
+}
+
+#logos {
+    margin:1rem 0rem 0rem 16px;
+}
+
+#logos img {
+    height:35px;
+    margin-right:10px;
+}
+
+#logos img#servir {
+    float:right;
+    height:25px;
+    margin-right:15px;
 }
 
 nav {

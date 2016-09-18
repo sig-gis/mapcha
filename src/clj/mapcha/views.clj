@@ -3,7 +3,7 @@
             [cemerick.friend             :as    friend]
             [cemerick.friend.credentials :refer [bcrypt-credential-fn]]
             [hiccup.page                 :refer [html5 include-css include-js]]
-            [hiccup.element              :refer [javascript-tag link-to]]
+            [hiccup.element              :refer [javascript-tag link-to image]]
             [mapcha.validation           :refer [is-email? validate-params]]
             [mapcha.db                   :refer [find-user-info
                                                  set-user-email
@@ -80,6 +80,11 @@
        html5shiv]
       [:body
        [:header
+        [:div#logos
+         (image "/img/usaid.png")
+         (image "/img/nasa.png")
+         (image "/img/ADPC.jpg")
+         (image {:id "servir"} "/img/servir.png")]
         [:nav
          [:ul
           (case (current-role request)
