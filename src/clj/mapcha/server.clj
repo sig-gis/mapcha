@@ -183,12 +183,13 @@
 
 (defn wrap-request-logging [handler]
   (fn [{:keys [request-method uri params flash] :as req}]
-    (let [start  (System/currentTimeMillis)
+    (let [time   (java.time.LocalDateTime/now)
+          start  (System/currentTimeMillis)
           resp   (handler req)
           finish (System/currentTimeMillis)
           total  (- finish start)]
-      (log "request %s %s (%dms) %s %s"
-           request-method uri total (safe-log params) flash)
+      (log "%s %s %s (%dms) %s %s"
+           time request-method uri total (safe-log params) flash)
       resp)))
 
 (defn wrap-error-page
