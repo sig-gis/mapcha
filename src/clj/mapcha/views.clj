@@ -203,7 +203,9 @@
      [:input.button {:type "submit" :name "login" :value "Login"}]]
     [:hr]
     [:h1 "New to Mapcha?"]
-    [:p#register-account (link-to "/register" "Register a new account")]]))
+    [:input.button {:type "button" :name "register"
+                    :value "Register a new account"
+                    :onclick "window.location='/register'"}]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

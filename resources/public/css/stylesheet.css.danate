@@ -285,8 +285,7 @@ footer p {
     border:1px solid gray;
 }
 
-#login-form p#forgot-password a,
-#login-form p#register-account a {
+#login-form p#forgot-password a {
     display:block;
     font-size:0.9rem;
     font-weight:700;
