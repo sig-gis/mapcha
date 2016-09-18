@@ -389,15 +389,13 @@
   (wrap-header
    request
    [:div#dashboard
-    [:h1 "Dashboard"]
     [:input#quit-button.button {:type "button" :name "dashboard-quit" :value "Quit"
-                                :onclick "window.location='/'"}]
+                                :onclick "window.location='/select-project'"}]
     [:div#image-analysis-pane]
     [:div#sidebar]
     [:p#imagery-info (str "DigitalGlobe Maps API: Recent Imagery+Streets | "
                           "June 2015 | "
                           "© DigitalGlobe, Inc")]
-    [:div#page-stretcher]
     [:input#user-id {:type "hidden" :name "user-id"
                      :value (str (current-user-id request))}]
     [:input#initial-project-id {:type "hidden" :name "initial-project-id"

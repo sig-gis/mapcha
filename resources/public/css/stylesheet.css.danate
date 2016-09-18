@@ -537,29 +537,17 @@ p.error-message {
     background:rgba(255,255,255, 0.8);
 }
 
-#dashboard h1 {
-    display:none;
-    font-size:1.5rem;
-    font-weight:100;
-    padding-left:1rem !important;
-    width:calc(70% - 6.4rem);
-    width:calc(70%);
-    color:orange!important;
-    line-height:1.2;
-}
-
 #dashboard #quit-button {
     display:inline-block;
     margin-top:0;
-    width:5rem !important;
-    position:fixed;
-    left:calc(70vw - 1 * 5rem);
+    width:5rem;
+    position:absolute;
+    left:calc(70vw - 5rem);
     z-index:10000;
-    border-radius:0rem !important;
-    background-color:#3FABC6 !important;
+    background-color:#3FABC6;
     height:40px;
-    border:none;
     font-size:17;
+    border:none;
     text-align:center;
 }
 
@@ -667,10 +655,6 @@ p.error-message {
     color:white;
     padding:0.25rem;
     background-color:rgba(75,75,150,0.6);
-}
-
-#dashboard #page-stretcher {
-    display:none;
 }
 
 /*********/
