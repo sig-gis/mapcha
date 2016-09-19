@@ -160,7 +160,7 @@
              " The full functionality of Mapcha including collaborative"
              " compilation of reference point databases is implemented online"
              " so there is no need for desktop installation.")]
-    [:hr]
+    (link-to "http://www.sig-gis.com" (image "/img/sig-logo.png"))
     [:p "Copyright &copy; " (link-to "http://www.sig-gis.com" "SIG-GIS") " 2016"]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
