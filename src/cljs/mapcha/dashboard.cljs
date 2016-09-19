@@ -13,23 +13,25 @@
 
 (defonce current-project (r/atom nil))
 
-(defonce current-plot (r/atom nil))
+(defonce current-plot (atom nil))
 
 (defonce current-samples (atom ()))
 
 (defonce user-samples (atom {}))
 
-(defn save-values! [evt]
+(defn save-values! []
   (let [user-id    (js/parseInt (.-value (dom/getElement "user-id")))
         plot-id    (:id @current-plot)
         imagery-id 2] ;; DigitalGlobe Maps API: Recent Imagery+Streets
     (remote-callback :add-user-samples
                      [user-id plot-id imagery-id @user-samples]
-                     #(js/alert
-                       "Your assignments have been saved to the database."))
-    (u/disable-element! (.-currentTarget evt))
-    (reset! current-plot nil)
-    (map/disable-selection @map/map-ref)))
+                     #(do (js/alert
+                           "Your assignments have been saved to the database.")
+                          (u/enable-element! (dom/getElement "new-plot-button"))
+                          (u/disable-element! (dom/getElement "flag-plot-button"))
+                          (u/disable-element! (dom/getElement "save-values-button"))
+                          (reset! current-plot nil)
+                          (map/disable-selection @map/map-ref)))))
 
 (defn set-current-value! [evt {:keys [id value color]}]
   (if-let [selected-features (map/get-selected-samples)]
@@ -60,6 +62,9 @@
                    [(:id @current-project)]
                    #(let [new-plot %]
                       (reset! current-plot new-plot)
+                      (u/disable-element! (dom/getElement "new-plot-button"))
+                      (u/enable-element! (dom/getElement "flag-plot-button"))
+                      (u/disable-element! (dom/getElement "save-values-button"))
                       (map/draw-buffer (:center new-plot)
                                        (:radius new-plot))
                       (load-sample-points! (:id new-plot)))))
@@ -101,35 +106,33 @@
       (map/disable-selection))
     (load-sample-values! new-project-id)
     (u/enable-element! (dom/getElement "new-plot-button"))
+    (u/disable-element! (dom/getElement "flag-plot-button"))
     (u/disable-element! (dom/getElement "save-values-button"))
     (map/draw-polygon (:boundary new-project))))
 
 (defn flag-plot!
-  [plot-id]
-  (remote-callback :flag-plot
-                   [plot-id]
-                   #(js/alert (str "Plot " plot-id " has been flagged."))))
+  []
+  (let [plot-id (:id @current-plot)]
+    (remote-callback :flag-plot
+                     [plot-id]
+                     #(do (js/alert (str "Plot " plot-id " has been flagged."))
+                          (load-random-plot!)))))
 
 (defn sidebar-contents []
   [:div#sidebar-contents
    [:fieldset
-    [:legend "Select Project"]
+    [:legend "1. Select Project"]
     [:select#project-id {:name "project-id" :size "1"
-                         :value (:id @current-project)
+                         :value (or (:id @current-project) "")
                          :on-change #(switch-project!
                                       (js/parseInt (.-value (.-currentTarget %))))}
      (for [{:keys [id name]} @project-list]
        [:option {:key id :value id} name])]
     [:input#new-plot-button.button {:type "button" :name "new-plot"
-                                    :value (if @current-plot
-                                             "Flag Plot as Bad"
-                                             "Analyze New Plot")
-                                    :on-click (fn [_]
-                                                (when @current-plot
-                                                  (flag-plot! (:id @current-plot)))
-                                                (load-random-plot!))}]]
+                                    :value "2. Analyze New Plot"
+                                    :on-click load-random-plot!}]]
    [:fieldset
-    [:legend "Sample Values"]
+    [:legend "3. Assign Values"]
     [:ul
      (for [{:keys [id value color] :as sample-value} @sample-values-list]
        [:li {:key id}
@@ -140,15 +143,21 @@
                            :border-left-color color}
                           {})
                  :on-click #(set-current-value! % sample-value)}]])]
-    [:input#save-values-button.button {:type "button" :name "save-values"
-                                       :value "Save Assignments"
-                                       :on-click save-values!
-                                       :disabled true
-                                       :style {:opacity "0.5"}}]]])
+    [:div#final-plot-options
+     [:p "4."]
+     [:input#flag-plot-button.button {:type "button" :name "flag-plot"
+                                      :value "Flag Plot as Bad"
+                                      :on-click flag-plot!}]
+     [:p "or"]
+     [:input#save-values-button.button {:type "button" :name "save-values"
+                                        :value "Save Assignments"
+                                        :on-click save-values!}]]]])
 
 (defn ^:export main []
   (load-projects-and-sample-values!)
   (r/render [sidebar-contents] (dom/getElement "sidebar"))
+  (u/disable-element! (dom/getElement "flag-plot-button"))
+  (u/disable-element! (dom/getElement "save-values-button"))
   (map/digitalglobe-base-map {:div-name      "image-analysis-pane"
                               :center-coords [102.0 17.0]
                               :zoom-level    5}))
