@@ -73,7 +73,7 @@ header a.active-link {
 }
 
 #logos {
-    margin:1rem 0rem 0rem 16px;
+    margin:0.7rem 0rem 0rem 16px;
 }
 
 #logos img#usaid {
@@ -586,7 +586,7 @@ p.error-message {
 #dashboard #sidebar-contents legend {
     font-size:1.2em;
     font-family:Oswald;
-    font-weight:400 !important;
+    font-weight:400;
     padding:10px 0;
     color:#3FABC6;
     text-transform:uppercase;
