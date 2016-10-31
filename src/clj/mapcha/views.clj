@@ -71,7 +71,7 @@
        [:title "Mapcha"]
        [:meta {:charset "utf-8"}]
        [:meta {:name "description" :content description}]
-       [:meta {:name "keyword" :content keywords}]
+       [:meta {:name "keywords" :content keywords}]
        [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]
        [:link {:rel "shortcut icon" :href "/favicon.ico"}]
        (include-css "/css/cssreset-min.css"
