@@ -144,14 +144,20 @@
                           {})
                  :on-click #(set-current-value! % sample-value)}]])]
     [:div#final-plot-options
-     [:p "4."]
-     [:input#flag-plot-button.button {:type "button" :name "flag-plot"
+     [:table
+      [:tbody
+       [:tr
+        [:td "4."]
+        [:td "Either"]
+        [:td [:input#save-values-button.button {:type "button" :name "save-values"
+                                                :value "Save Assignments"
+                                                :on-click save-values!}]]]
+       [:tr
+        [:td " "]
+        [:td "or"]
+        [:td [:input#flag-plot-button.button {:type "button" :name "flag-plot"
                                       :value "Flag Plot as Bad"
-                                      :on-click flag-plot!}]
-     [:p "or"]
-     [:input#save-values-button.button {:type "button" :name "save-values"
-                                        :value "Save Assignments"
-                                        :on-click save-values!}]]]])
+                                      :on-click flag-plot!}]]]]]]]])
 
 (defn ^:export main []
   (load-projects-and-sample-values!)
