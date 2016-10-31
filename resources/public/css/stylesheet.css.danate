@@ -704,43 +704,27 @@ p.error-message {
 /*********/
 
 #admin {
-    overflow:scroll;
     height:100%;
     width:100%;
-    padding:0 20px 0 20px;
+    padding:10px 20px;
     background:rgba(255,255,255,0.9);
-}
-
-#admin h1,
-#admin h2,
-#admin h3,
-#admin h4,
-#admin h5,
-#admin h6,
-#admin h7,
-#admin p,
-#admin label {
-    font-family:Open Sans !important;
-    font-weight:400 !important;
-}
-
-#admin label {
-    color:darkgray !important;
-    font-size:1rem !important;
+    overflow:scroll;
 }
 
 #admin h1 {
-    font-size:2rem;
+    font-size:1.8rem;
     font-weight:bold;
-    margin:0px 0 10px 0;
+    margin-bottom:10px;
 }
 
 #admin #project-selection label {
     font-size:1em;
-    font-family:Oswald !important;
-    font-weight:400 !important;
-    color:#3fabc6 !important;
+    font-family:Oswald;
+    font-weight:400;
+    color:#3fabc6;
     text-transform:uppercase;
+    display:block;
+    margin-bottom:5px;
 }
 
 #admin #project-selection select {
@@ -749,230 +733,137 @@ p.error-message {
     font-size:0.9em;
 }
 
-#admin input#download-plot-data {
+#admin input.button[name=download-plot-data] {
     position:absolute;
-    top:0.9rem;
-    padding:0.25rem;
-    left:45rem;
+    top:10px;
+    right:15rem;
+    font-size:1rem;
+    padding:0.5rem;
     color:white;
     background-color:#55f;
-    border-radius:0.5rem;
     box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6);
 }
 
-#admin table {
-    width:100% !important;
+#admin input.button[name=create-project] {
+    position:absolute;
+    top:10px;
+    right:20px;
+    font-size:1rem;
+    padding:0.5rem;
+    color:white;
+    background-color:#55f;
+    box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6);
+}
+
+#admin fieldset {
+    margin-right:2rem;
 }
 
 #admin legend {
     margin-top:1em;
     font-size:1em;
-    font-family:Oswald !important;
-    font-weight:400 !important;
-    color:#3fabc6 !important;
+    font-family:Oswald;
+    font-weight:400;
+    color:#3fabc6;
     text-transform:uppercase;
 }
 
-#admin legend {
-    font-size:1em;
-    font-family:Oswald !important;
-    font-weight:400 !important;
-    color:#3fabc6 !important;
-}
-
-#admin #project-info label, #plot-info label, #sample-info th {
-    font-size:0.8em !important;
-    font-weight:400;
-    margin-right:1rem;
-    color:black !important;
+#admin #project-info label,
+#admin #plot-info label,
+#admin #bounding-box label {
+    display:block;
+    font-size:0.8rem;
+    padding:0.25rem 0rem;
 }
 
 #admin input[type=number], #admin input[type=text] {
     height:1rem;
     padding:0.3rem;
-}
-
-#admin fieldset {
-    width:calc(50% - 4rem);
-    margin-right:1rem;
+    margin-bottom:5px;
 }
 
 #admin fieldset#project-info {
     float:left;
-    display:inline;
     width:25%;
 }
 
-#admin fieldset#project-info td {
-    display:inline;
+#admin fieldset#project-info input[name="project-name"] {
+    width:90%;
 }
 
-#admin #project-description {
-    width:100%;
+#admin fieldset#project-info textarea[name="project-description"] {
+    height:6rem;
+    width:90%;
+    padding:0rem 0.7rem;
+    border-radius:0.25rem;
+    border:1px solid darkgray;
 }
 
 #admin fieldset#plot-info {
     float:left;
-    display:inline;
-    width:25%;
+    width:11%;
 }
 
-#admin fieldset#plot-info td {
-    display:inline;
+#admin fieldset#plot-info input[name="plots"],
+#admin fieldset#plot-info input[name="buffer-radius"],
+#admin fieldset#plot-info input[name="samples-per-plot"] {
+    width:80%;
 }
 
 #admin fieldset#bounding-box {
-    clear:both;
     float:left;
-    width:12.5vw;
-    background-color:white;
-    position:relative;
+    width:15rem;
+}
+
+#admin #bounding-box label {
+    text-align:center;
+    margin-bottom:5px;
 }
 
 #admin fieldset#bounding-box input {
-    width:100px;
+    display:block;
+    width:5rem;
 }
 
-/* bottom */
 #admin fieldset#bounding-box input#lat-max {
-    background-color:maroon;
+    margin:0rem auto 0.25rem auto;
 }
 
-/* top */
 #admin fieldset#bounding-box input#lon-min {
-    background-color:blue;
+    margin:0.25rem 0rem;
+    float:left;
 }
 
-/* left */
 #admin fieldset#bounding-box input#lon-max {
+    margin:0.25rem 0rem;
+    float:right;
 }
 
-/* right */
 #admin fieldset#bounding-box input#lat-min {
-    background-color:olive;
-}
-
-#admin fieldset#bounding-box td {
-}
-
-#admin .empty {
-    width:auto;
-    height:auto;
-}
-
-#admin #value-name {
-    font-size:0.9em !important;
-}
-
-#admin input#value-color {
-    font-size:0.9em !important;
-    width:20px;
-    margin:0px;
-}
-
-#admin input#value-image {
-    font-size:0.9em !important;
-    width:40%;
+    clear:both;
+    margin:0.25rem auto;
 }
 
 #admin #new-project-map {
     float:left;
-    border:1px solid;
-    width:37.5%;
-    z-index:49;
-    margin-top:5px !important;
-    height:auto;
+    margin-top:1rem;
+    width:calc(100% - 25% - 11% - 15rem - 6rem - 50px);
+    height:13rem;
+    border:1px solid black;
 }
 
-#admin fieldset#project-info {
-}
-
-#admin fieldset#project-info tr {
-}
-
-#admin fieldset#project-info input[type=text] {
-}
-
-#admin #project-info #project-name {
-}
-
-#admin #project-info input[name="project-name"],
-#project-info textarea[name="project-description"],
-#plot-info input[name="plots"],
-#plot-info input[name="buffer-radius"],
-#plot-info input[name="samples-per-plot"] {
-    width:95% !important;
-}
-
-/*project info */
-
-#admin #project-info table td {
-    display:block;
-}
-#admin #project-info textarea {
-    height:4.3em;
-    padding-right:8px;
-}
-
-#admin #plot-info table td {
-    display:block;
-}
-
-#admin fieldset#project-info textarea {
-}
-
-/* box1 */
-#admin fieldset#plot-info {
-    float:left;
-}
-
-/* box2 */
-#admin fieldset#plot-info table {
-}
-
-#admin fieldset#plot-info input {
-    width:100%;
-}
-
-#admin fieldset#bounding-box {
-}
-
-#admin fieldset#bounding-box input {
-}
-
-#admin fieldset#bounding-box input#lat-max {
-}
-
-#admin fieldset#bounding-box input#lon-min {
-}
-
-#admin fieldset#bounding-box input#lon-max {
-}
-
-#admin fieldset#bounding-box input#lat-min {
-}
-
-/* box3 */
-#admin fieldset#sample-info table tr th:nth-child(4) {
-    text-align:center;
-}
-
-#admin #sample-info, #project-info, #plot-info {
-    /* background-color:darkgray !important; */
-}
-
+#admin fieldset#sample-info th,
 #admin fieldset#sample-info td {
     text-align:center;
+    font-size:0.8rem;
+    padding:0.25rem;
 }
 
-#admin fieldset#sample-info th.empty {
-    background-color:#eee;
-    border:0px;
-}
-
-#admin fieldset#sample-info input[type=file] {
-    width:100%;
-    text-align:right;
+#admin fieldset#sample-info input.button {
+    padding:0.25rem;
+    min-width:2rem;
+    color:white;
+    background-color:#55f;
 }
 
 #admin fieldset#sample-info .circle {
@@ -983,73 +874,45 @@ p.error-message {
 }
 
 #admin fieldset#sample-info input#value-name {
+    font-size:0.9rem;
 }
 
 #admin fieldset#sample-info input#value-color {
-    padding:0px !important;
+    font-size:0.9rem;
+    height:2rem;
+    padding:0rem;
+    margin-bottom:5px;
 }
 
-#admin fieldset#sample-info input.button {
-    padding:0.25rem;
-    color:white;
-    min-width:2rem;
-    background-color:#55f;
-    border-radius:0.5rem;
+#admin fieldset#sample-info input#value-image {
+    font-size:0.9rem;
+    height:2rem;
+    padding:0rem;
+    margin-bottom:5px;
+}
+
+#admin fieldset#sample-info input.button[name=add-sample-value] {
+    margin:0.5rem 3rem;
     box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6);
-}
-
-#admin #sample-info th, td {
-    display:table-cell;
-}
-
-#admin input.button[name=add-sample-value] {
-    margin:0.5rem;
-}
-
-#admin #page-stretcher {
-    clear:both;
-}
-
-#admin input.button[name=create-project] {
-    font-size:1rem;
-    padding:0.5rem;
-    color:white;
-    background-color:#55f;
-    position:fixed;
-    right:0;
-    top:100px;
-    /* border-radius:1rem; */
-    /* box-shadow:0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6); */
 }
 
 #admin #spinner {
     position:absolute;
-    top:0.6rem;
-    right:2rem;
-    width:2rem;
-    height:2rem;
-    border-radius:1rem;
-    border-bottom:0.25rem solid #55f;
+    top:1rem;
+    left:45%;
+    width:4rem;
+    height:4rem;
+    border-radius:2rem;
+    border-bottom:0.5rem solid #3fabc6;
     -webkit-animation:sweep 1s infinite linear;
     visibility:hidden;
 }
-@-webkit-keyframes sweep { to { -webkit-transform:rotate(360deg); } }
-
-/* mmm */
-
-label {
-    display:block;
-    font-family:Open Sans;
-}
-
-#create-project-form table {
-    /* background-color:red; */
-    width:100%;
-}
-
-/* mmm end */
 
 @-webkit-keyframes sweep { to { -webkit-transform:rotate(360deg); } }
+
+/*****************************/
+/* Alternative @media Styles */
+/*****************************/
 
 @media screen and (max-width:768px) {
     header {

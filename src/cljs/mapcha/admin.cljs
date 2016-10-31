@@ -95,62 +95,59 @@
        [:option {:key 0 :value 0} "New Project"]
        (for [{:keys [id name]} @project-list]
          [:option {:key id :value id} name])]]
-     [:input#download-plot-data {:type "button" :value "Download Data"
-                                 :on-click export-current-plot-data
-                                 :style {:visibility
-                                         (if num_plots "visible" "hidden")}}]
+     [:input.button {:type "button" :name "download-plot-data"
+                     :value "Download Data" :on-click export-current-plot-data
+                     :style {:visibility (if num_plots "visible" "hidden")}}]
+     [:input.button {:type "button" :name "create-project"
+                     :value (if num_plots
+                              "Delete this project"
+                              "Create and launch this project")
+                     :on-click submit-form}]
      [:fieldset#project-info
       [:legend "Project Info"]
-      [:table
-       [:tbody
-        [:tr
-         [:td [:label "Name"]]
-         [:td [:input#project-name {:type "text" :name "project-name"
-                       :auto-complete "off" :value name}]]]
-        [:tr
-         [:td [:label "Description"]]
-         [:td [:textarea#project-description
-               {:name "project-description" :value description}]]]]]]
+      [:label "Name"]
+      [:input#project-name {:type "text" :name "project-name"
+                            :auto-complete "off" :value (or name "")}]
+      [:label "Description"]
+      [:textarea#project-description {:name "project-description"
+                                      :value (or description "")}]]
      [:fieldset#plot-info
       [:legend "Plot Info"]
-      [:table
-       [:tbody
-        [:tr
-         [:td [:label "Number of plots"]]
-         [:td [:input {:type "number" :name "plots" :value num_plots
-                       :auto-complete "off" :min "0" :step "1"}]]]
-        [:tr
-         [:td [:label "Plot radius in meters"]]
-         [:td [:input {:type "number" :name "buffer-radius" :value radius
-                       :auto-complete "off" :min "0.0" :step "any"}]]]
-        [:tr
-         [:td [:label "Samples per plot"]]
-         [:td [:input {:type "number" :name "samples-per-plot" :value num_samples
-                       :auto-complete "off" :min "0" :step "1"}]]]]]]
+      [:label "Number of plots"]
+      [:input {:type "number" :name "plots" :value (or num_plots "")
+               :auto-complete "off" :min "0" :step "1"}]
+      [:label "Plot radius in meters"]
+      [:input {:type "number" :name "buffer-radius" :value (or radius "")
+               :auto-complete "off" :min "0.0" :step "any"}]
+      [:label "Samples per plot"]
+      [:input {:type "number" :name "samples-per-plot" :value (or num_samples "")
+               :auto-complete "off" :min "0" :step "1"}]]
      [:fieldset#bounding-box
       [:legend "Define Bounding Box"]
+      [:label "Hold CTRL and click-and-drag a bounding box on the map"]
       [:input#lat-max {:type "number" :name "boundary-lat-max"
-                       :value (or lat_max maxlat)
-                       :placeholder "Lat Max" :auto-complete "off"
+                       :value (or lat_max maxlat "")
+                       :placeholder "North" :auto-complete "off"
                        :min "-90.0" :max "90.0" :step "any"}]
       [:input#lon-min {:type "number" :name "boundary-lon-min"
-                       :value (or lon_min minlon)
-                       :placeholder "Lon Min" :auto-complete "off"
+                       :value (or lon_min minlon "")
+                       :placeholder "West" :auto-complete "off"
                        :min "-180.0" :max "180.0" :step "any"}]
       [:input#lon-max {:type "number" :name "boundary-lon-max"
-                       :value (or lon_max maxlon)
-                       :placeholder "Lon Max" :auto-complete "off"
+                       :value (or lon_max maxlon "")
+                       :placeholder "East" :auto-complete "off"
                        :min "-180.0" :max "180.0" :step "any"}]
       [:input#lat-min {:type "number" :name "boundary-lat-min"
-                       :value (or lat_min minlat)
-                       :placeholder "Lat Min" :auto-complete "off"
+                       :value (or lat_min minlat "")
+                       :placeholder "South" :auto-complete "off"
                        :min "-90.0" :max "90.0" :step "any"}]]
+     [:div#new-project-map]
      [:fieldset#sample-info
       [:legend "Sample Values"]
       [:table
        [:thead
         [:tr
-         [:th.empty ""]
+         [:th ""]
          [:th "Name"]
          [:th "Color"]
          [:th "Reference Image"]]]
@@ -181,13 +178,6 @@
                       :disabled (if num_plots true false)}]
       [:input {:type "hidden" :name "sample-values"
                :value (pr-str @sample-values)}]]
-     [:div#new-project-map]
-     [:div#page-stretcher]
-     [:input.button {:type "button" :name "create-project"
-                     :value (if num_plots
-                              "Delete this project"
-                              "Create and launch this project")
-                     :on-click submit-form}]
      [:div#spinner]]))
 
 (defn ^:export main []
