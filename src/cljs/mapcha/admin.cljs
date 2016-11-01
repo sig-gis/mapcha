@@ -20,8 +20,22 @@
 (defn load-project-info! [project-id]
   (remote-callback :get-project-info
                    [project-id]
-                   #(do (set! (.-value (dom/getElement "project-description")) "")
-                        (reset! current-project %))))
+                   #(let [{:keys [name description num_plots radius
+                                  num_samples sample_resolution
+                                  lon_min lon_max lat_min lat_max]} %]
+                      (set! (.-value (dom/getElement "project-selector")) project-id)
+                      (set! (.-value (dom/getElement "project-name")) (or name ""))
+                      (set! (.-value (dom/getElement "project-description"))
+                            (or description ""))
+                      (set! (.-value (dom/getElement "plots")) (or num_plots ""))
+                      (set! (.-value (dom/getElement "radius")) (or radius ""))
+                      (set! (.-value (dom/getElement "num-samples"))
+                            (if-not num_samples
+                              ""
+                              (if (neg? sample_resolution)
+                                num_samples
+                                (str num_samples " @ " sample_resolution "m"))))
+                      (reset! current-project %))))
 
 (defn load-sample-values! [project-id]
   (remote-callback :get-sample-values
@@ -50,7 +64,6 @@
     (swap! sample-values delete-element idx)))
 
 (defn set-current-project! [project-id]
-  (set! (.-value (dom/getElement "project-selector")) project-id)
   (load-project-info! project-id)
   (load-sample-values! project-id))
 
@@ -80,8 +93,7 @@
                        #(.open js/window %)))))
 
 (defn create-project-form-contents []
-  (let [{:keys [name description num_plots radius num_samples sample_resolution
-                lon_min lon_max lat_min lat_max]} @current-project
+  (let [{:keys [num_plots lon_min lon_max lat_min lat_max]} @current-project
         {:keys [minlon minlat maxlon maxlat]} @map/current-bbox]
     [:form#project-management-form {:method "post" :action "/admin"}
      [:div#project-selection
@@ -106,29 +118,24 @@
      [:fieldset#project-info
       [:legend "Project Info"]
       [:label "Name"]
-      [:input#project-name {:type "text" :name "project-name"
-                            :auto-complete "off" :value (or name "")}]
+      [:input#project-name {:type "text" :name "project-name" :auto-complete "off"}]
       [:label "Description"]
-      [:textarea#project-description {:name "project-description"
-                                      :value (or description "")}]]
+      [:textarea#project-description {:name "project-description"}]]
      [:fieldset#plot-info
       [:legend "Plot Info"]
       [:label "Number of plots"]
-      [:input {:type "number" :name "plots" :value (or num_plots "")
-               :auto-complete "off" :min "0" :step "1"}]
+      [:input#plots {:type "number" :name "plots" :auto-complete "off"
+                     :min "0" :step "1"}]
       [:label "Plot radius (m)"]
-      [:input {:type "number" :name "buffer-radius" :value (or radius "")
-               :auto-complete "off" :min "0.0" :step "any"}]
-      [:label (if num_samples
+      [:input#radius {:type "number" :name "buffer-radius" :auto-complete "off"
+               :min "0.0" :step "any"}]
+      [:label (if num_plots
                 "Samples per plot"
                 "Sample resolution (m)")]
-      (if num_samples
-        [:input {:type "text" :name "sample-resolution"
-                 :value (if (pos? sample_resolution)
-                          (str num_samples " @ " sample_resolution "m")
-                          num_samples)}]
-        [:input {:type "number" :name "sample-resolution"
-                 :value "" :auto-complete "off" :min "0.0" :step "any"}])]
+      (if num_plots
+        [:input#num-samples {:type "text" :name "sample-resolution"}]
+        [:input#num-samples {:type "number" :name "sample-resolution"
+                             :auto-complete "off" :min "0.0" :step "any"}])]
      [:fieldset#bounding-box
       [:legend "Define Bounding Box"]
       [:label "Hold CTRL and click-and-drag a bounding box on the map"]
