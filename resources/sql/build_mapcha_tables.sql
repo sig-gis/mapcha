@@ -1,11 +1,12 @@
 CREATE SCHEMA mapcha;
 
 CREATE TABLE mapcha.projects (
-  id          serial primary key,
-  name        text not null,
-  description text,
-  boundary    geometry(Polygon,4326),
-  archived    boolean default false
+  id                serial primary key,
+  name              text not null,
+  description       text,
+  boundary          geometry(Polygon,4326),
+  sample_resolution double precision default -1.0,
+  archived          boolean default false
 );
 
 CREATE TABLE mapcha.plots (

@@ -80,7 +80,7 @@
                        #(.open js/window %)))))
 
 (defn create-project-form-contents []
-  (let [{:keys [name description num_plots radius num_samples
+  (let [{:keys [name description num_plots radius num_samples sample_resolution
                 lon_min lon_max lat_min lat_max]} @current-project
         {:keys [minlon minlat maxlon maxlat]} @map/current-bbox]
     [:form#project-management-form {:method "post" :action "/admin"}
@@ -116,12 +116,19 @@
       [:label "Number of plots"]
       [:input {:type "number" :name "plots" :value (or num_plots "")
                :auto-complete "off" :min "0" :step "1"}]
-      [:label "Plot radius in meters"]
+      [:label "Plot radius (m)"]
       [:input {:type "number" :name "buffer-radius" :value (or radius "")
                :auto-complete "off" :min "0.0" :step "any"}]
-      [:label "Samples per plot"]
-      [:input {:type "number" :name "samples-per-plot" :value (or num_samples "")
-               :auto-complete "off" :min "0" :step "1"}]]
+      [:label (if num_samples
+                "Samples per plot"
+                "Sample resolution (m)")]
+      (if num_samples
+        [:input {:type "text" :name "sample-resolution"
+                 :value (if (pos? sample_resolution)
+                          (str num_samples " @ " sample_resolution "m")
+                          num_samples)}]
+        [:input {:type "number" :name "sample-resolution"
+                 :value "" :auto-complete "off" :min "0.0" :step "any"}])]
      [:fieldset#bounding-box
       [:legend "Define Bounding Box"]
       [:label "Hold CTRL and click-and-drag a bounding box on the map"]

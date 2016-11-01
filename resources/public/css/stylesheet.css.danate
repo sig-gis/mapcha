@@ -801,12 +801,12 @@ p.error-message {
 
 #admin fieldset#plot-info {
     float:left;
-    width:11%;
+    width:12%;
 }
 
 #admin fieldset#plot-info input[name="plots"],
 #admin fieldset#plot-info input[name="buffer-radius"],
-#admin fieldset#plot-info input[name="samples-per-plot"] {
+#admin fieldset#plot-info input[name="sample-resolution"] {
     width:80%;
 }
 
@@ -847,7 +847,7 @@ p.error-message {
 #admin #new-project-map {
     float:left;
     margin-top:1rem;
-    width:calc(100% - 25% - 11% - 15rem - 6rem - 50px);
+    width:calc(100% - 25% - 12% - 15rem - 6rem - 50px);
     height:13rem;
     border:1px solid black;
 }

@@ -1,9 +1,10 @@
 -- name: add-project-sql
 -- Adds a new project record to mapcha.projects.
-INSERT INTO mapcha.projects (name, description, boundary)
-  VALUES (:name, :description,
+INSERT INTO mapcha.projects (name, description, sample_resolution, boundary)
+  VALUES (:name, :description, :sample_resolution,
           ST_MakeEnvelope(:lon_min,:lat_min,:lon_max,:lat_max,4326))
-  RETURNING id, name, description, ST_AsText(boundary) AS boundary;
+  RETURNING id, name, description, sample_resolution,
+            ST_AsText(boundary) AS boundary;
 
 -- name: add-plot-sql
 -- Adds a new plot record to mapcha.plots for the given project_id.
@@ -45,7 +46,7 @@ WITH plots      AS (SELECT count(id) AS num_plots
      samples    AS (SELECT count(id) AS num_samples
                       FROM first_plot
                       INNER JOIN mapcha.samples USING (plot_id))
-  SELECT name, description, num_plots, radius, num_samples,
+  SELECT name, description, num_plots, radius, num_samples, sample_resolution,
          ST_XMin(boundary) AS lon_min,
          ST_XMax(boundary) AS lon_max,
          ST_YMin(boundary) AS lat_min,

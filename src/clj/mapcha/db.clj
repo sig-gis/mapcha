@@ -97,35 +97,53 @@
 
 (defqueries "sql/project_management.sql" {:connection db-spec})
 
+(defn square-distance
+  [x1 y1 x2 y2]
+  (+ (Math/pow (- x2 x1) 2.0)
+     (Math/pow (- y2 y1) 2.0)))
+
+(defn create-gridded-sample-set
+  [plot-x plot-y buffer-radius sample-resolution]
+  (let [left           (- plot-x buffer-radius)
+        right          (+ plot-x buffer-radius)
+        top            (- plot-y buffer-radius)
+        bottom         (+ plot-y buffer-radius)
+        radius-squared (* buffer-radius buffer-radius)]
+    (for [x (range left (+ right sample-resolution) sample-resolution)
+          y (range top (+ bottom sample-resolution) sample-resolution)
+          :when (< (square-distance x y plot-x plot-y) radius-squared)]
+      [x y])))
+
 (defn create-new-project
   [{:keys [project-name project-description boundary-lon-min
            boundary-lon-max boundary-lat-min boundary-lat-max
-           plots buffer-radius samples-per-plot sample-values]}]
+           plots buffer-radius sample-resolution sample-values]}]
   (try
     (with-db-transaction [conn db-spec]
       ;; 1. Insert project-name, project-description, and boundary (as a
       ;;    polygon) into mapcha.projects.
 
-      (let [boundary-lon-min (Double/parseDouble boundary-lon-min)
-            boundary-lon-max (Double/parseDouble boundary-lon-max)
-            boundary-lat-min (Double/parseDouble boundary-lat-min)
-            boundary-lat-max (Double/parseDouble boundary-lat-max)
-            plots            (Integer/parseInt plots)
-            buffer-radius    (Double/parseDouble buffer-radius)
-            samples-per-plot (Integer/parseInt samples-per-plot)
+      (let [boundary-lon-min  (Double/parseDouble boundary-lon-min)
+            boundary-lon-max  (Double/parseDouble boundary-lon-max)
+            boundary-lat-min  (Double/parseDouble boundary-lat-min)
+            boundary-lat-max  (Double/parseDouble boundary-lat-max)
+            plots             (Integer/parseInt plots)
+            buffer-radius     (Double/parseDouble buffer-radius)
+            sample-resolution (Double/parseDouble sample-resolution)
             project-info (first
-                          (add-project-sql {:name        project-name
-                                            :description project-description
-                                            :lon_min     boundary-lon-min
-                                            :lon_max     boundary-lon-max
-                                            :lat_min     boundary-lat-min
-                                            :lat_max     boundary-lat-max}
+                          (add-project-sql {:name              project-name
+                                            :description       project-description
+                                            :lon_min           boundary-lon-min
+                                            :lon_max           boundary-lon-max
+                                            :lat_min           boundary-lat-min
+                                            :lat_max           boundary-lat-max
+                                            :sample_resolution sample-resolution}
                                            {:connection conn}))
             project-id   (project-info :id)
             lon-range    (- boundary-lon-max boundary-lon-min)
             lat-range    (- boundary-lat-max boundary-lat-min)]
 
-        ;; 2. Insert plots rows into mapcha.plots with random centers
+        ;; 2. Insert plot rows into mapcha.plots with random centers
         ;;    within boundary and radius=buffer-radius.
 
         (dotimes [_ plots]
@@ -141,19 +159,17 @@
                 plot-x    (plot-info :web_mercator_x)
                 plot-y    (plot-info :web_mercator_y)]
 
-            ;; 3. Insert samples-per-plot rows into mapcha.samples for each
-            ;;    plot with a randomly selected point within the plot's
-            ;;    buffer
+            ;; 3. Insert sample rows into mapcha.samples for each plot
+            ;;    with a gridded distribution based on sample-resolution.
 
-            (dotimes [_ samples-per-plot]
-              (let [offset-angle     (rand (* 2.0 Math/PI))
-                    offset-magnitude (rand buffer-radius)
-                    x-offset         (* offset-magnitude (Math/cos offset-angle))
-                    y-offset         (* offset-magnitude (Math/sin offset-angle))]
-                (add-sample-sql {:plot_id  plot-id
-                                 :sample_x (+ plot-x x-offset)
-                                 :sample_y (+ plot-y y-offset)}
-                                {:connection conn})))))
+            (doseq [[x y] (create-gridded-sample-set plot-x
+                                                     plot-y
+                                                     buffer-radius
+                                                     sample-resolution)]
+              (add-sample-sql {:plot_id  plot-id
+                               :sample_x x
+                               :sample_y y}
+                              {:connection conn}))))
 
         ;; 4. Read sample-values (EDN string -> [[name color image]*])
         ;;    and insert them into mapcha.sample_values.
