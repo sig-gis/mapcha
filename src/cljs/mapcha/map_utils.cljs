@@ -59,19 +59,46 @@
                                           "I6ImNpcTJ3ZTlyZTAwOWNuam00ZWU3aTk"
                                           "xdWIifQ.9OFrmevVe0YB2dJokKhhdA")
         recent-imagery-url           "digitalglobe.nal0g75k"
-        recent-imagery-+-streets-url "digitalglobe.nal0mpda"]
+        recent-imagery-+-streets-url "digitalglobe.nal0mpda"
+        bing-maps-access-token       (str "AlQPbThspGcsiCnczC-2QVOYU9u_PrteL"
+                                          "w6dxNQls99dmLXcr9-qWCM5J4Y2G-pS")]
     (->>
      (js/ol.Map.
       #js {:target div-name
            :layers #js [(js/ol.layer.Tile.
+                         #js {:title "DigitalGlobe Maps API: Recent Imagery"
+                              :visible false
+                              :source (js/ol.source.XYZ.
+                                       #js {:url (str
+                                                  "http://api.tiles.mapbox.com/v4/"
+                                                  recent-imagery-url
+                                                  "/{z}/{x}/{y}.png?access_token="
+                                                  digital-globe-access-token)
+                                            :attribution "© DigitalGlobe, Inc"})})
+                        (js/ol.layer.Tile.
                          #js {:title "DigitalGlobe Maps API: Recent Imagery+Streets"
+                              :visible true
                               :source (js/ol.source.XYZ.
                                        #js {:url (str
                                                   "http://api.tiles.mapbox.com/v4/"
                                                   recent-imagery-+-streets-url
                                                   "/{z}/{x}/{y}.png?access_token="
                                                   digital-globe-access-token)
-                                            :attribution "© DigitalGlobe, Inc"})})]
+                                            :attribution "© DigitalGlobe, Inc"})})
+                        (js/ol.layer.Tile.
+                         #js {:title "Bing Maps API: Aerial"
+                              :visible false
+                              :source (js/ol.source.BingMaps.
+                                       #js {:key bing-maps-access-token
+                                            :imagerySet "Aerial"
+                                            :maxZoom 19})})
+                        (js/ol.layer.Tile.
+                         #js {:title "Bing Maps API: Aerial with Labels"
+                              :visible false
+                              :source (js/ol.source.BingMaps.
+                                       #js {:key bing-maps-access-token
+                                            :imagerySet "AerialWithLabels"
+                                            :maxZoom 19})})]
            :controls (.extend (js/ol.control.defaults)
                               #js [(js/ol.control.ScaleLine.)])
            :view (js/ol.View.
