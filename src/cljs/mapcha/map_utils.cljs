@@ -6,6 +6,7 @@
             [ol.layer.Tile]
             [ol.layer.Vector]
             [ol.source.MapQuest]
+            [ol.source.BingMaps]
             [ol.source.Vector]
             [ol.source.XYZ]
             [ol.control]
@@ -66,7 +67,7 @@
      (js/ol.Map.
       #js {:target div-name
            :layers #js [(js/ol.layer.Tile.
-                         #js {:title "DigitalGlobe Maps API: Recent Imagery"
+                         #js {:title "DigitalGlobeRecentImagery"
                               :visible false
                               :source (js/ol.source.XYZ.
                                        #js {:url (str
@@ -76,7 +77,7 @@
                                                   digital-globe-access-token)
                                             :attribution "© DigitalGlobe, Inc"})})
                         (js/ol.layer.Tile.
-                         #js {:title "DigitalGlobe Maps API: Recent Imagery+Streets"
+                         #js {:title "DigitalGlobeRecentImagery+Streets"
                               :visible true
                               :source (js/ol.source.XYZ.
                                        #js {:url (str
@@ -86,14 +87,14 @@
                                                   digital-globe-access-token)
                                             :attribution "© DigitalGlobe, Inc"})})
                         (js/ol.layer.Tile.
-                         #js {:title "Bing Maps API: Aerial"
+                         #js {:title "BingAerial"
                               :visible false
                               :source (js/ol.source.BingMaps.
                                        #js {:key bing-maps-access-token
                                             :imagerySet "Aerial"
                                             :maxZoom 19})})
                         (js/ol.layer.Tile.
-                         #js {:title "Bing Maps API: Aerial with Labels"
+                         #js {:title "BingAerialWithLabels"
                               :visible false
                               :source (js/ol.source.BingMaps.
                                        #js {:key bing-maps-access-token

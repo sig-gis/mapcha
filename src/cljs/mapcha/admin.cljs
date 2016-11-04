@@ -69,9 +69,14 @@
   (load-project-info! project-id)
   (load-sample-values! project-id))
 
-(defn set-current-imagery! [imagery-id]
-  (reset! current-imagery imagery-id)
-  (js/alert @current-imagery))
+(defn set-current-imagery! [new-imagery]
+  (doseq [layer (.getArray (.getLayers @map/map-ref))]
+    (let [title (.get layer "title")]
+      (if (= title @current-imagery)
+        (.setVisible layer false))
+      (if (= title new-imagery)
+        (.setVisible layer true))))
+  (reset! current-imagery new-imagery))
 
 (defn delete-current-project! []
   (let [project-id (js/parseInt (.-value (dom/getElement "project-selector")))]
