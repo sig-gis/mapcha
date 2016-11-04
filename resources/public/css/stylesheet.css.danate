@@ -844,12 +844,31 @@ p.error-message {
     margin:0.25rem auto;
 }
 
-#admin #new-project-map {
+#admin #map-and-imagery {
     float:left;
     margin-top:1rem;
     width:calc(100% - 25% - 12% - 15rem - 6rem - 50px);
+}
+
+#admin #map-and-imagery #new-project-map {
     height:13rem;
+    margin-bottom:5px;
     border:1px solid black;
+}
+
+#admin #map-and-imagery label {
+    font-size:1em;
+    font-family:Oswald;
+    font-weight:400;
+    color:#3fabc6;
+    text-transform:uppercase;
+    display:inline;
+}
+
+#admin #map-and-imagery select {
+    border:1px solid darkgray;
+    height:2rem;
+    font-size:0.9em;
 }
 
 #admin fieldset#sample-info th,

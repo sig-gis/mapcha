@@ -12,6 +12,8 @@
 
 (defonce sample-values (r/atom []))
 
+(defonce current-imagery (atom "DigitalGlobeRecentImagery+Streets"))
+
 (defn load-projects! []
   (remote-callback :get-all-projects
                    []
@@ -66,6 +68,10 @@
 (defn set-current-project! [project-id]
   (load-project-info! project-id)
   (load-sample-values! project-id))
+
+(defn set-current-imagery! [imagery-id]
+  (reset! current-imagery imagery-id)
+  (js/alert @current-imagery))
 
 (defn delete-current-project! []
   (let [project-id (js/parseInt (.-value (dom/getElement "project-selector")))]
@@ -155,7 +161,20 @@
                        :value (or lat_min minlat "")
                        :placeholder "South" :auto-complete "off"
                        :min "-90.0" :max "90.0" :step "any"}]]
-     [:div#new-project-map]
+     [:div#map-and-imagery
+      [:div#new-project-map]
+      [:label "Basemap imagery: "]
+      [:select {:name "imagery-selector" :size "1"
+                :default-value "DigitalGlobeRecentImagery+Streets"
+                :on-change #(-> (.-currentTarget %)
+                                (.-value)
+                                (set-current-imagery!))}
+       [:option {:value "DigitalGlobeRecentImagery"}
+        "DigitalGlobe: Recent Imagery"]
+       [:option {:value "DigitalGlobeRecentImagery+Streets"}
+        "DigitalGlobe: Recent Imagery+Streets"]
+       [:option {:value "BingAerial"} "Bing Maps: Aerial"]
+       [:option {:value "BingAerialWithLabels"} "Bing Maps: Aerial with Labels"]]]
      [:fieldset#sample-info
       [:legend "Sample Values"]
       [:table
