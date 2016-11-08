@@ -2,9 +2,9 @@
 -- Adds a new project record to mapcha.projects.
 INSERT INTO mapcha.projects (name, description, sample_resolution,
                              imagery_id, boundary)
-  VALUES (:name, :description, :sample_resolution, :imagery_id
+  VALUES (:name, :description, :sample_resolution, :imagery_id,
           ST_MakeEnvelope(:lon_min,:lat_min,:lon_max,:lat_max,4326))
-  RETURNING id, name, description, sample_resolution, imagery_id
+  RETURNING id, name, description, sample_resolution, imagery_id,
             ST_AsText(boundary) AS boundary;
 
 -- name: add-plot-sql

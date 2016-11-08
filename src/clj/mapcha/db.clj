@@ -121,7 +121,7 @@
 (defn create-new-project
   [{:keys [project-name project-description boundary-lon-min boundary-lon-max
            boundary-lat-min boundary-lat-max plots buffer-radius
-           sample-resolution sample-values current-imagery]}]
+           sample-resolution sample-values imagery-selector]}]
   (try
     (with-db-transaction [conn db-spec]
       ;; 1. Insert project-name, project-description, and boundary (as a
@@ -134,7 +134,7 @@
             plots             (Integer/parseInt plots)
             buffer-radius     (Double/parseDouble buffer-radius)
             sample-resolution (Double/parseDouble sample-resolution)
-            imagery-id        (get-imagery-id-by-title current-imagery)
+            imagery-id        (get-imagery-id-by-title imagery-selector)
             project-info (first
                           (add-project-sql {:name              project-name
                                             :description       project-description

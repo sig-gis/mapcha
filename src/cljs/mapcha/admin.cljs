@@ -12,7 +12,7 @@
 
 (defonce sample-values (r/atom []))
 
-(defonce current-imagery (r/atom "DigitalGlobeRecentImagery+Streets"))
+(defonce current-imagery (atom "DigitalGlobeRecentImagery+Streets"))
 
 (defn load-projects! []
   (remote-callback :get-all-projects
@@ -215,9 +215,7 @@
                       :on-click add-sample-value-row!
                       :disabled (if num_plots true false)}]
       [:input {:type "hidden" :name "sample-values"
-               :value (pr-str @sample-values)}]
-      [:input {:type "hidden" :name "current-imagery"
-               :value @current-imagery}]]
+               :value (pr-str @sample-values)}]]
      [:div#spinner]]))
 
 (defn ^:export main []
