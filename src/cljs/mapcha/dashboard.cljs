@@ -161,9 +161,13 @@
                                       :value "Flag Plot as Bad"
                                       :on-click flag-plot!}]]]]]]]])
 
+(defn imagery-info []
+  [:p (:attribution @current-project)])
+
 (defn ^:export main []
   (load-projects-and-sample-values!)
   (r/render [sidebar-contents] (dom/getElement "sidebar"))
+  (r/render [imagery-info] (dom/getElement "imagery-info"))
   (u/disable-element! (dom/getElement "flag-plot-button"))
   (u/disable-element! (dom/getElement "save-values-button"))
   (map/digitalglobe-base-map {:div-name      "image-analysis-pane"

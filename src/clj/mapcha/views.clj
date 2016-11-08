@@ -393,9 +393,7 @@
                                 :onclick "window.location='/select-project'"}]
     [:div#image-analysis-pane]
     [:div#sidebar]
-    [:p#imagery-info (str "DigitalGlobe Maps API: Recent Imagery+Streets | "
-                          "June 2015 | "
-                          "© DigitalGlobe, Inc")]
+    [:div#imagery-info]
     [:input#user-id {:type "hidden" :name "user-id"
                      :value (str (current-user-id request))}]
     [:input#initial-project-id {:type "hidden" :name "initial-project-id"
