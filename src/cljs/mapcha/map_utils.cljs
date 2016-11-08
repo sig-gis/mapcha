@@ -290,7 +290,8 @@
 
 (defn enable-dragbox-draw [map]
   (let [draw-layer (js/ol.layer.Vector.
-                    #js {:source (js/ol.source.Vector.
+                    #js {:title  "ProjectBoundingBox"
+                         :source (js/ol.source.Vector.
                                   #js {:features #js []})
                          :style  (styles :polygon)})
         source (.getSource draw-layer)

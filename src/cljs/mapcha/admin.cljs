@@ -31,9 +31,8 @@
 (defn load-project-info! [project-id]
   (remote-callback :get-project-info
                    [project-id]
-                   #(let [{:keys [name description num_plots radius
-                                  num_samples sample_resolution imagery
-                                  lon_min lon_max lat_min lat_max]
+                   #(let [{:keys [name description num_plots radius num_samples
+                                  sample_resolution imagery boundary]
                            :or {imagery "DigitalGlobeRecentImagery+Streets"}} %]
                       (set! (.-value (dom/getElement "project-selector")) project-id)
                       (set! (.-value (dom/getElement "project-name")) (or name ""))
@@ -49,6 +48,13 @@
                                 (str num_samples " @ " sample_resolution "m"))))
                       (set! (.-value (dom/getElement "imagery-selector")) imagery)
                       (set-current-imagery! imagery)
+                      (if boundary
+                        (do (map/disable-dragbox-draw @map/map-ref)
+                            (map/draw-polygon boundary))
+                        (do (map/enable-dragbox-draw @map/map-ref)
+                            (.removeLayer @map/map-ref @map/current-boundary)
+                            (reset! map/current-boundary nil)
+                            (map/zoom-and-recenter-map 102.0 17.0 5)))
                       (reset! current-project %))))
 
 (defn load-sample-values! [project-id]
