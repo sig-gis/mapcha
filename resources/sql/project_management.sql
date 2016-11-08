@@ -47,16 +47,18 @@ WITH plots      AS (SELECT count(id) AS num_plots
      samples    AS (SELECT count(id) AS num_samples
                       FROM first_plot
                       INNER JOIN mapcha.samples USING (plot_id))
-  SELECT name, description, num_plots, radius, num_samples, sample_resolution,
+  SELECT name, description, num_plots, radius, num_samples,
+         sample_resolution, title AS imagery,
          ST_XMin(boundary) AS lon_min,
          ST_XMax(boundary) AS lon_max,
          ST_YMin(boundary) AS lat_min,
          ST_YMax(boundary) AS lat_max
-    FROM mapcha.projects
+    FROM mapcha.projects AS prj
+    INNER JOIN mapcha.imagery AS img ON prj.imagery_id = img.id
     CROSS JOIN plots
     CROSS JOIN first_plot
     CROSS JOIN samples
-    WHERE id = :project_id;
+    WHERE prj.id = :project_id;
 
 -- name: get-imagery-info-sql
 -- Returns all of the properties of the imagery entry matching title.

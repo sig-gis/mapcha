@@ -14,6 +14,15 @@
 
 (defonce current-imagery (atom "DigitalGlobeRecentImagery+Streets"))
 
+(defn set-current-imagery! [new-imagery]
+  (doseq [layer (.getArray (.getLayers @map/map-ref))]
+    (let [title (.get layer "title")]
+      (if (= title @current-imagery)
+        (.setVisible layer false))
+      (if (= title new-imagery)
+        (.setVisible layer true))))
+  (reset! current-imagery new-imagery))
+
 (defn load-projects! []
   (remote-callback :get-all-projects
                    []
@@ -23,8 +32,9 @@
   (remote-callback :get-project-info
                    [project-id]
                    #(let [{:keys [name description num_plots radius
-                                  num_samples sample_resolution
-                                  lon_min lon_max lat_min lat_max]} %]
+                                  num_samples sample_resolution imagery
+                                  lon_min lon_max lat_min lat_max]
+                           :or {imagery "DigitalGlobeRecentImagery+Streets"}} %]
                       (set! (.-value (dom/getElement "project-selector")) project-id)
                       (set! (.-value (dom/getElement "project-name")) (or name ""))
                       (set! (.-value (dom/getElement "project-description"))
@@ -37,6 +47,8 @@
                               (if (neg? sample_resolution)
                                 num_samples
                                 (str num_samples " @ " sample_resolution "m"))))
+                      (set! (.-value (dom/getElement "imagery-selector")) imagery)
+                      (set-current-imagery! imagery)
                       (reset! current-project %))))
 
 (defn load-sample-values! [project-id]
@@ -68,15 +80,6 @@
 (defn set-current-project! [project-id]
   (load-project-info! project-id)
   (load-sample-values! project-id))
-
-(defn set-current-imagery! [new-imagery]
-  (doseq [layer (.getArray (.getLayers @map/map-ref))]
-    (let [title (.get layer "title")]
-      (if (= title @current-imagery)
-        (.setVisible layer false))
-      (if (= title new-imagery)
-        (.setVisible layer true))))
-  (reset! current-imagery new-imagery))
 
 (defn delete-current-project! []
   (let [project-id (js/parseInt (.-value (dom/getElement "project-selector")))]
@@ -169,7 +172,7 @@
      [:div#map-and-imagery
       [:div#new-project-map]
       [:label "Basemap imagery: "]
-      [:select {:name "imagery-selector" :size "1"
+      [:select#imagery-selector {:name "imagery-selector" :size "1"
                 :default-value "DigitalGlobeRecentImagery+Streets"
                 :on-change #(-> (.-currentTarget %)
                                 (.-value)
