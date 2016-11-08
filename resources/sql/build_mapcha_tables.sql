@@ -6,6 +6,7 @@ CREATE TABLE mapcha.projects (
   description       text,
   boundary          geometry(Polygon,4326),
   sample_resolution double precision default -1.0,
+  imagery_id        integer not null references mapcha.imagery (id),
   archived          boolean default false
 );
 

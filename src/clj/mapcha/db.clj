@@ -114,10 +114,14 @@
           :when (< (square-distance x y plot-x plot-y) radius-squared)]
       [x y])))
 
+(defn get-imagery-id-by-title
+  [imagery-title]
+  (:id (first (get-imagery-info-sql {:title imagery-title}))))
+
 (defn create-new-project
-  [{:keys [project-name project-description boundary-lon-min
-           boundary-lon-max boundary-lat-min boundary-lat-max
-           plots buffer-radius sample-resolution sample-values]}]
+  [{:keys [project-name project-description boundary-lon-min boundary-lon-max
+           boundary-lat-min boundary-lat-max plots buffer-radius
+           sample-resolution sample-values current-imagery]}]
   (try
     (with-db-transaction [conn db-spec]
       ;; 1. Insert project-name, project-description, and boundary (as a
@@ -130,6 +134,7 @@
             plots             (Integer/parseInt plots)
             buffer-radius     (Double/parseDouble buffer-radius)
             sample-resolution (Double/parseDouble sample-resolution)
+            imagery-id        (get-imagery-id-by-title current-imagery)
             project-info (first
                           (add-project-sql {:name              project-name
                                             :description       project-description
@@ -137,7 +142,8 @@
                                             :lon_max           boundary-lon-max
                                             :lat_min           boundary-lat-min
                                             :lat_max           boundary-lat-max
-                                            :sample_resolution sample-resolution}
+                                            :sample_resolution sample-resolution
+                                            :imagery_id        imagery-id}
                                            {:connection conn}))
             project-id   (project-info :id)
             lon-range    (- boundary-lon-max boundary-lon-min)

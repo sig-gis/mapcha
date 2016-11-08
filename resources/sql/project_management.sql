@@ -1,9 +1,10 @@
 -- name: add-project-sql
 -- Adds a new project record to mapcha.projects.
-INSERT INTO mapcha.projects (name, description, sample_resolution, boundary)
-  VALUES (:name, :description, :sample_resolution,
+INSERT INTO mapcha.projects (name, description, sample_resolution,
+                             imagery_id, boundary)
+  VALUES (:name, :description, :sample_resolution, :imagery_id
           ST_MakeEnvelope(:lon_min,:lat_min,:lon_max,:lat_max,4326))
-  RETURNING id, name, description, sample_resolution,
+  RETURNING id, name, description, sample_resolution, imagery_id
             ST_AsText(boundary) AS boundary;
 
 -- name: add-plot-sql
@@ -56,6 +57,10 @@ WITH plots      AS (SELECT count(id) AS num_plots
     CROSS JOIN first_plot
     CROSS JOIN samples
     WHERE id = :project_id;
+
+-- name: get-imagery-info-sql
+-- Returns all of the properties of the imagery entry matching title.
+SELECT * FROM mapcha.imagery WHERE title = :title;
 
 -- name: get-sample-values-sql
 -- Returns all rows in mapcha.sample_values with the given project_id.
