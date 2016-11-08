@@ -108,6 +108,17 @@
                        :zoom zoom-level})})
      (reset! map-ref))))
 
+(defonce current-imagery (atom "DigitalGlobeRecentImagery+Streets"))
+
+(defn set-current-imagery! [new-imagery]
+  (doseq [layer (.getArray (.getLayers @map-ref))]
+    (let [title (.get layer "title")]
+      (if (= title @current-imagery)
+        (.setVisible layer false))
+      (if (= title new-imagery)
+        (.setVisible layer true))))
+  (reset! current-imagery new-imagery))
+
 (defn zoom-map-to-layer [map layer]
   (let [view   (.getView map)
         size   (.getSize map)

@@ -91,6 +91,7 @@
                               project1 (or initial-project (first %))]
                           (reset! current-project project1)
                           (load-sample-values! (:id project1))
+                          (map/set-current-imagery! (:imagery project1))
                           (map/draw-polygon (:boundary project1))))))
 
 (defn switch-project!
@@ -108,6 +109,7 @@
     (u/enable-element! (dom/getElement "new-plot-button"))
     (u/disable-element! (dom/getElement "flag-plot-button"))
     (u/disable-element! (dom/getElement "save-values-button"))
+    (map/set-current-imagery! (:imagery new-project))
     (map/draw-polygon (:boundary new-project))))
 
 (defn flag-plot!

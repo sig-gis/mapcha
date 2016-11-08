@@ -12,17 +12,6 @@
 
 (defonce sample-values (r/atom []))
 
-(defonce current-imagery (atom "DigitalGlobeRecentImagery+Streets"))
-
-(defn set-current-imagery! [new-imagery]
-  (doseq [layer (.getArray (.getLayers @map/map-ref))]
-    (let [title (.get layer "title")]
-      (if (= title @current-imagery)
-        (.setVisible layer false))
-      (if (= title new-imagery)
-        (.setVisible layer true))))
-  (reset! current-imagery new-imagery))
-
 (defn load-projects! []
   (remote-callback :get-all-projects
                    []
@@ -47,7 +36,7 @@
                                 num_samples
                                 (str num_samples " @ " sample_resolution "m"))))
                       (set! (.-value (dom/getElement "imagery-selector")) imagery)
-                      (set-current-imagery! imagery)
+                      (map/set-current-imagery! imagery)
                       (if boundary
                         (do (map/disable-dragbox-draw @map/map-ref)
                             (map/draw-polygon boundary))
@@ -182,7 +171,7 @@
                 :default-value "DigitalGlobeRecentImagery+Streets"
                 :on-change #(-> (.-currentTarget %)
                                 (.-value)
-                                (set-current-imagery!))}
+                                (map/set-current-imagery!))}
        [:option {:value "DigitalGlobeRecentImagery"}
         "DigitalGlobe: Recent Imagery"]
        [:option {:value "DigitalGlobeRecentImagery+Streets"}

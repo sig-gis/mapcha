@@ -30,10 +30,12 @@ INSERT INTO mapcha.sample_values (project_id, value, color, image)
 
 -- name: get-all-projects-sql
 -- Returns all rows in mapcha.projects for which archived = false.
-SELECT id, name, description, ST_AsGeoJSON(boundary) AS boundary
-  FROM mapcha.projects
+SELECT prj.id, name, description, ST_AsGeoJSON(boundary) AS boundary,
+       title AS imagery
+  FROM mapcha.projects AS prj
+  INNER JOIN mapcha.imagery AS img ON prj.imagery_id = img.id
   WHERE archived = false
-  ORDER BY id;
+  ORDER BY prj.id;
 
 -- name: get-project-info-sql
 -- Returns all of the properties of the project matching project_id.
