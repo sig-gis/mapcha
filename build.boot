@@ -16,6 +16,7 @@
                    [net.cgrand/moustache        "1.2.0-alpha2"
                     :exclusions [org.clojure/clojure ring/ring-core]]
                    [hiccup                      "1.0.5"]
+                   [garden                      "1.3.2"]
                    [org.clojure/java.jdbc       "0.5.0"]
                    [org.postgresql/postgresql   "9.4.1208.jre7"]
                    [yesql                       "0.5.2"]

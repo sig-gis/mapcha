@@ -19,7 +19,8 @@
             [net.cgrand.moustache           :refer [app]]
             [mapcha.validation              :refer [validate-params]]
             [mapcha.db                      :refer [find-user-info add-user]]
-            [mapcha.views                   :as    views]))
+            [mapcha.views                   :as    views]
+            [mapcha.css                     :as    css]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -48,27 +49,29 @@
 (def route-handler
   (app
    ;; Public pages (no authentication required)
-   []                 {:get views/home-page}
-   ["about"]          {:get views/about-page}
+   []                   {:get views/home-page}
+   ["about"]            {:get views/about-page}
    ;; Login/Registration/Password-Reset/Logout pages
-   ["login"]          {:any views/login-page}
-   ["register"]       {:any views/register-page}
-   ["password"]       {:any views/password-page}
-   ["password-reset"] {:any views/password-reset-page}
-   ["logout"]         (app logout :any (fn [_] (redirect "/")))
+   ["login"]            {:any views/login-page}
+   ["register"]         {:any views/register-page}
+   ["password"]         {:any views/password-page}
+   ["password-reset"]   {:any views/password-reset-page}
+   ["logout"]           (app logout :any (fn [_] (redirect "/")))
    ;; Private pages (must be logged in to access)
-   ["select-project"] (app (wrap-authorize #{:user :admin})
-                           :get views/select-project)
-   ["account"]        (app (wrap-authorize #{:user :admin})
-                           :get views/account-page
-                           :post views/update-account-page)
-   ["dashboard"]      (app (wrap-authorize #{:user :admin})
-                           :get views/dashboard-page)
-   ["admin"]          (app (wrap-authorize #{:admin})
-                           :get views/admin-page
-                           :post views/create-new-project-page)
+   ["select-project"]   (app (wrap-authorize #{:user :admin})
+                             :get views/select-project)
+   ["account"]          (app (wrap-authorize #{:user :admin})
+                             :get views/account-page
+                             :post views/update-account-page)
+   ["dashboard"]        (app (wrap-authorize #{:user :admin})
+                             :get views/dashboard-page)
+   ["admin"]            (app (wrap-authorize #{:admin})
+                             :get views/admin-page
+                             :post views/create-new-project-page)
+   ;; Stylesheet
+   ["css" "garden.css"] {:get css/make-stylesheet}
    ;; Page not found (matches everything else)
-   [&]                views/page-not-found-page))
+   [&]                  views/page-not-found-page))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
