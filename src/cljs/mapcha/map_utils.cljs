@@ -47,6 +47,11 @@
                         "EPSG:3857"
                         "EPSG:4326"))
 
+(defn get-full-extent []
+  (let [[minlon minlat] (reproject-to-map -180.0 -89.999999)
+        [maxlon maxlat] (reproject-to-map 180.0 90.0)]
+    #js [minlon minlat maxlon maxlat]))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Create the default OpenLayers Map Object used on all pages
@@ -105,6 +110,7 @@
            :view (js/ol.View.
                   #js {:projection "EPSG:3857"
                        :center (js/ol.proj.fromLonLat (clj->js center-coords))
+                       :extent (get-full-extent)
                        :zoom zoom-level})})
      (reset! map-ref))))
 
@@ -416,6 +422,7 @@
         :view (js/ol.View.
                #js {:projection "EPSG:3857"
                     :center (js/ol.proj.fromLonLat (clj->js center-coords))
+                    :extent (get-full-extent)
                     :zoom zoom-level})}))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
