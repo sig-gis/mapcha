@@ -717,6 +717,10 @@ p.error-message {
     margin-bottom:10px;
 }
 
+#admin #project-selection {
+    margin-bottom:10px;
+}
+
 #admin #project-selection label {
     font-size:1em;
     font-family:Oswald;
@@ -846,12 +850,12 @@ p.error-message {
 
 #admin #map-and-imagery {
     float:left;
-    margin-top:1rem;
     width:calc(100% - 25% - 12% - 15rem - 6rem - 50px);
+    height:calc(50vh + 2rem + 5px);
 }
 
 #admin #map-and-imagery #new-project-map {
-    height:13rem;
+    height:50vh;
     margin-bottom:5px;
     border:1px solid black;
 }
@@ -869,6 +873,12 @@ p.error-message {
     border:1px solid darkgray;
     height:2rem;
     font-size:0.9em;
+}
+
+#admin fieldset#sample-info {
+    position:absolute;
+    top:22rem;
+    left:20px;
 }
 
 #admin fieldset#sample-info th,
