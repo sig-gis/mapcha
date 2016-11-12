@@ -12,6 +12,8 @@
 
 (defonce sample-values (r/atom []))
 
+(defonce sample-type (r/atom "random"))
+
 (defn load-projects! []
   (remote-callback :get-all-projects
                    []
@@ -29,12 +31,19 @@
                             (or description ""))
                       (set! (.-value (dom/getElement "plots")) (or num_plots ""))
                       (set! (.-value (dom/getElement "radius")) (or radius ""))
-                      (set! (.-value (dom/getElement "num-samples"))
-                            (if-not num_samples
-                              ""
-                              (if (neg? sample_resolution)
-                                num_samples
-                                (str num_samples " @ " sample_resolution "m"))))
+                      (if (and sample_resolution (pos? sample_resolution))
+                        (do (reset! sample-type "both")
+                            (set! (.-checked (dom/getElement "gridded-sample-type"))
+                                  true))
+                        (do (reset! sample-type "random")
+                            (set! (.-checked (dom/getElement "random-sample-type"))
+                                  true)))
+                      (set! (.-value (dom/getElement "samples-per-plot"))
+                            (or num_samples ""))
+                      (set! (.-value (dom/getElement "sample-resolution"))
+                            (if (and sample_resolution (pos? sample_resolution))
+                              sample_resolution
+                              ""))
                       (set! (.-value (dom/getElement "imagery-selector")) imagery)
                       (map/set-current-imagery! imagery)
                       (if boundary
@@ -137,14 +146,36 @@
                      :min "0" :step "1"}]
       [:label "Plot radius (m)"]
       [:input#radius {:type "number" :name "buffer-radius" :auto-complete "off"
-               :min "0.0" :step "any"}]
-      [:label (if num_plots
-                "Samples per plot"
-                "Sample resolution (m)")]
-      (if num_plots
-        [:input#num-samples {:type "text" :name "sample-resolution"}]
-        [:input#num-samples {:type "number" :name "sample-resolution"
-                             :auto-complete "off" :min "0.0" :step "any"}])]
+               :min "0.0" :step "any"}]]
+     [:fieldset#sample-info
+      [:legend "Sample Info"]
+      [:label "Sample type"]
+      [:table
+       [:tbody
+        [:tr
+         [:td [:input#random-sample-type
+               {:type "radio" :name "sample-type" :value "random"
+                :default-checked "true"
+                :on-change #(reset! sample-type
+                                    (-> (.-currentTarget %)
+                                        (.-value)))}]]
+         [:td [:label "Random"]]]
+        [:tr
+         [:td [:input#gridded-sample-type
+               {:type "radio" :name "sample-type" :value "gridded"
+                :on-change #(reset! sample-type
+                                    (-> (.-currentTarget %)
+                                        (.-value)))}]]
+         [:td [:label "Gridded"]]]]]
+      [:label "Samples per plot"]
+      [:input#samples-per-plot {:type "number" :name "samples-per-plot"
+                                :auto-complete "off" :min "0" :step "1"
+                                :disabled (= @sample-type "gridded")}]
+      [:label "Sample resolution (m)"]
+      [:input#sample-resolution {:type "number" :name "sample-resolution"
+                                 :auto-complete "off" :min "0.0"
+                                 :step "any"
+                                 :disabled (= @sample-type "random")}]]
      [:fieldset#bounding-box
       [:legend "Define Bounding Box"]
       [:label "Hold CTRL and click-and-drag a bounding box on the map"]
@@ -178,7 +209,7 @@
         "DigitalGlobe: Recent Imagery+Streets"]
        [:option {:value "BingAerial"} "Bing Maps: Aerial"]
        [:option {:value "BingAerialWithLabels"} "Bing Maps: Aerial with Labels"]]]
-     [:fieldset#sample-info
+     [:fieldset#sample-value-info
       [:legend "Sample Values"]
       [:table
        [:thead

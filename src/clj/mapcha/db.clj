@@ -114,14 +114,23 @@
           :when (< (square-distance x y plot-x plot-y) radius-squared)]
       [x y])))
 
+(defn create-random-sample-set
+  [plot-x plot-y buffer-radius samples-per-plot]
+  (for [offset-angle (repeatedly samples-per-plot #(rand (* 2.0 Math/PI)))]
+    (let [offset-magnitude (rand buffer-radius)
+          x-offset         (* offset-magnitude (Math/cos offset-angle))
+          y-offset         (* offset-magnitude (Math/sin offset-angle))]
+      [(+ plot-x x-offset)
+       (+ plot-y y-offset)])))
+
 (defn get-imagery-id-by-title
   [imagery-title]
   (:id (first (get-imagery-info-sql {:title imagery-title}))))
 
 (defn create-new-project
   [{:keys [project-name project-description boundary-lon-min boundary-lon-max
-           boundary-lat-min boundary-lat-max plots buffer-radius
-           sample-resolution sample-values imagery-selector]}]
+           boundary-lat-min boundary-lat-max plots buffer-radius sample-type
+           samples-per-plot sample-resolution sample-values imagery-selector]}]
   (try
     (with-db-transaction [conn db-spec]
       ;; 1. Insert project-name, project-description, and boundary (as a
@@ -133,7 +142,11 @@
             boundary-lat-max  (Double/parseDouble boundary-lat-max)
             plots             (Integer/parseInt plots)
             buffer-radius     (Double/parseDouble buffer-radius)
-            sample-resolution (Double/parseDouble sample-resolution)
+            samples-per-plot  (if (= sample-type "random")
+                                (Integer/parseInt samples-per-plot))
+            sample-resolution (if (= sample-type "gridded")
+                                (Double/parseDouble sample-resolution)
+                                -1.0)
             imagery-id        (get-imagery-id-by-title imagery-selector)
             project-info (first
                           (add-project-sql {:name              project-name
@@ -166,12 +179,17 @@
                 plot-y    (plot-info :web_mercator_y)]
 
             ;; 3. Insert sample rows into mapcha.samples for each plot
-            ;;    with a gridded distribution based on sample-resolution.
+            ;;    with the spatial distribution specified by sample-type.
 
-            (doseq [[x y] (create-gridded-sample-set plot-x
-                                                     plot-y
-                                                     buffer-radius
-                                                     sample-resolution)]
+            (doseq [[x y] (if (= sample-type "gridded")
+                            (create-gridded-sample-set plot-x
+                                                       plot-y
+                                                       buffer-radius
+                                                       sample-resolution)
+                            (create-random-sample-set plot-x
+                                                      plot-y
+                                                      buffer-radius
+                                                      samples-per-plot))]
               (add-sample-sql {:plot_id  plot-id
                                :sample_x x
                                :sample_y y}
