@@ -512,19 +512,46 @@ nav ul li {
 /* Error Pages */
 /***************/
 
-p.alert {
-    float:left;
-    clear:left;
-    margin:1rem 0rem 0rem 1rem;
+@-webkit-keyframes fade-out {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@-moz-keyframes fade-out {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@-o-keyframes fade-out {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes fade-out {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.alert {
+    position:absolute;
+    top:1rem;
+    left:1rem;
     font-size:1rem;
     font-style:italic;
     width:35rem;
     padding:1rem;
     border:1px solid #009;
-    border-radius:1rem;
-    background:rgba(255, 255, 255, 0.8);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
-    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
+    background:white;
+    z-index:1000;
+    -webkit-animation: fade-out 5s;
+    -moz-animation: fade-out 5s;
+    -o-animation: fade-out 5s;
+    animation: fade-out 5s;
+    opacity:0;
 }
 
 p.error-message {
@@ -567,7 +594,7 @@ p.error-message {
     width:5rem;
     position:absolute;
     left:calc(70vw - 5rem);
-    z-index:10000;
+    z-index:500;
     background-color:#3FABC6;
     height:40px;
     font-size:17;
@@ -957,10 +984,16 @@ p.error-message {
     border-radius:2rem;
     border-bottom:0.5rem solid #3fabc6;
     -webkit-animation:sweep 1s infinite linear;
+    -moz-animation:sweep 1s infinite linear;
+    -o-animation:sweep 1s infinite linear;
+    animation:sweep 1s infinite linear;
     visibility:hidden;
 }
 
 @-webkit-keyframes sweep { to { -webkit-transform:rotate(360deg); } }
+@-moz-keyframes    sweep { to { -moz-transform:rotate(360deg); } }
+@-o-keyframes      sweep { to { -o-transform:rotate(360deg); } }
+@keyframes         sweep { to { transform:rotate(360deg); } }
 
 /*****************************/
 /* Alternative @media Styles */

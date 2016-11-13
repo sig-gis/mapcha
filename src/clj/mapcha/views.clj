@@ -112,10 +112,11 @@
              (link-active "/login" "Login")))]]]
        [:section#content
         (when-let [message (:flash request)]
-          (if (string? message)
-            [:p {:class "alert"} message]
-            (for [sub-message message]
-              [:p {:class "alert"} sub-message])))
+          [:div {:class "alert"}
+           (if (string? message)
+             [:p message]
+             (for [sub-message message]
+               [:p sub-message]))])
         content]]))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
