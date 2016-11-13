@@ -870,13 +870,15 @@ p.error-message {
 }
 
 #admin #map-and-imagery {
-    float:left;
+    position:absolute;
+    top:5rem;
+    right:20px;
     width:calc(100% - 18% - 10% - 12% - 15rem - 4.5rem - 50px);
-    height:calc(55vh + 2rem + 5px);
+    height:calc(60vh + 2rem + 5px);
 }
 
 #admin #map-and-imagery #new-project-map {
-    height:55vh;
+    height:60vh;
     margin-bottom:5px;
     border:1px solid black;
 }
@@ -897,9 +899,9 @@ p.error-message {
 }
 
 #admin fieldset#sample-value-info {
-    position:absolute;
-    top:22rem;
-    left:20px;
+    float:left;
+    clear:both;
+    margin-bottom:20px;
 }
 
 #admin fieldset#sample-value-info th,
