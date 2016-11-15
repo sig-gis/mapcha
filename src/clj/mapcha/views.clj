@@ -177,8 +177,9 @@
    [:div#login-form
     [:h1 "Sign into your account"]
     [:form {:method "post" :action "/login"}
-     [:input {:type "email" :name "email" :value "" :placeholder "Email"}]
-     [:input {:type "password" :name "password" :value "" :placeholder "Password"}]
+     [:input#email {:type "email" :name "email" :value "" :placeholder "Email"}]
+     [:input#password {:type "password" :name "password" :value ""
+                       :placeholder "Password"}]
      [:p#forgot-password (link-to "/password" "Forgot your password?")]
      [:input.button {:type "submit" :name "login" :value "Login"}]]
     [:hr]
@@ -200,12 +201,13 @@
    [:div#register-form
     [:h1 "Register a new account"]
     [:form {:method "post" :action "/register"}
-     [:input {:type "email" :name "email" :value ""
-              :placeholder "Email" :autocomplete "off"}]
-     [:input {:type "password" :name "password" :value ""
-              :placeholder "Password" :autocomplete "off"}]
-     [:input {:type "password" :name "password-confirmation" :value ""
-              :placeholder "Password confirmation" :autocomplete "off"}]
+     [:input#email {:type "email" :name "email" :value ""
+                    :placeholder "Email" :autocomplete "off"}]
+     [:input#password {:type "password" :name "password" :value ""
+                       :placeholder "Password" :autocomplete "off"}]
+     [:input#password-confirmation {:type "password" :name "password-confirmation"
+                                    :value "" :placeholder "Password confirmation"
+                                    :autocomplete "off"}]
      [:input.button {:type "submit" :name "register" :value "Register"}]]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -239,12 +241,16 @@
       [:form {:method "post" :action "/password-reset"}
        [:input#email {:type "email" :name "email" :value email
                       :placeholder "Email" :autocomplete "off"}]
-       [:input {:type "text" :name "password-reset-key" :value password-reset-key
-                :placeholder "Password reset key" :autocomplete "off"}]
-       [:input {:type "password" :name "password" :value ""
-                :placeholder "New password" :autocomplete "off"}]
-       [:input {:type "password" :name "password-confirmation" :value ""
-                :placeholder "New password confirmation" :autocomplete "off"}]
+       [:input#password-reset-key {:type "text" :name "password-reset-key"
+                                   :value password-reset-key
+                                   :placeholder "Password reset key"
+                                   :autocomplete "off"}]
+       [:input#password {:type "password" :name "password" :value ""
+                         :placeholder "New password" :autocomplete "off"}]
+       [:input#password-confirmation {:type "password"
+                                      :name "password-confirmation" :value ""
+                                      :placeholder "New password confirmation"
+                                      :autocomplete "off"}]
        [:input.button {:type "submit" :value "Reset Password"}]]])))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -316,16 +322,17 @@
     [:h1 "Account Settings"]
     [:form {:method "post" :action "/account"}
      [:h2 "Reset email"]
-     [:input {:type "email" :name "email" :value ""
-              :placeholder "New email" :autocomplete "off"}]
+     [:input#email {:type "email" :name "email" :value ""
+                    :placeholder "New email" :autocomplete "off"}]
      [:h2 "Reset password"]
-     [:input {:type "password" :name "password" :value ""
-              :placeholder "New password" :autocomplete "off"}]
-     [:input {:type "password" :name "password-confirmation" :value ""
-              :placeholder "New password confirmation" :autocomplete "off"}]
+     [:input#password {:type "password" :name "password" :value ""
+                       :placeholder "New password" :autocomplete "off"}]
+     [:input#password-confirmation {:type "password" :name "password-confirmation"
+                                    :value "" :autocomplete "off"
+                                    :placeholder "New password confirmation"}]
      [:h2 "Verify your identity"]
-     [:input {:type "password" :name "current-password" :value ""
-              :placeholder "Current password" :autocomplete "off"}]
+     [:input#current-password {:type "password" :name "current-password" :value ""
+                               :placeholder "Current password" :autocomplete "off"}]
      [:input.button {:type "submit" :name "update-account"
                      :value "Update account settings"}]]]))
 

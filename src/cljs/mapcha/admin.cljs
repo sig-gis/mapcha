@@ -125,14 +125,17 @@
        [:option {:key 0 :value 0} "New Project"]
        (for [{:keys [id name]} @project-list]
          [:option {:key id :value id} name])]]
-     [:input.button {:type "button" :name "download-plot-data"
-                     :value "Download Data" :on-click export-current-plot-data
-                     :style {:visibility (if num_plots "visible" "hidden")}}]
-     [:input.button {:type "button" :name "create-project"
-                     :value (if num_plots
-                              "Delete this project"
-                              "Create and launch this project")
-                     :on-click submit-form}]
+     [:input#download-plot-data.button {:type "button" :name "download-plot-data"
+                                        :value "Download Data"
+                                        :on-click export-current-plot-data
+                                        :style {:visibility (if num_plots
+                                                              "visible"
+                                                              "hidden")}}]
+     [:input#create-project.button {:type "button" :name "create-project"
+                                    :value (if num_plots
+                                             "Delete this project"
+                                             "Create and launch this project")
+                                    :on-click submit-form}]
      [:fieldset#project-info
       [:legend "Project Info"]
       [:label "Name"]
@@ -239,10 +242,10 @@
          [:td [:input#value-image {:type "file" :name "value-image"
                                    :accept "image/*"
                                    :disabled (if num_plots true false)}]]]]]
-      [:input.button {:type "button" :name "add-sample-value"
-                      :value "Add sample value"
-                      :on-click add-sample-value-row!
-                      :disabled (if num_plots true false)}]
+      [:input#add-sample-value.button {:type "button" :name "add-sample-value"
+                                       :value "Add sample value"
+                                       :on-click add-sample-value-row!
+                                       :disabled (if num_plots true false)}]
       [:input {:type "hidden" :name "sample-values"
                :value (pr-str @sample-values)}]]
      [:div#spinner]]))

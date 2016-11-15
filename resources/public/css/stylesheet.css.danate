@@ -572,7 +572,7 @@ p.error-message {
     -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF, endColorstr=#CCFFFFFF);
 }
 
-#access-denied, #page-not-found, #error-page h3 {
+#access-denied h3, #page-not-found h3, #error-page h3 {
     font-size:1.5rem;
     font-weight:100;
     color:gray;
@@ -867,7 +867,7 @@ p.error-message {
     width:15rem;
 }
 
-#admin #bounding-box label {
+#admin fieldset#bounding-box label {
     text-align:center;
     margin-bottom:5px;
 }

@@ -1,5 +1,6 @@
 (ns mapcha.css
-  (:require [garden.core :refer [css]]))
+  (:require [clojure.string :as str]
+            [garden.core :refer [css]]))
 
 ;;==================
 ;; Global Constants
@@ -190,17 +191,376 @@
    [:p
     {:padding "0.5rem"}]])
 
+(def login-register-password-account-styles
+  [:#login-form :#register-form :#password-form :#account-form
+   {:position "absolute"
+    :right "5rem"
+    :height "100%"
+    :width "350px"
+    :padding "2rem"
+    :background "rgba(255,255,255,0.8)"
+    :filter ms-gradient-filter
+    :-ms-filter ms-gradient-filter}
+
+   [:h1
+    {:font {:size "1.9rem" :weight "100"}
+     :padding "0.5rem"
+     :color "gray"}]
+
+   [:h2
+    {:font {:size "1rem" :weight "400"}
+     :padding "0.1rem"
+     :color "darkgray"}]
+
+   [:input#email :input#password :input#password-confirmation
+    :input#password-reset-key :input#current-password
+    {:height "2rem"
+     :width "20rem"
+     :border "1px solid #ececec"
+     :margin "0.3rem"
+     :padding "0px 5px"}
+
+    [:&:focus
+     {:border "1px solid darkgray"
+      :cursor "grab"}]
+
+    [:&:hover
+     {:border "1px solid gray"
+      :cursor "pointer"}]]
+
+   [:p#forgot-password
+    [:a
+     {:display "block"
+      :font {:size "0.9rem" :weight "700"}
+      :margin "0.5rem 0.5rem 0rem 1rem"}]]
+
+   [:input.button
+    {:height "2rem"
+     :width "21rem"
+     :margin "0.6rem 0.3rem"
+     :padding "0.5rem"
+     :border "1px solid #ececec"}
+
+    [:&:focus
+     {:border "1px solid #999"}]]
+
+   [:hr
+    {:height "12px"
+     :border "0"
+     :box-shadow "inset 0 12px 12px -12px rgba(0, 0, 0, 0.5)"}]])
+
+(def select-project-styles
+  [:#select-project-form
+   {:position "absolute"
+    :right "5rem"
+    :height "100%"
+    :width "350px"
+    :padding "2rem"
+    :background "rgba(255,255,255,0.8)"
+    :filter ms-gradient-filter
+    :-ms-filter ms-gradient-filter}
+
+   [:h1
+    {:font {:size "1.9rem" :weight "100"}
+     :padding "0.5rem"
+     :color "gray"}]
+
+   [:ul
+    {:list-style-type "none"
+     :padding "0.5rem"
+     :height "80%"
+     :overflow "scroll"}
+
+    [:li
+     [:a
+      {:display "block"
+       :width "95%"
+       :border "1px solid blue"
+       :margin-bottom "0.5rem"
+       :padding "0.25rem"
+       :text-align "center"
+       :font-size "1rem"
+       :color "#3C948B"
+       :text-decoration "none"}]]]])
+
+(def dashboard-styles
+  [:#dashboard
+   {}])
+
+(def admin-styles
+  [:#admin
+   {:height "100%"
+    :width "100%"
+    :padding "10px 20px"
+    :background "rgba(255,255,255,0.9)"
+    :overflow "scroll"}
+
+   [:h1
+    {:font {:size "1.8rem" :weight "bold"}
+     :margin-bottom "10px"}]
+
+   [:#project-selection
+    {:margin-bottom "10px"}
+
+    [:label
+     {:font {:size "1rem" :family "Oswald" :weight "400"}
+      :color "#3fabc6"
+      :text-transform "uppercase"
+      :display "block"
+      :margin-bottom "5px"}]
+
+    [:select
+     {:border "1px solid darkgray"
+      :height "2rem"
+      :font-size "0.9rem"}]]
+
+   [:input#download-plot-data
+    {:position "absolute"
+     :top "10px"
+     :right "15rem"
+     :font-size "1rem"
+     :padding "0.5rem"
+     :color "white"
+     :box-shadow "0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6)"}]
+
+   [:input#create-project
+    {:position "absolute"
+     :top "10px"
+     :right "20px"
+     :font-size "1rem"
+     :padding "0.5rem"
+     :color "white"
+     :box-shadow "0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6)"}]
+
+   [:fieldset
+    {:margin-right "1.5rem"}]
+
+   [:legend
+    {:margin-top "1rem"
+     :font {:size "1rem" :family "Oswald" :weight "400"}
+     :color "#3fabc6"
+     :text-transform "uppercase"}]
+
+   [:#project-info :#plot-info :#sample-info :#bounding-box
+    [:label
+     {:display "block"
+      :font-size "0.8rem"
+      :padding "0.25rem 0rem"}]]
+
+   [:input#project-name :input#plots :input#radius
+    :input#samples-per-plot :input#sample-resolution
+    :input#lat-max :input#lon-min :input#lon-max :input#lat-min
+    {:height "1rem"
+     :padding "0.3rem"
+     :margin-bottom "5px"}]
+
+   [:fieldset#project-info
+    {:float "left"
+     :width "18%"}
+
+    [:input#project-name
+     {:width "90%"}]
+
+    [:textarea#project-description
+     {:height "6rem"
+      :width "90%"
+      :padding "0rem 0.7rem"
+      :border-radius "0.25rem"
+      :border "1px solid darkgray"}]]
+
+   [:fieldset#plot-info
+    {:float "left"
+     :width "10%"}
+
+    [:input#plots :input#radius
+     {:width "80%"}]]
+
+   [:fieldset#sample-info
+    {:float "left"
+     :width "12%"}
+
+    [:input#random-sample-type :input#gridded-sample-type
+     :input#samples-per-plot :input#sample-resolution
+     {:width "80%"}]
+
+    [:table
+     {:margin-left "1rem"
+      :background-color "white"
+      :border "1px solid #aaa"}
+
+     [:td
+      {:padding "0px 5px"}]]]
+
+   [:fieldset#bounding-box
+    {:float "left"
+     :width "15rem"}
+
+    [:label
+     {:text-align "center"
+      :margin-bottom "5px"}]
+
+    [:input
+     {:display "block"
+      :width "5rem"}
+
+     [:&#lat-max
+      {:margin "0rem auto 0.25rem auto"}]
+
+     [:&#lon-min
+      {:margin "0.25rem 0rem"
+       :float "left"}]
+
+     [:&#lon-max
+      {:margin "0.25rem 0rem"
+       :float "right"}]
+
+     [:&#lat-min
+      {:clear "both"
+       :margin "0.25rem auto"}]]]
+
+   [:#map-and-imagery
+    {:position "absolute"
+     :top "5rem"
+     :right "20px"
+     :width "calc(100% - 18% - 10% - 12% - 15rem - 4.5rem - 50px)"
+     :height "calc(60vh + 2rem + 5px)"}
+
+    [:#new-project-map
+     {:height "60vh"
+      :margin-bottom "5px"
+      :border "1px solid black"}]
+
+    [:label
+     {:font {:size "1rem" :family "Oswald" :weight "400"}
+      :color "#3fabc6"
+      :text-transform "uppercase"
+      :display "inline"}]
+
+    [:select
+     {:border "1px solid darkgray"
+      :height "2rem"
+      :font-size "0.9rem"}]]
+
+   [:fieldset#sample-value-info
+    {:float "left"
+     :clear "both"
+     :margin-bottom "20px"}
+
+    [:th :td
+     {:text-align "center"
+      :font-size "0.8rem"
+      :padding "0.25rem"}]
+
+    [:input.button
+     {:padding "0.25rem"
+      :min-width "2rem"
+      :color "white"}]
+
+    [:.circle
+     {:width "1rem"
+      :height "1rem"
+      :border-radius "0.5rem"
+      :margin "0rem auto"}]
+
+    [:input#value-name :input#value-color :input#value-image
+     {:font-size "0.9rem"
+      :height "2rem"
+      :padding "0rem"
+      :margin-bottom "5px"}]
+
+    [:input#add-sample-value
+     {:margin "0.5rem 3rem"
+      :box-shadow "0.25rem 0.25rem 0.5rem rgba(21,21,153,0.6)"}]]
+
+   [:#spinner
+    {:position "absolute"
+     :top "1rem"
+     :left "45%"
+     :width "4rem"
+     :height "4rem"
+     :border {:radius "2rem" :bottom "0.5rem solid #3fabc6"}
+     :visibility "hidden"}
+    (vendor-map :animation "sweep 1s infinite linear")]])
+
+(def error-page-styles
+  [[:.alert
+     {:position "absolute"
+      :top "1rem"
+      :left "1rem"
+      :font {:size "1rem" :style "italic"}
+      :width "35rem"
+      :padding "1rem"
+      :border "1px solid #009"
+      :background "white"
+      :z-index "1000"
+      :opacity "0"}
+    (vendor-map :animation "fade-out 5s")]
+
+   [:p.error-message
+    {:margin-top "1rem"
+     :font {:size "1rem" :style "normal"}
+     :color "#555"}]
+
+   [:#access-denied :#page-not-found :#error-page
+    {:position "absolute"
+     :right "5rem"
+     :height "100%"
+     :width "350px"
+     :padding "2rem"
+     :background "rgba(255,255,255,0.8)"
+     :filter ms-gradient-filter
+     :-ms-filter ms-gradient-filter}
+
+    [:h3
+     {:font-size "1.5rem"
+      :font-weight "100"
+      :color "gray"}]]])
+
+(def animation-styles
+  (str/join
+   "\n"
+   ["@-webkit-keyframes sweep { to { -webkit-transform:rotate(360deg); } }"
+    "@-moz-keyframes    sweep { to { -moz-transform:rotate(360deg); } }"
+    "@-o-keyframes      sweep { to { -o-transform:rotate(360deg); } }"
+    "@keyframes         sweep { to { transform:rotate(360deg); } }"
+    "@-webkit-keyframes fade-out {"
+    "    0%   { opacity: 0; }"
+    "    50%  { opacity: 1; }"
+    "    100% { opacity: 0; }"
+    "}"
+    "@-moz-keyframes fade-out {"
+    "    0%   { opacity: 0; }"
+    "    50%  { opacity: 1; }"
+    "    100% { opacity: 0; }"
+    "}"
+    "@-o-keyframes fade-out {"
+    "    0%   { opacity: 0; }"
+    "    50%  { opacity: 1; }"
+    "    100% { opacity: 0; }"
+    "}"
+    "@keyframes fade-out {"
+    "    0%   { opacity: 0; }"
+    "    50%  { opacity: 1; }"
+    "    100% { opacity: 0; }"
+    "}"]))
+
 ;;========================
 ;; HTTP Response Creation
 ;;========================
 
-(defn wrap-http-response [body]
+(defn wrap-http-response [& body]
   {:status  200
    :headers {"Content-Type" "text/css"}
-   :body    body})
+   :body    (str/join "\n\n" body)})
 
 (defn make-stylesheet [request]
   (wrap-http-response
    (css universal-styles
         home-styles
-        about-styles)))
+        about-styles
+        login-register-password-account-styles
+        select-project-styles
+        dashboard-styles
+        admin-styles
+        error-page-styles)
+   animation-styles))
