@@ -846,7 +846,6 @@ p.error-message {
     width:12%;
 }
 
-#admin fieldset#sample-info input[name="sample-type"],
 #admin fieldset#sample-info input[name="samples-per-plot"],
 #admin fieldset#sample-info input[name="sample-resolution"] {
     width:80%;
@@ -860,6 +859,10 @@ p.error-message {
 
 #admin fieldset#sample-info td {
     padding:0px 5px;
+}
+
+#admin fieldset#sample-info input[type=radio] {
+    vertical-align:middle;
 }
 
 #admin fieldset#bounding-box {

@@ -380,7 +380,9 @@
      :width "12%"}
 
     [:input#random-sample-type :input#gridded-sample-type
-     :input#samples-per-plot :input#sample-resolution
+     {:vertical-align "middle"}]
+
+    [:input#samples-per-plot :input#sample-resolution
      {:width "80%"}]
 
     [:table
