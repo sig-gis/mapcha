@@ -366,22 +366,22 @@
           :width "100%"
           :font {:family "Verdana,Geneva,sans-serif" :size "0.8rem"}
           :text {:transform "uppercase" :align "left" :indent "10px"}
-          :cursor "pointer"}]
+          :cursor "pointer"}]]]
 
-        [:#final-plot-options
-         {:clear "left"
-          :float "left"
-          :margin-left "5px"}
+      [:#final-plot-options
+       {:clear "left"
+        :float "left"
+        :margin-left "5px"}
 
-         [:td
-          {:padding "5px"
-           :color "#3FABC6"
-           :font {:size "1.2rem" :family "Oswald" :weight "400"}
-           :text {:transform "uppercase" :align "center"}}
+       [:td
+        {:padding "5px"
+         :color "#3FABC6"
+         :font {:size "1.2rem" :family "Oswald" :weight "400"}
+         :text {:transform "uppercase" :align "center"}}
 
-          [:input#save-values-button :input#flag-plot-button
-           {:padding "8px 0px"
-            :font-size "1.2rem"}]]]]]]]]
+        [:input#save-values-button :input#flag-plot-button
+         {:padding "8px 0px"
+          :font-size "1.2rem"}]]]]]]
    [:#imagery-info
     {:clear "both"
      :position "relative"
