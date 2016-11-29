@@ -626,15 +626,15 @@ p.error-message {
     overflow:scroll;
 }
 
-#dashboard #sidebar-contents {
+#dashboard #sidebar #sidebar-contents {
     height:100%;
 }
 
-#dashboard #sidebar-contents fieldset {
+#dashboard #sidebar #sidebar-contents fieldset {
     margin-top:0px;
 }
 
-#dashboard #sidebar-contents legend {
+#dashboard #sidebar #sidebar-contents legend {
     font-size:1.2rem;
     font-family:Oswald;
     font-weight:400;
@@ -645,7 +645,7 @@ p.error-message {
     text-indent:10px;
 }
 
-#dashboard #sidebar-contents select {
+#dashboard #sidebar #sidebar-contents select {
     font-family:Verdana,Geneva,sans-serif;
     font-weight:200;
     font-size:0.9rem;
@@ -659,24 +659,24 @@ p.error-message {
     text-indent:5px;
 }
 
-#dashboard #sidebar-contents option {
+#dashboard #sidebar #sidebar-contents option {
     color:#3D3B39;
     text-indent:5px;
 }
 
-#dashboard #sidebar-contents input[name=new-plot] {
+#dashboard #sidebar #sidebar-contents input[name=new-plot] {
     margin:10px 5px 5px 5px;
     padding:8px 0px;
     font-size:1.2rem;
     text-align:left;
 }
 
-#dashboard #sidebar-contents ul li {
+#dashboard #sidebar #sidebar-contents ul li {
     float:left;
     width:50%;
 }
 
-#dashboard #sidebar-contents ul li input {
+#dashboard #sidebar #sidebar-contents ul li input {
     height:40px;
     width:100%;
     font-family:Verdana,Geneva,sans-serif;
@@ -687,13 +687,13 @@ p.error-message {
     text-indent:10px;
 }
 
-#dashboard #sidebar-contents #final-plot-options {
+#dashboard #sidebar #sidebar-contents #final-plot-options {
     clear:left;
     float:left;
     margin-left:5px;
 }
 
-#dashboard #sidebar-contents td {
+#dashboard #sidebar #sidebar-contents td {
     font-size:1.2rem;
     font-family:Oswald;
     font-weight:400;
@@ -703,12 +703,12 @@ p.error-message {
     padding:5px;
 }
 
-#dashboard #sidebar-contents input[name=save-values] {
+#dashboard #sidebar #sidebar-contents input[name=save-values] {
     padding:8px 0px;
     font-size:1.2rem;
 }
 
-#dashboard #sidebar-contents input[name=flag-plot] {
+#dashboard #sidebar #sidebar-contents input[name=flag-plot] {
     padding:8px 0px;
     font-size:1.2rem;
 }

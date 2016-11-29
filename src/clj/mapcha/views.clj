@@ -75,8 +75,12 @@
        [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]
        [:link {:rel "shortcut icon" :href "/favicon.ico"}]
        (include-css "/css/cssreset-min.css"
+                    "https://fonts.googleapis.com/css?family=Open+Sans:100,400,700"
+                    "https://fonts.googleapis.com/css?family=Oswald:normal"
                     "/css/openlayers_3.13.0.css"
-                    "/css/stylesheet.css")
+                    "/css/garden.css"
+                    ;; "/css/stylesheet.css"
+                    )
        html5shiv]
       [:body
        [:header

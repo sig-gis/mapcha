@@ -285,7 +285,114 @@
 
 (def dashboard-styles
   [:#dashboard
-   {}])
+   {:height "100%"
+    :padding "0rem"
+    :background "rgba(255,255,255,0.8)"}
+
+   [:#quit-button
+    {:display "inline-block"
+     :margin-top "0rem"
+     :width "5rem"
+     :position "absolute"
+     :left "calc(70vw - 5rem)"
+     :z-index "500"
+     :background-color "#3FABC6"
+     :height "40px"
+     :font-size "17"
+     :border "none"
+     :text-align "center"}]
+
+   [:#image-analysis-pane
+    {:float "left"
+     :height "100%"
+     :width "70%"
+     :background-color "darkgray"}]
+
+   [:.ol-dragbox
+    {:background-color "rgba(255,255,255,0.4)"
+     :border-color "rgba(100,150,0,1)"}]
+
+   [:.ol-rotate
+    {:top "4rem"}]
+
+   [:#sidebar
+    {:float "right"
+     :height "100%"
+     :width "30%"
+     :padding "0rem"
+     :overflow "scroll"}
+
+    [:#sidebar-contents
+     {:height "100%"}
+
+     [:fieldset
+      {:margin-top "0px"}
+
+      [:legend
+       {:margin-top "-5px"
+        :padding "10px 0px"
+        :color "#3FABC6"
+        :font {:size "1.2rem" :family "Oswald" :weight "400"}
+        :text {:transform "uppercase" :indent "10px"}}]
+
+      [:select#project-id
+       {:font {:family "Verdana,Geneva,sans-serif" :weight "200" :size "0.9rem"}
+        :line-height "90%"
+        :padding "0rem"
+        :height "1.8rem"
+        :width "100%"
+        :border "none"
+        :outline "none"
+        :color "#3D3B39"
+        :text-index "5px"}]
+
+      [:option
+       {:color "#3D3B39"
+        :text-indent "5px"}]
+
+      [:input#new-plot-button
+       {:margin "10px 5px 5px 5px"
+        :padding "8px 0px"
+        :font-size "1.2rem"
+        :text-align "left"}]
+
+      [:ul
+       [:li
+        {:float "left"
+         :width "50%"}
+
+        [:input
+         {:height "40px"
+          :width "100%"
+          :font {:family "Verdana,Geneva,sans-serif" :size "0.8rem"}
+          :text {:transform "uppercase" :align "left" :indent "10px"}
+          :cursor "pointer"}]
+
+        [:#final-plot-options
+         {:clear "left"
+          :float "left"
+          :margin-left "5px"}
+
+         [:td
+          {:padding "5px"
+           :color "#3FABC6"
+           :font {:size "1.2rem" :family "Oswald" :weight "400"}
+           :text {:transform "uppercase" :align "center"}}
+
+          [:input#save-values-button :input#flag-plot-button
+           {:padding "8px 0px"
+            :font-size "1.2rem"}]]]]]]]]
+   [:#imagery-info
+    {:clear "both"
+     :position "relative"
+     :top "-1.5rem"
+     :left "18%"
+     :width "40%"
+     :text-align "center"
+     :font-size "0.8rem"
+     :color "white"
+     :padding "0.25rem"
+     :background-color "rgba(75,75,150,0.6)"}]])
 
 (def admin-styles
   [:#admin
@@ -519,32 +626,37 @@
       :color "gray"}]]])
 
 (def animation-styles
-  (str/join
-   "\n"
-   ["@-webkit-keyframes sweep { to { -webkit-transform:rotate(360deg); } }"
-    "@-moz-keyframes    sweep { to { -moz-transform:rotate(360deg); } }"
-    "@-o-keyframes      sweep { to { -o-transform:rotate(360deg); } }"
-    "@keyframes         sweep { to { transform:rotate(360deg); } }"
-    "@-webkit-keyframes fade-out {"
-    "    0%   { opacity: 0; }"
-    "    50%  { opacity: 1; }"
-    "    100% { opacity: 0; }"
-    "}"
-    "@-moz-keyframes fade-out {"
-    "    0%   { opacity: 0; }"
-    "    50%  { opacity: 1; }"
-    "    100% { opacity: 0; }"
-    "}"
-    "@-o-keyframes fade-out {"
-    "    0%   { opacity: 0; }"
-    "    50%  { opacity: 1; }"
-    "    100% { opacity: 0; }"
-    "}"
-    "@keyframes fade-out {"
-    "    0%   { opacity: 0; }"
-    "    50%  { opacity: 1; }"
-    "    100% { opacity: 0; }"
-    "}"]))
+  "@-webkit-keyframes sweep { to { -webkit-transform:rotate(360deg); } }
+
+@-moz-keyframes    sweep { to { -moz-transform:rotate(360deg); } }
+
+@-o-keyframes      sweep { to { -o-transform:rotate(360deg); } }
+
+@keyframes         sweep { to { transform:rotate(360deg); } }
+
+@-webkit-keyframes fade-out {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@-moz-keyframes fade-out {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@-o-keyframes fade-out {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes fade-out {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+}")
 
 ;;========================
 ;; HTTP Response Creation
