@@ -78,9 +78,7 @@
                     "https://fonts.googleapis.com/css?family=Open+Sans:100,400,700"
                     "https://fonts.googleapis.com/css?family=Oswald:normal"
                     "/css/openlayers_3.13.0.css"
-                    "/css/garden.css"
-                    ;; "/css/stylesheet.css"
-                    )
+                    "/css/garden.css")
        html5shiv]
       [:body
        [:header
