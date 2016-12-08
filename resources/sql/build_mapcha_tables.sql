@@ -33,9 +33,9 @@ CREATE INDEX mapcha_samples_plot_id ON mapcha.samples (plot_id);
 CREATE TABLE mapcha.sample_values (
   id         serial primary key,
   project_id integer not null references mapcha.projects (id) on delete cascade on update cascade,
-  value      text not null
-  color      text not null;
-  image      text;
+  value      text not null,
+  color      text not null,
+  image      text
 );
 
 CREATE INDEX mapcha_sample_values_project_id ON mapcha.sample_values (project_id);
