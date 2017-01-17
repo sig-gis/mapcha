@@ -147,6 +147,10 @@
     :filter ms-gradient-filter
     :-ms-filter ms-gradient-filter}
 
+   [:img#ceo-logo
+    {:width "400px"
+     :margin "-15px 0px 15px -25px"}]
+
    [:h1
     {:margin-top "10px"
      :font {:size "3.0rem" :weight "bold"}
@@ -155,7 +159,7 @@
 
    [:h2
     {:margin-bottom "10px"
-     :font {:size "2.5rem" :weight "400"}
+     :font {:size "1.6rem" :weight "400"}
      :color "gray"
      :text-align "center"}]
 

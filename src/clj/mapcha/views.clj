@@ -132,7 +132,7 @@
   (wrap-header
    request
    [:div#home
-    [:h1 "Collect Earth Online"]
+    (image {:id "ceo-logo"} "/img/collect-earth-logo.png")
     [:h2 "Earth Image Identification"]
     [:h3 "Collaborate. Play. Map the world."]
     [:hr]
