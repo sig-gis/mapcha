@@ -53,11 +53,11 @@
 
 (defn wrap-header
   [request & content]
-  (let [description (str "Mapcha is an Image Analysis Crowdsourcing Platform "
-                         "by Spatial Informatics Group")
-        keywords    (str "mapcha image analysis crowdsourcing platform asia "
-                         "mekong cambodia thailand laos vietnam myanmar SIG "
-                         "spatial informatics group")
+  (let [description (str "Collect Earth Online is an Image Analysis Crowdsourcing "
+                         "Platform by Spatial Informatics Group")
+        keywords    (str "collect earth online ceo image analysis crowdsourcing "
+                         "platform asia mekong cambodia thailand laos vietnam "
+                         "myanmar SIG spatial informatics group")
         html5shiv   (str "<!--[if lt IE 9]><script type=\"text/javascript\" "
                          "src=\"/js/html5shiv.js\"></script><![endif]-->")
         link-active (fn [url label]
@@ -68,7 +68,7 @@
      (html5
       {:lang "en"}
       [:head
-       [:title "Mapcha"]
+       [:title "Collect Earth Online"]
        [:meta {:charset "utf-8"}]
        [:meta {:name "description" :content description}]
        [:meta {:name "keywords" :content keywords}]
@@ -132,14 +132,14 @@
   (wrap-header
    request
    [:div#home
-    [:h1 "Mapcha"]
+    [:h1 "Collect Earth Online"]
     [:h2 "Earth Image Identification"]
     [:h3 "Collaborate. Play. Map the world."]
     [:hr]
     [:p
-     "Mapcha is a collaborative effort between its developers and its "
-     "community of users. We welcome suggestions for improvements on our "
-     (link-to "https://github.com/sig-gis/mapcha/issues" "Github")
+     "Collect Earth Online is a collaborative effort between its developers and "
+     "its community of users. We welcome suggestions for improvements on our "
+     (link-to "https://github.com/openforis/collect-earth-online/issues" "Github")
      " issues page."]]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -153,14 +153,14 @@
   (wrap-header
    request
    [:div#about
-    [:h1 "About Mapcha"]
-    [:p (str "Mapcha is a custom built, open-source, high resolution satellite"
+    [:h1 "About Collect Earth Online"]
+    [:p (str "Collect Earth Online is a custom built, open-source, high resolution satellite"
              " image viewing and interpretation system that is being developed"
              " by SERVIR-Mekong as a tool for use in projects that require land"
-             " cover and/or land use reference data. Mapcha promotes consistency"
+             " cover and/or land use reference data. Collect Earth Online promotes consistency"
              " in locating, interpreting, and labeling reference data plots for"
              " use in classifying and monitoring land cover / land use change."
-             " The full functionality of Mapcha including collaborative"
+             " The full functionality of Collect Earth Online including collaborative"
              " compilation of reference point databases is implemented online"
              " so there is no need for desktop installation.")]
     (link-to "http://www.sig-gis.com" (image "/img/sig-logo.png"))
@@ -185,7 +185,7 @@
      [:p#forgot-password (link-to "/password" "Forgot your password?")]
      [:input.button {:type "submit" :name "login" :value "Login"}]]
     [:hr]
-    [:h1 "New to Mapcha?"]
+    [:h1 "New to CEO?"]
     [:input.button {:type "button" :name "register"
                     :value "Register a new account"
                     :onclick "window.location='/register'"}]]))

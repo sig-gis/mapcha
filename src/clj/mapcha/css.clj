@@ -148,18 +148,16 @@
     :-ms-filter ms-gradient-filter}
 
    [:h1
-    {:margin-top "20px"
-     :padding "0.5rem 0.5rem 0.5rem 1rem"
-     :font {:size "3.5rem" :weight "bold"}
+    {:margin-top "10px"
+     :font {:size "3.0rem" :weight "bold"}
      :color "gray"
-     :line-height "80%"}]
+     :text-align "center"}]
 
    [:h2
     {:margin-bottom "10px"
-     :padding "0.5rem 0.5rem 0.5rem 1rem"
      :font {:size "2.5rem" :weight "400"}
      :color "gray"
-     :line-height "110%"}]
+     :text-align "center"}]
 
    [:h3
     {:padding "0.5rem 0.5rem 0.75rem 1rem"
@@ -181,7 +179,7 @@
     :-ms-filter ms-gradient-filter}
 
    [:h1
-    {:font {:size "1.9rem" :weight "100"}
+    {:font {:size "1.5rem" :weight "100"}
      :padding "0.5rem"
      :color "gray"}]
 
@@ -203,7 +201,7 @@
     :-ms-filter ms-gradient-filter}
 
    [:h1
-    {:font {:size "1.9rem" :weight "100"}
+    {:font {:size "1.7rem" :weight "100"}
      :padding "0.5rem"
      :color "gray"}]
 
