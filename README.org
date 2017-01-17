@@ -1,7 +1,4 @@
-* Mapcha Website
-
-This is the web interface for Spatial Informatics Group's Image
-Analysis Crowdsourcing Platform (Mapcha).
+* Collect Earth Online (CEO)
 
 ** Usage
 
@@ -13,7 +10,7 @@ To run this web application, you will need:
 4) PostGIS 2.2+
 
 Begin by following the Database Initialization instructions at the end
-of this file to create a new database for your Mapcha installation.
+of this file to create a new database for your CEO installation.
 
 Then simply enter the toplevel project directory (the same one
 containing this README file), and instruct Boot to run the web
@@ -25,7 +22,7 @@ application as follows:
   In production mode:
   $ boot site
 
-Both commands will start a web server running the Mapcha website.
+Both commands will start a web server running the CEO website.
 Connect to it by pointing your web browser at http://localhost:8080.
 
 In development mode, connect to the local nrepl server with your IDE
@@ -46,7 +43,7 @@ Emails: gjohnson@sig-gis.com, dsaah@sig-gis.com
 
 Copyright © 2016 Spatial Informatics Group, LLC.
 
-Mapcha is distributed by Spatial Informatics Group, LLC. under a
+CEO is distributed by Spatial Informatics Group, LLC. under a
 restricted use license. Please contact the authors at the above-listed
 emails for a copy of this license.
 
@@ -63,43 +60,44 @@ emails for a copy of this license.
 4. At the psql prompt, run these commands:
 
    #+begin_src sql
-   CREATE ROLE mapcha WITH LOGIN CREATEDB;
-   CREATE DATABASE mapcha WITH OWNER mapcha;
-   \c mapcha
+   CREATE ROLE ceo WITH LOGIN CREATEDB;
+   CREATE DATABASE ceo WITH OWNER ceo;
+   \c ceo
    CREATE EXTENSION postgis;
    #+end_src
 
-   This will create a new database called "mapcha" owned by user
-   "mapcha" and add the PostGIS spatial extensions to it.
+   This will create a new database called "ceo" owned by user
+   "ceo" and add the PostGIS spatial extensions to it.
 
-5. From your shell, run "psql -U mapcha -f build_mapcha_tables.sql -d
-   mapcha" to populate the new mapcha database with the table schema
+5. From your shell, run "psql -U ceo -f build_ceo_tables.sql -d
+   ceo" to populate the new ceo database with the table schema
    expected by the website code. This SQL file can be found under
    resources/sql in the toplevel project directory.
 
-6. Launch the Mapcha website by running "boot dev" from within the
-   mapcha directory that you cloned from GitHub.
+6. Launch the CEO website by running "boot dev" from within the
+   CEO directory that you cloned from GitHub.
 
 7. Point your web browser at http://localhost:8080 to access the site.
 
-8. Register a new user account called "admin@sig-gis.com" with whatever
+8. Register a new user administrator account with whatever email and
    password you like.
 
-9. From your shell, run "psql -U mapcha -d mapcha" to connect to the
-   mapcha database as the mapcha user.
+9. From your shell, run "psql -U ceo -d ceo" to connect to the ceo
+   database as the ceo user.
 
-10. At the psql prompt, run this command to elevate admin@sig-gis.com
-    to the admin role.
+10. At the psql prompt, run this command to elevate your new email
+    address (in this case, we use "admin@sig-gis.com") to the admin
+    role.
 
     #+begin_src sql
-    UPDATE mapcha.users
+    UPDATE ceo.users
       SET role='admin'
       WHERE email='admin@sig-gis.com';
     #+end_src
 
-11. Logout and back in as admin@sig-gis.com on the Mapcha website. You
-    should now see the Account, Dashboard, and Admin links added to
-    the navigation bar.
+11. Logout and back in as your new administrator account on the CEO
+    website. You should now see the Account, Dashboard, and Admin
+    links added to the navigation bar.
 
 12. Visit the Admin link and create a new project. All fields must be
     filled in. To input the bounding box coordinates, use ctrl+drag on
