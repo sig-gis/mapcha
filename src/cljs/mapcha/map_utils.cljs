@@ -9,8 +9,10 @@
             [ol.source.BingMaps]
             [ol.source.Vector]
             [ol.source.XYZ]
+            [ol.source.TileWMS]
             [ol.control]
             [ol.control.ScaleLine]
+            [ol.control.MousePosition]
             [ol.View]
             [ol.Feature]
             [ol.geom.Point]
@@ -67,7 +69,8 @@
         recent-imagery-url           "digitalglobe.nal0g75k"
         recent-imagery-+-streets-url "digitalglobe.nal0mpda"
         bing-maps-access-token       (str "AlQPbThspGcsiCnczC-2QVOYU9u_PrteL"
-                                          "w6dxNQls99dmLXcr9-qWCM5J4Y2G-pS")]
+                                          "w6dxNQls99dmLXcr9-qWCM5J4Y2G-pS")
+        sig-geoserver-url            "http://pyrite.sig-gis.com/geoserver/wms"]
     (->>
      (js/ol.Map.
       #js {:target div-name
@@ -104,9 +107,21 @@
                               :source (js/ol.source.BingMaps.
                                        #js {:key bing-maps-access-token
                                             :imagerySet "AerialWithLabels"
-                                            :maxZoom 19})})]
+                                            :maxZoom 19})})
+                        (js/ol.layer.Tile.
+                         #js {:title "NASASERVIRChipset2002"
+                              :visible false
+                              :extent #js [10298030 898184 12094575 2697289]
+                              :source (js/ol.source.TileWMS.
+                                       #js {:url sig-geoserver-url
+                                            :params #js {"LAYERS" "servir:yr2002"
+                                                         "TILED" true}
+                                            :serverType "geoserver"})})]
            :controls (.extend (js/ol.control.defaults)
-                              #js [(js/ol.control.ScaleLine.)])
+                              #js [(js/ol.control.ScaleLine.)
+                                   ;; (js/ol.control.MousePosition.
+                                   ;;  #js {:projection "ESPG:4326"})
+                                   ])
            :view (js/ol.View.
                   #js {:projection "EPSG:3857"
                        :center (js/ol.proj.fromLonLat (clj->js center-coords))

@@ -211,7 +211,8 @@
        [:option {:value "DigitalGlobeRecentImagery+Streets"}
         "DigitalGlobe: Recent Imagery+Streets"]
        [:option {:value "BingAerial"} "Bing Maps: Aerial"]
-       [:option {:value "BingAerialWithLabels"} "Bing Maps: Aerial with Labels"]]]
+       [:option {:value "BingAerialWithLabels"} "Bing Maps: Aerial with Labels"]
+       [:option {:value "NASASERVIRChipset2002"} "NASA SERVIR Chipset 2002"]]]
      [:fieldset#sample-value-info
       [:legend "Sample Values"]
       [:table
