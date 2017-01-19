@@ -1,5 +1,11 @@
 CREATE SCHEMA mapcha;
 
+-- Grant user privileges
+
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA mapcha to mapcha;
+
+-- Create tables
+
 CREATE TABLE mapcha.projects (
   id                serial primary key,
   name              text not null,
