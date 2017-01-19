@@ -1,0 +1,131 @@
+latitude,longitude,ID,elevation,slope,aspect,dryland_category,Continent,country,district,realm,biome,ecoregion,fao_ecozones
+10.919123,104.790533,As42234,,,,,Asia,Cambodia,Takeo,IM,2,40202,13
+11.190773,103.523001,As42185,,,,,Asia,Cambodia,Koh Kong,IM,1,40106,11
+13.484113,102.546075,As35052,,,,,Asia,Cambodia,Banteay Meanchey,IM,1,40106,13
+13.195915,106.926535,As35500,,,,,Asia,Cambodia,Ratanak Kiri,IM,2,40202,13
+11.257331,104.391501,As42128,,,,,Asia,Cambodia,Kampong Speu,IM,1,40106,13
+13.039957,105.733438,As35234,,,,,Asia,Cambodia,Kratie,IM,2,40210,13
+12.922997,106.746722,As35308,,,,,Asia,Cambodia,Mondul Kiri,IM,2,40202,12
+11.59312,103.989811,As42132,,,,,Asia,Cambodia,Kampong Speu,IM,1,40106,11
+12.764603,105.557217,As35188,,,,,Asia,Cambodia,Kampong Thom,IM,2,40210,12
+13.872266,104.790449,As35378,,,,,Asia,Cambodia,Preah Vihear,IM,2,40202,13
+13.320241,104.441305,As35518,,,,,Asia,Cambodia,Siem Reap,IM,2,40210,13
+13.461287,102.838051,As35048,,,,,Asia,Cambodia,Banteay Meanchey,IM,2,40202,13
+13.202352,104.136574,As35542,,,,,Asia,Cambodia,Siem Reap,IM,2,40202,13
+12.887636,107.035781,As35310,,,,,Asia,Cambodia,Mondul Kiri,IM,2,40202,12
+12.098515,103.310318,As35455,,,,,Asia,Cambodia,Pursat,IM,1,40106,11
+12.778544,103.951291,As35461,,,,,Asia,Cambodia,Pursat,IM,1,40164,13
+12.577485,104.516139,As35203,,,,,Asia,Cambodia,Kampong Thom,IM,1,40164,13
+12.459287,104.2136,As35428,,,,,Asia,Cambodia,Pursat,IM,1,40106,13
+13.254912,103.554649,As35088,,,,,Asia,Cambodia,Battambang,IM,1,40164,13
+14.002463,104.951599,As35374,,,,,Asia,Cambodia,Preah Vihear,IM,2,40202,13
+13.327251,102.680645,As35054,,,,,Asia,Cambodia,Battambang,IM,2,40202,13
+16.107796,106.992211,As36868,,,,,Asia,Lao People's Democratic Republic,Salavan,IM,1,40152,16
+16.762216,106.313765,As36899,,,,,Asia,Lao People's Democratic Republic,Savannakhet,IM,1,40136,11
+16.208807,106.094836,As36951,,,,,Asia,Lao People's Democratic Republic,Savannakhet,IM,2,40202,11
+21.468023,102.91396,As32868,,,,,Asia,Lao People's Democratic Republic,Phongsali,IM,1,40137,16
+19.767657,100.875664,As32893,,,,,Asia,Lao People's Democratic Republic,Xaignabouli,IM,1,40137,12
+19.779733,102.918866,As32670,,,,,Asia,Lao People's Democratic Republic,Louangphabang,IM,1,40121,16
+15.461251,106.307694,As36993,,,,,Asia,Lao People's Democratic Republic,Xekong,IM,1,40152,12
+19.552604,102.114646,As32680,,,,,Asia,Lao People's Democratic Republic,Louangphabang,IM,1,40121,11
+18.282808,102.014303,As37108,,,,,Asia,Lao People's Democratic Republic,Vientiane,IM,1,40121,12
+18.240537,102.62891,As37148,,,,,Asia,Lao People's Democratic Republic,Vientiane,IM,1,40138,12
+15.303391,107.642027,As37005,,,,,Asia,Lao People's Democratic Republic,Xekong,IM,1,40152,16
+15.014291,106.404244,As36768,,,,,Asia,Lao People's Democratic Republic,Champasak,IM,1,40152,11
+18.078654,104.622011,As36773,,,,,Asia,Lao People's Democratic Republic,Khammouan,IM,1,40136,11
+19.009205,101.759772,As36961,,,,,Asia,Lao People's Democratic Republic,Xaignabouli,IM,1,40121,12
+18.087827,102.770302,As37028,,,,,Asia,Lao People's Democratic Republic,Vientiane capital,IM,1,40138,12
+16.66828,105.845099,As36883,,,,,Asia,Lao People's Democratic Republic,Savannakhet,IM,1,40136,12
+16.240726,105.79529,As36942,,,,,Asia,Lao People's Democratic Republic,Savannakhet,IM,2,40202,12
+21.050105,102.87558,As32686,,,,,Asia,Lao People's Democratic Republic,Louangphabang,IM,1,40137,13
+21.168266,100.970824,As32758,,,,,Asia,Lao People's Democratic Republic,Louang-Namtha,IM,1,40137,16
+20.80353,102.376031,As32697,,,,,Asia,Lao People's Democratic Republic,Louangphabang,IM,1,40137,12
+14.615864,106.058417,As36723,,,,,Asia,Lao People's Democratic Republic,Champasak,IM,2,40210,12
+15.321802,107.49399,As36996,,,,,Asia,Lao People's Democratic Republic,Xekong,IM,1,40152,12
+16.367501,105.961867,As36939,,,,,Asia,Lao People's Democratic Republic,Savannakhet,IM,2,40202,12
+16.459382,105.060974,As36923,,,,,Asia,Lao People's Democratic Republic,Savannakhet,IM,2,40202,13
+14.370278,106.922988,As36700,,,,,Asia,Lao People's Democratic Republic,Attapu,IM,2,40210,12
+20.153077,103.584373,As32599,,,,,Asia,Lao People's Democratic Republic,Houaphan,IM,1,40137,12
+21.511143,102.276562,As32829,,,,,Asia,Lao People's Democratic Republic,Phongsali,IM,1,40137,13
+8.311807,99.801452,As43852,,,,,Asia,Thailand,Nakhon Si Thammarat,IM,1,40163,11
+16.461919,101.422089,As37909,,,,,Asia,Thailand,Phetchabun,IM,1,40121,12
+6.712153,101.104555,As43891,,,,,Asia,Thailand,Pattani,IM,1,40146,11
+18.7811,100.810835,As37835,,,,,Asia,Thailand,Nan,IM,1,40139,12
+14.597207,103.227835,As38272,,,,,Asia,Thailand,Surin,IM,2,40202,13
+19.046296,101.139523,As37822,,,,,Asia,Thailand,Nan,IM,1,40121,11
+17.171868,98.574864,As38304,,,,,Asia,Thailand,Tak,IM,1,40119,12
+15.815022,104.237953,As38392,,,,,Asia,Thailand,Yasothon,IM,2,40202,13
+13.829724,99.186288,As37502,,,,,Asia,Thailand,Kanchanaburi,IM,1,40163,13
+18.315085,98.465659,As37331,,,,,Asia,Thailand,Chiang Mai,IM,1,40119,12
+14.832119,99.527308,As38240,,,,,Asia,Thailand,Suphanburi,IM,1,40119,13
+15.610551,101.214009,As37931,,,,,Asia,Thailand,Phetchabun,IM,2,40202,13
+17.939507,100.603124,As38370,,,,,Asia,Thailand,Uttaradit,IM,1,40139,12
+12.348797,99.558571,As38041,,,,,Asia,Thailand,Prachuap Khilikhan,IM,1,40163,11
+16.211181,100.800949,As37919,,,,,Asia,Thailand,Phetchabun,IM,2,40202,13
+7.245178,99.892,As44052,,,,,Asia,Thailand,Trang,IM,1,40163,11
+17.769702,103.204396,As38571,,,,,Asia,Thailand,Udon Thani,IM,2,40202,11
+15.012738,98.642373,As37468,,,,,Asia,Thailand,Kanchanaburi,IM,1,40119,13
+7.093223,99.885149,As44053,,,,,Asia,Thailand,Trang,IM,1,40163,11
+13.973382,101.846167,As38441,,,,,Asia,Thailand,Phachinburi,IM,2,40202,11
+18.336166,103.25584,As37863,,,,,Asia,Thailand,Nong Khai,IM,1,40138,11
+8.168239,99.655796,As43857,,,,,Asia,Thailand,Nakhon Si Thammarat,IM,1,40163,11
+14.535917,99.661562,As37432,,,,,Asia,Thailand,Kanchanaburi,IM,2,40202,13
+17.805468,100.441329,As33135,,,,,Asia,Thailand,Uttaradit,IM,1,40139,13
+18.356688,100.783487,As37846,,,,,Asia,Thailand,Nan,IM,1,40139,12
+16.093697,102.603859,As37536,,,,,Asia,Thailand,Khon Kaen,IM,2,40202,13
+19.532689,99.920962,As33029,,,,,Asia,Thailand,Chiang Rai,IM,2,40202,12
+14.739118,104.878998,As38524,,,,,Asia,Thailand,Ubon Ratchathani,IM,2,40202,13
+16.892554,103.430965,As38570,,,,,Asia,Thailand,Udon Thani,IM,2,40202,12
+16.41524,99.603819,As37415,,,,,Asia,Thailand,Kampaeng Phet,IM,2,40202,13
+6.082081,101.34293,As44070,,,,,Asia,Thailand,Yala,IM,1,40146,11
+17.970151,99.98978,As33113,,,,,Asia,Thailand,Phrae,IM,1,40139,13
+14.216773,100.237146,As38239,,,,,Asia,Thailand,Suphanburi,IM,1,40107,13
+19.41197,99.44553,As33041,,,,,Asia,Thailand,Chiang Rai,IM,1,40119,12
+6.773275,100.145663,As43954,,,,,Asia,Thailand,Satun,IM,1,40163,11
+18.812783,100.191819,As38026,,,,,Asia,Thailand,Phrae,IM,2,40202,12
+7.735271,99.221172,As43833,,,,,Asia,Thailand,Krabi,IM,14,41404,11
+17.615835,103.344093,As38573,,,,,Asia,Thailand,Udon Thani,IM,2,40202,11
+12.766025,102.345341,As37290,,,,,Asia,Thailand,Chanthaburi,IM,1,40106,11
+15.514622,104.358784,As38397,,,,,Asia,Thailand,Yasothon,IM,2,40202,13
+17.543664,99.966501,As33131,,,,,Asia,Thailand,Uttaradit,IM,2,40202,13
+15.772688,103.029274,As37697,,,,,Asia,Thailand,Maha Sarakham,IM,2,40202,13
+18.59339,98.631115,As37326,,,,,Asia,Thailand,Chiang Mai,IM,1,40119,12
+13.366174,99.752178,As38063,,,,,Asia,Thailand,Ratchaburi,IM,1,40107,13
+13.721572,101.239908,As37209,,,,,Asia,Thailand,Chachoengsao,IM,1,40107,13
+16.104695,102.453795,As37535,,,,,Asia,Thailand,Khon Kaen,IM,2,40202,13
+6.235007,101.35174,As44068,,,,,Asia,Thailand,Yala,IM,1,40146,11
+17.247017,102.546179,As38411,,,,,Asia,Thailand,Nong Bua Lamphu,IM,1,40138,12
+16.153701,103.666515,As38097,,,,,Asia,Thailand,Roi Et,IM,2,40202,13
+15.411169,103.89837,As38251,,,,,Asia,Thailand,Surin,IM,2,40202,13
+6.244795,101.215438,As44067,,,,,Asia,Thailand,Yala,IM,1,40146,11
+12.954207,101.77518,As37280,,,,,Asia,Thailand,Chanthaburi,IM,1,40106,13
+10.630063,106.051123,As42373,,,,,Asia,Viet Nam,Long An,IM,1,40165,12
+11.742184,108.929999,As36517,,,,,Asia,Viet Nam,Ninh Thuan,IM,2,40211,12
+17.975989,105.692043,As36285,,,,,Asia,Viet Nam,Quang Binh,IM,1,40136,11
+11.902075,107.788456,As36666,,,,,Asia,Viet Nam,Dak Nong,IM,1,40152,12
+9.460597,105.784902,As42446,,,,,Asia,Viet Nam,Soc Trang,IM,14,41402,13
+20.864036,103.49553,As32113,,,,,Asia,Viet Nam,Son La,IM,1,40137,16
+19.093353,104.418908,As32321,,,,,Asia,Viet Nam,Nghe An,IM,1,40136,12
+13.587064,108.452891,As36406,,,,,Asia,Viet Nam,Gia Lai,IM,2,40210,12
+23.057802,105.681179,As32176,,,,,Asia,Viet Nam,Cao Bang,IM,1,40149,25
+18.288918,105.419091,As36454,,,,,Asia,Viet Nam,Ha Tinh,IM,1,40136,11
+21.218671,104.330459,As32072,,,,,Asia,Viet Nam,Son La,IM,1,40137,12
+21.377134,107.077493,As32210,,,,,Asia,Viet Nam,Lang Son,IM,1,40149,12
+21.787698,104.231625,As32378,,,,,Asia,Viet Nam,Yen Bai,IM,1,40137,16
+21.321198,106.266375,As32410,,,,,Asia,Viet Nam,Bac Giang,IM,1,40149,12
+12.339846,107.844821,As36650,,,,,Asia,Viet Nam,Dak Nong,IM,2,40210,13
+9.592856,105.940411,As42443,,,,,Asia,Viet Nam,Soc Trang,IM,14,41402,13
+13.174689,109.280806,As36270,,,,,Asia,Viet Nam,Phu Yen,IM,2,40211,14
+12.231926,107.539216,As36669,,,,,Asia,Viet Nam,Dak Nong,IM,1,40152,11
+11.316422,107.714063,As36372,,,,,Asia,Viet Nam,Binh Thuan,IM,1,40152,12
+12.13565,108.255708,As36188,,,,,Asia,Viet Nam,Lam Dong,IM,1,40152,11
+22.199425,105.896693,As32393,,,,,Asia,Viet Nam,Bac Kan,IM,1,40149,12
+12.122966,107.234273,As36652,,,,,Asia,Viet Nam,Dak Nong,IM,2,40210,12
+22.566432,106.433042,As32174,,,,,Asia,Viet Nam,Cao Bang,IM,1,40149,21
+10.662989,105.768148,As42321,,,,,Asia,Viet Nam,Dong Thap,IM,1,40165,12
+21.344398,104.504425,As32098,,,,,Asia,Viet Nam,Son La,IM,1,40137,16
+22.751705,105.968505,As32165,,,,,Asia,Viet Nam,Cao Bang,IM,1,40149,21
+12.179701,108.991265,As36254,,,,,Asia,Viet Nam,Khanh Hoa,IM,1,40152,14
+20.966172,103.984047,As32080,,,,,Asia,Viet Nam,Son La,IM,1,40137,12
+16.728888,106.614807,As36338,,,,,Asia,Viet Nam,Quang Tri,IM,1,40136,11
+13.794302,109.075177,As36232,,,,,Asia,Viet Nam,Binh Dinh,IM,2,40211,12

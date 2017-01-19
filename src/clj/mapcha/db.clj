@@ -127,6 +127,15 @@
   [imagery-title]
   (:id (first (get-imagery-info-sql {:title imagery-title}))))
 
+(defn create-random-points-in-bounds
+  [lat-min lat-max lon-min lon-max num-points]
+  (let [lon-range (- lon-max lon-min)
+        lat-range (- lat-max lat-min)]
+    (repeatedly num-points
+                #(vector
+                  (+ lat-min (rand lat-range))
+                  (+ lon-min (rand lon-range))))))
+
 (defn create-new-project
   [{:keys [project-name project-description boundary-lon-min boundary-lon-max
            boundary-lat-min boundary-lat-max plots buffer-radius sample-type
@@ -140,7 +149,6 @@
             boundary-lon-max  (Double/parseDouble boundary-lon-max)
             boundary-lat-min  (Double/parseDouble boundary-lat-min)
             boundary-lat-max  (Double/parseDouble boundary-lat-max)
-            plots             (Integer/parseInt plots)
             buffer-radius     (Double/parseDouble buffer-radius)
             samples-per-plot  (if (= sample-type "random")
                                 (Integer/parseInt samples-per-plot))
@@ -159,16 +167,20 @@
                                             :imagery_id        imagery-id}
                                            {:connection conn}))
             project-id   (project-info :id)
-            lon-range    (- boundary-lon-max boundary-lon-min)
-            lat-range    (- boundary-lat-max boundary-lat-min)]
+            plots        (if (string? plots)
+                           (create-random-points-in-bounds
+                            boundary-lat-min
+                            boundary-lat-max
+                            boundary-lon-min
+                            boundary-lon-max
+                            (Integer/parseInt plots))
+                           plots)]
 
         ;; 2. Insert plot rows into mapcha.plots with random centers
         ;;    within boundary and radius=buffer-radius.
 
-        (dotimes [_ plots]
-          (let [plot-lon  (+ boundary-lon-min (rand lon-range))
-                plot-lat  (+ boundary-lat-min (rand lat-range))
-                plot-info (first
+        (doseq [[plot-lat plot-lon] plots]
+          (let [plot-info (first
                            (add-plot-sql {:project_id project-id
                                           :lon        plot-lon
                                           :lat        plot-lat
@@ -206,6 +218,52 @@
                                 {:connection conn})))
       true)
     (catch Exception e false)))
+
+(defn load-csv [csv-filename]
+  (with-open [in-file (io/reader (io/resource (str "csv/" csv-filename)))]
+    (mapv (fn [[lat lon]]
+            [(Double/parseDouble lat)
+             (Double/parseDouble lon)])
+          (rest (csv/read-csv in-file)))))
+
+(defn wrap-lat [x]
+  (- (mod (+ x 90) 180) 90))
+
+(defn wrap-lon [x]
+  (- (mod (+ x 180) 360) 180))
+
+(defn create-new-project-from-csv
+  [{:keys [project-name project-description plot-csv buffer-radius sample-type
+           samples-per-plot sample-resolution sample-values imagery-selector]
+    :as params}]
+  (let [plot-points   (load-csv plot-csv)
+        latitudes     (map first plot-points)
+        longitudes    (map second plot-points)
+        min-lat       (wrap-lat (- (reduce min latitudes)  0.1))
+        min-lon       (wrap-lon (- (reduce min longitudes) 0.1))
+        max-lat       (wrap-lat (+ (reduce max latitudes)  0.1))
+        max-lon       (wrap-lon (+ (reduce max longitudes) 0.1))]
+    (create-new-project
+     (assoc params
+            :boundary-lon-min (str min-lon)
+            :boundary-lon-max (str max-lon)
+            :boundary-lat-min (str min-lat)
+            :boundary-lat-max (str max-lat)
+            :plots            plot-points))))
+
+;; Here is an example of project creation from a CSV with 2 columns
+;; ("latitude", "longitude"), which must be stored in the
+;; resources/csv/ directory.
+;;
+;; (create-new-project-from-csv
+;;  {:project-name "NASA SERVIR Chipset Test"
+;;   :project-description ""
+;;   :plot-csv "chip_2002_centerPoints.csv"
+;;   :buffer-radius "75.0"
+;;   :sample-type "gridded"
+;;   :sample-resolution "30.0"
+;;   :sample-values "[[\"Chipset Point\" \"#0dee0b\" \"\"] [\"No Imagery\" \"#ec1717\" \"\"]]"
+;;   :imagery-selector "NASASERVIRChipset2002"})
 
 (defremote get-all-projects
   []
