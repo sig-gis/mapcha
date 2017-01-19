@@ -229,13 +229,13 @@
   (get-sample-points-sql {:plot_id plot-id}))
 
 (defremote add-user-samples
-  [user-id plot-id imagery-id sample-value-map]
+  [user-id plot-id imagery-title sample-value-map]
   (increment-plot-analyses-sql {:plot_id plot-id})
   (doseq [[sample-id value-id] sample-value-map]
-    (add-user-sample-sql {:user_id   user-id
-                          :sample_id sample-id
-                          :value_id  value-id
-                          :imagery_id imagery-id})))
+    (add-user-sample-sql {:user_id    user-id
+                          :sample_id  sample-id
+                          :value_id   value-id
+                          :imagery_id (get-imagery-id-by-title imagery-title)})))
 
 (defremote archive-project
   [project-id]

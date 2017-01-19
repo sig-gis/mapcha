@@ -20,11 +20,11 @@
 (defonce user-samples (atom {}))
 
 (defn save-values! []
-  (let [user-id    (js/parseInt (.-value (dom/getElement "user-id")))
-        plot-id    (:id @current-plot)
-        imagery-id 2] ;; DigitalGlobe Maps API: Recent Imagery+Streets
+  (let [user-id (js/parseInt (.-value (dom/getElement "user-id")))
+        plot-id (:id @current-plot)
+        imagery (:imagery @current-project)]
     (remote-callback :add-user-samples
-                     [user-id plot-id imagery-id @user-samples]
+                     [user-id plot-id imagery @user-samples]
                      #(do (js/alert
                            "Your assignments have been saved to the database.")
                           (u/enable-element! (dom/getElement "new-plot-button"))
