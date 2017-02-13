@@ -1,11 +1,10 @@
 /*****************************************************************************
 ***
-*** Create the mapcha.map_utils object to act as a namespace for this file
+*** Create the map_utils object to act as a namespace for this file
 ***
 *****************************************************************************/
 
-var mapcha = {};
-mapcha.map_utils = {};
+var map_utils = {};
 
 /*****************************************************************************
 ***
@@ -17,21 +16,21 @@ mapcha.map_utils = {};
 ***
 *****************************************************************************/
 
-mapcha.map_utils.reproject_to_map = function (longitude, latitude) {
+map_utils.reproject_to_map = function (longitude, latitude) {
     return ol.proj.transform([Number(longitude), Number(latitude)],
                              "EPSG:4326",
                              "EPSG:3857");
 };
 
-mapcha.map_utils.reproject_from_map = function (x, y) {
+map_utils.reproject_from_map = function (x, y) {
     return ol.proj.transform([Number(x), Number(y)],
                              "EPSG:3857",
                              "EPSG:4326");
 };
 
-mapcha.map_utils.get_full_extent = function () {
-    var llxy = mapcha.map_utils.reproject_to_map(-180.0, -89.999999);
-    var urxy = mapcha.map_utils.reproject_to_map(180.0, 90.0);
+map_utils.get_full_extent = function () {
+    var llxy = map_utils.reproject_to_map(-180.0, -89.999999);
+    var urxy = map_utils.reproject_to_map(180.0, 90.0);
     return [llxy[0], llxy[1], urxy[0], urxy[1]];
 };
 
@@ -42,9 +41,9 @@ mapcha.map_utils.get_full_extent = function () {
 *****************************************************************************/
 
 // This reference will hold the current page's OpenLayers map object
-mapcha.map_utils.map_ref = null;
+map_utils.map_ref = null;
 
-mapcha.map_utils.digital_globe_base_map = function (map_config) {
+map_utils.digital_globe_base_map = function (map_config) {
     var digital_globe_access_token     = "pk.eyJ1IjoiZGlnaXRhbGdsb2JlIiwiYS" +
                                          "I6ImNpcTJ3ZTlyZTAwOWNuam00ZWU3aTk" +
                                          "xdWIifQ.9OFrmevVe0YB2dJokKhhdA";
@@ -108,7 +107,7 @@ mapcha.map_utils.digital_globe_base_map = function (map_config) {
     // Create the map view using the passed in center_coords and zoom_level
     var view = new ol.View({"projection": "EPSG:3857",
                             "center": ol.proj.fromLonLat(map_config.center_coords),
-                            "extent": mapcha.map_utils.get_full_extent(),
+                            "extent": map_utils.get_full_extent(),
                             "zoom": map_config.zoom_level});
 
     // Create the new OpenLayers map object
@@ -118,35 +117,35 @@ mapcha.map_utils.digital_globe_base_map = function (map_config) {
                                      "controls": controls,
                                      "view": view});
 
-    // Store the new OpenLayers map object in mapcha.map_utils.map_ref and return it
-    mapcha.map_utils.map_ref = openlayers_map;
+    // Store the new OpenLayers map object in map_utils.map_ref and return it
+    map_utils.map_ref = openlayers_map;
     return openlayers_map;
 };
 
-mapcha.map_utils.current_imagery = "DigitalGlobeRecentImagery+Streets";
+map_utils.current_imagery = "DigitalGlobeRecentImagery+Streets";
 
-mapcha.map_utils.set_current_imagery = function (new_imagery) {
-    for (layer in mapcha.map_utils.map_ref.getLayers().getArray()) {
+map_utils.set_current_imagery = function (new_imagery) {
+    for (layer in map_utils.map_ref.getLayers().getArray()) {
         var title = layer.get("title");
-        if (title == mapcha.map_utils.current_imagery) {
+        if (title == map_utils.current_imagery) {
             layer.setVisible(false);
         }
         if (title == new_imagery) {
             layer.setVisible(true);
         }
     }
-    mapcha.map_utils.current_imagery = new_imagery;
+    map_utils.current_imagery = new_imagery;
     return new_imagery;
 };
 
-mapcha.map_utils.zoom_map_to_layer = function (layer) {
-    var view = mapcha.map_utils.map_ref.getView();
-    var size = mapcha.map_utils.map_ref.getSize();
+map_utils.zoom_map_to_layer = function (layer) {
+    var view = map_utils.map_ref.getView();
+    var size = map_utils.map_ref.getSize();
     var extent = layer.getSource().getExtent();
     return view.fit(extent, size);
 };
 
-mapcha.map_utils.styles =
+map_utils.styles =
     {"icon": new ol.style.Style(
         {"image": new ol.style.Icon({"src": "/favicon.ico"})}),
 
@@ -170,47 +169,47 @@ mapcha.map_utils.styles =
               {"color": "#8b2323",
                "width": 3})})};
 
-mapcha.map_utils.current_boundary = null;
+map_utils.current_boundary = null;
 
-mapcha.map_utils.draw_polygon = function (polygon) {
+map_utils.draw_polygon = function (polygon) {
     var format = new ol.format.GeoJSON();
     var geometry = format.readGeometry(polygon).transform("EPSG:4326", "EPSG:3857");
     var feature = new ol.Feature({"geometry": geometry});
     var vector_source = new ol.source.Vector({"features": [feature]});
-    var style = mapcha.map_utils.styles["polygon"];
+    var style = map_utils.styles["polygon"];
     var vector_layer = new ol.layer.Vector({"source": vector_source,
                                             "style": style});
-    if (mapcha.map_utils.current_boundary != null) {
-        mapcha.map_utils.map_ref.removeLayer(mapcha.map_utils.current_boundary);
+    if (map_utils.current_boundary != null) {
+        map_utils.map_ref.removeLayer(map_utils.current_boundary);
     }
-    mapcha.map_utils.current_boundary = vector_layer;
-    mapcha.map_utils.map_ref.addLayer(vector_layer);
-    mapcha.map_utils.zoom_map_to_layer(vector_layer);
-    return mapcha.map_utils.map_ref;
+    map_utils.current_boundary = vector_layer;
+    map_utils.map_ref.addLayer(vector_layer);
+    map_utils.zoom_map_to_layer(vector_layer);
+    return map_utils.map_ref;
 };
 
-mapcha.map_utils.current_buffer = null;
+map_utils.current_buffer = null;
 
-mapcha.map_utils.remove_plot_layer = function () {
-    if (mapcha.map_utils.current_buffer != null) {
-        mapcha.map_utils.map_ref.removeLayer(mapcha.map_utils.current_buffer);
-        mapcha.map_utils.current_buffer = null;
+map_utils.remove_plot_layer = function () {
+    if (map_utils.current_buffer != null) {
+        map_utils.map_ref.removeLayer(map_utils.current_buffer);
+        map_utils.current_buffer = null;
     }
     return null;
 };
 
-mapcha.map_utils.draw_buffer = function (center, radius) {
+map_utils.draw_buffer = function (center, radius) {
     var format = new ol.format.GeoJSON();
     var geometry = format.readGeometry(center).transform("EPSG:4326", "EPSG:3857");
     var buffer = new ol.geom.Circle(geometry.getCoordinates(), radius);
     var feature = new ol.Feature({"geometry": buffer});
     var vector_source = new ol.source.Vector({"features": [feature]});
-    var style = mapcha.map_utils.styles["polygon"];
+    var style = map_utils.styles["polygon"];
     var vector_layer = new ol.layer.Vector({"source": vector_source,
                                             "style": style});
-    mapcha.map_utils.remove_plot_layer();
-    mapcha.map_utils.current_buffer = vector_layer;
-    mapcha.map_utils.map_ref.addLayer(vector_layer);
-    mapcha.map_utils.zoom_map_to_layer(vector_layer);
-    return mapcha.map_utils.map_ref;
+    map_utils.remove_plot_layer();
+    map_utils.current_buffer = vector_layer;
+    map_utils.map_ref.addLayer(vector_layer);
+    map_utils.zoom_map_to_layer(vector_layer);
+    return map_utils.map_ref;
 };
