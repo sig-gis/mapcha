@@ -264,6 +264,26 @@
 ;;   :sample-resolution "30.0"
 ;;   :sample-values "[[\"Chipset Point\" \"#0dee0b\" \"\"] [\"No Imagery\" \"#ec1717\" \"\"]]"
 ;;   :imagery-selector "NASASERVIRChipset2002"})
+;;
+;; (create-new-project-from-csv
+;;  {:project-name "RLCMS Assemblage Test"
+;;   :project-description ""
+;;   :plot-csv "SampledPoints_Assemblage_2015.csv"
+;;   :buffer-radius "22.5"
+;;   :sample-type "gridded"
+;;   :sample-resolution "7.5"
+;;   :sample-values "[[\"Unknown\" \"#000000\" \"\"] [\"Water\" \"#123D7D\" \"\"] [\"Mangrove\" \"#FB9C0D\" \"\"] [\"Tree - Mixed\" \"#4CB432\" \"\"] [\"Shrub\" \"#CCFF01\" \"\"] [\"Impervious\" \"#888888\" \"\"] [\"Crop\" \"#F01212\" \"\"] [\"Tree - Deciduous\" \"#44EA1A\" \"\"] [\"Tree - Evergreen\" \"#2A621C\" \"\"]]"
+;;   :imagery-selector "DigitalGlobeRecentImagery+Streets"})
+;;
+;; (create-new-project-from-csv
+;;  {:project-name "Deltares Surface Water Test"
+;;   :project-description ""
+;;   :plot-csv "SampledPoints_Water_2015.csv"
+;;   :buffer-radius "22.5"
+;;   :sample-type "gridded"
+;;   :sample-resolution "7.5"
+;;   :sample-values "[[\"Non-Water\" \"#CC1717\" \"\"] [\"Ephemeral Water\" \"#15EEEE\" \"\"] [\"Permanent Water\" \"#4119E0\" \"\"]]"
+;;   :imagery-selector "DigitalGlobeRecentImagery+Streets"})
 
 (defremote get-all-projects
   []
