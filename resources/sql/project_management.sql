@@ -82,6 +82,16 @@ SELECT id, ST_AsGeoJSON(center) AS center, radius
   ORDER BY random()
   LIMIT 1;
 
+-- name: get-random-plot-once-sql
+-- Returns a random non-flagged row from mapcha.plots with the given project_id.
+SELECT id, ST_AsGeoJSON(center) AS center, radius
+  FROM mapcha.plots
+  WHERE project_id = :project_id
+    AND flagged = false
+    AND analyses = 0
+  ORDER BY random()
+  LIMIT 1;
+
 -- name: get-random-plot-by-min-analyses-sql
 -- Returns a random non-flagged row from mapcha.plots with the given project_id.
 SELECT id, center, radius
