@@ -159,22 +159,24 @@ WITH plot_data AS (SELECT plt.id AS plot_id, ST_X(center) AS center_lon,
                           ST_Y(center) AS center_lat, radius AS radius_m,
                           flagged, analyses, sample_id, user_id, value_id, value
                      FROM mapcha.plots AS plt
-                     INNER JOIN mapcha.samples AS smp ON plt.id = plot_id
-                     INNER JOIN mapcha.user_samples ON smp.id = sample_id
-                     INNER JOIN mapcha.sample_values AS val ON value_id = val.id
+                     LEFT JOIN mapcha.samples AS smp ON plt.id = plot_id
+                     LEFT JOIN mapcha.user_samples ON smp.id = sample_id
+                     LEFT JOIN mapcha.sample_values AS val ON value_id = val.id
                      WHERE plt.project_id = :project_id),
      plot_overview AS (SELECT plot_id, center_lon, center_lat, radius_m, flagged,
-                              analyses, count(sample_id) AS sample_points,
+                              analyses, count(distinct sample_id) AS sample_points,
                               count(distinct user_id) AS user_assignments
                          FROM plot_data
                          GROUP BY plot_id, center_lon, center_lat,
                                   radius_m, flagged, analyses),
      plot_values AS (SELECT plot_id, value,
-                            (100.0 * count(value_id) /
-                              (sample_points*user_assignments))::float AS percent
+                            CASE WHEN flagged = true
+                                 THEN 0.0
+                                 ELSE (100.0 * count(value_id) / (sample_points*user_assignments))::float
+                            END AS percent
                        FROM plot_data
-                       INNER JOIN plot_overview USING (plot_id)
-                       GROUP BY plot_id, sample_points, user_assignments, value
+                       INNER JOIN plot_overview USING (plot_id, flagged)
+                       GROUP BY plot_id, flagged, sample_points, user_assignments, value
                        ORDER BY plot_id)
   SELECT *
     FROM plot_overview
