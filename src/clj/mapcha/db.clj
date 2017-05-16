@@ -219,9 +219,11 @@
       true)
     (catch Exception e false)))
 
+;; NOTE: Tweak the destructuring line "(mapv (fn [[lat lon]]" to
+;; select the right columns from the CSV for latitude and longitude.
 (defn load-csv [csv-filename]
   (with-open [in-file (io/reader (io/resource (str "csv/" csv-filename)))]
-    (mapv (fn [[lat lon]]
+    (mapv (fn [[_ _ lat lon _ _]]
             [(Double/parseDouble lat)
              (Double/parseDouble lon)])
           (rest (csv/read-csv in-file)))))
@@ -283,6 +285,16 @@
 ;;   :sample-type "gridded"
 ;;   :sample-resolution "7.5"
 ;;   :sample-values "[[\"Non-Water\" \"#CC1717\" \"\"] [\"Ephemeral Water\" \"#15EEEE\" \"\"] [\"Permanent Water\" \"#4119E0\" \"\"]]"
+;;   :imagery-selector "DigitalGlobeRecentImagery+Streets"})
+;;
+;; (create-new-project-from-csv
+;;  {:project-name "RLCMS Crop Test"
+;;   :project-description ""
+;;   :plot-csv "SampledPoints_Crop_2015.csv"
+;;   :buffer-radius "22.5"
+;;   :sample-type "gridded"
+;;   :sample-resolution "7.5"
+;;   :sample-values "[[\"Cropland\" \"#FC9903\" \"\"] [\"Impervious Surface\" \"#3E3C3A\" \"\"] [\"Other\" \"#C50CF3\" \"\"] [\"Need Phenology\" \"#12EBEB\" \"\"]]"
 ;;   :imagery-selector "DigitalGlobeRecentImagery+Streets"})
 
 (defremote get-all-projects
