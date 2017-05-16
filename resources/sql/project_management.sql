@@ -170,7 +170,7 @@ WITH plot_data AS (SELECT plt.id AS plot_id, ST_X(center) AS center_lon,
                          GROUP BY plot_id, center_lon, center_lat,
                                   radius_m, flagged, analyses),
      plot_values AS (SELECT plot_id, value,
-                            CASE WHEN flagged = true
+                            CASE WHEN flagged = true OR sample_points = 0 OR user_assignments = 0
                                  THEN 0.0
                                  ELSE (100.0 * count(value_id) / (sample_points*user_assignments))::float
                             END AS percent
