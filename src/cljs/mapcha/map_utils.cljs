@@ -63,9 +63,12 @@
 (defonce map-ref (atom nil))
 
 (defn digitalglobe-base-map [{:keys [div-name center-coords zoom-level]}]
-  (let [digital-globe-access-token   (str "pk.eyJ1IjoiZGlnaXRhbGdsb2JlIiwiYS"
-                                          "I6ImNpcTJ3ZTlyZTAwOWNuam00ZWU3aTk"
-                                          "xdWIifQ.9OFrmevVe0YB2dJokKhhdA")
+  (let [;; digital-globe-access-token   (str "pk.eyJ1IjoiZGlnaXRhbGdsb2JlIiwiYS"
+        ;;                                   "I6ImNpcTJ3ZTlyZTAwOWNuam00ZWU3aTk"
+        ;;                                   "xdWIifQ.9OFrmevVe0YB2dJokKhhdA")
+        digital-globe-access-token   (str "pk.eyJ1IjoiZGlnaXRhbGdsb2JlIiwiYS"
+                                          "I6ImNqM2RuZTE3dTAwMncyd3Bwanh4MHJ"
+                                          "1cmgifQ.LNrR2h_I0kz6fra93XGP2g")
         recent-imagery-url           "digitalglobe.nal0g75k"
         recent-imagery-+-streets-url "digitalglobe.nal0mpda"
         bing-maps-access-token       (str "AlQPbThspGcsiCnczC-2QVOYU9u_PrteL"
