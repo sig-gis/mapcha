@@ -296,6 +296,26 @@
 ;;   :sample-resolution "7.5"
 ;;   :sample-values "[[\"Cropland\" \"#FC9903\" \"\"] [\"Impervious Surface\" \"#3E3C3A\" \"\"] [\"Other\" \"#C50CF3\" \"\"] [\"Need Phenology\" \"#12EBEB\" \"\"]]"
 ;;   :imagery-selector "DigitalGlobeRecentImagery+Streets"})
+;;
+;; (create-new-project-from-csv
+;;  {:project-name "Impervious Surface Training Data"
+;;   :project-description ""
+;;   :plot-csv "ISReferenceData2015.csv"
+;;   :buffer-radius "22.5"
+;;   :sample-type "gridded"
+;;   :sample-resolution "7.5"
+;;   :sample-values "[[\"Cropland\" \"#FC9903\" \"\"] [\"Impervious Surface\" \"#3E3C3A\" \"\"] [\"Water\" \"#123D7D\" \"\"] [\"Vegetation\" \"#4CB432\" \"\"] [\"Other\" \"#C50CF3\" \"\"] [\"Unknown\" \"#12EBEB\" \"\"]]"
+;;   :imagery-selector "DigitalGlobeRecentImagery+Streets"})
+;;
+;; (create-new-project-from-csv
+;;  {:project-name "Cropland Disagreement"
+;;   :project-description ""
+;;   :plot-csv "DisagreementPointsLatLong.csv"
+;;   :buffer-radius "22.5"
+;;   :sample-type "gridded"
+;;   :sample-resolution "7.5"
+;;   :sample-values "[[\"Cropland\" \"#FC9903\" \"\"] [\"Impervious Surface\" \"#3E3C3A\" \"\"] [\"Water\" \"#123D7D\" \"\"] [\"Vegetation\" \"#4CB432\" \"\"] [\"Other\" \"#C50CF3\" \"\"] [\"Unknown\" \"#12EBEB\" \"\"]]"
+;;   :imagery-selector "DigitalGlobeRecentImagery+Streets"})
 
 (defremote get-all-projects
   []
