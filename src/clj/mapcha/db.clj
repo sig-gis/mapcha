@@ -223,7 +223,7 @@
 ;; select the right columns from the CSV for latitude and longitude.
 (defn load-csv [csv-filename]
   (with-open [in-file (io/reader (io/resource (str "csv/" csv-filename)))]
-    (mapv (fn [[_ _ lat lon _ _]]
+    (mapv (fn [[lon lat _ _ _ _]]
             [(Double/parseDouble lat)
              (Double/parseDouble lon)])
           (rest (csv/read-csv in-file)))))
@@ -315,6 +315,56 @@
 ;;   :sample-type "gridded"
 ;;   :sample-resolution "7.5"
 ;;   :sample-values "[[\"Cropland\" \"#FC9903\" \"\"] [\"Impervious Surface\" \"#3E3C3A\" \"\"] [\"Water\" \"#123D7D\" \"\"] [\"Vegetation\" \"#4CB432\" \"\"] [\"Other\" \"#C50CF3\" \"\"] [\"Unknown\" \"#12EBEB\" \"\"]]"
+;;   :imagery-selector "DigitalGlobeRecentImagery+Streets"})
+;;
+;; (create-new-project-from-csv
+;;  {:project-name "RLCMS Cambodia"
+;;   :project-description ""
+;;   :plot-csv "CambodiaSampledPoints_2013_MODIS.csv"
+;;   :buffer-radius "22.5"
+;;   :sample-type "gridded"
+;;   :sample-resolution "7.5"
+;;   :sample-values "[[\"Built Surface\" \"#6A5D54\" \"\"] [\"Built Veg. (non-tree)\" \"#3ACE65\" \"\"] [\"Built Tree\" \"#178922\" \"\"] [\"Mining\" \"#251510\" \"\"] [\"Mudflat/Beach\" \"#E1671F\" \"\"] [\"Barren Other\" \"#314021\" \"\"] [\"Tree Plantation/Orchard\" \"#1CDE63\" \"\"] [\"Tree Mangrove\" \"#EAB412\" \"\"] [\"Tree Other\" \"#5AC63C\" \"\"] [\"Shrub\" \"#C42B60\" \"\"] [\"Grass\" \"#E085A5\" \"\"] [\"Crop\" \"#DC0F0F\" \"\"] [\"Aquaculture Pond\" \"#137FF6\" \"\"] [\"Aquatic Veg. Other\" \"#13F3F6\" \"\"] [\"Water\" \"#1C214F\" \"\"] [\"Snow & Ice\" \"#EBECF6\" \"\"] [\"Unknown\" \"#7D06F9\" \"\"] [\"Other\" \"#050209\" \"\"]]"
+;;   :imagery-selector "DigitalGlobeRecentImagery+Streets"})
+;;
+;; (create-new-project-from-csv
+;;  {:project-name "RLCMS Myanmar"
+;;   :project-description ""
+;;   :plot-csv "MyanmarSampledPoints_2013_MODIS.csv"
+;;   :buffer-radius "22.5"
+;;   :sample-type "gridded"
+;;   :sample-resolution "7.5"
+;;   :sample-values "[[\"Built Surface\" \"#6A5D54\" \"\"] [\"Built Veg. (non-tree)\" \"#3ACE65\" \"\"] [\"Built Tree\" \"#178922\" \"\"] [\"Mining\" \"#251510\" \"\"] [\"Mudflat/Beach\" \"#E1671F\" \"\"] [\"Barren Other\" \"#314021\" \"\"] [\"Tree Plantation/Orchard\" \"#1CDE63\" \"\"] [\"Tree Mangrove\" \"#EAB412\" \"\"] [\"Tree Other\" \"#5AC63C\" \"\"] [\"Shrub\" \"#C42B60\" \"\"] [\"Grass\" \"#E085A5\" \"\"] [\"Crop\" \"#DC0F0F\" \"\"] [\"Aquaculture Pond\" \"#137FF6\" \"\"] [\"Aquatic Veg. Other\" \"#13F3F6\" \"\"] [\"Water\" \"#1C214F\" \"\"] [\"Snow & Ice\" \"#EBECF6\" \"\"] [\"Unknown\" \"#7D06F9\" \"\"] [\"Other\" \"#050209\" \"\"]]"
+;;   :imagery-selector "DigitalGlobeRecentImagery+Streets"})
+;;
+;; (create-new-project-from-csv
+;;  {:project-name "RLCMS Laos"
+;;   :project-description ""
+;;   :plot-csv "LaosSampledPoints_2013_MODIS.csv"
+;;   :buffer-radius "22.5"
+;;   :sample-type "gridded"
+;;   :sample-resolution "7.5"
+;;   :sample-values "[[\"Built Surface\" \"#6A5D54\" \"\"] [\"Built Veg. (non-tree)\" \"#3ACE65\" \"\"] [\"Built Tree\" \"#178922\" \"\"] [\"Mining\" \"#251510\" \"\"] [\"Mudflat/Beach\" \"#E1671F\" \"\"] [\"Barren Other\" \"#314021\" \"\"] [\"Tree Plantation/Orchard\" \"#1CDE63\" \"\"] [\"Tree Mangrove\" \"#EAB412\" \"\"] [\"Tree Other\" \"#5AC63C\" \"\"] [\"Shrub\" \"#C42B60\" \"\"] [\"Grass\" \"#E085A5\" \"\"] [\"Crop\" \"#DC0F0F\" \"\"] [\"Aquaculture Pond\" \"#137FF6\" \"\"] [\"Aquatic Veg. Other\" \"#13F3F6\" \"\"] [\"Water\" \"#1C214F\" \"\"] [\"Snow & Ice\" \"#EBECF6\" \"\"] [\"Unknown\" \"#7D06F9\" \"\"] [\"Other\" \"#050209\" \"\"]]"
+;;   :imagery-selector "DigitalGlobeRecentImagery+Streets"})
+;;
+;; (create-new-project-from-csv
+;;  {:project-name "RLCMS Thailand"
+;;   :project-description ""
+;;   :plot-csv "ThailandSampledPoints_2013_MODIS.csv"
+;;   :buffer-radius "22.5"
+;;   :sample-type "gridded"
+;;   :sample-resolution "7.5"
+;;   :sample-values "[[\"Built Surface\" \"#6A5D54\" \"\"] [\"Built Veg. (non-tree)\" \"#3ACE65\" \"\"] [\"Built Tree\" \"#178922\" \"\"] [\"Mining\" \"#251510\" \"\"] [\"Mudflat/Beach\" \"#E1671F\" \"\"] [\"Barren Other\" \"#314021\" \"\"] [\"Tree Plantation/Orchard\" \"#1CDE63\" \"\"] [\"Tree Mangrove\" \"#EAB412\" \"\"] [\"Tree Other\" \"#5AC63C\" \"\"] [\"Shrub\" \"#C42B60\" \"\"] [\"Grass\" \"#E085A5\" \"\"] [\"Crop\" \"#DC0F0F\" \"\"] [\"Aquaculture Pond\" \"#137FF6\" \"\"] [\"Aquatic Veg. Other\" \"#13F3F6\" \"\"] [\"Water\" \"#1C214F\" \"\"] [\"Snow & Ice\" \"#EBECF6\" \"\"] [\"Unknown\" \"#7D06F9\" \"\"] [\"Other\" \"#050209\" \"\"]]"
+;;   :imagery-selector "DigitalGlobeRecentImagery+Streets"})
+;;
+;; (create-new-project-from-csv
+;;  {:project-name "RLCMS Vietnam"
+;;   :project-description ""
+;;   :plot-csv "VietnamSampledPoints_2013_MODIS.csv"
+;;   :buffer-radius "22.5"
+;;   :sample-type "gridded"
+;;   :sample-resolution "7.5"
+;;   :sample-values "[[\"Built Surface\" \"#6A5D54\" \"\"] [\"Built Veg. (non-tree)\" \"#3ACE65\" \"\"] [\"Built Tree\" \"#178922\" \"\"] [\"Mining\" \"#251510\" \"\"] [\"Mudflat/Beach\" \"#E1671F\" \"\"] [\"Barren Other\" \"#314021\" \"\"] [\"Tree Plantation/Orchard\" \"#1CDE63\" \"\"] [\"Tree Mangrove\" \"#EAB412\" \"\"] [\"Tree Other\" \"#5AC63C\" \"\"] [\"Shrub\" \"#C42B60\" \"\"] [\"Grass\" \"#E085A5\" \"\"] [\"Crop\" \"#DC0F0F\" \"\"] [\"Aquaculture Pond\" \"#137FF6\" \"\"] [\"Aquatic Veg. Other\" \"#13F3F6\" \"\"] [\"Water\" \"#1C214F\" \"\"] [\"Snow & Ice\" \"#EBECF6\" \"\"] [\"Unknown\" \"#7D06F9\" \"\"] [\"Other\" \"#050209\" \"\"]]"
 ;;   :imagery-selector "DigitalGlobeRecentImagery+Streets"})
 
 (defremote get-all-projects
